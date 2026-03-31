@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- PRIMARY SEO -->
+  <title>GPA Calculator — Calculate Your GPA Free Online | StudyTools</title>
+  <meta name="description" content="Free GPA calculator for high school and college students. Enter your courses and grades to instantly calculate your GPA. Supports 4.0 scale, weighted and unweighted." />
+  <meta name="keywords" content="gpa calculator, calculate gpa online, free gpa calculator, college gpa calculator, high school gpa calculator, cumulative gpa calculator" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://studytools.pro/gpa-calculator.html" />
+
+  <!-- OPEN GRAPH -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="GPA Calculator — Free Online | StudyTools" />
+  <meta property="og:description" content="Calculate your GPA instantly. Enter your courses, credits, and grades. Works for high school and college on a 4.0 scale." />
+  <meta property="og:url" content="https://studytools.pro/gpa-calculator.html" />
+
+  <!-- SCHEMA.ORG -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "GPA Calculator",
+    "description": "Free online GPA calculator for college and high school students. Calculate cumulative GPA on a 4.0 scale.",
+    "url": "https://studytools.pro/gpa-calculator.html",
+    "applicationCategory": "EducationalApplication",
+    "operatingSystem": "Any",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #0a0a0f;
+      --bg2: #111118;
+      --bg3: #18181f;
+      --border: rgba(255,255,255,0.07);
+      --text: #e8e8f0;
+      --muted: #7a7a90;
+      --accent: #5b6af0;
+      --accent2: #00d4aa;
+      --card-bg: #13131a;
+      --input-bg: #0f0f16;
+      --danger: #f05b5b;
+      --success: #00d4aa;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 clamp(1.5rem, 5vw, 4rem);
+      height: 64px;
+      background: rgba(10,10,15,0.9);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.2rem;
+      color: var(--text); text-decoration: none; display: flex; align-items: center; gap: 0.5rem;
+    }
+    .nav-logo span { width:8px;height:8px;background:var(--accent2);border-radius:50%;display:inline-block;animation:pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.4);opacity:.7} }
+    .nav-back { color: var(--muted); text-decoration: none; font-size: 0.875rem; display: flex; align-items: center; gap: 0.4rem; }
+    .nav-back:hover { color: var(--text); }
+
+    /* LAYOUT */
+    .page-wrap {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: clamp(2rem, 5vw, 4rem) clamp(1.5rem, 4vw, 3rem);
+    }
+
+    /* HEADER */
+    .page-header { margin-bottom: 2.5rem; }
+    .breadcrumb { font-size: 0.8rem; color: var(--muted); margin-bottom: 1rem; }
+    .breadcrumb a { color: var(--muted); text-decoration: none; } 
+    .breadcrumb a:hover { color: var(--text); }
+    .breadcrumb span { margin: 0 0.4rem; }
+
+    h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 0.75rem;
+    }
+    h1 em {
+      font-style: normal;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .page-desc { color: var(--muted); font-size: 1rem; max-width: 500px; }
+
+    /* MAIN CARD */
+    .calc-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      overflow: hidden;
+      margin-bottom: 2rem;
+    }
+
+    .calc-tabs {
+      display: flex;
+      border-bottom: 1px solid var(--border);
+    }
+    .tab-btn {
+      flex: 1; padding: 1rem 1.5rem;
+      background: none; border: none; cursor: pointer;
+      color: var(--muted); font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem; font-weight: 500;
+      transition: all 0.2s;
+      border-bottom: 2px solid transparent;
+    }
+    .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+    .tab-panel { display: none; padding: 2rem; }
+    .tab-panel.active { display: block; }
+
+    /* COURSE ROWS */
+    .courses-header {
+      display: grid;
+      grid-template-columns: 1fr 120px 120px 44px;
+      gap: 0.75rem;
+      padding: 0 0 0.75rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+    }
+
+    .course-row {
+      display: grid;
+      grid-template-columns: 1fr 120px 120px 44px;
+      gap: 0.75rem;
+      margin-bottom: 0.75rem;
+      animation: fadeIn 0.2s ease;
+    }
+
+    @keyframes fadeIn { from { opacity:0; transform: translateY(-6px); } to { opacity:1; transform:none; } }
+
+    input[type="text"], select {
+      width: 100%; padding: 0.75rem 1rem;
+      background: var(--input-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    input[type="text"]:focus, select:focus { border-color: var(--accent); }
+    select option { background: #1a1a24; }
+
+    .btn-remove {
+      width: 44px; height: 44px;
+      background: rgba(240,91,91,0.1);
+      border: 1px solid rgba(240,91,91,0.2);
+      border-radius: 10px;
+      color: var(--danger);
+      cursor: pointer; font-size: 1rem;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.2s;
+    }
+    .btn-remove:hover { background: rgba(240,91,91,0.2); }
+
+    /* BUTTONS */
+    .btn-row { display: flex; gap: 0.75rem; margin-top: 1.5rem; flex-wrap: wrap; }
+
+    .btn {
+      padding: 0.75rem 1.5rem;
+      border-radius: 10px; border: none; cursor: pointer;
+      font-family: 'DM Sans', sans-serif; font-weight: 600; font-size: 0.9rem;
+      transition: all 0.2s;
+    }
+    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(91,106,240,0.4); }
+    .btn-secondary {
+      background: transparent; color: var(--muted);
+      border: 1px solid var(--border);
+    }
+    .btn-secondary:hover { color: var(--text); border-color: rgba(255,255,255,0.2); }
+
+    /* RESULT */
+    .result-panel {
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      padding: 2rem;
+      display: none;
+    }
+    .result-panel.show { display: block; }
+
+    .result-main {
+      display: flex; align-items: center; gap: 2rem;
+      flex-wrap: wrap; margin-bottom: 1.5rem;
+    }
+
+    .gpa-display {
+      font-family: 'Syne', sans-serif;
+      font-size: 5rem; font-weight: 800;
+      line-height: 1;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+
+    .result-details { flex: 1; }
+    .result-label { font-size: 0.8rem; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.25rem; }
+    .result-value { font-family: 'Syne', sans-serif; font-size: 1.2rem; font-weight: 700; }
+
+    .letter-badge {
+      display: inline-block;
+      padding: 0.4rem 1rem;
+      border-radius: 8px;
+      font-family: 'Syne', sans-serif;
+      font-weight: 800; font-size: 1.5rem;
+      margin-top: 0.5rem;
+    }
+
+    .grade-bar-wrap { margin-top: 1.5rem; }
+    .grade-bar-label { display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--muted); margin-bottom: 0.5rem; }
+    .grade-bar-track {
+      height: 10px; background: var(--border);
+      border-radius: 999px; overflow: hidden;
+    }
+    .grade-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      border-radius: 999px;
+      transition: width 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+      width: 0%;
+    }
+
+    /* GPA SCALE TABLE */
+    .scale-section { margin-top: 3rem; }
+    .scale-section h2 {
+      font-family: 'Syne', sans-serif; font-size: 1.5rem; font-weight: 700;
+      margin-bottom: 0.5rem; letter-spacing: -0.02em;
+    }
+    .scale-section p { color: var(--muted); font-size: 0.9rem; margin-bottom: 1.5rem; }
+
+    .scale-table {
+      width: 100%; border-collapse: collapse;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px; overflow: hidden;
+    }
+    .scale-table th {
+      background: var(--bg2); padding: 0.875rem 1.25rem;
+      text-align: left; font-size: 0.75rem;
+      text-transform: uppercase; letter-spacing: 0.08em;
+      color: var(--muted); font-weight: 600;
+    }
+    .scale-table td { padding: 0.875rem 1.25rem; font-size: 0.9rem; border-top: 1px solid var(--border); }
+    .scale-table tr:hover td { background: rgba(255,255,255,0.02); }
+
+    /* FAQ */
+    .faq-section { margin-top: 3rem; }
+    .faq-section h2 { font-family: 'Syne', sans-serif; font-size: 1.5rem; font-weight: 700; margin-bottom: 1.5rem; letter-spacing: -0.02em; }
+
+    .faq-item { border-bottom: 1px solid var(--border); padding: 1.25rem 0; }
+    .faq-q {
+      font-weight: 600; cursor: pointer;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .faq-q::after { content: '+'; font-size: 1.2rem; color: var(--accent); transition: transform 0.2s; }
+    .faq-item.open .faq-q::after { transform: rotate(45deg); }
+    .faq-a { font-size: 0.9rem; color: var(--muted); max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s; }
+    .faq-item.open .faq-a { max-height: 200px; padding-top: 0.75rem; }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2.5rem clamp(1.5rem, 5vw, 4rem);
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+      max-width: 100%;
+    }
+    .footer-logo { font-family: 'Syne', sans-serif; font-weight: 800; color: var(--text); font-size: 1rem; }
+    .footer-links { display: flex; gap: 1.5rem; list-style: none; }
+    .footer-links a { color: var(--muted); text-decoration: none; font-size: 0.85rem; }
+    .footer-links a:hover { color: var(--text); }
+    footer small { color: var(--muted); font-size: 0.8rem; }
+
+    @media (max-width: 640px) {
+      .courses-header, .course-row { grid-template-columns: 1fr 90px 90px 40px; gap: 0.5rem; }
+      .gpa-display { font-size: 3.5rem; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo"><span></span> StudyTools</a>
+  <a href="/" class="nav-back">← All Tools</a>
+</nav>
+
+<div class="page-wrap">
+  <div class="page-header">
+    <div class="breadcrumb">
+      <a href="/">Home</a><span>/</span> GPA Calculator
+    </div>
+    <h1>Free <em>GPA Calculator</em></h1>
+    <p class="page-desc">Enter your courses, credit hours, and grades to instantly calculate your GPA on a 4.0 scale. Works for high school and college.</p>
+  </div>
+
+  <!-- CALCULATOR -->
+  <div class="calc-card">
+    <div class="calc-tabs">
+      <button class="tab-btn active" onclick="switchTab('semester')">Semester GPA</button>
+      <button class="tab-btn" onclick="switchTab('cumulative')">Cumulative GPA</button>
+    </div>
+
+    <!-- SEMESTER TAB -->
+    <div class="tab-panel active" id="tab-semester">
+      <div class="courses-header">
+        <div>Course Name</div>
+        <div>Credits</div>
+        <div>Grade</div>
+        <div></div>
+      </div>
+      <div id="courses-list"></div>
+      <div class="btn-row">
+        <button class="btn btn-secondary" onclick="addCourse()">+ Add Course</button>
+        <button class="btn btn-primary" onclick="calculateGPA()">Calculate GPA</button>
+        <button class="btn btn-secondary" onclick="resetAll()">Reset</button>
+      </div>
+    </div>
+
+    <!-- CUMULATIVE TAB -->
+    <div class="tab-panel" id="tab-cumulative">
+      <p style="color:var(--muted);font-size:.9rem;margin-bottom:1.5rem;">Enter your previous GPA and credit hours, then add your new semester grades.</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem;">
+        <div>
+          <label style="font-size:.8rem;color:var(--muted);font-weight:600;display:block;margin-bottom:.5rem;text-transform:uppercase;letter-spacing:.08em">Previous GPA</label>
+          <input type="text" id="prev-gpa" placeholder="e.g. 3.45" />
+        </div>
+        <div>
+          <label style="font-size:.8rem;color:var(--muted);font-weight:600;display:block;margin-bottom:.5rem;text-transform:uppercase;letter-spacing:.08em">Previous Credits</label>
+          <input type="text" id="prev-credits" placeholder="e.g. 60" />
+        </div>
+      </div>
+      <div id="cumulative-courses-list"></div>
+      <div class="btn-row">
+        <button class="btn btn-secondary" onclick="addCumulativeCourse()">+ Add Course</button>
+        <button class="btn btn-primary" onclick="calculateCumulative()">Calculate Cumulative GPA</button>
+      </div>
+    </div>
+
+    <!-- RESULT -->
+    <div class="result-panel" id="result-panel">
+      <div class="result-main">
+        <div class="gpa-display" id="result-gpa">0.00</div>
+        <div class="result-details">
+          <div class="result-label">Letter Grade</div>
+          <div class="letter-badge" id="result-letter">—</div>
+          <div style="margin-top:1rem">
+            <div class="result-label">Total Credits</div>
+            <div class="result-value" id="result-credits">—</div>
+          </div>
+        </div>
+      </div>
+      <div class="grade-bar-wrap">
+        <div class="grade-bar-label"><span>0.0</span><span id="bar-label">4.0</span></div>
+        <div class="grade-bar-track"><div class="grade-bar-fill" id="gpa-bar"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GRADE SCALE TABLE -->
+  <div class="scale-section">
+    <h2>GPA Scale Reference</h2>
+    <p>Standard 4.0 GPA conversion scale used by most US high schools and colleges.</p>
+    <table class="scale-table">
+      <thead>
+        <tr>
+          <th>Letter Grade</th>
+          <th>Percentage</th>
+          <th>GPA Points</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>A+</td><td>97–100%</td><td>4.0</td><td>Exceptional</td></tr>
+        <tr><td>A</td><td>93–96%</td><td>4.0</td><td>Excellent</td></tr>
+        <tr><td>A−</td><td>90–92%</td><td>3.7</td><td>Near perfect</td></tr>
+        <tr><td>B+</td><td>87–89%</td><td>3.3</td><td>Above average</td></tr>
+        <tr><td>B</td><td>83–86%</td><td>3.0</td><td>Good</td></tr>
+        <tr><td>B−</td><td>80–82%</td><td>2.7</td><td>Slightly above average</td></tr>
+        <tr><td>C+</td><td>77–79%</td><td>2.3</td><td>Average</td></tr>
+        <tr><td>C</td><td>73–76%</td><td>2.0</td><td>Satisfactory</td></tr>
+        <tr><td>C−</td><td>70–72%</td><td>1.7</td><td>Below average</td></tr>
+        <tr><td>D+</td><td>67–69%</td><td>1.3</td><td>Passing (barely)</td></tr>
+        <tr><td>D</td><td>60–66%</td><td>1.0</td><td>Poor</td></tr>
+        <tr><td>F</td><td>Below 60%</td><td>0.0</td><td>Failing</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- FAQ (important for SEO) -->
+  <div class="faq-section">
+    <h2>Frequently Asked Questions</h2>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFAQ(this)">How is GPA calculated?</div>
+      <div class="faq-a">GPA is calculated by multiplying the grade points of each course by the number of credit hours, summing all of those values, then dividing by the total number of credit hours. For example, an A (4.0) in a 3-credit course gives you 12 quality points. Divide total quality points by total credits to get your GPA.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFAQ(this)">What is a good GPA?</div>
+      <div class="faq-a">A GPA of 3.0 or higher is generally considered good at the college level. A 3.5 or above is considered excellent and can qualify you for academic honors. For graduate school applications, a GPA of 3.5+ is usually expected for competitive programs.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFAQ(this)">What is the difference between weighted and unweighted GPA?</div>
+      <div class="faq-a">An unweighted GPA is calculated on a 4.0 scale and doesn't account for course difficulty. A weighted GPA gives extra points for harder courses like AP or IB classes, often on a 5.0 scale. Most college calculators use the unweighted 4.0 scale.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFAQ(this)">How do I calculate my cumulative GPA?</div>
+      <div class="faq-a">To find your cumulative GPA, use the Cumulative tab above. Enter your current GPA and total credit hours earned so far, then add your new semester's courses and grades. The calculator will weigh everything correctly and give you your updated GPA.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFAQ(this)">Can I use this calculator for high school and college?</div>
+      <div class="faq-a">Yes. This GPA calculator uses the standard 4.0 scale which is used by the vast majority of US high schools and colleges. The calculation method works for both. If your school uses a different scale, multiply your result accordingly.</div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo">StudyTools</div>
+  <ul class="footer-links">
+    <li><a href="/">Home</a></li>
+    <li><a href="/grade-calculator.html">Grade Calculator</a></li>
+    <li><a href="/pomodoro-timer.html">Pomodoro Timer</a></li>
+    <li><a href="/privacy.html">Privacy</a></li>
+  </ul>
+  <small>© 2025 StudyTools</small>
+</footer>
+
+<script>
+  const GRADES = {
+    'A+': 4.0, 'A': 4.0, 'A-': 3.7,
+    'B+': 3.3, 'B': 3.0, 'B-': 2.7,
+    'C+': 2.3, 'C': 2.0, 'C-': 1.7,
+    'D+': 1.3, 'D': 1.0,
+    'F': 0.0
+  };
+
+  const LETTER_COLORS = {
+    'A': '#00d4aa', 'B': '#5b6af0', 'C': '#f0a050', 'D': '#f08050', 'F': '#f05b5b'
+  };
+
+  let courseCount = 0;
+
+  function gradeSelectHTML() {
+    return Object.keys(GRADES).map(g => `<option value="${g}">${g}</option>`).join('');
+  }
+
+  function addCourse(listId = 'courses-list') {
+    courseCount++;
+    const id = courseCount;
+    const div = document.createElement('div');
+    div.className = 'course-row';
+    div.id = `course-${id}`;
+    div.innerHTML = `
+      <input type="text" placeholder="Course name (optional)" />
+      <input type="text" placeholder="Credits" value="3" />
+      <select>${gradeSelectHTML()}</select>
+      <button class="btn-remove" onclick="removeCourse(${id})">✕</button>
+    `;
+    document.getElementById(listId).appendChild(div);
+  }
+
+  function addCumulativeCourse() { addCourse('cumulative-courses-list'); }
+
+  function removeCourse(id) {
+    const el = document.getElementById(`course-${id}`);
+    if (el) el.remove();
+  }
+
+  function getCoursesFromList(listId) {
+    const rows = document.getElementById(listId).querySelectorAll('.course-row');
+    const courses = [];
+    rows.forEach(row => {
+      const credits = parseFloat(row.querySelectorAll('input')[1].value) || 0;
+      const grade = row.querySelector('select').value;
+      if (credits > 0 && grade) courses.push({ credits, points: GRADES[grade] });
+    });
+    return courses;
+  }
+
+  function computeGPA(courses) {
+    let totalQP = 0, totalCredits = 0;
+    courses.forEach(c => { totalQP += c.credits * c.points; totalCredits += c.credits; });
+    return totalCredits === 0 ? { gpa: 0, credits: 0 } : { gpa: totalQP / totalCredits, credits: totalCredits };
+  }
+
+  function getLetterFromGPA(gpa) {
+    if (gpa >= 3.7) return 'A';
+    if (gpa >= 3.0) return 'B';
+    if (gpa >= 2.0) return 'C';
+    if (gpa >= 1.0) return 'D';
+    return 'F';
+  }
+
+  function showResult({ gpa, credits }) {
+    const panel = document.getElementById('result-panel');
+    panel.classList.add('show');
+    document.getElementById('result-gpa').textContent = gpa.toFixed(2);
+    document.getElementById('result-credits').textContent = credits + ' credits';
+    const letter = getLetterFromGPA(gpa);
+    const badge = document.getElementById('result-letter');
+    badge.textContent = letter;
+    badge.style.background = (LETTER_COLORS[letter] || '#999') + '22';
+    badge.style.color = LETTER_COLORS[letter] || '#999';
+    setTimeout(() => {
+      document.getElementById('gpa-bar').style.width = ((gpa / 4) * 100) + '%';
+    }, 50);
+    panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  function calculateGPA() {
+    const courses = getCoursesFromList('courses-list');
+    if (!courses.length) { alert('Please add at least one course.'); return; }
+    showResult(computeGPA(courses));
+  }
+
+  function calculateCumulative() {
+    const prevGPA = parseFloat(document.getElementById('prev-gpa').value) || 0;
+    const prevCredits = parseFloat(document.getElementById('prev-credits').value) || 0;
+    const newCourses = getCoursesFromList('cumulative-courses-list');
+    const newResult = computeGPA(newCourses);
+    const totalCredits = prevCredits + newResult.credits;
+    if (totalCredits === 0) { alert('Please enter some data.'); return; }
+    const cumulativeGPA = (prevGPA * prevCredits + newResult.gpa * newResult.credits) / totalCredits;
+    showResult({ gpa: cumulativeGPA, credits: totalCredits });
+  }
+
+  function resetAll() {
+    document.getElementById('courses-list').innerHTML = '';
+    document.getElementById('result-panel').classList.remove('show');
+    courseCount = 0;
+    addCourse(); addCourse(); addCourse();
+  }
+
+  function switchTab(name) {
+    document.querySelectorAll('.tab-btn').forEach((b,i) => b.classList.toggle('active', (i===0&&name==='semester')||(i===1&&name==='cumulative')));
+    document.getElementById('tab-semester').classList.toggle('active', name==='semester');
+    document.getElementById('tab-cumulative').classList.toggle('active', name==='cumulative');
+    document.getElementById('result-panel').classList.remove('show');
+  }
+
+  function toggleFAQ(el) {
+    el.parentElement.classList.toggle('open');
+  }
+
+  // Init with 3 courses
+  addCourse(); addCourse(); addCourse();
+  addCourse('cumulative-courses-list'); addCourse('cumulative-courses-list');
+</script>
+</body>
+</html>

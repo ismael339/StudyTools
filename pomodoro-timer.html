@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-P8T9B392');</script>
+  <!-- End Google Tag Manager -->
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-66DETECVGK"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-66DETECVGK');
+  </script>
+
+  <title>Pomodoro Timer Online — Free Study Timer | StudyTools</title>
+  <meta name="description" content="Free online Pomodoro timer for students. 25-minute focus sessions with short breaks. Customizable intervals, sound alerts, and session counter. No sign-up needed." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://studytools.pro/pomodoro-timer.html" />
+  <meta property="og:title" content="Pomodoro Timer Online — Free Study Timer | StudyTools" />
+  <meta property="og:description" content="Free online Pomodoro timer. 25-minute focus sessions with breaks. Customizable, works in any browser." />
+  <meta property="og:url" content="https://studytools.pro/pomodoro-timer.html" />
+
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"WebApplication","name":"Pomodoro Timer","description":"Free online Pomodoro timer for students. Customizable focus and break intervals with sound alerts.","url":"https://studytools.pro/pomodoro-timer.html","applicationCategory":"EducationalApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    :root{--bg:#0a0a0f;--bg2:#111118;--border:rgba(255,255,255,0.07);--text:#e8e8f0;--muted:#7a7a90;--accent:#f0a050;--accent2:#f05b5b;--accent3:#00d4aa;--card-bg:#13131a;--input-bg:#0f0f16;}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:16px;line-height:1.6;min-height:100vh}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+    @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.4);opacity:.7}}
+    @keyframes tickPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.02)}}
+
+    nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(1.5rem,5vw,4rem);height:64px;background:rgba(10,10,15,0.9);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+    .nav-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.2rem;color:var(--text);text-decoration:none;display:flex;align-items:center;gap:.5rem}
+    .nav-logo span{width:8px;height:8px;background:var(--accent);border-radius:50%;display:inline-block;animation:pulse 2s infinite}
+    .nav-back{color:var(--muted);text-decoration:none;font-size:.875rem;transition:color .2s}
+    .nav-back:hover{color:var(--text)}
+
+    .page-wrap{max-width:800px;margin:0 auto;padding:clamp(2rem,5vw,4rem) clamp(1.5rem,4vw,3rem)}
+    .breadcrumb{font-size:.8rem;color:var(--muted);margin-bottom:1rem}
+    .breadcrumb a{color:var(--muted);text-decoration:none}.breadcrumb a:hover{color:var(--text)}
+    .breadcrumb span{margin:0 .4rem}
+    h1{font-family:'Syne',sans-serif;font-size:clamp(2rem,5vw,3rem);font-weight:800;letter-spacing:-.03em;line-height:1.1;margin-bottom:.75rem}
+    h1 em{font-style:normal;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .page-desc{color:var(--muted);font-size:1rem;max-width:500px;margin-bottom:2rem}
+
+    /* MODE TABS */
+    .mode-tabs{display:flex;gap:.75rem;margin-bottom:2rem;flex-wrap:wrap}
+    .mode-btn{padding:.6rem 1.25rem;border-radius:10px;border:1px solid var(--border);background:transparent;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:.875rem;font-weight:500;cursor:pointer;transition:all .2s}
+    .mode-btn.active{background:var(--accent);border-color:var(--accent);color:#000;font-weight:700}
+
+    /* TIMER CARD */
+    .timer-card{background:var(--card-bg);border:1px solid var(--border);border-radius:24px;padding:clamp(2rem,5vw,3.5rem);text-align:center;margin-bottom:2rem;position:relative;overflow:hidden}
+    .timer-card::before{content:'';position:absolute;top:-100px;left:50%;transform:translateX(-50%);width:400px;height:300px;background:radial-gradient(ellipse,rgba(240,160,80,0.1) 0%,transparent 70%);pointer-events:none;transition:background .5s}
+    .timer-card.break-mode::before{background:radial-gradient(ellipse,rgba(0,212,170,0.1) 0%,transparent 70%)}
+    .timer-card.long-break-mode::before{background:radial-gradient(ellipse,rgba(91,106,240,0.1) 0%,transparent 70%)}
+
+    /* RING */
+    .ring-wrap{position:relative;width:220px;height:220px;margin:0 auto 2rem}
+    .ring-svg{width:100%;height:100%;transform:rotate(-90deg)}
+    .ring-bg{fill:none;stroke:var(--border);stroke-width:6}
+    .ring-fill{fill:none;stroke:var(--accent);stroke-width:6;stroke-linecap:round;stroke-dasharray:628;stroke-dashoffset:0;transition:stroke-dashoffset .5s ease,stroke .5s}
+    .timer-display{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center}
+    .timer-time{font-family:'Syne',sans-serif;font-size:3.2rem;font-weight:800;letter-spacing:-.02em;line-height:1}
+    .timer-label{font-size:.8rem;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-top:.4rem}
+
+    /* CONTROLS */
+    .timer-controls{display:flex;justify-content:center;gap:1rem;margin-bottom:2rem;flex-wrap:wrap}
+    .ctrl-btn{padding:.875rem 2rem;border-radius:12px;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:700;font-size:1rem;transition:all .2s;min-width:120px}
+    .ctrl-start{background:var(--accent);color:#000}
+    .ctrl-start:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(240,160,80,0.4)}
+    .ctrl-pause{background:rgba(240,160,80,0.15);border:1px solid rgba(240,160,80,0.3);color:var(--accent)}
+    .ctrl-pause:hover{background:rgba(240,160,80,0.25)}
+    .ctrl-reset{background:transparent;border:1px solid var(--border);color:var(--muted)}
+    .ctrl-reset:hover{color:var(--text);border-color:rgba(255,255,255,0.2)}
+    .ctrl-skip{background:transparent;border:1px solid var(--border);color:var(--muted)}
+    .ctrl-skip:hover{color:var(--text);border-color:rgba(255,255,255,0.2)}
+
+    /* SESSION COUNT */
+    .session-row{display:flex;justify-content:center;align-items:center;gap:1.5rem;margin-bottom:2rem}
+    .session-dots{display:flex;gap:.5rem}
+    .dot{width:12px;height:12px;border-radius:50%;background:var(--border);transition:background .3s,transform .3s}
+    .dot.done{background:var(--accent);transform:scale(1.1)}
+    .session-count{font-size:.85rem;color:var(--muted)}
+
+    /* SETTINGS */
+    .settings-section{background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:1.5rem;margin-bottom:2rem}
+    .settings-title{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;margin-bottom:1.25rem;display:flex;align-items:center;gap:.5rem}
+    .settings-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:1rem}
+    .setting-item label{display:block;font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:.5rem}
+    .setting-item input{width:100%;padding:.65rem .875rem;background:var(--input-bg);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:.9rem;outline:none;transition:border-color .2s;-moz-appearance:textfield}
+    .setting-item input::-webkit-outer-spin-button,.setting-item input::-webkit-inner-spin-button{-webkit-appearance:none}
+    .setting-item input:focus{border-color:var(--accent)}
+    .settings-footer{margin-top:1rem;display:flex;gap:.75rem}
+    .btn-sm{padding:.55rem 1rem;border-radius:8px;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:.85rem;font-weight:600;transition:all .2s}
+    .btn-sm-primary{background:var(--accent);color:#000}
+    .btn-sm-primary:hover{box-shadow:0 4px 12px rgba(240,160,80,0.3)}
+    .btn-sm-secondary{background:transparent;color:var(--muted);border:1px solid var(--border)}
+    .btn-sm-secondary:hover{color:var(--text)}
+
+    /* INFO SECTION */
+    .info-section{margin-top:3rem}
+    .info-section h2{font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:700;margin-bottom:.75rem;letter-spacing:-.02em}
+    .info-section p{color:var(--muted);font-size:.95rem;margin-bottom:1rem;line-height:1.7}
+
+    .faq-section{margin-top:3rem}
+    .faq-section h2{font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:700;margin-bottom:1.5rem;letter-spacing:-.02em}
+    .faq-item{border-bottom:1px solid var(--border);padding:1.25rem 0}
+    .faq-q{font-weight:600;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+    .faq-q::after{content:'+';font-size:1.2rem;color:var(--accent);transition:transform .2s}
+    .faq-item.open .faq-q::after{transform:rotate(45deg)}
+    .faq-a{font-size:.9rem;color:var(--muted);max-height:0;overflow:hidden;transition:max-height .3s ease,padding .3s}
+    .faq-item.open .faq-a{max-height:200px;padding-top:.75rem}
+
+    footer{border-top:1px solid var(--border);padding:2.5rem clamp(1.5rem,5vw,4rem);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+    .footer-logo{font-family:'Syne',sans-serif;font-weight:800;color:var(--text)}
+    .footer-links{display:flex;gap:1.5rem;list-style:none;flex-wrap:wrap}
+    .footer-links a{color:var(--muted);text-decoration:none;font-size:.85rem;transition:color .2s}
+    .footer-links a:hover{color:var(--text)}
+    footer small{color:var(--muted);font-size:.8rem}
+
+    @media(max-width:500px){.timer-time{font-size:2.4rem}.ring-wrap{width:180px;height:180px}.ctrl-btn{min-width:90px;padding:.75rem 1.25rem;font-size:.9rem}}
+  </style>
+</head>
+<body>
+
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P8T9B392"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<nav>
+  <a href="/" class="nav-logo"><span></span> StudyTools</a>
+  <a href="/" class="nav-back">← All Tools</a>
+</nav>
+
+<div class="page-wrap">
+  <div style="margin-bottom:2rem">
+    <div class="breadcrumb"><a href="/">Home</a><span>/</span> Pomodoro Timer</div>
+    <h1>Free <em>Pomodoro Timer</em></h1>
+    <p class="page-desc">Study in focused 25-minute sprints, then take a short break. The Pomodoro Technique helps you stay concentrated and avoid burnout.</p>
+  </div>
+
+  <!-- MODE SELECTOR -->
+  <div class="mode-tabs">
+    <button class="mode-btn active" onclick="setMode('pomodoro')">🍅 Pomodoro</button>
+    <button class="mode-btn" onclick="setMode('short')">☕ Short Break</button>
+    <button class="mode-btn" onclick="setMode('long')">🛋️ Long Break</button>
+  </div>
+
+  <!-- TIMER -->
+  <div class="timer-card" id="timer-card">
+    <div class="ring-wrap">
+      <svg class="ring-svg" viewBox="0 0 220 220">
+        <circle class="ring-bg" cx="110" cy="110" r="100"/>
+        <circle class="ring-fill" id="ring" cx="110" cy="110" r="100"/>
+      </svg>
+      <div class="timer-display">
+        <div class="timer-time" id="timer-display">25:00</div>
+        <div class="timer-label" id="timer-mode-label">Focus Time</div>
+      </div>
+    </div>
+
+    <div class="session-row">
+      <div class="session-dots" id="session-dots">
+        <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+      </div>
+      <div class="session-count" id="session-count">Session 1 of 4</div>
+    </div>
+
+    <div class="timer-controls">
+      <button class="ctrl-btn ctrl-reset" onclick="resetTimer()">Reset</button>
+      <button class="ctrl-btn ctrl-start" id="start-btn" onclick="toggleTimer()">Start</button>
+      <button class="ctrl-btn ctrl-skip" onclick="skipSession()">Skip →</button>
+    </div>
+  </div>
+
+  <!-- SETTINGS -->
+  <div class="settings-section">
+    <div class="settings-title">⚙️ Settings</div>
+    <div class="settings-grid">
+      <div class="setting-item">
+        <label>Pomodoro (min)</label>
+        <input type="number" id="set-pomodoro" value="25" min="1" max="90" />
+      </div>
+      <div class="setting-item">
+        <label>Short Break (min)</label>
+        <input type="number" id="set-short" value="5" min="1" max="30" />
+      </div>
+      <div class="setting-item">
+        <label>Long Break (min)</label>
+        <input type="number" id="set-long" value="15" min="1" max="60" />
+      </div>
+      <div class="setting-item">
+        <label>Sessions before long</label>
+        <input type="number" id="set-sessions" value="4" min="2" max="8" />
+      </div>
+    </div>
+    <div class="settings-footer">
+      <button class="btn-sm btn-sm-primary" onclick="applySettings()">Apply Settings</button>
+      <button class="btn-sm btn-sm-secondary" onclick="resetSettings()">Defaults</button>
+    </div>
+  </div>
+
+  <!-- INFO -->
+  <div class="info-section">
+    <h2>What is the Pomodoro Technique?</h2>
+    <p>The Pomodoro Technique is a time management method developed by Francesco Cirillo in the late 1980s. The idea is simple: work in focused 25-minute blocks (called "pomodoros"), then take a 5-minute break. After four pomodoros, take a longer 15-30 minute break.</p>
+    <p>The technique is widely used by students and professionals because it combats procrastination, reduces mental fatigue, and helps you maintain consistent concentration over long study sessions.</p>
+  </div>
+
+  <div class="faq-section">
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFAQ(this)">How does the Pomodoro Technique work?</div>
+      <div class="faq-a">Work for 25 minutes without interruptions (one "pomodoro"), then take a 5-minute break. Repeat four times, then take a longer 15-30 minute break. The structured intervals keep your brain fresh and improve focus throughout long study sessions.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFAQ(this)">Can I change the timer length?</div>
+      <div class="faq-a">Yes — use the Settings panel above to customize your focus time, short break, long break, and the number of sessions before a long break. Click "Apply Settings" to save your changes. The classic recommendation is 25/5/15, but many people prefer 50/10/30 for deeper work.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFAQ(this)">Does the timer work when I switch tabs?</div>
+      <div class="faq-a">Yes. The timer continues running in the background even when you switch to another browser tab. You'll hear a sound alert when your session ends so you know when to take a break.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFAQ(this)">Why is it called Pomodoro?</div>
+      <div class="faq-a">Francesco Cirillo named it after a tomato-shaped kitchen timer he used as a university student ("pomodoro" means tomato in Italian). The original timer happened to be set for 25 minutes, which became the standard focus interval for the technique.</div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo">StudyTools</div>
+  <ul class="footer-links">
+    <li><a href="/">Home</a></li>
+    <li><a href="/gpa-calculator.html">GPA Calculator</a></li>
+    <li><a href="/grade-calculator.html">Grade Calculator</a></li>
+    <li><a href="/word-counter.html">Word Counter</a></li>
+    <li><a href="/privacy.html">Privacy</a></li>
+  </ul>
+  <small>© 2025 StudyTools</small>
+</footer>
+
+<script>
+  const MODES = {
+    pomodoro: { label: 'Focus Time', color: '#f0a050', bgClass: '' },
+    short: { label: 'Short Break', color: '#00d4aa', bgClass: 'break-mode' },
+    long: { label: 'Long Break', color: '#5b6af0', bgClass: 'long-break-mode' }
+  };
+
+  let settings = { pomodoro: 25, short: 5, long: 15, sessions: 4 };
+  let currentMode = 'pomodoro';
+  let timeLeft = settings.pomodoro * 60;
+  let totalTime = timeLeft;
+  let isRunning = false;
+  let interval = null;
+  let sessionsDone = 0;
+
+  const timerDisplay = document.getElementById('timer-display');
+  const modeLabel = document.getElementById('timer-mode-label');
+  const startBtn = document.getElementById('start-btn');
+  const ring = document.getElementById('ring');
+  const timerCard = document.getElementById('timer-card');
+  const CIRCUMFERENCE = 2 * Math.PI * 100;
+
+  function setMode(mode) {
+    clearInterval(interval);
+    isRunning = false;
+    currentMode = mode;
+    const mins = mode === 'pomodoro' ? settings.pomodoro : mode === 'short' ? settings.short : settings.long;
+    timeLeft = mins * 60;
+    totalTime = timeLeft;
+    startBtn.textContent = 'Start';
+    document.querySelectorAll('.mode-btn').forEach((b,i) => b.classList.toggle('active', ['pomodoro','short','long'][i] === mode));
+    timerCard.className = 'timer-card ' + MODES[mode].bgClass;
+    ring.style.stroke = MODES[mode].color;
+    modeLabel.textContent = MODES[mode].label;
+    updateDisplay();
+    updateRing();
+  }
+
+  function toggleTimer() {
+    if (isRunning) {
+      clearInterval(interval);
+      isRunning = false;
+      startBtn.textContent = 'Resume';
+    } else {
+      isRunning = true;
+      startBtn.textContent = 'Pause';
+      interval = setInterval(tick, 1000);
+    }
+  }
+
+  function tick() {
+    if (timeLeft <= 0) {
+      clearInterval(interval);
+      isRunning = false;
+      playAlert();
+      if (currentMode === 'pomodoro') {
+        sessionsDone++;
+        updateDots();
+        const nextMode = sessionsDone >= settings.sessions ? 'long' : 'short';
+        if (sessionsDone >= settings.sessions) sessionsDone = 0;
+        setTimeout(() => setMode(nextMode), 500);
+      } else {
+        setTimeout(() => setMode('pomodoro'), 500);
+      }
+      return;
+    }
+    timeLeft--;
+    updateDisplay();
+    updateRing();
+  }
+
+  function updateDisplay() {
+    const m = Math.floor(timeLeft / 60).toString().padStart(2,'0');
+    const s = (timeLeft % 60).toString().padStart(2,'0');
+    timerDisplay.textContent = `${m}:${s}`;
+    document.title = `${m}:${s} — StudyTools Pomodoro`;
+  }
+
+  function updateRing() {
+    const progress = timeLeft / totalTime;
+    ring.style.strokeDashoffset = CIRCUMFERENCE * (1 - progress);
+  }
+
+  function updateDots() {
+    const dots = document.querySelectorAll('.dot');
+    dots.forEach((d, i) => d.classList.toggle('done', i < sessionsDone % settings.sessions));
+    document.getElementById('session-count').textContent = `Session ${(sessionsDone % settings.sessions) + 1} of ${settings.sessions}`;
+  }
+
+  function resetTimer() {
+    clearInterval(interval);
+    isRunning = false;
+    startBtn.textContent = 'Start';
+    setMode(currentMode);
+  }
+
+  function skipSession() {
+    clearInterval(interval);
+    isRunning = false;
+    timeLeft = 0;
+    tick();
+  }
+
+  function playAlert() {
+    try {
+      const ctx = new (window.AudioContext || window.webkitAudioContext)();
+      [0, 0.3, 0.6].forEach(delay => {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.connect(gain); gain.connect(ctx.destination);
+        osc.frequency.value = 880;
+        osc.type = 'sine';
+        gain.gain.setValueAtTime(0.3, ctx.currentTime + delay);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + delay + 0.4);
+        osc.start(ctx.currentTime + delay);
+        osc.stop(ctx.currentTime + delay + 0.4);
+      });
+    } catch(e) {}
+  }
+
+  function applySettings() {
+    settings.pomodoro = parseInt(document.getElementById('set-pomodoro').value) || 25;
+    settings.short = parseInt(document.getElementById('set-short').value) || 5;
+    settings.long = parseInt(document.getElementById('set-long').value) || 15;
+    settings.sessions = parseInt(document.getElementById('set-sessions').value) || 4;
+    updateDots();
+    setMode(currentMode);
+  }
+
+  function resetSettings() {
+    settings = { pomodoro: 25, short: 5, long: 15, sessions: 4 };
+    document.getElementById('set-pomodoro').value = 25;
+    document.getElementById('set-short').value = 5;
+    document.getElementById('set-long').value = 15;
+    document.getElementById('set-sessions').value = 4;
+    setMode('pomodoro');
+  }
+
+  function toggleFAQ(el) { el.parentElement.classList.toggle('open'); }
+
+  // Init
+  ring.style.strokeDasharray = CIRCUMFERENCE;
+  ring.style.strokeDashoffset = CIRCUMFERENCE * 0;
+  updateDisplay();
+  updateRing();
+</script>
+</body>
+</html>

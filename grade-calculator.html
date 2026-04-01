@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-P8T9B392');</script>
+  <!-- End Google Tag Manager -->
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-66DETECVGK"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-66DETECVGK');
+  </script>
+
+  <title>Grade Calculator — What Do I Need on My Final? | StudyTools</title>
+  <meta name="description" content="Free grade calculator for students. Find out what grade you need on your final exam to pass or get an A. Enter your current grade and target score — instant results." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://studytools.pro/grade-calculator.html" />
+  <meta property="og:title" content="Grade Calculator — What Do I Need on My Final? | StudyTools" />
+  <meta property="og:description" content="Find out exactly what grade you need on your final exam. Free, instant, no sign-up." />
+  <meta property="og:url" content="https://studytools.pro/grade-calculator.html" />
+
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"WebApplication","name":"Grade Calculator","description":"Free online grade calculator. Find out what you need on your final exam to reach your target grade.","url":"https://studytools.pro/grade-calculator.html","applicationCategory":"EducationalApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    :root{--bg:#0a0a0f;--bg2:#111118;--border:rgba(255,255,255,0.07);--text:#e8e8f0;--muted:#7a7a90;--accent:#00d4aa;--accent2:#5b6af0;--card-bg:#13131a;--input-bg:#0f0f16;}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:16px;line-height:1.6;min-height:100vh}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+    @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.4);opacity:.7}}
+
+    nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(1.5rem,5vw,4rem);height:64px;background:rgba(10,10,15,0.9);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+    .nav-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.2rem;color:var(--text);text-decoration:none;display:flex;align-items:center;gap:.5rem}
+    .nav-logo span{width:8px;height:8px;background:var(--accent);border-radius:50%;display:inline-block;animation:pulse 2s infinite}
+    .nav-back{color:var(--muted);text-decoration:none;font-size:.875rem;transition:color .2s}
+    .nav-back:hover{color:var(--text)}
+
+    .page-wrap{max-width:860px;margin:0 auto;padding:clamp(2rem,5vw,4rem) clamp(1.5rem,4vw,3rem)}
+    .breadcrumb{font-size:.8rem;color:var(--muted);margin-bottom:1rem}
+    .breadcrumb a{color:var(--muted);text-decoration:none}.breadcrumb a:hover{color:var(--text)}
+    .breadcrumb span{margin:0 .4rem}
+    h1{font-family:'Syne',sans-serif;font-size:clamp(2rem,5vw,3rem);font-weight:800;letter-spacing:-.03em;line-height:1.1;margin-bottom:.75rem}
+    h1 em{font-style:normal;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .page-desc{color:var(--muted);font-size:1rem;max-width:500px;margin-bottom:2rem}
+
+    .calc-card{background:var(--card-bg);border:1px solid var(--border);border-radius:20px;overflow:hidden;margin-bottom:2rem}
+    .calc-tabs{display:flex;border-bottom:1px solid var(--border)}
+    .tab-btn{flex:1;padding:1rem 1.5rem;background:none;border:none;cursor:pointer;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:.9rem;font-weight:500;transition:all .2s;border-bottom:2px solid transparent}
+    .tab-btn.active{color:var(--accent);border-bottom-color:var(--accent)}
+    .tab-panel{display:none;padding:2rem}.tab-panel.active{display:block}
+
+    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-bottom:1.5rem}
+    .form-group label{display:block;font-size:.8rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:.5rem}
+    input[type="number"],input[type="text"],select{width:100%;padding:.875rem 1rem;background:var(--input-bg);border:1px solid var(--border);border-radius:10px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:1rem;outline:none;transition:border-color .2s;-moz-appearance:textfield}
+    input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{-webkit-appearance:none}
+    input:focus,select:focus{border-color:var(--accent)}
+    select option{background:#1a1a24}
+    .input-hint{font-size:.78rem;color:var(--muted);margin-top:.4rem}
+
+    .assignments-header{display:grid;grid-template-columns:1fr 100px 100px 44px;gap:.75rem;padding:0 0 .75rem;font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+    .assignment-row{display:grid;grid-template-columns:1fr 100px 100px 44px;gap:.75rem;margin-bottom:.75rem}
+    .btn-remove{width:44px;height:44px;background:rgba(240,91,91,0.1);border:1px solid rgba(240,91,91,0.2);border-radius:10px;color:#f05b5b;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:all .2s}
+    .btn-remove:hover{background:rgba(240,91,91,0.2)}
+
+    .btn-row{display:flex;gap:.75rem;margin-top:1.5rem;flex-wrap:wrap}
+    .btn{padding:.75rem 1.5rem;border-radius:10px;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:600;font-size:.9rem;transition:all .2s}
+    .btn-primary{background:var(--accent);color:#000}
+    .btn-primary:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(0,212,170,0.35)}
+    .btn-secondary{background:transparent;color:var(--muted);border:1px solid var(--border)}
+    .btn-secondary:hover{color:var(--text);border-color:rgba(255,255,255,0.2)}
+
+    .result-panel{background:var(--bg);border-top:1px solid var(--border);padding:2rem;display:none}
+    .result-panel.show{display:block}
+    .result-big{font-family:'Syne',sans-serif;font-size:5rem;font-weight:800;line-height:1;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .result-label{font-size:.8rem;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.08em;margin-bottom:.25rem}
+    .result-row{display:flex;gap:3rem;flex-wrap:wrap;align-items:flex-end;margin-bottom:1.5rem}
+    .result-meta p{font-size:.9rem;color:var(--muted);margin-top:.4rem}
+    .result-meta strong{color:var(--text)}
+    .status-pill{display:inline-block;padding:.4rem 1rem;border-radius:999px;font-size:.85rem;font-weight:700;margin-top:.75rem}
+    .s-easy{background:rgba(0,212,170,0.15);color:#00d4aa}
+    .s-medium{background:rgba(240,160,80,0.15);color:#f0a050}
+    .s-hard{background:rgba(240,91,91,0.15);color:#f05b5b}
+    .s-impossible{background:rgba(150,50,50,0.2);color:#ff6b6b}
+
+    .grade-table-section{margin-top:3rem}
+    .grade-table-section h2{font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:700;margin-bottom:.5rem;letter-spacing:-.02em}
+    .grade-table-section p{color:var(--muted);font-size:.9rem;margin-bottom:1.5rem}
+    table{width:100%;border-collapse:collapse;background:var(--card-bg);border:1px solid var(--border);border-radius:16px;overflow:hidden}
+    th{background:var(--bg2);padding:.875rem 1.25rem;text-align:left;font-size:.75rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:600}
+    td{padding:.875rem 1.25rem;font-size:.9rem;border-top:1px solid var(--border)}
+    tr:hover td{background:rgba(255,255,255,0.02)}
+
+    .faq-section{margin-top:3rem}
+    .faq-section h2{font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:700;margin-bottom:1.5rem;letter-spacing:-.02em}
+    .faq-item{border-bottom:1px solid var(--border);padding:1.25rem 0}
+    .faq-q{font-weight:600;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+    .faq-q::after{content:'+';font-size:1.2rem;color:var(--accent);transition:transform .2s}
+    .faq-item.open .faq-q::after{transform:rotate(45deg)}
+    .faq-a{font-size:.9rem;color:var(--muted);max-height:0;overflow:hidden;transition:max-height .3s ease,padding .3s}
+    .faq-item.open .faq-a{max-height:220px;padding-top:.75rem}
+
+    footer{border-top:1px solid var(--border);padding:2.5rem clamp(1.5rem,5vw,4rem);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+    .footer-logo{font-family:'Syne',sans-serif;font-weight:800;color:var(--text)}
+    .footer-links{display:flex;gap:1.5rem;list-style:none;flex-wrap:wrap}
+    .footer-links a{color:var(--muted);text-decoration:none;font-size:.85rem;transition:color .2s}
+    .footer-links a:hover{color:var(--text)}
+    footer small{color:var(--muted);font-size:.8rem}
+
+    @media(max-width:600px){.form-grid{grid-template-columns:1fr}.result-big{font-size:3.5rem}.assignments-header,.assignment-row{grid-template-columns:1fr 80px 80px 40px;gap:.5rem}}
+  </style>
+</head>
+<body>
+
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P8T9B392"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<nav>
+  <a href="/" class="nav-logo"><span></span> StudyTools</a>
+  <a href="/" class="nav-back">← All Tools</a>
+</nav>
+
+<div class="page-wrap">
+  <div style="margin-bottom:2.5rem">
+    <div class="breadcrumb"><a href="/">Home</a><span>/</span> Grade Calculator</div>
+    <h1>Free <em>Grade Calculator</em></h1>
+    <p class="page-desc">Find out exactly what score you need on your final exam to hit your target grade. Also calculate your current grade from multiple assignments.</p>
+  </div>
+
+  <div class="calc-card">
+    <div class="calc-tabs">
+      <button class="tab-btn active" onclick="switchTab('final')">Final Exam Calculator</button>
+      <button class="tab-btn" onclick="switchTab('current')">Current Grade</button>
+    </div>
+
+    <div class="tab-panel active" id="tab-final">
+      <p style="color:var(--muted);font-size:.9rem;margin-bottom:1.5rem">"What do I need on my final?" — Enter your current grade, the final's weight, and your target grade.</p>
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Current Grade (%)</label>
+          <input type="number" id="current-grade" placeholder="e.g. 78" min="0" max="100" />
+          <div class="input-hint">Your grade before the final</div>
+        </div>
+        <div class="form-group">
+          <label>Final Exam Weight (%)</label>
+          <input type="number" id="final-weight" placeholder="e.g. 30" min="1" max="100" />
+          <div class="input-hint">How much the final counts</div>
+        </div>
+        <div class="form-group">
+          <label>Target Grade (%)</label>
+          <input type="number" id="target-grade" placeholder="e.g. 80" min="0" max="100" />
+          <div class="input-hint">The grade you want in the class</div>
+        </div>
+        <div class="form-group">
+          <label>Or Pick a Letter Grade</label>
+          <select id="target-letter" onchange="fillTargetFromLetter()">
+            <option value="">— select —</option>
+            <option value="97">A+ (97%)</option>
+            <option value="93">A (93%)</option>
+            <option value="90">A− (90%)</option>
+            <option value="87">B+ (87%)</option>
+            <option value="83">B (83%)</option>
+            <option value="80">B− (80%)</option>
+            <option value="77">C+ (77%)</option>
+            <option value="73">C (73%)</option>
+            <option value="70">C− (70%)</option>
+            <option value="67">D+ (67%)</option>
+            <option value="60">D (60%)</option>
+          </select>
+        </div>
+      </div>
+      <div class="btn-row">
+        <button class="btn btn-primary" onclick="calculateFinal()">Calculate →</button>
+        <button class="btn btn-secondary" onclick="resetFinal()">Reset</button>
+      </div>
+    </div>
+
+    <div class="tab-panel" id="tab-current">
+      <p style="color:var(--muted);font-size:.9rem;margin-bottom:1.5rem">Add all your graded assignments to calculate your current weighted average.</p>
+      <div class="assignments-header"><div>Assignment</div><div>Score (%)</div><div>Weight (%)</div><div></div></div>
+      <div id="assignments-list"></div>
+      <div class="btn-row">
+        <button class="btn btn-secondary" onclick="addAssignment()">+ Add Assignment</button>
+        <button class="btn btn-primary" onclick="calculateCurrent()">Calculate Grade</button>
+        <button class="btn btn-secondary" onclick="resetCurrent()">Reset</button>
+      </div>
+    </div>
+
+    <div class="result-panel" id="result-panel">
+      <div class="result-row">
+        <div>
+          <div class="result-label" id="result-label-text">Score needed on final</div>
+          <div class="result-big" id="result-main">—</div>
+          <div id="result-status"></div>
+        </div>
+        <div class="result-meta" id="result-meta"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grade-table-section">
+    <h2>Letter Grade Scale</h2>
+    <p>Standard percentage-to-letter grade conversion used by most US schools.</p>
+    <table>
+      <thead><tr><th>Letter</th><th>Percentage</th><th>GPA Points</th><th>Meaning</th></tr></thead>
+      <tbody>
+        <tr><td>A+</td><td>97–100%</td><td>4.0</td><td>Exceptional</td></tr>
+        <tr><td>A</td><td>93–96%</td><td>4.0</td><td>Excellent</td></tr>
+        <tr><td>A−</td><td>90–92%</td><td>3.7</td><td>Very good</td></tr>
+        <tr><td>B+</td><td>87–89%</td><td>3.3</td><td>Above average</td></tr>
+        <tr><td>B</td><td>83–86%</td><td>3.0</td><td>Good</td></tr>
+        <tr><td>B−</td><td>80–82%</td><td>2.7</td><td>Slightly above average</td></tr>
+        <tr><td>C+</td><td>77–79%</td><td>2.3</td><td>Average</td></tr>
+        <tr><td>C</td><td>73–76%</td><td>2.0</td><td>Satisfactory</td></tr>
+        <tr><td>C−</td><td>70–72%</td><td>1.7</td><td>Below average</td></tr>
+        <tr><td>D</td><td>60–69%</td><td>1.0</td><td>Poor but passing</td></tr>
+        <tr><td>F</td><td>Below 60%</td><td>0.0</td><td>Failing</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="faq-section">
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFAQ(this)">How do I calculate what I need on my final?</div>
+      <div class="faq-a">The formula is: Required Final Score = (Target Grade − Current Grade × (1 − Final Weight)) ÷ Final Weight. For example, if you have 75%, the final is worth 30%, and you want 80%, you need: (0.80 − 0.75 × 0.70) ÷ 0.30 = 91.7% on the final.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFAQ(this)">What if I need over 100% on my final?</div>
+      <div class="faq-a">If the result is over 100%, your target grade is mathematically out of reach with just the final exam. You may want to lower your target grade or ask your professor about extra credit opportunities.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFAQ(this)">How is a weighted grade calculated?</div>
+      <div class="faq-a">A weighted grade multiplies each assignment's score by its weight percentage, sums those values, then divides by the total weight. Use the "Current Grade" tab to do this automatically with all your assignments.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFAQ(this)">What if my final has no set weight?</div>
+      <div class="faq-a">If your syllabus doesn't specify, ask your professor. Common final exam weights are 20%, 25%, or 30%. If all assignments count equally, divide 100% by the total number of assignments to get each one's weight.</div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo">StudyTools</div>
+  <ul class="footer-links">
+    <li><a href="/">Home</a></li>
+    <li><a href="/gpa-calculator.html">GPA Calculator</a></li>
+    <li><a href="/pomodoro-timer.html">Pomodoro Timer</a></li>
+    <li><a href="/word-counter.html">Word Counter</a></li>
+    <li><a href="/privacy.html">Privacy</a></li>
+  </ul>
+  <small>© 2025 StudyTools</small>
+</footer>
+
+<script>
+  let aCount = 0;
+
+  function switchTab(name) {
+    document.querySelectorAll('.tab-btn').forEach((b,i) => b.classList.toggle('active',(i===0&&name==='final')||(i===1&&name==='current')));
+    document.getElementById('tab-final').classList.toggle('active', name==='final');
+    document.getElementById('tab-current').classList.toggle('active', name==='current');
+    document.getElementById('result-panel').classList.remove('show');
+  }
+
+  function fillTargetFromLetter() {
+    const val = document.getElementById('target-letter').value;
+    if (val) document.getElementById('target-grade').value = val;
+  }
+
+  function calculateFinal() {
+    const current = parseFloat(document.getElementById('current-grade').value);
+    const weight = parseFloat(document.getElementById('final-weight').value) / 100;
+    const target = parseFloat(document.getElementById('target-grade').value);
+    if (isNaN(current)||isNaN(weight)||isNaN(target)) { alert('Please fill in all three fields.'); return; }
+    const needed = (target/100 - current/100 * (1-weight)) / weight * 100;
+    const panel = document.getElementById('result-panel');
+    panel.classList.add('show');
+    document.getElementById('result-label-text').textContent = 'Score needed on final exam';
+    document.getElementById('result-main').textContent = needed.toFixed(1) + '%';
+    let s = '';
+    if (needed > 100) s = '<div class="status-pill s-impossible">Not achievable — adjust your target</div>';
+    else if (needed >= 90) s = '<div class="status-pill s-hard">Very challenging — study hard!</div>';
+    else if (needed >= 75) s = '<div class="status-pill s-medium">Doable with good preparation</div>';
+    else s = '<div class="status-pill s-easy">Achievable — you got this!</div>';
+    document.getElementById('result-status').innerHTML = s;
+    document.getElementById('result-meta').innerHTML = `<div class="result-label">Summary</div><p>Current grade: <strong>${current}%</strong></p><p>Final weight: <strong>${(weight*100).toFixed(0)}%</strong></p><p>Target: <strong>${target}%</strong></p>`;
+    panel.scrollIntoView({behavior:'smooth',block:'nearest'});
+  }
+
+  function resetFinal() {
+    ['current-grade','final-weight','target-grade'].forEach(id => document.getElementById(id).value='');
+    document.getElementById('target-letter').value='';
+    document.getElementById('result-panel').classList.remove('show');
+  }
+
+  function addAssignment() {
+    aCount++;
+    const id = aCount;
+    const div = document.createElement('div');
+    div.className = 'assignment-row'; div.id = `arow-${id}`;
+    div.innerHTML = `<input type="text" placeholder="Assignment name"/><input type="number" placeholder="Score" min="0" max="100"/><input type="number" placeholder="Weight" min="0" max="100"/><button class="btn-remove" onclick="document.getElementById('arow-${id}').remove()">✕</button>`;
+    document.getElementById('assignments-list').appendChild(div);
+  }
+
+  function calculateCurrent() {
+    const rows = document.getElementById('assignments-list').querySelectorAll('.assignment-row');
+    let totalWeight=0, weightedSum=0;
+    rows.forEach(row=>{
+      const inputs = row.querySelectorAll('input[type="number"]');
+      const score = parseFloat(inputs[0].value);
+      const weight = parseFloat(inputs[1].value);
+      if(!isNaN(score)&&!isNaN(weight)&&weight>0){weightedSum+=score*weight;totalWeight+=weight;}
+    });
+    if(totalWeight===0){alert('Please add at least one assignment.');return;}
+    const avg = weightedSum/totalWeight;
+    const panel = document.getElementById('result-panel');
+    panel.classList.add('show');
+    document.getElementById('result-label-text').textContent = 'Your current grade';
+    document.getElementById('result-main').textContent = avg.toFixed(1)+'%';
+    document.getElementById('result-status').innerHTML = '';
+    document.getElementById('result-meta').innerHTML = `<div class="result-label">Based on</div><p>Total weight counted: <strong>${totalWeight.toFixed(0)}%</strong></p>`;
+    panel.scrollIntoView({behavior:'smooth',block:'nearest'});
+  }
+
+  function resetCurrent() {
+    document.getElementById('assignments-list').innerHTML='';
+    document.getElementById('result-panel').classList.remove('show');
+    aCount=0; addAssignment();addAssignment();addAssignment();
+  }
+
+  function toggleFAQ(el){el.parentElement.classList.toggle('open')}
+
+  addAssignment();addAssignment();addAssignment();
+</script>
+</body>
+</html>

@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-P8T9B392');</script>
+  <!-- End Google Tag Manager -->
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-66DETECVGK"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-66DETECVGK');
+  </script>
+
+  <title>Study Schedule Maker — Free Weekly Planner for Students | StudyTools</title>
+  <meta name="description" content="Free study schedule maker for students. Build your weekly study plan, add subjects and time blocks, then print or download it. No sign-up required." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://studytools.pro/study-schedule.html" />
+  <meta property="og:title" content="Study Schedule Maker — Free Weekly Planner | StudyTools" />
+  <meta property="og:description" content="Build your perfect weekly study schedule. Add subjects, time slots, and print it out. Free, no sign-up." />
+  <meta property="og:url" content="https://studytools.pro/study-schedule.html" />
+
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"WebApplication","name":"Study Schedule Maker","description":"Free weekly study schedule builder for students. Create, customize and print your study plan.","url":"https://studytools.pro/study-schedule.html","applicationCategory":"EducationalApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    :root{--bg:#0a0a0f;--bg2:#111118;--border:rgba(255,255,255,0.07);--text:#e8e8f0;--muted:#7a7a90;--accent:#5b6af0;--accent2:#00d4aa;--card-bg:#13131a;--input-bg:#0d0d14;}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:16px;line-height:1.6;min-height:100vh}
+    @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.4);opacity:.7}}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+
+    nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(1.5rem,5vw,4rem);height:64px;background:rgba(10,10,15,0.9);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+    .nav-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.2rem;color:var(--text);text-decoration:none;display:flex;align-items:center;gap:.5rem}
+    .nav-logo span{width:8px;height:8px;background:var(--accent2);border-radius:50%;display:inline-block;animation:pulse 2s infinite}
+    .nav-back{color:var(--muted);text-decoration:none;font-size:.875rem;transition:color .2s}
+    .nav-back:hover{color:var(--text)}
+
+    .page-wrap{max-width:1100px;margin:0 auto;padding:clamp(2rem,5vw,4rem) clamp(1.5rem,4vw,3rem)}
+    .breadcrumb{font-size:.8rem;color:var(--muted);margin-bottom:1rem}
+    .breadcrumb a{color:var(--muted);text-decoration:none}.breadcrumb a:hover{color:var(--text)}
+    .breadcrumb span{margin:0 .4rem}
+    h1{font-family:'Syne',sans-serif;font-size:clamp(2rem,5vw,3rem);font-weight:800;letter-spacing:-.03em;line-height:1.1;margin-bottom:.75rem}
+    h1 em{font-style:normal;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .page-desc{color:var(--muted);font-size:1rem;max-width:520px;margin-bottom:2rem}
+
+    /* LAYOUT */
+    .builder-layout{display:grid;grid-template-columns:300px 1fr;gap:1.5rem;align-items:start}
+
+    /* SIDEBAR */
+    .sidebar{background:var(--card-bg);border:1px solid var(--border);border-radius:16px;overflow:hidden;position:sticky;top:80px}
+    .sidebar-header{padding:1.25rem 1.25rem .75rem;border-bottom:1px solid var(--border)}
+    .sidebar-title{font-family:'Syne',sans-serif;font-weight:700;font-size:.95rem}
+    .sidebar-body{padding:1.25rem}
+
+    .form-group{margin-bottom:1rem}
+    .form-group label{display:block;font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:.4rem}
+    input[type="text"],input[type="time"],select{width:100%;padding:.7rem .875rem;background:var(--input-bg);border:1px solid var(--border);border-radius:9px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:.9rem;outline:none;transition:border-color .2s}
+    input:focus,select:focus{border-color:var(--accent)}
+    select option{background:#1a1a24}
+
+    .color-row{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.4rem}
+    .color-dot{width:24px;height:24px;border-radius:50%;cursor:pointer;border:2px solid transparent;transition:transform .15s,border-color .15s}
+    .color-dot.selected{border-color:#fff;transform:scale(1.15)}
+    .color-dot:hover{transform:scale(1.1)}
+
+    .btn-add{width:100%;padding:.8rem;background:var(--accent);color:#fff;border:none;border-radius:10px;font-family:'DM Sans',sans-serif;font-weight:700;font-size:.9rem;cursor:pointer;transition:all .2s;margin-top:.25rem}
+    .btn-add:hover{box-shadow:0 6px 20px rgba(91,106,240,0.4);transform:translateY(-1px)}
+
+    .subjects-list{margin-top:1.25rem;border-top:1px solid var(--border);padding-top:1rem}
+    .subjects-label{font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:.75rem}
+    .subject-tag{display:flex;align-items:center;gap:.5rem;padding:.45rem .75rem;border-radius:8px;margin-bottom:.4rem;font-size:.85rem;font-weight:500;animation:fadeIn .2s ease}
+    .subject-tag-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+    .subject-tag-name{flex:1}
+    .subject-tag-remove{background:none;border:none;color:var(--muted);cursor:pointer;font-size:.85rem;padding:0;line-height:1;transition:color .2s}
+    .subject-tag-remove:hover{color:#f05b5b}
+
+    /* SCHEDULE GRID */
+    .schedule-card{background:var(--card-bg);border:1px solid var(--border);border-radius:16px;overflow:hidden}
+    .schedule-toolbar{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.25rem;border-bottom:1px solid var(--border);flex-wrap:wrap;gap:.75rem}
+    .schedule-toolbar-left{font-family:'Syne',sans-serif;font-weight:700;font-size:.95rem}
+    .toolbar-btns{display:flex;gap:.5rem}
+    .btn-sm{padding:.45rem .875rem;border-radius:8px;border:1px solid var(--border);background:transparent;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:.8rem;font-weight:500;cursor:pointer;transition:all .2s}
+    .btn-sm:hover{color:var(--text);border-color:rgba(255,255,255,0.2)}
+    .btn-sm.primary{background:var(--accent2);border-color:var(--accent2);color:#000;font-weight:700}
+    .btn-sm.primary:hover{box-shadow:0 4px 14px rgba(0,212,170,0.3)}
+
+    .grid-wrap{overflow-x:auto}
+    .schedule-grid{width:100%;border-collapse:collapse;min-width:600px}
+    .schedule-grid th{padding:.6rem .5rem;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);text-align:center;border-bottom:1px solid var(--border)}
+    .schedule-grid th:first-child{text-align:left;padding-left:1rem;width:70px}
+    .schedule-grid td{border:1px solid rgba(255,255,255,0.04);height:52px;vertical-align:top;padding:2px;position:relative;cursor:pointer;transition:background .15s}
+    .schedule-grid td:first-child{font-size:.75rem;color:var(--muted);padding:.35rem .5rem .35rem 1rem;cursor:default;white-space:nowrap;background:transparent!important;width:70px}
+    .schedule-grid td:hover:not(:first-child){background:rgba(91,106,240,0.06)}
+
+    .cell-block{width:100%;height:100%;border-radius:5px;padding:.25rem .4rem;font-size:.72rem;font-weight:600;line-height:1.3;display:flex;align-items:center;gap:.3rem;cursor:pointer;position:relative}
+    .cell-block:hover .remove-block{opacity:1}
+    .remove-block{position:absolute;top:2px;right:2px;width:14px;height:14px;background:rgba(0,0,0,0.4);border:none;border-radius:3px;color:#fff;font-size:.6rem;cursor:pointer;opacity:0;transition:opacity .15s;display:flex;align-items:center;justify-content:center;line-height:1}
+
+    /* STATS */
+    .schedule-stats{display:flex;gap:1rem;padding:1rem 1.25rem;border-top:1px solid var(--border);flex-wrap:wrap}
+    .sstat{font-size:.8rem;color:var(--muted)}
+    .sstat strong{color:var(--text)}
+
+    /* TIPS */
+    .tips-section{margin-top:3rem}
+    .tips-section h2{font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:700;margin-bottom:1rem;letter-spacing:-.02em}
+    .tips-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1rem;margin-bottom:2rem}
+    .tip-card{background:var(--card-bg);border:1px solid var(--border);border-radius:12px;padding:1.25rem}
+    .tip-icon{font-size:1.4rem;margin-bottom:.6rem}
+    .tip-card h4{font-family:'Syne',sans-serif;font-weight:700;font-size:.9rem;margin-bottom:.35rem}
+    .tip-card p{font-size:.825rem;color:var(--muted);line-height:1.55}
+
+    .faq-section{margin-top:3rem}
+    .faq-section h2{font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:700;margin-bottom:1.5rem;letter-spacing:-.02em}
+    .faq-item{border-bottom:1px solid var(--border);padding:1.25rem 0}
+    .faq-q{font-weight:600;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+    .faq-q::after{content:'+';font-size:1.2rem;color:var(--accent);transition:transform .2s}
+    .faq-item.open .faq-q::after{transform:rotate(45deg)}
+    .faq-a{font-size:.9rem;color:var(--muted);max-height:0;overflow:hidden;transition:max-height .3s ease,padding .3s}
+    .faq-item.open .faq-a{max-height:220px;padding-top:.75rem}
+
+    footer{border-top:1px solid var(--border);padding:2.5rem clamp(1.5rem,5vw,4rem);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+    .footer-logo{font-family:'Syne',sans-serif;font-weight:800;color:var(--text)}
+    .footer-links{display:flex;gap:1.5rem;list-style:none;flex-wrap:wrap}
+    .footer-links a{color:var(--muted);text-decoration:none;font-size:.85rem;transition:color .2s}
+    .footer-links a:hover{color:var(--text)}
+    footer small{color:var(--muted);font-size:.8rem}
+
+    @media(max-width:768px){.builder-layout{grid-template-columns:1fr}.sidebar{position:static}}
+
+    @media print {
+      nav,footer,.sidebar,.schedule-toolbar,.tips-section,.faq-section,.page-desc,.breadcrumb,h1,.schedule-stats{display:none!important}
+      body{background:#fff;color:#000}
+      .schedule-card{border:none}
+      .schedule-grid th{color:#555}
+      .schedule-grid td{border-color:#ddd}
+      .cell-block{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+      .remove-block{display:none!important}
+      .page-wrap{padding:0}
+    }
+  </style>
+</head>
+<body>
+
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P8T9B392"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<nav>
+  <a href="/" class="nav-logo"><span></span> StudyTools</a>
+  <a href="/" class="nav-back">← All Tools</a>
+</nav>
+
+<div class="page-wrap">
+  <div style="margin-bottom:2rem">
+    <div class="breadcrumb"><a href="/">Home</a><span>/</span> Study Schedule Maker</div>
+    <h1>Free <em>Study Schedule</em> Maker</h1>
+    <p class="page-desc">Build your weekly study plan by adding subjects and clicking time slots on the grid. Print or clear when done.</p>
+  </div>
+
+  <div class="builder-layout">
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-title">➕ Add a Block</div>
+      </div>
+      <div class="sidebar-body">
+        <div class="form-group">
+          <label>Subject / Activity</label>
+          <input type="text" id="inp-subject" placeholder="e.g. Math, Break, Gym…" />
+        </div>
+        <div class="form-group">
+          <label>Color</label>
+          <div class="color-row" id="color-row"></div>
+        </div>
+        <div class="form-group">
+          <label>Duration</label>
+          <select id="inp-duration">
+            <option value="1">30 min (1 slot)</option>
+            <option value="2" selected>1 hour (2 slots)</option>
+            <option value="3">1.5 hours (3 slots)</option>
+            <option value="4">2 hours (4 slots)</option>
+          </select>
+        </div>
+        <button class="btn-add" onclick="startPlacing()">Place on Schedule →</button>
+
+        <div class="subjects-list" id="subjects-list">
+          <div class="subjects-label">Recent Subjects</div>
+          <div id="subjects-tags"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GRID -->
+    <div class="schedule-card">
+      <div class="schedule-toolbar">
+        <div class="schedule-toolbar-left">📅 Weekly Schedule</div>
+        <div class="toolbar-btns">
+          <button class="btn-sm" onclick="clearSchedule()">Clear All</button>
+          <button class="btn-sm primary" onclick="window.print()">🖨 Print</button>
+        </div>
+      </div>
+      <div class="grid-wrap">
+        <table class="schedule-grid" id="schedule-grid"></table>
+      </div>
+      <div class="schedule-stats" id="schedule-stats">
+        <div class="sstat">Total study blocks: <strong id="stat-blocks">0</strong></div>
+        <div class="sstat">Estimated study time: <strong id="stat-hours">0h 0m</strong></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TIPS -->
+  <div class="tips-section">
+    <h2>Study Schedule Tips</h2>
+    <div class="tips-grid">
+      <div class="tip-card"><div class="tip-icon">⏰</div><h4>Study at your peak hours</h4><p>Schedule your hardest subjects when you're most alert — usually mid-morning for most students.</p></div>
+      <div class="tip-card"><div class="tip-icon">🔄</div><h4>Alternate subjects</h4><p>Switching between different subjects every 1-2 hours reduces mental fatigue and improves retention.</p></div>
+      <div class="tip-card"><div class="tip-icon">😴</div><h4>Protect your sleep</h4><p>Consistent sleep improves memory consolidation. Aim for 7-9 hours and keep a regular bedtime.</p></div>
+      <div class="tip-card"><div class="tip-icon">📵</div><h4>Block distractions</h4><p>Use your phone's focus mode or apps like Cold Turkey during study blocks to stay on task.</p></div>
+    </div>
+  </div>
+
+  <div class="faq-section">
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFAQ(this)">How do I use the study schedule maker?</div>
+      <div class="faq-a">Type a subject name in the sidebar, pick a color, choose a duration, then click "Place on Schedule." Your cursor will highlight slots blue — click any time slot on the grid to place the block there. Repeat for all your subjects. When done, click Print to get a printable version.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFAQ(this)">How many hours should I study per day?</div>
+      <div class="faq-a">Most educational research suggests 2-4 hours of focused study per day is effective for high school students, and 4-6 hours for college students. Quality matters more than quantity — short, focused sessions beat long, distracted ones.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFAQ(this)">Is my schedule saved?</div>
+      <div class="faq-a">Your schedule is kept in your browser's memory while the tab is open. If you want to keep it permanently, use the Print button to save it as a PDF. Currently there is no account-based saving — everything stays local in your browser.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFAQ(this)">What is the best way to structure a study schedule?</div>
+      <div class="faq-a">Start by blocking fixed commitments (classes, meals, sleep), then fill in study time around them. Prioritize subjects with upcoming exams or assignments. Include short breaks every 1-2 hours and at least one full rest day per week to avoid burnout.</div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo">StudyTools</div>
+  <ul class="footer-links">
+    <li><a href="/">Home</a></li>
+    <li><a href="/gpa-calculator.html">GPA Calculator</a></li>
+    <li><a href="/grade-calculator.html">Grade Calculator</a></li>
+    <li><a href="/pomodoro-timer.html">Pomodoro Timer</a></li>
+    <li><a href="/word-counter.html">Word Counter</a></li>
+    <li><a href="/privacy.html">Privacy</a></li>
+  </ul>
+  <small>© 2025 StudyTools</small>
+</footer>
+
+<script>
+  const DAYS = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+  const COLORS = ['#5b6af0','#00d4aa','#f0a050','#dc507a','#78b4ff','#a078ff','#50c878','#f05b5b','#ffd700','#ff7f50'];
+  const TIMES = [];
+  for (let h = 6; h <= 23; h++) {
+    TIMES.push(`${String(h).padStart(2,'0')}:00`);
+    TIMES.push(`${String(h).padStart(2,'0')}:30`);
+  }
+
+  let selectedColor = COLORS[0];
+  let placing = false;
+  let schedule = {}; // key: "day-timeIdx" value: {subject, color, span}
+  let recentSubjects = [];
+
+  // Build color picker
+  const colorRow = document.getElementById('color-row');
+  COLORS.forEach((c, i) => {
+    const d = document.createElement('div');
+    d.className = 'color-dot' + (i === 0 ? ' selected' : '');
+    d.style.background = c;
+    d.onclick = () => {
+      document.querySelectorAll('.color-dot').forEach(x => x.classList.remove('selected'));
+      d.classList.add('selected');
+      selectedColor = c;
+    };
+    colorRow.appendChild(d);
+  });
+
+  // Build grid
+  function buildGrid() {
+    const grid = document.getElementById('schedule-grid');
+    let html = '<thead><tr><th>Time</th>' + DAYS.map(d => `<th>${d}</th>`).join('') + '</tr></thead><tbody>';
+    TIMES.forEach((time, ti) => {
+      html += `<tr><td>${time}</td>`;
+      DAYS.forEach((_, di) => {
+        html += `<td id="cell-${di}-${ti}" onclick="cellClick(${di},${ti})"></td>`;
+      });
+      html += '</tr>';
+    });
+    html += '</tbody>';
+    grid.innerHTML = html;
+  }
+
+  function startPlacing() {
+    const subject = document.getElementById('inp-subject').value.trim();
+    if (!subject) { document.getElementById('inp-subject').focus(); return; }
+    placing = { subject, color: selectedColor, duration: parseInt(document.getElementById('inp-duration').value) };
+    document.body.style.cursor = 'crosshair';
+
+    // Add to recent
+    if (!recentSubjects.find(s => s.name === subject)) {
+      recentSubjects.unshift({ name: subject, color: selectedColor });
+      if (recentSubjects.length > 6) recentSubjects.pop();
+      renderRecentSubjects();
+    }
+  }
+
+  function cellClick(di, ti) {
+    if (!placing) return;
+    const { subject, color, duration } = placing;
+    // Check space
+    for (let i = 0; i < duration; i++) {
+      if (ti + i >= TIMES.length) return;
+      if (schedule[`${di}-${ti+i}`]) return;
+    }
+    // Place
+    schedule[`${di}-${ti}`] = { subject, color, span: duration };
+    for (let i = 1; i < duration; i++) schedule[`${di}-${ti+i}`] = { hidden: true };
+    renderGrid();
+    placing = false;
+    document.body.style.cursor = '';
+    updateStats();
+  }
+
+  function removeBlock(di, ti) {
+    if (!schedule[`${di}-${ti}`]) return;
+    const span = schedule[`${di}-${ti}`].span || 1;
+    for (let i = 0; i < span; i++) delete schedule[`${di}-${ti+i}`];
+    renderGrid();
+    updateStats();
+  }
+
+  function renderGrid() {
+    TIMES.forEach((_, ti) => {
+      DAYS.forEach((_, di) => {
+        const cell = document.getElementById(`cell-${di}-${ti}`);
+        if (!cell) return;
+        const key = `${di}-${ti}`;
+        cell.innerHTML = '';
+        cell.style.background = '';
+        cell.rowSpan = 1;
+        if (schedule[key] && !schedule[key].hidden) {
+          const s = schedule[key];
+          cell.rowSpan = s.span || 1;
+          const block = document.createElement('div');
+          block.className = 'cell-block';
+          block.style.background = s.color + '33';
+          block.style.color = s.color;
+          block.style.border = `1px solid ${s.color}55`;
+          block.innerHTML = `<span style="flex:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis">${s.subject}</span><button class="remove-block" onclick="event.stopPropagation();removeBlock(${di},${ti})">✕</button>`;
+          cell.appendChild(block);
+        } else if (schedule[key] && schedule[key].hidden) {
+          cell.style.display = 'none';
+        }
+      });
+    });
+  }
+
+  function renderRecentSubjects() {
+    const container = document.getElementById('subjects-tags');
+    container.innerHTML = recentSubjects.map(s => `
+      <div class="subject-tag" style="background:${s.color}18">
+        <div class="subject-tag-dot" style="background:${s.color}"></div>
+        <span class="subject-tag-name">${s.name}</span>
+        <button class="subject-tag-remove" onclick="quickSelect('${s.name}','${s.color}')">✎</button>
+      </div>
+    `).join('');
+  }
+
+  function quickSelect(name, color) {
+    document.getElementById('inp-subject').value = name;
+    selectedColor = color;
+    document.querySelectorAll('.color-dot').forEach(d => d.classList.toggle('selected', d.style.background === color || rgbToHex(d.style.background) === color));
+    startPlacing();
+  }
+
+  function rgbToHex(rgb) {
+    const result = rgb.match(/\d+/g);
+    if (!result) return rgb;
+    return '#' + result.slice(0,3).map(n => parseInt(n).toString(16).padStart(2,'0')).join('');
+  }
+
+  function clearSchedule() {
+    schedule = {};
+    renderGrid();
+    updateStats();
+  }
+
+  function updateStats() {
+    const blocks = Object.values(schedule).filter(v => v && !v.hidden).length;
+    const totalSlots = Object.values(schedule).filter(v => v && !v.hidden).reduce((s,v) => s + (v.span||1), 0);
+    const mins = totalSlots * 30;
+    document.getElementById('stat-blocks').textContent = blocks;
+    document.getElementById('stat-hours').textContent = Math.floor(mins/60) + 'h ' + (mins%60) + 'm';
+  }
+
+  function toggleFAQ(el) { el.parentElement.classList.toggle('open'); }
+
+  buildGrid();
+  updateStats();
+</script>
+</body>
+</html>

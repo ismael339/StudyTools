@@ -21,17 +21,46 @@
     gtag('config', 'G-66DETECVGK');
   </script>
 
+  <!-- PRIMARY SEO -->
   <title>StudyTools — Free Online Tools for Students</title>
   <meta name="description" content="Free online tools for students: GPA calculator, grade calculator, pomodoro timer, word counter, citation generator and more. No sign-up required." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://studytools.pro/" />
+
+  <!-- FAVICON — shown in browser tab AND Google search results -->
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="apple-touch-icon" href="/favicon_32.png" />
+
+  <!-- OPEN GRAPH — controls how the site looks when shared on social / search -->
   <meta property="og:type" content="website" />
   <meta property="og:title" content="StudyTools — Free Online Tools for Students" />
-  <meta property="og:description" content="Free calculators, timers, and study helpers. No sign-up, no fluff." />
+  <meta property="og:description" content="Free calculators, timers, and study helpers. No sign-up, no fluff — just tools that work." />
   <meta property="og:url" content="https://studytools.pro/" />
+  <meta property="og:site_name" content="StudyTools" />
+  <meta property="og:image" content="https://studytools.pro/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
 
+  <!-- TWITTER CARD -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="StudyTools — Free Online Tools for Students" />
+  <meta name="twitter:description" content="Free calculators, timers, and study helpers. No sign-up needed." />
+  <meta name="twitter:image" content="https://studytools.pro/og-image.png" />
+
+  <!-- SCHEMA.ORG -->
   <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"WebSite","name":"StudyTools","url":"https://studytools.pro/","description":"Free online tools for students."}
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "StudyTools",
+    "url": "https://studytools.pro/",
+    "description": "Free online tools for students: GPA calculator, grade calculator, pomodoro timer, word counter, citation generator and more.",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://studytools.pro/favicon.ico"
+    }
+  }
   </script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -42,10 +71,11 @@
     :root{--bg:#0a0a0f;--border:rgba(255,255,255,0.07);--text:#e8e8f0;--muted:#7a7a90;--accent:#5b6af0;--accent2:#00d4aa;--card-bg:#13131a;}
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     html{scroll-behavior:smooth}
-    body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;overflow-x:hidden}
+    body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:16px;line-height:1.6;overflow-x:hidden}
     @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
     @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.4);opacity:.7}}
 
+    /* NAV */
     nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(1.5rem,5vw,4rem);height:64px;background:rgba(10,10,15,0.9);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
     .nav-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.2rem;color:var(--text);text-decoration:none;display:flex;align-items:center;gap:.5rem}
     .nav-logo span{width:8px;height:8px;background:var(--accent2);border-radius:50%;display:inline-block;animation:pulse 2s infinite}
@@ -53,25 +83,28 @@
     .nav-links a{color:var(--muted);text-decoration:none;font-size:.85rem;font-weight:500;transition:color .2s}
     .nav-links a:hover{color:var(--text)}
 
+    /* HERO */
     .hero{position:relative;padding:clamp(5rem,12vw,9rem) clamp(1.5rem,5vw,4rem) clamp(4rem,8vw,7rem);text-align:center;overflow:hidden}
     .hero-glow{position:absolute;top:-200px;left:50%;transform:translateX(-50%);width:700px;height:500px;background:radial-gradient(ellipse,rgba(91,106,240,0.18) 0%,transparent 70%);pointer-events:none}
     .hero-badge{display:inline-flex;align-items:center;gap:.5rem;padding:.35rem 1rem;border:1px solid rgba(0,212,170,0.3);border-radius:999px;font-size:.75rem;font-weight:500;color:var(--accent2);letter-spacing:.08em;text-transform:uppercase;margin-bottom:2rem;animation:fadeUp .6s ease both}
     h1{font-family:'Syne',sans-serif;font-size:clamp(2.8rem,7vw,5.5rem);font-weight:800;line-height:1.05;letter-spacing:-.03em;margin-bottom:1.5rem;animation:fadeUp .7s .1s ease both}
     h1 em{font-style:normal;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
     .hero-sub{max-width:560px;margin:0 auto 2.5rem;color:var(--muted);font-size:1.1rem;font-weight:300;animation:fadeUp .7s .2s ease both}
-    .btn-primary{display:inline-flex;align-items:center;gap:.5rem;padding:.9rem 2rem;background:var(--accent);color:#fff;border-radius:10px;font-weight:600;font-size:.95rem;text-decoration:none;transition:transform .2s,box-shadow .2s;border:none;cursor:pointer;font-family:'DM Sans',sans-serif}
+    .btn-primary{display:inline-flex;align-items:center;gap:.5rem;padding:.9rem 2rem;background:var(--accent);color:#fff;border-radius:10px;font-weight:600;font-size:.95rem;text-decoration:none;transition:transform .2s,box-shadow .2s;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;animation:fadeUp .7s .3s ease both}
     .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(91,106,240,0.4)}
     .hero-stats{display:flex;justify-content:center;gap:clamp(2rem,5vw,4rem);margin-top:4rem;animation:fadeUp .7s .4s ease both}
     .stat{text-align:center}
     .stat-num{font-family:'Syne',sans-serif;font-size:1.8rem;font-weight:800}
     .stat-label{font-size:.8rem;color:var(--muted);margin-top:.2rem}
 
+    /* SECTIONS */
     .section{padding:clamp(3rem,7vw,6rem) clamp(1.5rem,5vw,4rem);max-width:1200px;margin:0 auto}
     .section-label{display:flex;align-items:center;gap:.75rem;font-size:.75rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem}
     .section-label::before{content:'';display:block;width:24px;height:2px;background:var(--accent);border-radius:2px}
     .section-title{font-family:'Syne',sans-serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:700;letter-spacing:-.02em;margin-bottom:.75rem}
     .section-desc{color:var(--muted);font-size:1rem;max-width:500px;margin-bottom:3rem}
 
+    /* TOOLS GRID */
     .tools-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.25rem}
     .tool-card{background:var(--card-bg);border:1px solid var(--border);border-radius:16px;padding:1.75rem;text-decoration:none;color:inherit;display:flex;flex-direction:column;gap:1rem;transition:transform .2s,border-color .2s,box-shadow .2s;position:relative;overflow:hidden;animation:fadeUp .5s ease both}
     .tool-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(91,106,240,0.06) 0%,transparent 60%);opacity:0;transition:opacity .3s}
@@ -85,6 +118,7 @@
     .badge-pop{position:absolute;top:1.25rem;right:1.25rem;background:var(--accent2);color:#000;font-size:.65rem;font-weight:700;padding:.2rem .55rem;border-radius:999px;text-transform:uppercase}
     .c1{background:rgba(91,106,240,0.12)}.c2{background:rgba(0,212,170,0.12)}.c3{background:rgba(240,160,80,0.12)}.c4{background:rgba(220,80,120,0.12)}.c5{background:rgba(120,180,255,0.12)}.c6{background:rgba(160,120,255,0.12)}
 
+    /* WHY */
     .why-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1.5rem;margin-top:3rem}
     .why-card{padding:1.75rem;background:var(--card-bg);border:1px solid var(--border);border-radius:16px}
     .why-icon{font-size:1.75rem;margin-bottom:1rem}
@@ -93,11 +127,13 @@
 
     .divider{width:100%;height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);max-width:1200px;margin:0 auto}
 
+    /* CTA */
     .cta-band{text-align:center;padding:clamp(4rem,8vw,7rem) clamp(1.5rem,5vw,4rem);position:relative;overflow:hidden}
     .cta-band::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(0,212,170,0.08) 0%,transparent 70%)}
     .cta-band h2{font-family:'Syne',sans-serif;font-size:clamp(1.8rem,4vw,3rem);font-weight:800;letter-spacing:-.02em;margin-bottom:1rem}
     .cta-band p{color:var(--muted);margin-bottom:2.5rem}
 
+    /* FOOTER */
     footer{border-top:1px solid var(--border);padding:2.5rem clamp(1.5rem,5vw,4rem);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
     .footer-logo{font-family:'Syne',sans-serif;font-weight:800;color:var(--text)}
     .footer-links{display:flex;gap:1.5rem;list-style:none;flex-wrap:wrap}
@@ -133,7 +169,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <p class="hero-sub">Calculators, timers, and helpers built for students. Open any tool and start immediately — no account needed.</p>
   <a href="#tools" class="btn-primary">Browse all tools ↓</a>
   <div class="hero-stats">
-    <div class="stat"><div class="stat-num">6+</div><div class="stat-label">Free Tools</div></div>
+    <div class="stat"><div class="stat-num">6</div><div class="stat-label">Free Tools</div></div>
     <div class="stat"><div class="stat-num">0</div><div class="stat-label">Sign-ups needed</div></div>
     <div class="stat"><div class="stat-num">100%</div><div class="stat-label">Browser-based</div></div>
   </div>
@@ -146,6 +182,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="section-label">Tools</div>
     <h2 class="section-title">Everything you need,<br />nothing you don't.</h2>
     <p class="section-desc">Each tool solves one problem well. Pick yours and get straight to work.</p>
+
     <div class="tools-grid">
 
       <a href="/gpa-calculator.html" class="tool-card">
@@ -180,14 +217,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <a href="/citation-generator.html" class="tool-card">
         <div class="tool-icon c5">📚</div>
         <h3>Citation Generator</h3>
-        <p>Generate APA, MLA, and Chicago citations in seconds. Fill in the details, copy and paste — done.</p>
+        <p>Generate APA, MLA, and Chicago citations in seconds. Supports books, websites, journals and more.</p>
         <div class="tool-arrow">Use tool →</div>
       </a>
 
       <a href="/study-schedule.html" class="tool-card">
         <div class="tool-icon c6">🗓️</div>
         <h3>Study Schedule Maker</h3>
-        <p>Build a weekly study plan around your classes, exams, and free time. Download or print your schedule.</p>
+        <p>Build a weekly study plan around your classes, exams, and free time. Print or download your schedule.</p>
         <div class="tool-arrow">Use tool →</div>
       </a>
 
@@ -211,8 +248,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   <section class="cta-band">
     <h2>Start with our most popular tool</h2>
-    <p>The GPA Calculator is used by thousands of students every month.</p>
-    <a href="/gpa-calculator.html" class="btn-primary">Open GPA Calculator →</a>
+    <p>The GPA Calculator helps thousands of students every month.</p>
+    <a href="/gpa-calculator.html" class="btn-primary" style="animation:none">Open GPA Calculator →</a>
   </section>
 </main>
 

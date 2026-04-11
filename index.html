@@ -21,22 +21,21 @@
     gtag('config', 'G-66DETECVGK');
   </script>
 
-  <title>StudyTools — Free Online Study Tools for Students</title>
-  <meta name="description" content="Free online study tools for students: GPA calculator, grade calculator, pomodoro timer, word counter, exam solver, citation generator and more. No sign-up required." />
-  <meta name="keywords" content="free study tools, student tools online, gpa calculator, grade calculator, pomodoro timer, study helper, exam solver, word counter, study schedule" />
+  <title>StudyTools — Free Online Study Tools for Students | AI Study Tools</title>
+  <meta name="description" content="The best free online study tools for students. AI study tools, GPA calculator, grade calculator, flashcard maker, pomodoro timer, exam solver and more. Free AI study tools for college students — no sign-up required." />
+  <meta name="keywords" content="free study tools, online study tools, AI study tools, best AI study tools, free AI study tools, study tools for students, study tools for college students, AI study tools for students, best study tools, study helper online, study set, study apps, help studying" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://studytools.pro/" />
 
-  <!-- FAVICON — inline SVG data URI so it always works regardless of file hosting -->
+  <!-- FAVICON inline SVG — works instantly without file dependency -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%235b6af0'/%3E%3Ctext x='16' y='23' font-family='Arial Black,sans-serif' font-size='19' font-weight='900' text-anchor='middle' fill='white'%3ES%3C/text%3E%3C/svg%3E" />
-  <!-- Fallback ICO for older browsers -->
   <link rel="icon" type="image/x-icon" href="/favicon.ico" />
   <link rel="apple-touch-icon" href="/favicon_32.png" />
 
   <!-- OPEN GRAPH -->
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="StudyTools — Free Online Study Tools for Students" />
-  <meta property="og:description" content="Free calculators, timers, and study helpers. No sign-up, no fluff — just tools that work." />
+  <meta property="og:title" content="StudyTools — Free Online Study Tools & AI Study Tools for Students" />
+  <meta property="og:description" content="Free AI study tools, GPA calculator, flashcard maker, pomodoro timer and more. The best free study tools for college students." />
   <meta property="og:url" content="https://studytools.pro/" />
   <meta property="og:site_name" content="StudyTools" />
   <meta property="og:image" content="https://studytools.pro/og-image.png" />
@@ -51,17 +50,18 @@
     "@type": "WebSite",
     "name": "StudyTools",
     "url": "https://studytools.pro/",
-    "description": "Free online study tools for students: GPA calculator, grade calculator, pomodoro timer, word counter, exam solver and more.",
-    "logo": { "@type": "ImageObject", "url": "https://studytools.pro/favicon.ico" }
+    "description": "Free online study tools for students. AI study tools, GPA calculator, grade calculator, flashcard maker, pomodoro timer, exam solver and more.",
+    "logo": { "@type": "ImageObject", "url": "https://studytools.pro/favicon.ico" },
+    "potentialAction": { "@type": "SearchAction", "target": "https://studytools.pro/?q={search_term_string}", "query-input": "required name=search_term_string" }
   }
   </script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet" />
 
   <style>
-    :root{--bg:#0a0a0f;--border:rgba(255,255,255,0.07);--text:#e8e8f0;--muted:#7a7a90;--accent:#5b6af0;--accent2:#00d4aa;--accent3:#f0a050;--card-bg:#13131a;}
+    :root{--bg:#0a0a0f;--bg2:#111118;--border:rgba(255,255,255,0.07);--text:#e8e8f0;--muted:#7a7a90;--accent:#5b6af0;--accent2:#00d4aa;--accent3:#f0a050;--card-bg:#13131a;}
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     html{scroll-behavior:smooth}
     body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:16px;line-height:1.6;overflow-x:hidden}
@@ -69,107 +69,110 @@
     @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.4);opacity:.7}}
     @keyframes shimmer{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
 
-    nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(1.5rem,5vw,4rem);height:64px;background:rgba(10,10,15,0.9);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+    /* NAV */
+    nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(1.5rem,5vw,4rem);height:64px;background:rgba(10,10,15,0.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
     .nav-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.2rem;color:var(--text);text-decoration:none;display:flex;align-items:center;gap:.5rem}
     .nav-logo span{width:8px;height:8px;background:var(--accent2);border-radius:50%;display:inline-block;animation:pulse 2s infinite}
-    .nav-links{display:flex;gap:1.75rem;list-style:none}
+    .nav-links{display:flex;gap:1.5rem;list-style:none;align-items:center}
     .nav-links a{color:var(--muted);text-decoration:none;font-size:.85rem;font-weight:500;transition:color .2s}
     .nav-links a:hover{color:var(--text)}
-    .nav-blog{background:var(--accent);color:#fff!important;padding:.35rem .9rem;border-radius:8px;font-weight:600!important;transition:box-shadow .2s!important}
-    .nav-blog:hover{box-shadow:0 4px 14px rgba(91,106,240,0.5)!important;color:#fff!important}
+    .nav-blog{background:var(--accent);color:#fff!important;padding:.35rem .9rem;border-radius:8px;font-weight:600!important}
+    .nav-blog:hover{box-shadow:0 4px 14px rgba(91,106,240,0.45)!important}
 
-    .hero{position:relative;padding:clamp(5rem,12vw,9rem) clamp(1.5rem,5vw,4rem) clamp(4rem,8vw,7rem);text-align:center;overflow:hidden}
+    /* HERO */
+    .hero{position:relative;padding:clamp(4.5rem,11vw,8rem) clamp(1.5rem,5vw,4rem) clamp(3.5rem,7vw,6rem);text-align:center;overflow:hidden}
     .hero-glow{position:absolute;top:-200px;left:50%;transform:translateX(-50%);width:700px;height:500px;background:radial-gradient(ellipse,rgba(91,106,240,0.18) 0%,transparent 70%);pointer-events:none}
     .hero-badge{display:inline-flex;align-items:center;gap:.5rem;padding:.35rem 1rem;border:1px solid rgba(0,212,170,0.3);border-radius:999px;font-size:.75rem;font-weight:500;color:var(--accent2);letter-spacing:.08em;text-transform:uppercase;margin-bottom:2rem;animation:fadeUp .6s ease both}
-    h1{font-family:'Syne',sans-serif;font-size:clamp(2.8rem,7vw,5.5rem);font-weight:800;line-height:1.05;letter-spacing:-.03em;margin-bottom:1.5rem;animation:fadeUp .7s .1s ease both}
+    h1{font-family:'Syne',sans-serif;font-size:clamp(2.5rem,6.5vw,5rem);font-weight:800;line-height:1.06;letter-spacing:-.03em;margin-bottom:1.25rem;animation:fadeUp .7s .1s ease both}
     h1 em{font-style:normal;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-    .hero-sub{max-width:560px;margin:0 auto 2.5rem;color:var(--muted);font-size:1.1rem;font-weight:300;animation:fadeUp .7s .2s ease both}
+    .hero-sub{max-width:600px;margin:0 auto 2.5rem;color:var(--muted);font-size:1.05rem;font-weight:300;animation:fadeUp .7s .2s ease both}
+    .hero-sub strong{color:var(--text);font-weight:500}
 
+    .cta-row{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;animation:fadeUp .7s .3s ease both}
     .btn-primary{display:inline-flex;align-items:center;gap:.5rem;padding:.9rem 2rem;background:var(--accent);color:#fff;border-radius:10px;font-weight:600;font-size:.95rem;text-decoration:none;transition:transform .2s,box-shadow .2s;border:none;cursor:pointer;font-family:'DM Sans',sans-serif}
-    .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(91,106,240,0.4)}
+    .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(91,106,240,0.4)}
+    .btn-blog{display:inline-flex;align-items:center;gap:.6rem;padding:.9rem 2rem;background:linear-gradient(135deg,#f0a050,#f05b80,#5b6af0);background-size:200% 200%;animation:shimmer 3s ease infinite;color:#fff;border-radius:10px;font-weight:700;font-size:.95rem;text-decoration:none;transition:transform .2s,box-shadow .2s;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;box-shadow:0 4px 20px rgba(240,160,80,0.3)}
+    .btn-blog:hover{transform:translateY(-2px);box-shadow:0 10px 32px rgba(240,160,80,0.45)}
 
-    .hero-cta-row{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;animation:fadeUp .7s .3s ease both}
-
-    /* BLOG BUTTON — big, animated, unmissable */
-    .btn-blog{
-      display:inline-flex;align-items:center;gap:.6rem;
-      padding:1rem 2.25rem;
-      background:linear-gradient(135deg,#f0a050,#f05b80,#5b6af0);
-      background-size:200% 200%;
-      animation:shimmer 3s ease infinite, fadeUp .7s .35s ease both;
-      color:#fff;border-radius:12px;font-weight:700;font-size:1rem;
-      text-decoration:none;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;
-      box-shadow:0 4px 24px rgba(240,160,80,0.35);
-      transition:transform .2s,box-shadow .2s;
-      position:relative;overflow:hidden;
-    }
-    .btn-blog::after{content:'';position:absolute;inset:0;background:rgba(255,255,255,0.1);opacity:0;transition:opacity .2s}
-    .btn-blog:hover{transform:translateY(-3px);box-shadow:0 10px 36px rgba(240,160,80,0.5)}
-    .btn-blog:hover::after{opacity:1}
-
-    .hero-stats{display:flex;justify-content:center;gap:clamp(2rem,5vw,4rem);margin-top:4rem;animation:fadeUp .7s .5s ease both}
+    .hero-stats{display:flex;justify-content:center;gap:clamp(2rem,5vw,4rem);margin-top:3.5rem;animation:fadeUp .7s .45s ease both}
     .stat{text-align:center}
     .stat-num{font-family:'Syne',sans-serif;font-size:1.8rem;font-weight:800}
-    .stat-label{font-size:.8rem;color:var(--muted);margin-top:.2rem}
+    .stat-label{font-size:.78rem;color:var(--muted);margin-top:.2rem}
 
-    .section{padding:clamp(3rem,7vw,6rem) clamp(1.5rem,5vw,4rem);max-width:1200px;margin:0 auto}
-    .section-label{display:flex;align-items:center;gap:.75rem;font-size:.75rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem}
+    /* SECTIONS */
+    .section{padding:clamp(3rem,6vw,5rem) clamp(1.5rem,5vw,4rem);max-width:1200px;margin:0 auto}
+    .section-label{display:flex;align-items:center;gap:.75rem;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:.875rem}
     .section-label::before{content:'';display:block;width:24px;height:2px;background:var(--accent);border-radius:2px}
-    .section-title{font-family:'Syne',sans-serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:700;letter-spacing:-.02em;margin-bottom:.75rem}
-    .section-desc{color:var(--muted);font-size:1rem;max-width:500px;margin-bottom:3rem}
+    .section-title{font-family:'Syne',sans-serif;font-size:clamp(1.7rem,3.5vw,2.6rem);font-weight:700;letter-spacing:-.02em;margin-bottom:.6rem}
+    .section-desc{color:var(--muted);font-size:.95rem;max-width:520px;margin-bottom:2.75rem}
 
-    .tools-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.25rem}
-    .tool-card{background:var(--card-bg);border:1px solid var(--border);border-radius:16px;padding:1.75rem;text-decoration:none;color:inherit;display:flex;flex-direction:column;gap:1rem;transition:transform .2s,border-color .2s,box-shadow .2s;position:relative;overflow:hidden;animation:fadeUp .5s ease both}
-    .tool-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(91,106,240,0.06) 0%,transparent 60%);opacity:0;transition:opacity .3s}
-    .tool-card:hover{transform:translateY(-4px);border-color:rgba(91,106,240,0.3);box-shadow:0 16px 40px rgba(0,0,0,0.4)}
+    /* TOOLS GRID */
+    .tools-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:1.15rem}
+    .tool-card{background:var(--card-bg);border:1px solid var(--border);border-radius:16px;padding:1.6rem;text-decoration:none;color:inherit;display:flex;flex-direction:column;gap:.875rem;transition:transform .2s,border-color .2s,box-shadow .2s;position:relative;overflow:hidden;animation:fadeUp .5s ease both}
+    .tool-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(91,106,240,0.06),transparent 60%);opacity:0;transition:opacity .3s}
+    .tool-card:hover{transform:translateY(-4px);border-color:rgba(91,106,240,0.3);box-shadow:0 14px 36px rgba(0,0,0,0.4)}
     .tool-card:hover::before{opacity:1}
-    .tool-card:nth-child(1){animation-delay:.05s}.tool-card:nth-child(2){animation-delay:.1s}.tool-card:nth-child(3){animation-delay:.15s}.tool-card:nth-child(4){animation-delay:.2s}.tool-card:nth-child(5){animation-delay:.25s}.tool-card:nth-child(6){animation-delay:.3s}.tool-card:nth-child(7){animation-delay:.35s}.tool-card:nth-child(8){animation-delay:.4s}
-    .tool-icon{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.5rem}
-    .tool-card h3{font-family:'Syne',sans-serif;font-size:1.05rem;font-weight:700}
-    .tool-card p{font-size:.875rem;color:var(--muted);line-height:1.5;flex:1}
-    .tool-arrow{font-size:.8rem;font-weight:600;color:var(--accent);margin-top:.5rem}
-    .badge-pop{position:absolute;top:1.25rem;right:1.25rem;background:var(--accent2);color:#000;font-size:.65rem;font-weight:700;padding:.2rem .55rem;border-radius:999px;text-transform:uppercase}
-    .badge-new{position:absolute;top:1.25rem;right:1.25rem;background:var(--accent3);color:#000;font-size:.65rem;font-weight:700;padding:.2rem .55rem;border-radius:999px;text-transform:uppercase}
-    .c1{background:rgba(91,106,240,0.12)}.c2{background:rgba(0,212,170,0.12)}.c3{background:rgba(240,160,80,0.12)}.c4{background:rgba(220,80,120,0.12)}.c5{background:rgba(120,180,255,0.12)}.c6{background:rgba(160,120,255,0.12)}.c7{background:rgba(80,200,120,0.12)}.c8{background:rgba(255,100,80,0.12)}
-
-    /* BLOG BANNER */
-    .blog-banner{
-      margin: 0 clamp(1.5rem,5vw,4rem);
-      max-width:1200px;
-      margin-left:auto;margin-right:auto;
-      background:linear-gradient(135deg,#1a1428 0%,#0f1a2e 100%);
-      border:1px solid rgba(240,160,80,0.25);
-      border-radius:20px;padding:2.5rem;
-      display:flex;align-items:center;justify-content:space-between;
-      gap:2rem;flex-wrap:wrap;
-      position:relative;overflow:hidden;
-    }
-    .blog-banner::before{content:'';position:absolute;top:-60px;right:-60px;width:250px;height:250px;background:radial-gradient(ellipse,rgba(240,160,80,0.15),transparent 70%);pointer-events:none}
-    .blog-banner-text h2{font-family:'Syne',sans-serif;font-size:clamp(1.4rem,3vw,2rem);font-weight:800;letter-spacing:-.02em;margin-bottom:.5rem}
-    .blog-banner-text p{color:var(--muted);font-size:.95rem;max-width:480px}
-    .blog-banner-text span{color:var(--accent3);font-weight:600}
-
-    .why-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1.5rem;margin-top:3rem}
-    .why-card{padding:1.75rem;background:var(--card-bg);border:1px solid var(--border);border-radius:16px}
-    .why-icon{font-size:1.75rem;margin-bottom:1rem}
-    .why-card h4{font-family:'Syne',sans-serif;font-weight:700;margin-bottom:.5rem}
-    .why-card p{font-size:.875rem;color:var(--muted);line-height:1.55}
+    .tool-card:nth-child(1){animation-delay:.04s}.tool-card:nth-child(2){animation-delay:.08s}.tool-card:nth-child(3){animation-delay:.12s}.tool-card:nth-child(4){animation-delay:.16s}.tool-card:nth-child(5){animation-delay:.2s}.tool-card:nth-child(6){animation-delay:.24s}.tool-card:nth-child(7){animation-delay:.28s}.tool-card:nth-child(8){animation-delay:.32s}.tool-card:nth-child(9){animation-delay:.36s}.tool-card:nth-child(10){animation-delay:.4s}
+    .tool-icon{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.4rem}
+    .tool-card h3{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;line-height:1.3}
+    .tool-card p{font-size:.845rem;color:var(--muted);line-height:1.55;flex:1}
+    .tool-arrow{font-size:.8rem;font-weight:600;color:var(--accent)}
+    .badge-pop{position:absolute;top:1.1rem;right:1.1rem;background:var(--accent2);color:#000;font-size:.62rem;font-weight:700;padding:.18rem .5rem;border-radius:999px;text-transform:uppercase}
+    .badge-new{position:absolute;top:1.1rem;right:1.1rem;background:var(--accent3);color:#000;font-size:.62rem;font-weight:700;padding:.18rem .5rem;border-radius:999px;text-transform:uppercase}
+    .badge-ai{position:absolute;top:1.1rem;right:1.1rem;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;font-size:.62rem;font-weight:700;padding:.18rem .5rem;border-radius:999px;text-transform:uppercase}
+    .c1{background:rgba(91,106,240,0.12)}.c2{background:rgba(0,212,170,0.12)}.c3{background:rgba(240,160,80,0.12)}.c4{background:rgba(220,80,120,0.12)}.c5{background:rgba(120,180,255,0.12)}.c6{background:rgba(160,120,255,0.12)}.c7{background:rgba(80,200,120,0.12)}.c8{background:rgba(255,100,80,0.12)}.c9{background:rgba(255,215,0,0.1)}.c10{background:rgba(91,180,240,0.12)}
 
     .divider{width:100%;height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);max-width:1200px;margin:0 auto}
 
-    .cta-band{text-align:center;padding:clamp(4rem,8vw,7rem) clamp(1.5rem,5vw,4rem);position:relative;overflow:hidden}
-    .cta-band::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(0,212,170,0.08) 0%,transparent 70%)}
-    .cta-band h2{font-family:'Syne',sans-serif;font-size:clamp(1.8rem,4vw,3rem);font-weight:800;letter-spacing:-.02em;margin-bottom:1rem}
-    .cta-band p{color:var(--muted);margin-bottom:2.5rem}
+    /* BLOG SECTION */
+    .blog-section{padding:clamp(3rem,6vw,5rem) clamp(1.5rem,5vw,4rem);max-width:1200px;margin:0 auto}
+    .blog-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.25rem;margin-bottom:2rem}
+    .blog-card{background:var(--card-bg);border:1px solid var(--border);border-radius:16px;overflow:hidden;text-decoration:none;color:inherit;transition:transform .2s,border-color .2s,box-shadow .2s;display:flex;flex-direction:column}
+    .blog-card:hover{transform:translateY(-3px);border-color:rgba(91,106,240,0.3);box-shadow:0 12px 32px rgba(0,0,0,0.4)}
+    .blog-thumb{padding:2rem;font-size:2.5rem;background:linear-gradient(135deg,#111820,#1a1428);display:flex;align-items:center;justify-content:center;min-height:100px}
+    .blog-body{padding:1.25rem;flex:1;display:flex;flex-direction:column;gap:.5rem}
+    .blog-tag{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--accent3)}
+    .blog-card h3{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;line-height:1.35}
+    .blog-card p{font-size:.84rem;color:var(--muted);line-height:1.55;flex:1}
+    .blog-read{font-size:.8rem;font-weight:600;color:var(--accent);margin-top:.25rem}
+
+    /* SEO CONTENT SECTION */
+    .seo-section{padding:clamp(3rem,5vw,4.5rem) clamp(1.5rem,5vw,4rem);max-width:1200px;margin:0 auto}
+    .seo-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start}
+    .seo-content h2{font-family:'Syne',sans-serif;font-size:clamp(1.5rem,3vw,2.2rem);font-weight:800;letter-spacing:-.02em;margin-bottom:1rem}
+    .seo-content h2 em{font-style:normal;color:var(--accent2)}
+    .seo-content p{color:var(--muted);font-size:.95rem;line-height:1.8;margin-bottom:.875rem}
+    .seo-content p strong{color:var(--text)}
+    .seo-list{list-style:none;display:flex;flex-direction:column;gap:.6rem;margin-top:1rem}
+    .seo-list li{display:flex;align-items:flex-start;gap:.6rem;font-size:.9rem;color:var(--muted)}
+    .seo-list li::before{content:'✓';color:var(--accent2);font-weight:700;flex-shrink:0;margin-top:.1rem}
+    .seo-cards{display:flex;flex-direction:column;gap:.875rem}
+    .seo-card{background:var(--card-bg);border:1px solid var(--border);border-radius:14px;padding:1.25rem 1.5rem}
+    .seo-card-title{font-family:'Syne',sans-serif;font-weight:700;font-size:.95rem;margin-bottom:.3rem}
+    .seo-card-desc{font-size:.845rem;color:var(--muted);line-height:1.55}
+
+    /* WHY */
+    .why-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:1.15rem;margin-top:2.5rem}
+    .why-card{padding:1.5rem;background:var(--card-bg);border:1px solid var(--border);border-radius:14px}
+    .why-icon{font-size:1.6rem;margin-bottom:.75rem}
+    .why-card h4{font-family:'Syne',sans-serif;font-weight:700;margin-bottom:.4rem;font-size:.95rem}
+    .why-card p{font-size:.84rem;color:var(--muted);line-height:1.55}
+
+    /* CTA */
+    .cta-band{text-align:center;padding:clamp(4rem,7vw,6rem) clamp(1.5rem,5vw,4rem);position:relative;overflow:hidden}
+    .cta-band::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(0,212,170,0.08),transparent 70%)}
+    .cta-band h2{font-family:'Syne',sans-serif;font-size:clamp(1.7rem,3.5vw,2.8rem);font-weight:800;letter-spacing:-.02em;margin-bottom:.875rem}
+    .cta-band p{color:var(--muted);margin-bottom:2.25rem;max-width:480px;margin-left:auto;margin-right:auto}
 
     footer{border-top:1px solid var(--border);padding:2.5rem clamp(1.5rem,5vw,4rem);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
     .footer-logo{font-family:'Syne',sans-serif;font-weight:800;color:var(--text)}
-    .footer-links{display:flex;gap:1.5rem;list-style:none;flex-wrap:wrap}
-    .footer-links a{color:var(--muted);text-decoration:none;font-size:.85rem;transition:color .2s}
+    .footer-links{display:flex;gap:1.25rem;list-style:none;flex-wrap:wrap}
+    .footer-links a{color:var(--muted);text-decoration:none;font-size:.82rem;transition:color .2s}
     .footer-links a:hover{color:var(--text)}
-    footer small{color:var(--muted);font-size:.8rem}
+    footer small{color:var(--muted);font-size:.78rem}
 
-    @media(max-width:640px){.nav-links{display:none}.hero-stats{gap:1.5rem}.stat-num{font-size:1.4rem}.blog-banner{text-align:center;justify-content:center}.hero-cta-row{flex-direction:column;align-items:center}}
+    @media(max-width:768px){.seo-grid{grid-template-columns:1fr}}
+    @media(max-width:640px){.nav-links{display:none}.hero-stats{gap:1.5rem}.stat-num{font-size:1.4rem}.cta-row{flex-direction:column;align-items:center}}
   </style>
 </head>
 <body>
@@ -183,7 +186,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <a href="/" class="nav-logo"><span></span> StudyTools</a>
   <ul class="nav-links">
     <li><a href="#tools">Tools</a></li>
-    <li><a href="/gpa-calculator.html">GPA Calc</a></li>
+    <li><a href="/study-assistant.html">AI Tutor</a></li>
     <li><a href="/exam-solver.html">Exam Solver</a></li>
     <li><a href="/blog.html" class="nav-blog">📖 Blog</a></li>
   </ul>
@@ -191,31 +194,50 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <header class="hero">
   <div class="hero-glow"></div>
-  <div class="hero-badge">✦ 100% Free · No Sign-up · 8 Tools</div>
-  <h1>Study smarter with<br /><em>free online tools</em></h1>
-  <p class="hero-sub">Calculators, timers, and study helpers built for students. Open any tool and start immediately — no account needed.</p>
-
-  <div class="hero-cta-row">
-    <a href="#tools" class="btn-primary" style="animation:fadeUp .7s .3s ease both">Browse all tools ↓</a>
-    <a href="/blog.html" class="btn-blog">📖 Study Tips Blog — Read Now</a>
+  <div class="hero-badge">✦ Free AI Study Tools · No Sign-up · 10 Tools</div>
+  <h1>The best free <em>online study tools</em><br />for students</h1>
+  <p class="hero-sub">
+    <strong>AI study tools, calculators, timers and more</strong> — all free, all in your browser.
+    Used by students in the US, Canada and UK to study smarter and get better grades.
+  </p>
+  <div class="cta-row">
+    <a href="#tools" class="btn-primary">Browse all tools ↓</a>
+    <a href="/blog.html" class="btn-blog">📖 Study Tips Blog</a>
   </div>
-
   <div class="hero-stats">
-    <div class="stat"><div class="stat-num">8</div><div class="stat-label">Free Tools</div></div>
+    <div class="stat"><div class="stat-num">10</div><div class="stat-label">Free Tools</div></div>
     <div class="stat"><div class="stat-num">0</div><div class="stat-label">Sign-ups needed</div></div>
-    <div class="stat"><div class="stat-num">100%</div><div class="stat-label">Browser-based</div></div>
+    <div class="stat"><div class="stat-num">AI</div><div class="stat-label">Powered tutor</div></div>
   </div>
 </header>
 
 <div class="divider"></div>
 
 <main>
+
+  <!-- TOOLS GRID -->
   <section class="section" id="tools">
-    <div class="section-label">Tools</div>
-    <h2 class="section-title">Everything you need,<br />nothing you don't.</h2>
-    <p class="section-desc">Each tool solves one problem well. Pick yours and get straight to work.</p>
+    <div class="section-label">Free Study Tools Online</div>
+    <h2 class="section-title">Everything a student needs,<br />all in one place.</h2>
+    <p class="section-desc">The best free AI study tools and calculators for students. No account, no download — open and use instantly.</p>
 
     <div class="tools-grid">
+
+      <a href="/study-assistant.html" class="tool-card">
+        <div class="tool-icon c10">🤖</div>
+        <h3>AI Study Assistant</h3>
+        <p>Your personal AI tutor. Set your subject, course level and topic — then ask anything. Remembers the full conversation like a real tutor.</p>
+        <div class="tool-arrow">Use tool →</div>
+        <span class="badge-ai">AI</span>
+      </a>
+
+      <a href="/exam-solver.html" class="tool-card">
+        <div class="tool-icon c8">🧠</div>
+        <h3>Exam Question Solver</h3>
+        <p>Paste any exam question and get a clear, step-by-step explanation. Works for math, science, history, English and more.</p>
+        <div class="tool-arrow">Use tool →</div>
+        <span class="badge-ai">AI</span>
+      </a>
 
       <a href="/gpa-calculator.html" class="tool-card">
         <div class="tool-icon c1">🎓</div>
@@ -232,10 +254,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="tool-arrow">Use tool →</div>
       </a>
 
-      <a href="/exam-solver.html" class="tool-card">
-        <div class="tool-icon c8">🧠</div>
-        <h3>Exam Question Solver</h3>
-        <p>Paste any exam question and get a clear, step-by-step explanation. Works for math, science, history and more.</p>
+      <a href="/flashcard-maker.html" class="tool-card">
+        <div class="tool-icon c7">🃏</div>
+        <h3>Flashcard Maker</h3>
+        <p>Create digital flashcards, flip through them and track which ones you know. Works like Quizlet — free and instant.</p>
         <div class="tool-arrow">Use tool →</div>
         <span class="badge-new">New</span>
       </a>
@@ -268,12 +290,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="tool-arrow">Use tool →</div>
       </a>
 
-      <a href="/flashcard-maker.html" class="tool-card">
-        <div class="tool-icon c7">🃏</div>
-        <h3>Flashcard Maker</h3>
-        <p>Create digital flashcards to memorize vocabulary, formulas, and concepts. Flip, shuffle, and self-test anytime.</p>
-        <div class="tool-arrow">Use tool →</div>
-        <span class="badge-new">New</span>
+      <a href="/blog.html" class="tool-card" style="border-style:dashed;border-color:rgba(240,160,80,0.3)">
+        <div class="tool-icon c9">📖</div>
+        <h3>Study Tips Blog</h3>
+        <p>How to study effectively, beat procrastination, improve memory and ace your exams. New articles every week.</p>
+        <div class="tool-arrow" style="color:var(--accent3)">Read articles →</div>
       </a>
 
     </div>
@@ -281,23 +302,96 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   <div class="divider"></div>
 
-  <!-- BLOG BANNER -->
-  <div class="blog-banner">
-    <div class="blog-banner-text">
-      <h2>📖 Study smarter — read our blog</h2>
-      <p>Tips on <span>how to study effectively</span>, beat procrastination, improve memory, and ace your exams. New articles every week.</p>
+  <!-- BLOG PREVIEW -->
+  <section class="blog-section">
+    <div class="section-label">Study Tips Blog</div>
+    <h2 class="section-title">Learn how to study effectively</h2>
+    <p class="section-desc">Proven techniques and strategies used by top students. New articles on AI study tools, memory, and exam prep.</p>
+
+    <div class="blog-grid">
+      <a href="/blog.html#article-pomodoro" class="blog-card">
+        <div class="blog-thumb">🍅</div>
+        <div class="blog-body">
+          <div class="blog-tag">Study Techniques · 6 min</div>
+          <h3>How to Use the Pomodoro Technique to Study Better</h3>
+          <p>Most students use it wrong. Here's the correct method that actually improves focus and beats procrastination.</p>
+          <div class="blog-read">Read article →</div>
+        </div>
+      </a>
+      <a href="/blog.html#article-memory" class="blog-card">
+        <div class="blog-thumb">🧠</div>
+        <div class="blog-body">
+          <div class="blog-tag">Memory · 7 min</div>
+          <h3>How to Memorize Anything: The Science-Backed Method</h3>
+          <p>Spaced repetition, active recall and the Feynman technique — the three most powerful memory tools for students.</p>
+          <div class="blog-read">Read article →</div>
+        </div>
+      </a>
+      <a href="/blog.html#article-exam" class="blog-card">
+        <div class="blog-thumb">✍️</div>
+        <div class="blog-body">
+          <div class="blog-tag">Exam Prep · 8 min</div>
+          <h3>How to Study for an Exam in One Week</h3>
+          <p>A step-by-step plan for when you have 7 days (or less) before your exam. Used by thousands of students.</p>
+          <div class="blog-read">Read article →</div>
+        </div>
+      </a>
     </div>
-    <a href="/blog.html" class="btn-blog" style="animation:shimmer 3s ease infinite;white-space:nowrap">Read the Blog →</a>
-  </div>
 
-  <div class="divider" style="margin-top:3rem"></div>
+    <div style="text-align:center">
+      <a href="/blog.html" class="btn-primary">View all study tips →</a>
+    </div>
+  </section>
 
-  <section class="section" id="about">
+  <div class="divider"></div>
+
+  <!-- SEO CONTENT SECTION -->
+  <section class="seo-section">
+    <div class="seo-grid">
+      <div class="seo-content">
+        <h2>The best free <em>AI study tools</em> for students</h2>
+        <p>StudyTools is a free collection of <strong>online study tools</strong> designed to help students study smarter, not harder. Whether you need <strong>AI study tools for college students</strong>, a simple GPA calculator, or a pomodoro timer — everything is here, free, with no sign-up.</p>
+        <p>Our <strong>AI Study Assistant</strong> works like having a personal tutor available 24/7. Set your subject — math, biology, history, economics — and your course level, and it adapts its explanations to your level. It remembers everything you've discussed in the session, so you can ask follow-up questions naturally.</p>
+        <p>Unlike other <strong>study tools like Quizlet</strong>, StudyTools doesn't require an account, has no paywalls, and works instantly in any browser on any device.</p>
+        <ul class="seo-list">
+          <li>Free AI study tools — no subscription needed</li>
+          <li>Works for high school and college students</li>
+          <li>Available on phone, tablet and desktop</li>
+          <li>No data collected — everything runs in your browser</li>
+          <li>New tools and study tips added regularly</li>
+        </ul>
+      </div>
+      <div class="seo-cards">
+        <div class="seo-card">
+          <div class="seo-card-title">🤖 AI Study Tools</div>
+          <div class="seo-card-desc">Our AI Study Assistant and Exam Question Solver use advanced AI to give you personalized explanations for any subject, at any level. The best free AI study tools available online.</div>
+        </div>
+        <div class="seo-card">
+          <div class="seo-card-title">🎓 Study Tools for College Students</div>
+          <div class="seo-card-desc">GPA calculator, grade calculator, citation generator and study schedule maker — everything college students need to stay on top of their coursework.</div>
+        </div>
+        <div class="seo-card">
+          <div class="seo-card-title">🃏 Study Tools like Quizlet</div>
+          <div class="seo-card-desc">Our free flashcard maker lets you create, flip and study digital flashcards — similar to Quizlet but with no account required and completely free.</div>
+        </div>
+        <div class="seo-card">
+          <div class="seo-card-title">📱 Best Apps for Summaries & Outlines</div>
+          <div class="seo-card-desc">Use our AI Study Assistant to generate summaries, outlines and mind maps of any topic instantly. Works on iPad, iPhone and any mobile device.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- WHY -->
+  <section class="section">
     <div class="section-label">Why StudyTools</div>
     <h2 class="section-title">Built for students,<br />not for clicks.</h2>
     <div class="why-grid">
       <div class="why-card"><div class="why-icon">⚡</div><h4>Instant results</h4><p>Every tool gives you answers immediately in your browser. No loading screens, no waiting.</p></div>
-      <div class="why-card"><div class="why-icon">🔒</div><h4>Zero data collected</h4><p>Nothing you type is stored or sent anywhere. All calculations happen locally on your device.</p></div>
+      <div class="why-card"><div class="why-icon">🤖</div><h4>Real AI inside</h4><p>Our AI tools use advanced language models to give personalized, subject-specific explanations — not generic answers.</p></div>
+      <div class="why-card"><div class="why-icon">🔒</div><h4>Zero data collected</h4><p>Nothing you type is stored or sent to any server. All calculations happen locally on your device.</p></div>
       <div class="why-card"><div class="why-icon">📱</div><h4>Works on any device</h4><p>Fully responsive for phones, tablets, and desktops. Use it in class, at the library, anywhere.</p></div>
       <div class="why-card"><div class="why-icon">♾️</div><h4>Always free</h4><p>No premium plans, no paywalls. Every tool on this site is free to use, forever.</p></div>
     </div>
@@ -307,9 +401,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   <section class="cta-band">
     <h2>Ready to study smarter?</h2>
-    <p>Start with our most popular tool — used by thousands of students every month.</p>
-    <a href="/gpa-calculator.html" class="btn-primary" style="animation:none">Open GPA Calculator →</a>
+    <p>Join thousands of students using StudyTools every day to get better grades in less time.</p>
+    <a href="/study-assistant.html" class="btn-primary" style="margin:0 auto">Try the AI Study Assistant →</a>
   </section>
+
 </main>
 
 <footer>
@@ -317,17 +412,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <ul class="footer-links">
     <li><a href="/">Home</a></li>
     <li><a href="/blog.html">Blog</a></li>
+    <li><a href="/study-assistant.html">AI Tutor</a></li>
+    <li><a href="/exam-solver.html">Exam Solver</a></li>
     <li><a href="/gpa-calculator.html">GPA Calculator</a></li>
     <li><a href="/grade-calculator.html">Grade Calculator</a></li>
-    <li><a href="/exam-solver.html">Exam Solver</a></li>
+    <li><a href="/flashcard-maker.html">Flashcards</a></li>
     <li><a href="/pomodoro-timer.html">Pomodoro</a></li>
     <li><a href="/word-counter.html">Word Counter</a></li>
     <li><a href="/citation-generator.html">Citations</a></li>
     <li><a href="/study-schedule.html">Study Schedule</a></li>
-    <li><a href="/flashcard-maker.html">Flashcards</a></li>
     <li><a href="/privacy.html">Privacy</a></li>
   </ul>
-  <small>© 2025 StudyTools · Free study tools for students</small>
+  <small>© 2025 StudyTools · Free online study tools for students</small>
 </footer>
 
 </body>

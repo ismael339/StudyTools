@@ -21,38 +21,36 @@
     gtag('config', 'G-66DETECVGK');
   </script>
 
-  <title>StudyTools — Free Online Study Tools for Students | AI Study Tools</title>
-  <meta name="description" content="The best free online study tools for students. AI study tools, GPA calculator, grade calculator, flashcard maker, pomodoro timer, exam solver and more. Free AI study tools for college students — no sign-up required." />
-  <meta name="keywords" content="free study tools, online study tools, AI study tools, best AI study tools, free AI study tools, study tools for students, study tools for college students, AI study tools for students, best study tools, study helper online, study set, study apps, help studying" />
+  <title>StudyTools — Free AI Study Platform for Students</title>
+  <meta name="description" content="Free AI study platform for students. Summarize notes, create outlines, generate practice tests, build study plans and get instant answers. No sign-up required." />
+  <meta name="keywords" content="AI study tools, free AI study platform, AI tutor for students, summarize notes AI, study helper AI, free study tools, best AI study tools 2025, AI homework helper" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://studytools.pro/" />
 
-  <!-- FAVICON inline SVG — works instantly without file dependency -->
+  <!-- FAVICON -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%235b6af0'/%3E%3Ctext x='16' y='23' font-family='Arial Black,sans-serif' font-size='19' font-weight='900' text-anchor='middle' fill='white'%3ES%3C/text%3E%3C/svg%3E" />
   <link rel="icon" type="image/x-icon" href="/favicon.ico" />
   <link rel="apple-touch-icon" href="/favicon_32.png" />
 
   <!-- OPEN GRAPH -->
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="StudyTools — Free Online Study Tools & AI Study Tools for Students" />
-  <meta property="og:description" content="Free AI study tools, GPA calculator, flashcard maker, pomodoro timer and more. The best free study tools for college students." />
+  <meta property="og:title" content="StudyTools — Free AI Study Platform for Students" />
+  <meta property="og:description" content="Your personal AI study assistant. Summarize, outline, test and plan — all in one place." />
   <meta property="og:url" content="https://studytools.pro/" />
-  <meta property="og:site_name" content="StudyTools" />
   <meta property="og:image" content="https://studytools.pro/og-image.png" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="StudyTools — Free Online Study Tools for Students" />
-  <meta name="twitter:image" content="https://studytools.pro/og-image.png" />
 
-  <!-- SCHEMA.ORG -->
+  <!-- SCHEMA -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "WebSite",
+    "@type": "WebApplication",
     "name": "StudyTools",
     "url": "https://studytools.pro/",
-    "description": "Free online study tools for students. AI study tools, GPA calculator, grade calculator, flashcard maker, pomodoro timer, exam solver and more.",
-    "logo": { "@type": "ImageObject", "url": "https://studytools.pro/favicon.ico" },
-    "potentialAction": { "@type": "SearchAction", "target": "https://studytools.pro/?q={search_term_string}", "query-input": "required name=search_term_string" }
+    "description": "Free AI study platform for students. Summarize notes, generate outlines, practice tests and study plans.",
+    "applicationCategory": "EducationalApplication",
+    "operatingSystem": "Any",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
   }
   </script>
 
@@ -61,118 +59,443 @@
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet" />
 
   <style>
-    :root{--bg:#0a0a0f;--bg2:#111118;--border:rgba(255,255,255,0.07);--text:#e8e8f0;--muted:#7a7a90;--accent:#5b6af0;--accent2:#00d4aa;--accent3:#f0a050;--card-bg:#13131a;}
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    html{scroll-behavior:smooth}
-    body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:16px;line-height:1.6;overflow-x:hidden}
-    @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
-    @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.4);opacity:.7}}
-    @keyframes shimmer{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+    :root {
+      --bg: #07070d;
+      --bg2: #0d0d18;
+      --bg3: #111120;
+      --border: rgba(255,255,255,0.07);
+      --border2: rgba(255,255,255,0.12);
+      --text: #eeeef5;
+      --muted: #6a6a84;
+      --accent: #6c63ff;
+      --accent2: #00e5b0;
+      --accent3: #ff7f50;
+      --card: #0e0e1c;
+      --input: #09090f;
+      --user-msg: #1a1a35;
+      --ai-msg: #0e0e1c;
+    }
 
-    /* NAV */
-    nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(1.5rem,5vw,4rem);height:64px;background:rgba(10,10,15,0.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
-    .nav-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.2rem;color:var(--text);text-decoration:none;display:flex;align-items:center;gap:.5rem}
-    .nav-logo span{width:8px;height:8px;background:var(--accent2);border-radius:50%;display:inline-block;animation:pulse 2s infinite}
-    .nav-links{display:flex;gap:1.5rem;list-style:none;align-items:center}
-    .nav-links a{color:var(--muted);text-decoration:none;font-size:.85rem;font-weight:500;transition:color .2s}
-    .nav-links a:hover{color:var(--text)}
-    .nav-blog{background:var(--accent);color:#fff!important;padding:.35rem .9rem;border-radius:8px;font-weight:600!important}
-    .nav-blog:hover{box-shadow:0 4px 14px rgba(91,106,240,0.45)!important}
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      line-height: 1.65;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
 
-    /* HERO */
-    .hero{position:relative;padding:clamp(4.5rem,11vw,8rem) clamp(1.5rem,5vw,4rem) clamp(3.5rem,7vw,6rem);text-align:center;overflow:hidden}
-    .hero-glow{position:absolute;top:-200px;left:50%;transform:translateX(-50%);width:700px;height:500px;background:radial-gradient(ellipse,rgba(91,106,240,0.18) 0%,transparent 70%);pointer-events:none}
-    .hero-badge{display:inline-flex;align-items:center;gap:.5rem;padding:.35rem 1rem;border:1px solid rgba(0,212,170,0.3);border-radius:999px;font-size:.75rem;font-weight:500;color:var(--accent2);letter-spacing:.08em;text-transform:uppercase;margin-bottom:2rem;animation:fadeUp .6s ease both}
-    h1{font-family:'Syne',sans-serif;font-size:clamp(2.5rem,6.5vw,5rem);font-weight:800;line-height:1.06;letter-spacing:-.03em;margin-bottom:1.25rem;animation:fadeUp .7s .1s ease both}
-    h1 em{font-style:normal;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-    .hero-sub{max-width:600px;margin:0 auto 2.5rem;color:var(--muted);font-size:1.05rem;font-weight:300;animation:fadeUp .7s .2s ease both}
-    .hero-sub strong{color:var(--text);font-weight:500}
+    /* SUBTLE GRID BG */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image:
+        linear-gradient(rgba(108,99,255,0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(108,99,255,0.035) 1px, transparent 1px);
+      background-size: 52px 52px;
+      pointer-events: none; z-index: 0;
+    }
 
-    .cta-row{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;animation:fadeUp .7s .3s ease both}
-    .btn-primary{display:inline-flex;align-items:center;gap:.5rem;padding:.9rem 2rem;background:var(--accent);color:#fff;border-radius:10px;font-weight:600;font-size:.95rem;text-decoration:none;transition:transform .2s,box-shadow .2s;border:none;cursor:pointer;font-family:'DM Sans',sans-serif}
-    .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(91,106,240,0.4)}
-    .btn-blog{display:inline-flex;align-items:center;gap:.6rem;padding:.9rem 2rem;background:linear-gradient(135deg,#f0a050,#f05b80,#5b6af0);background-size:200% 200%;animation:shimmer 3s ease infinite;color:#fff;border-radius:10px;font-weight:700;font-size:.95rem;text-decoration:none;transition:transform .2s,box-shadow .2s;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;box-shadow:0 4px 20px rgba(240,160,80,0.3)}
-    .btn-blog:hover{transform:translateY(-2px);box-shadow:0 10px 32px rgba(240,160,80,0.45)}
+    @keyframes fadeUp { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:none} }
+    @keyframes pulse { 0%,100%{transform:scale(1)}50%{transform:scale(1.4);opacity:.6} }
+    @keyframes shimmer { 0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%} }
+    @keyframes spin { to{transform:rotate(360deg)} }
+    @keyframes dotBounce { 0%,80%,100%{transform:translateY(0)}40%{transform:translateY(-5px)} }
+    @keyframes msgIn { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:none} }
+    @keyframes blink { 0%,100%{opacity:1}50%{opacity:0} }
 
-    .hero-stats{display:flex;justify-content:center;gap:clamp(2rem,5vw,4rem);margin-top:3.5rem;animation:fadeUp .7s .45s ease both}
-    .stat{text-align:center}
-    .stat-num{font-family:'Syne',sans-serif;font-size:1.8rem;font-weight:800}
-    .stat-label{font-size:.78rem;color:var(--muted);margin-top:.2rem}
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 200;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 clamp(1rem,4vw,3rem); height: 62px;
+      background: rgba(7,7,13,0.92);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.2rem;
+      color: var(--text); text-decoration: none;
+      display: flex; align-items: center; gap: .5rem;
+    }
+    .nav-dot { width: 8px; height: 8px; background: var(--accent2); border-radius: 50%; animation: pulse 2s infinite; }
+    .nav-links { display: flex; align-items: center; gap: .5rem; }
+    .nav-link {
+      padding: .4rem .875rem; border-radius: 8px;
+      color: var(--muted); text-decoration: none;
+      font-size: .85rem; font-weight: 500; transition: all .2s;
+    }
+    .nav-link:hover { color: var(--text); background: rgba(255,255,255,0.04); }
+    .nav-link.active { color: var(--text); }
+    .nav-signin {
+      padding: .4rem 1.1rem;
+      background: rgba(108,99,255,0.15);
+      border: 1px solid rgba(108,99,255,0.35);
+      border-radius: 8px;
+      color: var(--accent); font-size: .85rem; font-weight: 700;
+      cursor: pointer; transition: all .2s;
+      display: flex; align-items: center; gap: .4rem;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .nav-signin:hover { background: rgba(108,99,255,0.25); box-shadow: 0 4px 14px rgba(108,99,255,0.3); }
 
-    /* SECTIONS */
-    .section{padding:clamp(3rem,6vw,5rem) clamp(1.5rem,5vw,4rem);max-width:1200px;margin:0 auto}
-    .section-label{display:flex;align-items:center;gap:.75rem;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:.875rem}
-    .section-label::before{content:'';display:block;width:24px;height:2px;background:var(--accent);border-radius:2px}
-    .section-title{font-family:'Syne',sans-serif;font-size:clamp(1.7rem,3.5vw,2.6rem);font-weight:700;letter-spacing:-.02em;margin-bottom:.6rem}
-    .section-desc{color:var(--muted);font-size:.95rem;max-width:520px;margin-bottom:2.75rem}
+    /* ── HERO ── */
+    .hero {
+      position: relative; z-index: 1;
+      padding: clamp(3rem,7vw,5rem) clamp(1rem,4vw,3rem) 1.5rem;
+      text-align: center;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: .5rem;
+      padding: .3rem 1rem;
+      background: rgba(0,229,176,0.08);
+      border: 1px solid rgba(0,229,176,0.2);
+      border-radius: 999px;
+      font-size: .7rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--accent2); margin-bottom: 1.5rem;
+      animation: fadeUp .5s ease both;
+    }
+    .hero-badge-dot { width: 6px; height: 6px; background: var(--accent2); border-radius: 50%; animation: pulse 1.5s infinite; }
+    h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2.2rem, 5.5vw, 4rem);
+      font-weight: 800; line-height: 1.07; letter-spacing: -.03em;
+      margin-bottom: 1rem;
+      animation: fadeUp .6s .1s ease both;
+    }
+    .h1-gradient {
+      background: linear-gradient(90deg, var(--accent), var(--accent2), var(--accent3));
+      background-size: 200% 200%;
+      animation: shimmer 4s ease infinite;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .hero-sub {
+      max-width: 520px; margin: 0 auto 2rem;
+      color: var(--muted); font-size: 1rem; font-weight: 300;
+      animation: fadeUp .6s .2s ease both;
+    }
 
-    /* TOOLS GRID */
-    .tools-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:1.15rem}
-    .tool-card{background:var(--card-bg);border:1px solid var(--border);border-radius:16px;padding:1.6rem;text-decoration:none;color:inherit;display:flex;flex-direction:column;gap:.875rem;transition:transform .2s,border-color .2s,box-shadow .2s;position:relative;overflow:hidden;animation:fadeUp .5s ease both}
-    .tool-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(91,106,240,0.06),transparent 60%);opacity:0;transition:opacity .3s}
-    .tool-card:hover{transform:translateY(-4px);border-color:rgba(91,106,240,0.3);box-shadow:0 14px 36px rgba(0,0,0,0.4)}
-    .tool-card:hover::before{opacity:1}
-    .tool-card:nth-child(1){animation-delay:.04s}.tool-card:nth-child(2){animation-delay:.08s}.tool-card:nth-child(3){animation-delay:.12s}.tool-card:nth-child(4){animation-delay:.16s}.tool-card:nth-child(5){animation-delay:.2s}.tool-card:nth-child(6){animation-delay:.24s}.tool-card:nth-child(7){animation-delay:.28s}.tool-card:nth-child(8){animation-delay:.32s}.tool-card:nth-child(9){animation-delay:.36s}.tool-card:nth-child(10){animation-delay:.4s}
-    .tool-icon{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.4rem}
-    .tool-card h3{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;line-height:1.3}
-    .tool-card p{font-size:.845rem;color:var(--muted);line-height:1.55;flex:1}
-    .tool-arrow{font-size:.8rem;font-weight:600;color:var(--accent)}
-    .badge-pop{position:absolute;top:1.1rem;right:1.1rem;background:var(--accent2);color:#000;font-size:.62rem;font-weight:700;padding:.18rem .5rem;border-radius:999px;text-transform:uppercase}
-    .badge-new{position:absolute;top:1.1rem;right:1.1rem;background:var(--accent3);color:#000;font-size:.62rem;font-weight:700;padding:.18rem .5rem;border-radius:999px;text-transform:uppercase}
-    .badge-ai{position:absolute;top:1.1rem;right:1.1rem;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;font-size:.62rem;font-weight:700;padding:.18rem .5rem;border-radius:999px;text-transform:uppercase}
-    .c1{background:rgba(91,106,240,0.12)}.c2{background:rgba(0,212,170,0.12)}.c3{background:rgba(240,160,80,0.12)}.c4{background:rgba(220,80,120,0.12)}.c5{background:rgba(120,180,255,0.12)}.c6{background:rgba(160,120,255,0.12)}.c7{background:rgba(80,200,120,0.12)}.c8{background:rgba(255,100,80,0.12)}.c9{background:rgba(255,215,0,0.1)}.c10{background:rgba(91,180,240,0.12)}
+    /* ── MAIN PLATFORM CARD ── */
+    .platform-wrap {
+      max-width: 820px; margin: 0 auto;
+      padding: 0 clamp(1rem,4vw,3rem) 1.5rem;
+      position: relative; z-index: 1;
+    }
 
-    .divider{width:100%;height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);max-width:1200px;margin:0 auto}
+    .platform-card {
+      background: var(--card);
+      border: 1px solid var(--border2);
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 0 0 1px rgba(108,99,255,0.04), 0 32px 80px rgba(0,0,0,0.7);
+      animation: fadeUp .7s .3s ease both;
+    }
 
-    /* BLOG SECTION */
-    .blog-section{padding:clamp(3rem,6vw,5rem) clamp(1.5rem,5vw,4rem);max-width:1200px;margin:0 auto}
-    .blog-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.25rem;margin-bottom:2rem}
-    .blog-card{background:var(--card-bg);border:1px solid var(--border);border-radius:16px;overflow:hidden;text-decoration:none;color:inherit;transition:transform .2s,border-color .2s,box-shadow .2s;display:flex;flex-direction:column}
-    .blog-card:hover{transform:translateY(-3px);border-color:rgba(91,106,240,0.3);box-shadow:0 12px 32px rgba(0,0,0,0.4)}
-    .blog-thumb{padding:2rem;font-size:2.5rem;background:linear-gradient(135deg,#111820,#1a1428);display:flex;align-items:center;justify-content:center;min-height:100px}
-    .blog-body{padding:1.25rem;flex:1;display:flex;flex-direction:column;gap:.5rem}
-    .blog-tag{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--accent3)}
-    .blog-card h3{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;line-height:1.35}
-    .blog-card p{font-size:.84rem;color:var(--muted);line-height:1.55;flex:1}
-    .blog-read{font-size:.8rem;font-weight:600;color:var(--accent);margin-top:.25rem}
+    /* CARD HEADER */
+    .card-header {
+      padding: 1.1rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      background: rgba(0,0,0,0.2);
+    }
+    .ai-identity { display: flex; align-items: center; gap: .75rem; }
+    .ai-avatar {
+      width: 36px; height: 36px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem;
+    }
+    .ai-name { font-family: 'Syne', sans-serif; font-weight: 700; font-size: .9rem; }
+    .ai-status { font-size: .72rem; color: var(--accent2); display: flex; align-items: center; gap: .3rem; }
+    .ai-status::before { content: ''; width: 6px; height: 6px; background: var(--accent2); border-radius: 50%; }
+    .card-actions { display: flex; gap: .5rem; }
+    .card-action-btn {
+      padding: .35rem .75rem;
+      background: transparent; border: 1px solid var(--border);
+      border-radius: 7px; color: var(--muted);
+      font-size: .75rem; font-weight: 500;
+      cursor: pointer; transition: all .2s;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .card-action-btn:hover { color: var(--text); border-color: var(--border2); }
 
-    /* SEO CONTENT SECTION */
-    .seo-section{padding:clamp(3rem,5vw,4.5rem) clamp(1.5rem,5vw,4rem);max-width:1200px;margin:0 auto}
-    .seo-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start}
-    .seo-content h2{font-family:'Syne',sans-serif;font-size:clamp(1.5rem,3vw,2.2rem);font-weight:800;letter-spacing:-.02em;margin-bottom:1rem}
-    .seo-content h2 em{font-style:normal;color:var(--accent2)}
-    .seo-content p{color:var(--muted);font-size:.95rem;line-height:1.8;margin-bottom:.875rem}
-    .seo-content p strong{color:var(--text)}
-    .seo-list{list-style:none;display:flex;flex-direction:column;gap:.6rem;margin-top:1rem}
-    .seo-list li{display:flex;align-items:flex-start;gap:.6rem;font-size:.9rem;color:var(--muted)}
-    .seo-list li::before{content:'✓';color:var(--accent2);font-weight:700;flex-shrink:0;margin-top:.1rem}
-    .seo-cards{display:flex;flex-direction:column;gap:.875rem}
-    .seo-card{background:var(--card-bg);border:1px solid var(--border);border-radius:14px;padding:1.25rem 1.5rem}
-    .seo-card-title{font-family:'Syne',sans-serif;font-weight:700;font-size:.95rem;margin-bottom:.3rem}
-    .seo-card-desc{font-size:.845rem;color:var(--muted);line-height:1.55}
+    /* CHAT MESSAGES */
+    .chat-messages {
+      min-height: 280px; max-height: 420px;
+      overflow-y: auto; padding: 1.5rem;
+      display: flex; flex-direction: column; gap: 1.1rem;
+      scroll-behavior: smooth;
+    }
+    .chat-messages::-webkit-scrollbar { width: 4px; }
+    .chat-messages::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 4px; }
 
-    /* WHY */
-    .why-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:1.15rem;margin-top:2.5rem}
-    .why-card{padding:1.5rem;background:var(--card-bg);border:1px solid var(--border);border-radius:14px}
-    .why-icon{font-size:1.6rem;margin-bottom:.75rem}
-    .why-card h4{font-family:'Syne',sans-serif;font-weight:700;margin-bottom:.4rem;font-size:.95rem}
-    .why-card p{font-size:.84rem;color:var(--muted);line-height:1.55}
+    /* MESSAGES */
+    .msg { display: flex; gap: .75rem; animation: msgIn .25s ease both; }
+    .msg.user { flex-direction: row-reverse; }
 
-    /* CTA */
-    .cta-band{text-align:center;padding:clamp(4rem,7vw,6rem) clamp(1.5rem,5vw,4rem);position:relative;overflow:hidden}
-    .cta-band::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(0,212,170,0.08),transparent 70%)}
-    .cta-band h2{font-family:'Syne',sans-serif;font-size:clamp(1.7rem,3.5vw,2.8rem);font-weight:800;letter-spacing:-.02em;margin-bottom:.875rem}
-    .cta-band p{color:var(--muted);margin-bottom:2.25rem;max-width:480px;margin-left:auto;margin-right:auto}
+    .msg-avatar {
+      width: 32px; height: 32px; border-radius: 9px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .9rem; flex-shrink: 0;
+    }
+    .msg.ai .msg-avatar { background: linear-gradient(135deg, var(--accent), var(--accent2)); }
+    .msg.user .msg-avatar { background: var(--user-msg); font-size: .75rem; }
 
-    footer{border-top:1px solid var(--border);padding:2.5rem clamp(1.5rem,5vw,4rem);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
-    .footer-logo{font-family:'Syne',sans-serif;font-weight:800;color:var(--text)}
-    .footer-links{display:flex;gap:1.25rem;list-style:none;flex-wrap:wrap}
-    .footer-links a{color:var(--muted);text-decoration:none;font-size:.82rem;transition:color .2s}
-    .footer-links a:hover{color:var(--text)}
-    footer small{color:var(--muted);font-size:.78rem}
+    .msg-bubble {
+      max-width: 78%; padding: .875rem 1.1rem;
+      border-radius: 14px; font-size: .9rem; line-height: 1.72;
+    }
+    .msg.ai .msg-bubble {
+      background: var(--ai-msg); border: 1px solid var(--border);
+      border-radius: 4px 14px 14px 14px; color: #cccce0;
+    }
+    .msg.user .msg-bubble {
+      background: var(--user-msg); border: 1px solid rgba(108,99,255,0.2);
+      border-radius: 14px 4px 14px 14px; color: #d0d0f0;
+    }
+    .msg-bubble strong { color: var(--text); }
+    .msg-bubble p { margin-bottom: .5rem; }
+    .msg-bubble p:last-child { margin: 0; }
+    .msg-bubble ul { margin: .4rem 0 .5rem 1.1rem; }
+    .msg-bubble li { margin-bottom: .2rem; }
+    .msg-bubble h4 { font-family: 'Syne', sans-serif; font-size: .9rem; color: var(--accent2); margin-bottom: .4rem; }
 
-    @media(max-width:768px){.seo-grid{grid-template-columns:1fr}}
-    @media(max-width:640px){.nav-links{display:none}.hero-stats{gap:1.5rem}.stat-num{font-size:1.4rem}.cta-row{flex-direction:column;align-items:center}}
+    /* RESULT BLOCK inside message */
+    .result-block {
+      background: rgba(108,99,255,0.07);
+      border: 1px solid rgba(108,99,255,0.2);
+      border-radius: 10px; padding: 1rem;
+      margin-top: .75rem; font-size: .875rem; line-height: 1.7;
+    }
+    .result-block-title {
+      font-family: 'Syne', sans-serif; font-weight: 700; font-size: .78rem;
+      text-transform: uppercase; letter-spacing: .08em;
+      color: var(--accent); margin-bottom: .6rem;
+      display: flex; align-items: center; gap: .4rem;
+    }
+    .result-copy {
+      margin-top: .75rem; display: flex; justify-content: flex-end;
+    }
+    .btn-result-copy {
+      padding: .3rem .75rem; background: transparent;
+      border: 1px solid var(--border); border-radius: 7px;
+      color: var(--muted); font-size: .75rem; cursor: pointer;
+      transition: all .2s; font-family: 'DM Sans', sans-serif;
+    }
+    .btn-result-copy:hover { color: var(--text); border-color: var(--border2); }
+    .btn-result-copy.copied { color: var(--accent2); border-color: rgba(0,229,176,0.3); }
+
+    /* TYPING INDICATOR */
+    .typing-dots { display: flex; gap: 4px; align-items: center; padding: .2rem 0; }
+    .typing-dot { width: 7px; height: 7px; background: var(--muted); border-radius: 50%; animation: dotBounce 1.2s ease infinite; }
+    .typing-dot:nth-child(2) { animation-delay: .2s; }
+    .typing-dot:nth-child(3) { animation-delay: .4s; }
+
+    /* QUICK ACTIONS */
+    .quick-actions {
+      padding: 1rem 1.5rem;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: rgba(0,0,0,0.15);
+    }
+    .qa-label { font-size: .68rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); margin-bottom: .75rem; }
+    .qa-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: .5rem; }
+    .qa-btn {
+      padding: .65rem .6rem;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: var(--muted);
+      font-family: 'DM Sans', sans-serif;
+      font-size: .8rem; font-weight: 500;
+      cursor: pointer; transition: all .2s;
+      text-align: left; line-height: 1.35;
+      display: flex; flex-direction: column; gap: .2rem;
+    }
+    .qa-btn:hover {
+      background: rgba(108,99,255,0.1);
+      border-color: rgba(108,99,255,0.35);
+      color: var(--text); transform: translateY(-1px);
+    }
+    .qa-icon { font-size: 1.1rem; }
+    .qa-text { font-size: .78rem; }
+
+    /* INPUT BAR */
+    .input-bar { padding: 1rem 1.25rem; }
+    .input-row {
+      display: flex; gap: .6rem; align-items: flex-end;
+      background: var(--input);
+      border: 1px solid var(--border);
+      border-radius: 14px; padding: .75rem .875rem;
+      transition: border-color .2s;
+    }
+    .input-row:focus-within { border-color: rgba(108,99,255,0.45); }
+    textarea#chat-input {
+      flex: 1; background: transparent; border: none;
+      color: var(--text); font-family: 'DM Sans', sans-serif;
+      font-size: .95rem; line-height: 1.55; resize: none;
+      outline: none; max-height: 140px; min-height: 24px;
+    }
+    textarea#chat-input::placeholder { color: var(--muted); }
+    .btn-send {
+      width: 38px; height: 38px; flex-shrink: 0;
+      background: var(--accent); border: none; border-radius: 10px;
+      color: #fff; font-size: 1rem; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: all .2s;
+    }
+    .btn-send:hover { box-shadow: 0 4px 14px rgba(108,99,255,0.5); transform: translateY(-1px); }
+    .btn-send:disabled { opacity: .4; cursor: not-allowed; transform: none; box-shadow: none; }
+    .input-hint { font-size: .7rem; color: var(--muted); text-align: center; margin-top: .5rem; }
+
+    /* ── SIGN IN MODAL ── */
+    .modal-overlay {
+      position: fixed; inset: 0; z-index: 500;
+      background: rgba(0,0,0,0.75); backdrop-filter: blur(8px);
+      display: none; align-items: center; justify-content: center; padding: 1rem;
+    }
+    .modal-overlay.show { display: flex; }
+    .modal {
+      background: var(--card); border: 1px solid var(--border2);
+      border-radius: 20px; padding: 2.5rem;
+      max-width: 400px; width: 100%; position: relative;
+      animation: fadeUp .3s ease;
+    }
+    .modal-close {
+      position: absolute; top: 1.1rem; right: 1.1rem;
+      background: none; border: none; color: var(--muted);
+      font-size: 1.1rem; cursor: pointer; transition: color .2s;
+    }
+    .modal-close:hover { color: var(--text); }
+    .modal-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.1rem; margin-bottom: .3rem; }
+    .modal-title { font-family: 'Syne', sans-serif; font-size: 1.4rem; font-weight: 800; letter-spacing: -.02em; margin-bottom: .4rem; }
+    .modal-sub { color: var(--muted); font-size: .875rem; margin-bottom: 2rem; line-height: 1.55; }
+
+    .btn-google {
+      width: 100%; padding: .875rem;
+      background: #fff; border: none; border-radius: 12px;
+      color: #333; font-family: 'DM Sans', sans-serif;
+      font-weight: 700; font-size: .95rem;
+      cursor: pointer; transition: all .2s;
+      display: flex; align-items: center; justify-content: center; gap: .75rem;
+      margin-bottom: 1rem;
+    }
+    .btn-google:hover { background: #f0f0f0; box-shadow: 0 4px 16px rgba(0,0,0,0.3); }
+    .google-icon { width: 20px; height: 20px; }
+
+    .divider-or {
+      display: flex; align-items: center; gap: .75rem;
+      color: var(--muted); font-size: .8rem; margin-bottom: 1rem;
+    }
+    .divider-or::before, .divider-or::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+    .modal-input {
+      width: 100%; padding: .75rem 1rem;
+      background: var(--input); border: 1px solid var(--border);
+      border-radius: 10px; color: var(--text);
+      font-family: 'DM Sans', sans-serif; font-size: .9rem;
+      outline: none; transition: border-color .2s; margin-bottom: .75rem;
+    }
+    .modal-input:focus { border-color: rgba(108,99,255,0.5); }
+    .modal-input::placeholder { color: var(--muted); }
+    .btn-email-signin {
+      width: 100%; padding: .8rem;
+      background: var(--accent); border: none; border-radius: 12px;
+      color: #fff; font-family: 'DM Sans', sans-serif;
+      font-weight: 700; font-size: .9rem; cursor: pointer;
+      transition: all .2s; margin-bottom: 1rem;
+    }
+    .btn-email-signin:hover { box-shadow: 0 4px 16px rgba(108,99,255,0.4); }
+    .modal-footer { font-size: .75rem; color: var(--muted); text-align: center; line-height: 1.6; }
+    .modal-footer a { color: var(--accent); text-decoration: none; }
+    .modal-benefits { display: flex; flex-direction: column; gap: .45rem; margin-bottom: 1.75rem; }
+    .modal-benefit { display: flex; gap: .6rem; font-size: .85rem; color: var(--muted); align-items: flex-start; }
+    .modal-benefit::before { content: '✓'; color: var(--accent2); font-weight: 700; flex-shrink: 0; }
+
+    /* ── BLOG PREVIEW SECTION ── */
+    .blog-preview {
+      max-width: 820px; margin: 3rem auto 0;
+      padding: 0 clamp(1rem,4vw,3rem);
+      position: relative; z-index: 1;
+    }
+    .section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem; }
+    .section-label-wrap { display: flex; flex-direction: column; gap: .25rem; }
+    .section-label {
+      font-size: .68rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .12em; color: var(--accent);
+      display: flex; align-items: center; gap: .5rem;
+    }
+    .section-label::before { content: ''; width: 20px; height: 2px; background: var(--accent); border-radius: 2px; }
+    .section-title { font-family: 'Syne', sans-serif; font-size: 1.4rem; font-weight: 700; letter-spacing: -.02em; }
+    .btn-see-all {
+      padding: .4rem 1rem; background: transparent;
+      border: 1px solid var(--border); border-radius: 8px;
+      color: var(--muted); font-size: .8rem; font-weight: 500;
+      text-decoration: none; transition: all .2s; white-space: nowrap;
+    }
+    .btn-see-all:hover { color: var(--text); border-color: var(--border2); }
+
+    .blog-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem; margin-bottom: 3rem; }
+    .blog-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 16px; overflow: hidden;
+      text-decoration: none; color: inherit;
+      transition: transform .2s, border-color .2s, box-shadow .2s;
+      display: flex; flex-direction: column;
+    }
+    .blog-card:hover { transform: translateY(-3px); border-color: rgba(108,99,255,0.3); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+    .blog-thumb {
+      padding: 1.5rem; font-size: 2.2rem;
+      display: flex; align-items: center; justify-content: center;
+      background: linear-gradient(135deg, #111820, #1a1428);
+      min-height: 90px;
+    }
+    .blog-body { padding: 1.1rem; flex: 1; display: flex; flex-direction: column; gap: .4rem; }
+    .blog-tag { font-size: .65rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--accent3); }
+    .blog-card h3 { font-family: 'Syne', sans-serif; font-size: .9rem; font-weight: 700; line-height: 1.35; }
+    .blog-card p { font-size: .8rem; color: var(--muted); line-height: 1.5; flex: 1; }
+    .blog-read { font-size: .75rem; font-weight: 600; color: var(--accent); margin-top: .25rem; }
+
+    /* ── TOOLS FOOTER ROW ── */
+    .tools-row {
+      max-width: 820px; margin: 0 auto 4rem;
+      padding: 0 clamp(1rem,4vw,3rem);
+      position: relative; z-index: 1;
+    }
+    .tools-row-title { font-size: .68rem; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); margin-bottom: .875rem; text-align: center; }
+    .tools-chips { display: flex; flex-wrap: wrap; gap: .5rem; justify-content: center; }
+    .tool-chip {
+      padding: .4rem .875rem; background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border); border-radius: 999px;
+      color: var(--muted); font-size: .78rem; text-decoration: none;
+      transition: all .2s;
+    }
+    .tool-chip:hover { background: rgba(108,99,255,0.08); border-color: rgba(108,99,255,0.3); color: var(--accent); }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem clamp(1rem,4vw,3rem);
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 1rem;
+      position: relative; z-index: 1;
+    }
+    .footer-logo { font-family: 'Syne', sans-serif; font-weight: 800; color: var(--text); font-size: .95rem; }
+    .footer-links { display: flex; gap: 1.25rem; list-style: none; flex-wrap: wrap; }
+    .footer-links a { color: var(--muted); text-decoration: none; font-size: .8rem; transition: color .2s; }
+    .footer-links a:hover { color: var(--text); }
+    footer small { color: var(--muted); font-size: .75rem; }
+
+    @media(max-width:640px) {
+      h1 { font-size: 2rem; }
+      .qa-grid { grid-template-columns: repeat(2,1fr); }
+      .blog-grid { grid-template-columns: 1fr; }
+      .nav-link:not(.nav-signin) { display: none; }
+    }
   </style>
 </head>
 <body>
@@ -180,251 +503,412 @@
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P8T9B392"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
 
+<!-- ── NAV ── -->
 <nav>
-  <a href="/" class="nav-logo"><span></span> StudyTools</a>
-  <ul class="nav-links">
-    <li><a href="#tools">Tools</a></li>
-    <li><a href="/study-assistant.html">AI Tutor</a></li>
-    <li><a href="/exam-solver.html">Exam Solver</a></li>
-    <li><a href="/blog.html" class="nav-blog">📖 Blog</a></li>
-  </ul>
+  <a href="/" class="nav-logo"><div class="nav-dot"></div> StudyTools</a>
+  <div class="nav-links">
+    <a href="/" class="nav-link active">Home</a>
+    <a href="/blog.html" class="nav-link">Blog</a>
+    <a href="/pricing.html" class="nav-link">Pricing</a>
+    <button class="nav-signin" onclick="openModal()">
+      <span>👤</span> Sign in
+    </button>
+  </div>
 </nav>
 
-<header class="hero">
-  <div class="hero-glow"></div>
-  <div class="hero-badge">✦ Free AI Study Tools · No Sign-up · 10 Tools</div>
-  <h1>The best free <em>online study tools</em><br />for students</h1>
-  <p class="hero-sub">
-    <strong>AI study tools, calculators, timers and more</strong> — all free, all in your browser.
-    Used by students in the US, Canada and UK to study smarter and get better grades.
-  </p>
-  <div class="cta-row">
-    <a href="#tools" class="btn-primary">Browse all tools ↓</a>
-    <a href="/blog.html" class="btn-blog">📖 Study Tips Blog</a>
-  </div>
-  <div class="hero-stats">
-    <div class="stat"><div class="stat-num">10</div><div class="stat-label">Free Tools</div></div>
-    <div class="stat"><div class="stat-num">0</div><div class="stat-label">Sign-ups needed</div></div>
-    <div class="stat"><div class="stat-num">AI</div><div class="stat-label">Powered tutor</div></div>
-  </div>
-</header>
+<!-- ── HERO ── -->
+<div class="hero">
+  <div class="hero-badge"><div class="hero-badge-dot"></div> Free AI Study Platform · No Sign-up</div>
+  <h1>Your personal<br /><span class="h1-gradient">AI study assistant</span></h1>
+  <p class="hero-sub">Summarize notes, create outlines, generate practice tests and build study plans — all in one conversation.</p>
+</div>
 
-<div class="divider"></div>
+<!-- ── PLATFORM CARD ── -->
+<div class="platform-wrap">
+  <div class="platform-card">
 
-<main>
-
-  <!-- TOOLS GRID -->
-  <section class="section" id="tools">
-    <div class="section-label">Free Study Tools Online</div>
-    <h2 class="section-title">Everything a student needs,<br />all in one place.</h2>
-    <p class="section-desc">The best free AI study tools and calculators for students. No account, no download — open and use instantly.</p>
-
-    <div class="tools-grid">
-
-      <a href="/study-assistant.html" class="tool-card">
-        <div class="tool-icon c10">🤖</div>
-        <h3>AI Study Assistant</h3>
-        <p>Your personal AI tutor. Set your subject, course level and topic — then ask anything. Remembers the full conversation like a real tutor.</p>
-        <div class="tool-arrow">Use tool →</div>
-        <span class="badge-ai">AI</span>
-      </a>
-
-      <a href="/exam-solver.html" class="tool-card">
-        <div class="tool-icon c8">🧠</div>
-        <h3>Exam Question Solver</h3>
-        <p>Paste any exam question and get a clear, step-by-step explanation. Works for math, science, history, English and more.</p>
-        <div class="tool-arrow">Use tool →</div>
-        <span class="badge-ai">AI</span>
-      </a>
-
-      <a href="/gpa-calculator.html" class="tool-card">
-        <div class="tool-icon c1">🎓</div>
-        <h3>GPA Calculator</h3>
-        <p>Calculate your current GPA or plan future grades to hit your target. Supports weighted and unweighted 4.0 scale.</p>
-        <div class="tool-arrow">Use tool →</div>
-        <span class="badge-pop">Popular</span>
-      </a>
-
-      <a href="/grade-calculator.html" class="tool-card">
-        <div class="tool-icon c2">📊</div>
-        <h3>Grade Calculator</h3>
-        <p>Find out exactly what grade you need on your final exam to pass or reach your target score in any class.</p>
-        <div class="tool-arrow">Use tool →</div>
-      </a>
-
-      <a href="/flashcard-maker.html" class="tool-card">
-        <div class="tool-icon c7">🃏</div>
-        <h3>Flashcard Maker</h3>
-        <p>Create digital flashcards, flip through them and track which ones you know. Works like Quizlet — free and instant.</p>
-        <div class="tool-arrow">Use tool →</div>
-        <span class="badge-new">New</span>
-      </a>
-
-      <a href="/pomodoro-timer.html" class="tool-card">
-        <div class="tool-icon c3">⏱️</div>
-        <h3>Pomodoro Timer</h3>
-        <p>Focus in 25-minute sprints with short breaks. Customizable intervals with sound alerts to keep you on track.</p>
-        <div class="tool-arrow">Use tool →</div>
-      </a>
-
-      <a href="/word-counter.html" class="tool-card">
-        <div class="tool-icon c4">📝</div>
-        <h3>Word Counter</h3>
-        <p>Instantly count words, characters, sentences, and reading time. Paste any text and see live stats update.</p>
-        <div class="tool-arrow">Use tool →</div>
-      </a>
-
-      <a href="/citation-generator.html" class="tool-card">
-        <div class="tool-icon c5">📚</div>
-        <h3>Citation Generator</h3>
-        <p>Generate APA, MLA, and Chicago citations in seconds. Supports books, websites, journals and more.</p>
-        <div class="tool-arrow">Use tool →</div>
-      </a>
-
-      <a href="/study-schedule.html" class="tool-card">
-        <div class="tool-icon c6">🗓️</div>
-        <h3>Study Schedule Maker</h3>
-        <p>Build a weekly study plan around your classes, exams, and free time. Print or download your schedule.</p>
-        <div class="tool-arrow">Use tool →</div>
-      </a>
-
-      <a href="/blog.html" class="tool-card" style="border-style:dashed;border-color:rgba(240,160,80,0.3)">
-        <div class="tool-icon c9">📖</div>
-        <h3>Study Tips Blog</h3>
-        <p>How to study effectively, beat procrastination, improve memory and ace your exams. New articles every week.</p>
-        <div class="tool-arrow" style="color:var(--accent3)">Read articles →</div>
-      </a>
-
-    </div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- BLOG PREVIEW -->
-  <section class="blog-section">
-    <div class="section-label">Study Tips Blog</div>
-    <h2 class="section-title">Learn how to study effectively</h2>
-    <p class="section-desc">Proven techniques and strategies used by top students. New articles on AI study tools, memory, and exam prep.</p>
-
-    <div class="blog-grid">
-      <a href="/blog.html#article-pomodoro" class="blog-card">
-        <div class="blog-thumb">🍅</div>
-        <div class="blog-body">
-          <div class="blog-tag">Study Techniques · 6 min</div>
-          <h3>How to Use the Pomodoro Technique to Study Better</h3>
-          <p>Most students use it wrong. Here's the correct method that actually improves focus and beats procrastination.</p>
-          <div class="blog-read">Read article →</div>
+    <!-- HEADER -->
+    <div class="card-header">
+      <div class="ai-identity">
+        <div class="ai-avatar">🎓</div>
+        <div>
+          <div class="ai-name">StudyAI</div>
+          <div class="ai-status">Online · Ready to help</div>
         </div>
-      </a>
-      <a href="/blog.html#article-memory" class="blog-card">
-        <div class="blog-thumb">🧠</div>
-        <div class="blog-body">
-          <div class="blog-tag">Memory · 7 min</div>
-          <h3>How to Memorize Anything: The Science-Backed Method</h3>
-          <p>Spaced repetition, active recall and the Feynman technique — the three most powerful memory tools for students.</p>
-          <div class="blog-read">Read article →</div>
-        </div>
-      </a>
-      <a href="/blog.html#article-exam" class="blog-card">
-        <div class="blog-thumb">✍️</div>
-        <div class="blog-body">
-          <div class="blog-tag">Exam Prep · 8 min</div>
-          <h3>How to Study for an Exam in One Week</h3>
-          <p>A step-by-step plan for when you have 7 days (or less) before your exam. Used by thousands of students.</p>
-          <div class="blog-read">Read article →</div>
-        </div>
-      </a>
-    </div>
-
-    <div style="text-align:center">
-      <a href="/blog.html" class="btn-primary">View all study tips →</a>
-    </div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- SEO CONTENT SECTION -->
-  <section class="seo-section">
-    <div class="seo-grid">
-      <div class="seo-content">
-        <h2>The best free <em>AI study tools</em> for students</h2>
-        <p>StudyTools is a free collection of <strong>online study tools</strong> designed to help students study smarter, not harder. Whether you need <strong>AI study tools for college students</strong>, a simple GPA calculator, or a pomodoro timer — everything is here, free, with no sign-up.</p>
-        <p>Our <strong>AI Study Assistant</strong> works like having a personal tutor available 24/7. Set your subject — math, biology, history, economics — and your course level, and it adapts its explanations to your level. It remembers everything you've discussed in the session, so you can ask follow-up questions naturally.</p>
-        <p>Unlike other <strong>study tools like Quizlet</strong>, StudyTools doesn't require an account, has no paywalls, and works instantly in any browser on any device.</p>
-        <ul class="seo-list">
-          <li>Free AI study tools — no subscription needed</li>
-          <li>Works for high school and college students</li>
-          <li>Available on phone, tablet and desktop</li>
-          <li>No data collected — everything runs in your browser</li>
-          <li>New tools and study tips added regularly</li>
-        </ul>
       </div>
-      <div class="seo-cards">
-        <div class="seo-card">
-          <div class="seo-card-title">🤖 AI Study Tools</div>
-          <div class="seo-card-desc">Our AI Study Assistant and Exam Question Solver use advanced AI to give you personalized explanations for any subject, at any level. The best free AI study tools available online.</div>
-        </div>
-        <div class="seo-card">
-          <div class="seo-card-title">🎓 Study Tools for College Students</div>
-          <div class="seo-card-desc">GPA calculator, grade calculator, citation generator and study schedule maker — everything college students need to stay on top of their coursework.</div>
-        </div>
-        <div class="seo-card">
-          <div class="seo-card-title">🃏 Study Tools like Quizlet</div>
-          <div class="seo-card-desc">Our free flashcard maker lets you create, flip and study digital flashcards — similar to Quizlet but with no account required and completely free.</div>
-        </div>
-        <div class="seo-card">
-          <div class="seo-card-title">📱 Best Apps for Summaries & Outlines</div>
-          <div class="seo-card-desc">Use our AI Study Assistant to generate summaries, outlines and mind maps of any topic instantly. Works on iPad, iPhone and any mobile device.</div>
+      <div class="card-actions">
+        <button class="card-action-btn" onclick="clearChat()">Clear chat</button>
+        <button class="card-action-btn" onclick="openModal()">💾 Save session</button>
+      </div>
+    </div>
+
+    <!-- MESSAGES -->
+    <div class="chat-messages" id="chat-messages">
+      <div class="msg ai">
+        <div class="msg-avatar">🎓</div>
+        <div class="msg-bubble">
+          <p>Hey! I'm <strong>StudyAI</strong> — your personal study assistant. 👋</p>
+          <p>I can help you <strong>summarize notes</strong>, <strong>create outlines</strong>, <strong>generate practice tests</strong>, <strong>build a study plan</strong> or answer any question about your subjects.</p>
+          <p>Paste your notes below, use one of the quick buttons, or just ask me anything. What are you studying today?</p>
         </div>
       </div>
     </div>
-  </section>
 
-  <div class="divider"></div>
-
-  <!-- WHY -->
-  <section class="section">
-    <div class="section-label">Why StudyTools</div>
-    <h2 class="section-title">Built for students,<br />not for clicks.</h2>
-    <div class="why-grid">
-      <div class="why-card"><div class="why-icon">⚡</div><h4>Instant results</h4><p>Every tool gives you answers immediately in your browser. No loading screens, no waiting.</p></div>
-      <div class="why-card"><div class="why-icon">🤖</div><h4>Real AI inside</h4><p>Our AI tools use advanced language models to give personalized, subject-specific explanations — not generic answers.</p></div>
-      <div class="why-card"><div class="why-icon">🔒</div><h4>Zero data collected</h4><p>Nothing you type is stored or sent to any server. All calculations happen locally on your device.</p></div>
-      <div class="why-card"><div class="why-icon">📱</div><h4>Works on any device</h4><p>Fully responsive for phones, tablets, and desktops. Use it in class, at the library, anywhere.</p></div>
-      <div class="why-card"><div class="why-icon">♾️</div><h4>Always free</h4><p>No premium plans, no paywalls. Every tool on this site is free to use, forever.</p></div>
+    <!-- QUICK ACTIONS -->
+    <div class="quick-actions">
+      <div class="qa-label">Quick actions</div>
+      <div class="qa-grid">
+        <button class="qa-btn" onclick="quickAction('summarize')">
+          <span class="qa-icon">📄</span>
+          <span class="qa-text">Summarize notes</span>
+        </button>
+        <button class="qa-btn" onclick="quickAction('outline')">
+          <span class="qa-icon">🗂️</span>
+          <span class="qa-text">Create outline</span>
+        </button>
+        <button class="qa-btn" onclick="quickAction('test')">
+          <span class="qa-icon">❓</span>
+          <span class="qa-text">Generate test</span>
+        </button>
+        <button class="qa-btn" onclick="quickAction('plan')">
+          <span class="qa-icon">📅</span>
+          <span class="qa-text">Study plan</span>
+        </button>
+        <button class="qa-btn" onclick="quickAction('explain')">
+          <span class="qa-icon">💡</span>
+          <span class="qa-text">Explain a concept</span>
+        </button>
+        <button class="qa-btn" onclick="quickAction('flashcards')">
+          <span class="qa-icon">🃏</span>
+          <span class="qa-text">Make flashcards</span>
+        </button>
+      </div>
     </div>
-  </section>
 
-  <div class="divider"></div>
+    <!-- INPUT -->
+    <div class="input-bar">
+      <div class="input-row">
+        <textarea id="chat-input" placeholder="Ask anything or paste your notes here…" rows="1"
+          onkeydown="handleKey(event)" oninput="autoResize(this)"></textarea>
+        <button class="btn-send" id="send-btn" onclick="sendMessage()">➤</button>
+      </div>
+      <div class="input-hint">Press Enter to send · Shift+Enter for new line</div>
+    </div>
 
-  <section class="cta-band">
-    <h2>Ready to study smarter?</h2>
-    <p>Join thousands of students using StudyTools every day to get better grades in less time.</p>
-    <a href="/study-assistant.html" class="btn-primary" style="margin:0 auto">Try the AI Study Assistant →</a>
-  </section>
+  </div>
+</div>
 
-</main>
+<!-- ── BLOG PREVIEW ── -->
+<div class="blog-preview">
+  <div class="section-header">
+    <div class="section-label-wrap">
+      <div class="section-label">Study Tips</div>
+      <div class="section-title">Learn how to study smarter</div>
+    </div>
+    <a href="/blog.html" class="btn-see-all">View all →</a>
+  </div>
+  <div class="blog-grid">
+    <a href="/blog.html#ai-study-tools" class="blog-card">
+      <div class="blog-thumb">🤖</div>
+      <div class="blog-body">
+        <div class="blog-tag">AI Study Tools</div>
+        <h3>Best Free AI Study Tools for Students in 2025</h3>
+        <p>A complete guide to free AI tools that actually help you study.</p>
+        <div class="blog-read">Read article →</div>
+      </div>
+    </a>
+    <a href="/blog.html#pomodoro" class="blog-card">
+      <div class="blog-thumb">🍅</div>
+      <div class="blog-body">
+        <div class="blog-tag">Productivity</div>
+        <h3>How to Use the Pomodoro Technique to Study Better</h3>
+        <p>Why most students use it wrong and how to do it right.</p>
+        <div class="blog-read">Read article →</div>
+      </div>
+    </a>
+    <a href="/blog.html#how-to-study" class="blog-card">
+      <div class="blog-thumb">🧠</div>
+      <div class="blog-body">
+        <div class="blog-tag">Study Techniques</div>
+        <h3>How to Study Effectively: The Complete Guide</h3>
+        <p>Active recall and spaced repetition — the two methods that actually work.</p>
+        <div class="blog-read">Read article →</div>
+      </div>
+    </a>
+  </div>
+</div>
 
+<!-- ── TOOLS ROW ── -->
+<div class="tools-row">
+  <div class="tools-row-title">More free study tools</div>
+  <div class="tools-chips">
+    <a href="/gpa-calculator.html" class="tool-chip">🎓 GPA Calculator</a>
+    <a href="/grade-calculator.html" class="tool-chip">📊 Grade Calculator</a>
+    <a href="/pomodoro-timer.html" class="tool-chip">⏱️ Pomodoro Timer</a>
+    <a href="/word-counter.html" class="tool-chip">📝 Word Counter</a>
+    <a href="/flashcard-maker.html" class="tool-chip">🃏 Flashcard Maker</a>
+    <a href="/citation-generator.html" class="tool-chip">📚 Citation Generator</a>
+    <a href="/study-schedule.html" class="tool-chip">🗓️ Study Schedule</a>
+    <a href="/exam-solver.html" class="tool-chip">🧠 Exam Solver</a>
+    <a href="/app.html" class="tool-chip">✨ AI Summarizer</a>
+  </div>
+</div>
+
+<!-- ── SIGN IN MODAL ── -->
+<div class="modal-overlay" id="modal-overlay" onclick="closeModalOutside(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-logo">StudyTools</div>
+    <div class="modal-title">Save your progress</div>
+    <div class="modal-sub">Sign in to save your study sessions, summaries and history across all your devices.</div>
+
+    <div class="modal-benefits">
+      <div class="modal-benefit">Your chat history saved automatically</div>
+      <div class="modal-benefit">Summaries and outlines stored in your account</div>
+      <div class="modal-benefit">Personalized AI that remembers your subjects</div>
+      <div class="modal-benefit">Access from any device, any browser</div>
+    </div>
+
+    <button class="btn-google" onclick="signInGoogle()">
+      <svg class="google-icon" viewBox="0 0 24 24">
+        <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+        <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+        <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+        <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+      </svg>
+      Continue with Google
+    </button>
+
+    <div class="divider-or">or</div>
+
+    <input type="email" class="modal-input" placeholder="Email address" id="modal-email" />
+    <input type="password" class="modal-input" placeholder="Password" id="modal-password" />
+    <button class="btn-email-signin" onclick="signInEmail()">Sign in with Email</button>
+
+    <div class="modal-footer">
+      Don't have an account? <a href="#" onclick="switchToRegister()">Create one free</a><br />
+      By signing in you agree to our <a href="/privacy.html">Privacy Policy</a>
+    </div>
+  </div>
+</div>
+
+<!-- ── FOOTER ── -->
 <footer>
   <div class="footer-logo">StudyTools</div>
   <ul class="footer-links">
     <li><a href="/">Home</a></li>
     <li><a href="/blog.html">Blog</a></li>
-    <li><a href="/study-assistant.html">AI Tutor</a></li>
-    <li><a href="/exam-solver.html">Exam Solver</a></li>
+    <li><a href="/pricing.html">Pricing</a></li>
     <li><a href="/gpa-calculator.html">GPA Calculator</a></li>
-    <li><a href="/grade-calculator.html">Grade Calculator</a></li>
-    <li><a href="/flashcard-maker.html">Flashcards</a></li>
-    <li><a href="/pomodoro-timer.html">Pomodoro</a></li>
-    <li><a href="/word-counter.html">Word Counter</a></li>
-    <li><a href="/citation-generator.html">Citations</a></li>
-    <li><a href="/study-schedule.html">Study Schedule</a></li>
+    <li><a href="/app.html">AI Summarizer</a></li>
     <li><a href="/privacy.html">Privacy</a></li>
   </ul>
-  <small>© 2025 StudyTools · Free online study tools for students</small>
+  <small>© 2025 StudyTools · Free AI study platform for students</small>
 </footer>
 
+<script>
+  // ── CONVERSATION MEMORY ──
+  let conversationHistory = [];
+  let isLoading = false;
+
+  const SYSTEM_PROMPT = `You are StudyAI, a friendly and expert AI study assistant built into StudyTools.pro.
+
+Your personality: warm, encouraging, clear and direct. You adapt your tone to the student — casual but knowledgeable.
+
+Your capabilities:
+- Summarize notes or text into clear, concise summaries with key points
+- Create structured outlines with main topics and subtopics
+- Generate multiple-choice practice test questions from provided text
+- Build personalized weekly study plans
+- Explain any concept at any level
+- Create flashcard sets (question / answer pairs)
+- Answer subject-specific questions
+
+When generating a SUMMARY: provide a 3-4 sentence summary + 5 bullet key points.
+When generating an OUTLINE: use a clear hierarchical structure with main topics and subtopics.
+When generating a TEST: create exactly 5 multiple choice questions with 4 options each, marking the correct one and providing a brief explanation.
+When generating FLASHCARDS: create 8 question/answer pairs.
+When making a STUDY PLAN: ask for subjects, exam dates, and available hours first if not provided.
+
+Always be helpful, specific and educational. Remember the full conversation context.`;
+
+  // ── QUICK ACTIONS ──
+  const QUICK_PROMPTS = {
+    summarize: "I'd like to summarize my notes. Please paste the text you want me to summarize and I'll create a clear summary with key points.",
+    outline:   "I'll create a structured outline from your notes. Paste the text below and I'll organize it into a clear visual hierarchy.",
+    test:      "I'll generate a practice test from your material. Paste your notes or text and I'll create 5 multiple choice questions to test your knowledge.",
+    plan:      "I'll build a personalized study plan for you. Tell me: what subjects do you need to study, when are your exams, and how many hours per day can you dedicate?",
+    explain:   "What concept would you like me to explain? Tell me the topic and your course level and I'll break it down clearly.",
+    flashcards:"I'll create flashcards from your notes. Paste your study material and I'll generate question/answer pairs ready to memorize."
+  };
+
+  function quickAction(type) {
+    const welcomeText = QUICK_PROMPTS[type];
+    addAIMessage(welcomeText);
+    document.getElementById('chat-input').focus();
+    const textarea = document.getElementById('chat-input');
+    if (type === 'summarize') textarea.placeholder = 'Paste your notes or text here to summarize…';
+    else if (type === 'outline') textarea.placeholder = 'Paste the text to outline…';
+    else if (type === 'test') textarea.placeholder = 'Paste your study material here…';
+    else if (type === 'flashcards') textarea.placeholder = 'Paste your notes to generate flashcards…';
+  }
+
+  // ── SEND MESSAGE ──
+  async function sendMessage() {
+    const input = document.getElementById('chat-input');
+    const text = input.value.trim();
+    if (!text || isLoading) return;
+
+    input.value = '';
+    input.style.height = 'auto';
+    isLoading = true;
+    document.getElementById('send-btn').disabled = true;
+
+    addUserMessage(text);
+    conversationHistory.push({ role: 'user', content: text });
+
+    const typingId = addTyping();
+
+    try {
+      const response = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          model: 'claude-sonnet-4-20250514',
+          max_tokens: 1000,
+          system: SYSTEM_PROMPT,
+          messages: conversationHistory
+        })
+      });
+
+      const data = await response.json();
+      const reply = data.content?.map(b => b.text || '').join('') || 'Sorry, I had trouble responding. Please try again.';
+
+      removeTyping(typingId);
+      conversationHistory.push({ role: 'assistant', content: reply });
+      addAIMessage(reply);
+
+    } catch (err) {
+      removeTyping(typingId);
+      addAIMessage('There was a connection error. Please check your internet and try again. 🔌');
+    }
+
+    isLoading = false;
+    document.getElementById('send-btn').disabled = false;
+    input.focus();
+  }
+
+  // ── MESSAGE RENDERERS ──
+  function addUserMessage(text) {
+    const msgs = document.getElementById('chat-messages');
+    const div = document.createElement('div');
+    div.className = 'msg user';
+    div.innerHTML = `
+      <div class="msg-avatar">👤</div>
+      <div class="msg-bubble">${escHtml(text).replace(/\n/g,'<br>')}</div>`;
+    msgs.appendChild(div);
+    scrollBottom();
+  }
+
+  function addAIMessage(text) {
+    const msgs = document.getElementById('chat-messages');
+    const div = document.createElement('div');
+    div.className = 'msg ai';
+    div.innerHTML = `
+      <div class="msg-avatar">🎓</div>
+      <div class="msg-bubble">${formatMsg(text)}</div>`;
+    msgs.appendChild(div);
+    scrollBottom();
+  }
+
+  function addTyping() {
+    const msgs = document.getElementById('chat-messages');
+    const id = 'typing-' + Date.now();
+    const div = document.createElement('div');
+    div.className = 'msg ai'; div.id = id;
+    div.innerHTML = `
+      <div class="msg-avatar">🎓</div>
+      <div class="msg-bubble"><div class="typing-dots">
+        <div class="typing-dot"></div>
+        <div class="typing-dot"></div>
+        <div class="typing-dot"></div>
+      </div></div>`;
+    msgs.appendChild(div);
+    scrollBottom();
+    return id;
+  }
+
+  function removeTyping(id) {
+    const el = document.getElementById(id);
+    if (el) el.remove();
+  }
+
+  function formatMsg(text) {
+    return text
+      .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+      .replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')
+      .replace(/\*(.+?)\*/g,'<em>$1</em>')
+      .replace(/`(.+?)`/g,'<code style="background:rgba(255,255,255,0.08);padding:.1rem .35rem;border-radius:4px;font-family:monospace;font-size:.82rem">$1</code>')
+      .replace(/^### (.+)$/gm,'<h4>$1</h4>')
+      .replace(/^## (.+)$/gm,'<h4>$1</h4>')
+      .replace(/^# (.+)$/gm,'<h4>$1</h4>')
+      .replace(/^\d+\. (.+)$/gm,'<li>$1</li>')
+      .replace(/^[-•] (.+)$/gm,'<li>$1</li>')
+      .replace(/(<li>.*<\/li>\n?)+/g, m => '<ul style="margin:.4rem 0 .4rem 1.1rem">' + m + '</ul>')
+      .replace(/\n\n/g,'</p><p>')
+      .replace(/\n/g,'<br>')
+      .replace(/^(?!<[hulo])(.+)$/gm, m => m.trim() && !m.startsWith('<') ? '<p>' + m + '</p>' : m);
+  }
+
+  function escHtml(t) {
+    return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+
+  function scrollBottom() {
+    const msgs = document.getElementById('chat-messages');
+    setTimeout(() => msgs.scrollTop = msgs.scrollHeight, 50);
+  }
+
+  // ── CONTROLS ──
+  function handleKey(e) {
+    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
+  }
+
+  function autoResize(el) {
+    el.style.height = 'auto';
+    el.style.height = Math.min(el.scrollHeight, 140) + 'px';
+  }
+
+  function clearChat() {
+    conversationHistory = [];
+    const msgs = document.getElementById('chat-messages');
+    msgs.innerHTML = '';
+    addAIMessage("Chat cleared! I'm ready to help you study. What would you like to do?");
+  }
+
+  // ── MODAL ──
+  function openModal() { document.getElementById('modal-overlay').classList.add('show'); }
+  function closeModal() { document.getElementById('modal-overlay').classList.remove('show'); }
+  function closeModalOutside(e) { if (e.target === document.getElementById('modal-overlay')) closeModal(); }
+
+  function signInGoogle() {
+    // Placeholder — connect Firebase Auth here
+    alert('Google sign-in coming soon! We\'re setting up accounts. For now your session is saved locally.');
+    closeModal();
+  }
+
+  function signInEmail() {
+    const email = document.getElementById('modal-email').value.trim();
+    if (!email) { document.getElementById('modal-email').focus(); return; }
+    alert('Email sign-in coming soon! We\'re setting up accounts. For now your session is saved locally.');
+    closeModal();
+  }
+
+  function switchToRegister() {
+    document.querySelector('.modal-title').textContent = 'Create your free account';
+    document.querySelector('.btn-email-signin').textContent = 'Create account';
+  }
+</script>
 </body>
 </html>

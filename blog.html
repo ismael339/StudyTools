@@ -497,7 +497,19 @@
       min-height: 140px;
       border-bottom: 1px solid var(--border);
     }
-
+    .visual-icon {
+      width: 54px;
+      height: 54px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--accent), var(--teal));
+      color: #fff;
+      font-weight: 800;
+      letter-spacing: .04em;
+      box-shadow: 0 16px 34px rgba(124,106,245,.22);
+    }
     .card-visual svg { width: 100%; max-width: 160px; height: auto; }
 
     .card-body { padding: 22px 22px 24px; flex: 1; display: flex; flex-direction: column; }
@@ -1034,7 +1046,7 @@
         <span class="section-label">All Articles</span>
         <h2 id="articles-label">Latest Guides &amp; Resources</h2>
       </div>
-      <span class="section-count">3 articles · growing weekly</span>
+      <span class="section-count">13 articles · growing weekly</span>
     </div>
 
     <!-- FILTER BAR (functional with JS, degrades gracefully) -->
@@ -1046,6 +1058,97 @@
     </div>
 
     <div class="articles-grid" id="articles-grid" role="list">
+
+      <a href="how-to-study-for-an-exam-in-one-week.html" class="art-card" role="listitem" data-cat="exam prep study" aria-label="Read: How to Study for an Exam in One Week: 7-Day Plan">
+        <div class="card-visual" aria-hidden="true"><div class="visual-icon">ST</div></div>
+        <div class="card-body">
+          <div class="card-meta"><span class="tag">Exam Prep</span><span>8 min</span></div>
+          <h3>How to Study for an Exam in One Week: 7-Day Plan</h3>
+          <p class="card-excerpt">A practical 7-day exam study plan for students. Learn what to study each day, how to use active recall, and how to avoid wasting time.</p>
+          <span class="card-arrow"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+        </div>
+      </a>
+      <a href="how-to-use-a-gpa-calculator.html" class="art-card" role="listitem" data-cat="gpa study" aria-label="Read: How to Use a GPA Calculator Correctly">
+        <div class="card-visual" aria-hidden="true"><div class="visual-icon">ST</div></div>
+        <div class="card-body">
+          <div class="card-meta"><span class="tag">GPA</span><span>6 min</span></div>
+          <h3>How to Use a GPA Calculator Correctly</h3>
+          <p class="card-excerpt">Learn how GPA calculators work, what credits mean, and how to avoid common GPA calculation mistakes.</p>
+          <span class="card-arrow"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+        </div>
+      </a>
+      <a href="what-grade-do-i-need-on-my-final.html" class="art-card" role="listitem" data-cat="grades study" aria-label="Read: What Grade Do I Need on My Final Exam?">
+        <div class="card-visual" aria-hidden="true"><div class="visual-icon">ST</div></div>
+        <div class="card-body">
+          <div class="card-meta"><span class="tag">Grades</span><span>7 min</span></div>
+          <h3>What Grade Do I Need on My Final Exam?</h3>
+          <p class="card-excerpt">Find out how to calculate the score you need on your final exam to pass a class or reach your target grade.</p>
+          <span class="card-arrow"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+        </div>
+      </a>
+      <a href="best-free-ai-study-tools-for-students.html" class="art-card" role="listitem" data-cat="ai tools study" aria-label="Read: Best Free AI Study Tools for Students in 2026">
+        <div class="card-visual" aria-hidden="true"><div class="visual-icon">ST</div></div>
+        <div class="card-body">
+          <div class="card-meta"><span class="tag">AI Tools</span><span>9 min</span></div>
+          <h3>Best Free AI Study Tools for Students in 2026</h3>
+          <p class="card-excerpt">A student-focused guide to the best free AI study tools for homework, exam prep, summaries, flashcards and citations.</p>
+          <span class="card-arrow"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+        </div>
+      </a>
+      <a href="how-to-make-flashcards-that-work.html" class="art-card" role="listitem" data-cat="flashcards study" aria-label="Read: How to Make Flashcards That Actually Work">
+        <div class="card-visual" aria-hidden="true"><div class="visual-icon">ST</div></div>
+        <div class="card-body">
+          <div class="card-meta"><span class="tag">Flashcards</span><span>7 min</span></div>
+          <h3>How to Make Flashcards That Actually Work</h3>
+          <p class="card-excerpt">Learn how to write better flashcards for vocabulary, formulas, definitions and exam revision using active recall.</p>
+          <span class="card-arrow"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+        </div>
+      </a>
+      <a href="pomodoro-technique-for-students.html" class="art-card" role="listitem" data-cat="focus study" aria-label="Read: Pomodoro Technique for Students: The Right Way">
+        <div class="card-visual" aria-hidden="true"><div class="visual-icon">ST</div></div>
+        <div class="card-body">
+          <div class="card-meta"><span class="tag">Focus</span><span>6 min</span></div>
+          <h3>Pomodoro Technique for Students: The Right Way</h3>
+          <p class="card-excerpt">A practical guide to using the Pomodoro technique for homework, revision and deep focus without burning out.</p>
+          <span class="card-arrow"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+        </div>
+      </a>
+      <a href="how-to-create-a-study-schedule.html" class="art-card" role="listitem" data-cat="planning study" aria-label="Read: How to Create a Study Schedule That You Will Follow">
+        <div class="card-visual" aria-hidden="true"><div class="visual-icon">ST</div></div>
+        <div class="card-body">
+          <div class="card-meta"><span class="tag">Planning</span><span>7 min</span></div>
+          <h3>How to Create a Study Schedule That You Will Follow</h3>
+          <p class="card-excerpt">Build a realistic weekly study schedule around classes, exams, breaks and energy levels.</p>
+          <span class="card-arrow"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+        </div>
+      </a>
+      <a href="apa-citation-examples-for-students.html" class="art-card" role="listitem" data-cat="citations study" aria-label="Read: APA Citation Examples for Students">
+        <div class="card-visual" aria-hidden="true"><div class="visual-icon">ST</div></div>
+        <div class="card-body">
+          <div class="card-meta"><span class="tag">Citations</span><span>6 min</span></div>
+          <h3>APA Citation Examples for Students</h3>
+          <p class="card-excerpt">Simple APA citation examples for websites, books, journal articles and missing author or date situations.</p>
+          <span class="card-arrow"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+        </div>
+      </a>
+      <a href="how-to-study-with-no-motivation.html" class="art-card" role="listitem" data-cat="motivation study" aria-label="Read: How to Study When You Have No Motivation">
+        <div class="card-visual" aria-hidden="true"><div class="visual-icon">ST</div></div>
+        <div class="card-body">
+          <div class="card-meta"><span class="tag">Motivation</span><span>7 min</span></div>
+          <h3>How to Study When You Have No Motivation</h3>
+          <p class="card-excerpt">Practical ways to start studying when you feel tired, bored or overwhelmed.</p>
+          <span class="card-arrow"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+        </div>
+      </a>
+      <a href="ai-homework-helper-without-cheating.html" class="art-card" role="listitem" data-cat="ai ethics study" aria-label="Read: How to Use an AI Homework Helper Without Cheating">
+        <div class="card-visual" aria-hidden="true"><div class="visual-icon">ST</div></div>
+        <div class="card-body">
+          <div class="card-meta"><span class="tag">AI Ethics</span><span>8 min</span></div>
+          <h3>How to Use an AI Homework Helper Without Cheating</h3>
+          <p class="card-excerpt">A student guide to using AI for homework ethically: explanations, practice, feedback and checking your understanding.</p>
+          <span class="card-arrow"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+        </div>
+      </a>
 
       <!-- CARD 1 -->
       <a href="ai-homework-helper.html" class="art-card" role="listitem" data-cat="homework tools" aria-label="Read: AI Homework Helper guide">

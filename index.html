@@ -20,886 +20,430 @@
     gtag('config', 'G-66DETECVGK');
   </script>
 
-  <!-- SEO -->
-  <title>StudyTools — Free AI Study Tools & Homework Helper 2026</title>
-  <meta name="description" content="The best free AI study tools for students in 2026. AI homework helper, pomodoro timer, citation generator, note summarizer, flashcard maker and more. Study smarter with BrainTokens." />
-  <meta name="keywords" content="free ai study tools, ai homework helper, online pomodoro timer, citation generator free, ai note summarizer, best ai tools for students 2026, free flashcards maker, study tools, AI study assistant, how to study faster" />
-  <meta name="robots" content="index, follow" />
+  <title>StudyTools - Free AI Study Tools for Students</title>
+  <meta name="description" content="Free study tools for students: AI study assistant, exam solver, GPA calculator, grade calculator, flashcard maker, citation generator, Pomodoro timer and study planner." />
+  <meta name="keywords" content="free study tools, AI study tools, AI homework helper, GPA calculator, grade calculator, citation generator, flashcard maker, Pomodoro timer, study planner" />
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
   <link rel="canonical" href="https://www.studytools.pro/" />
   <link rel="apple-touch-icon" href="/favicon_32.png" />
-
-  <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%235b6af0'/%3E%3Ctext x='16' y='23' font-family='Arial Black,sans-serif' font-size='19' font-weight='900' text-anchor='middle' fill='white'%3ES%3C/text%3E%3C/svg%3E" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 
-  <!-- Open Graph -->
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="StudyTools — Free AI Study Tools & Homework Helper 2026" />
-  <meta property="og:description" content="Free AI study tools for students. AI homework helper, pomodoro timer, citations, flashcards and more." />
+  <meta property="og:title" content="StudyTools - Free AI Study Tools for Students" />
+  <meta property="og:description" content="Use free tools to study faster: AI assistant, exam solver, calculators, citations, flashcards and more." />
   <meta property="og:url" content="https://www.studytools.pro/" />
   <meta property="og:image" content="https://www.studytools.pro/og-image.png" />
   <meta name="twitter:card" content="summary_large_image" />
 
-  <!-- Schema.org -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "WebApplication",
-    "name": "StudyTools",
-    "url": "https://www.studytools.pro/",
-    "description": "Free AI study tools for students. AI homework helper, pomodoro timer, citation generator, flashcard maker and more.",
-    "applicationCategory": "EducationalApplication",
-    "operatingSystem": "Any",
-    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://www.studytools.pro/#website",
+        "url": "https://www.studytools.pro/",
+        "name": "StudyTools",
+        "description": "Free AI-powered study tools for students"
+      },
+      {
+        "@type": "WebApplication",
+        "@id": "https://www.studytools.pro/#app",
+        "name": "StudyTools",
+        "url": "https://www.studytools.pro/",
+        "applicationCategory": "EducationalApplication",
+        "operatingSystem": "Any",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+      }
+    ]
   }
   </script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
   <style>
     :root {
-      --bg:       #07070f;
-      --sb:       #0c0c1a;
-      --topbar:   rgba(7,7,15,0.95);
-      --border:   rgba(255,255,255,0.07);
-      --border2:  rgba(255,255,255,0.12);
-      --text:     #eeeef6;
-      --muted:    #64647c;
-      --accent:   #6c63ff;
-      --accent2:  #00e0a8;
-      --orange:   #ff8c5a;
-      --gold:     #f5c542;
-      --card:     #0e0e1e;
-      --inp:      #111124;
-      --user-bg:  #1a1a38;
-      --ai-bg:    #0e0e1e;
-      --red:      #ff5a5a;
+      --bg: #090a10;
+      --surface: #10121b;
+      --surface-2: #151827;
+      --card: #121522;
+      --card-2: #181b2d;
+      --text: #f4f6fb;
+      --muted: #9aa1b6;
+      --soft: #c9d0e3;
+      --line: rgba(255,255,255,.11);
+      --line-strong: rgba(255,255,255,.18);
+      --accent: #6f7cff;
+      --mint: #4fd1c5;
+      --yellow: #f7c948;
+      --rose: #ff7a9a;
+      --max: 1180px;
+      --font-head: 'Syne', system-ui, sans-serif;
+      --font-body: 'DM Sans', system-ui, sans-serif;
     }
 
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { height: 100%; overflow: hidden; }
-    body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 15px; line-height: 1.65; }
-
-    @keyframes fadeUp   { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:none} }
-    @keyframes msgIn    { from{opacity:0;transform:translateY(6px)}  to{opacity:1;transform:none} }
-    @keyframes pulse    { 0%,100%{transform:scale(1)} 50%{transform:scale(1.4);opacity:.5} }
-    @keyframes bounce   { 0%,80%,100%{transform:translateY(0)} 40%{transform:translateY(-5px)} }
-    @keyframes spin     { to{transform:rotate(360deg)} }
-    @keyframes shimmer  { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
-    @keyframes tokenPop { 0%{transform:scale(1)} 50%{transform:scale(1.2)} 100%{transform:scale(1)} }
-    @keyframes barDrain { from{width:100%} to{width:0%} }
-
-    /* ── APP SHELL ── */
-    .app { display:flex; height:100vh; overflow:hidden; }
-
-    /* ── SIDEBAR ── */
-    .sidebar {
-      width:252px; flex-shrink:0;
-      background:var(--sb); border-right:1px solid var(--border);
-      display:flex; flex-direction:column; overflow-y:auto;
-      transition:width .22s ease;
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 20% 0%, rgba(111,124,255,.18), transparent 34%),
+        radial-gradient(circle at 80% 8%, rgba(79,209,197,.14), transparent 28%),
+        var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      line-height: 1.65;
+      overflow-x: hidden;
     }
-    .sidebar.closed { width:0; overflow:hidden; border:none; }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
 
-    .sb-logo { padding:1rem 1.1rem; border-bottom:1px solid var(--border); display:flex; align-items:center; gap:.6rem; flex-shrink:0; }
-    .sb-mark { width:30px; height:30px; background:linear-gradient(135deg,var(--accent),var(--accent2)); border-radius:8px; display:flex; align-items:center; justify-content:center; font-family:'Syne',sans-serif; font-weight:900; font-size:.85rem; color:#fff; flex-shrink:0; }
-    .sb-name { font-family:'Syne',sans-serif; font-weight:800; font-size:.95rem; }
-    .sb-ai-badge { margin-left:auto; font-size:.55rem; font-weight:700; background:rgba(0,224,168,0.12); border:1px solid rgba(0,224,168,0.25); color:var(--accent2); padding:.1rem .4rem; border-radius:999px; text-transform:uppercase; letter-spacing:.06em; }
-
-    .sb-new { margin:.75rem .875rem; padding:.6rem .875rem; background:rgba(108,99,255,0.1); border:1px solid rgba(108,99,255,0.22); border-radius:9px; color:var(--accent); font-family:'DM Sans',sans-serif; font-weight:600; font-size:.8rem; cursor:pointer; transition:all .2s; display:flex; align-items:center; gap:.45rem; flex-shrink:0; }
-    .sb-new:hover { background:rgba(108,99,255,0.2); }
-
-    .sb-sect { padding:.5rem 1.1rem .25rem; font-size:.62rem; font-weight:700; text-transform:uppercase; letter-spacing:.1em; color:var(--muted); flex-shrink:0; }
-
-    .sb-item { display:flex; align-items:center; gap:.6rem; padding:.5rem 1.1rem; color:var(--muted); font-size:.82rem; font-weight:500; cursor:pointer; transition:all .2s; border-left:2px solid transparent; text-decoration:none; white-space:nowrap; overflow:hidden; }
-    .sb-item:hover { color:var(--text); background:rgba(255,255,255,0.03); }
-    .sb-item.on { color:var(--text); border-left-color:var(--accent); background:rgba(108,99,255,0.08); }
-    .sb-ico { font-size:.95rem; width:18px; text-align:center; flex-shrink:0; }
-    .sb-tag { margin-left:auto; font-size:.55rem; font-weight:700; background:var(--accent2); color:#000; padding:.1rem .38rem; border-radius:999px; text-transform:uppercase; }
-
-    .sb-bottom { margin-top:auto; border-top:1px solid var(--border); padding:.75rem .875rem; flex-shrink:0; }
-    .sb-signin { width:100%; padding:.6rem; background:rgba(108,99,255,0.1); border:1px solid rgba(108,99,255,0.25); border-radius:9px; color:var(--accent); font-family:'DM Sans',sans-serif; font-weight:700; font-size:.8rem; cursor:pointer; transition:all .2s; display:flex; align-items:center; justify-content:center; gap:.4rem; }
-    .sb-signin:hover { background:rgba(108,99,255,0.2); }
-    .sb-user { display:none; align-items:center; gap:.6rem; padding:.5rem .65rem; background:rgba(255,255,255,0.03); border:1px solid var(--border); border-radius:9px; margin-bottom:.5rem; }
-    .sb-user.show { display:flex; }
-    .sb-avatar { width:26px; height:26px; border-radius:50%; background:linear-gradient(135deg,var(--accent),var(--accent2)); display:flex; align-items:center; justify-content:center; font-size:.72rem; font-weight:700; color:#fff; flex-shrink:0; overflow:hidden; }
-    .sb-avatar img { width:100%; height:100%; object-fit:cover; }
-    .sb-uname { font-size:.78rem; font-weight:600; flex:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-    .sb-out { background:none; border:none; color:var(--muted); font-size:.72rem; cursor:pointer; transition:color .2s; }
-    .sb-out:hover { color:var(--red); }
-    .sb-links { display:flex; gap:.875rem; justify-content:center; margin-top:.6rem; }
-    .sb-link { color:var(--muted); text-decoration:none; font-size:.7rem; transition:color .2s; }
-    .sb-link:hover { color:var(--text); }
-
-    /* ── MAIN ── */
-    .main { flex:1; display:flex; flex-direction:column; overflow:hidden; min-width:0; }
-
-    /* ── TOPBAR ── */
-    .topbar { height:52px; flex-shrink:0; border-bottom:1px solid var(--border); display:flex; align-items:center; padding:0 1rem; gap:.75rem; background:var(--topbar); backdrop-filter:blur(14px); }
-    .tb-btn { width:30px; height:30px; background:transparent; border:none; color:var(--muted); cursor:pointer; font-size:.95rem; display:flex; align-items:center; justify-content:center; border-radius:7px; transition:all .2s; flex-shrink:0; }
-    .tb-btn:hover { color:var(--text); background:rgba(255,255,255,0.05); }
-    .tb-title { font-family:'Syne',sans-serif; font-weight:700; font-size:.875rem; }
-
-    /* BRAINTOKENS COUNTER */
-    .bt-counter {
-      display:flex; align-items:center; gap:.5rem;
-      padding:.3rem .875rem;
-      background:rgba(245,197,66,0.08);
-      border:1px solid rgba(245,197,66,0.2);
-      border-radius:999px; cursor:pointer;
-      transition:all .2s; margin-left:auto;
-      flex-shrink:0;
+    .wrap { width: min(var(--max), calc(100% - 32px)); margin: 0 auto; }
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      border-bottom: 1px solid var(--line);
+      background: rgba(9,10,16,.82);
+      backdrop-filter: blur(18px);
     }
-    .bt-counter:hover { background:rgba(245,197,66,0.15); }
-    .bt-icon { font-size:.9rem; }
-    .bt-amount { font-family:'Syne',sans-serif; font-weight:800; font-size:.82rem; color:var(--gold); }
-    .bt-bar-wrap { width:48px; height:4px; background:rgba(255,255,255,0.1); border-radius:999px; overflow:hidden; }
-    .bt-bar { height:100%; background:linear-gradient(90deg,var(--gold),#ffaa00); border-radius:999px; transition:width .5s ease; }
-    .bt-timer { font-size:.68rem; color:var(--muted); }
+    .nav-inner {
+      min-height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+    .brand { display: inline-flex; align-items: center; gap: 10px; font-family: var(--font-head); font-weight: 800; }
+    .mark {
+      width: 34px;
+      height: 34px;
+      border-radius: 9px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--accent), var(--mint));
+      color: white;
+      font-size: .95rem;
+    }
+    .nav-links { display: flex; align-items: center; gap: 6px; }
+    .nav-links a {
+      color: var(--muted);
+      font-size: .9rem;
+      font-weight: 700;
+      padding: 9px 12px;
+      border-radius: 8px;
+    }
+    .nav-links a:hover { color: var(--text); background: rgba(255,255,255,.06); }
+    .nav-cta {
+      background: var(--text);
+      color: #0b0c12 !important;
+      border: 1px solid transparent;
+    }
 
-    .tb-status { font-size:.7rem; color:var(--accent2); display:flex; align-items:center; gap:.3rem; }
-    .tb-status::before { content:''; width:6px; height:6px; background:var(--accent2); border-radius:50%; animation:pulse 2s infinite; }
-    .tb-nav { display:flex; gap:.2rem; }
-    .tb-nav a, .tb-nav button { padding:.28rem .65rem; border-radius:6px; color:var(--muted); text-decoration:none; font-size:.77rem; font-weight:500; transition:all .2s; background:none; border:none; cursor:pointer; font-family:inherit; }
-    .tb-nav a:hover, .tb-nav button:hover { color:var(--text); background:rgba(255,255,255,0.05); }
+    .hero {
+      padding: clamp(42px, 8vw, 92px) 0 42px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(320px, 440px);
+      gap: clamp(28px, 5vw, 58px);
+      align-items: center;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--mint);
+      background: rgba(79,209,197,.1);
+      border: 1px solid rgba(79,209,197,.2);
+      border-radius: 999px;
+      padding: 7px 12px;
+      font-size: .78rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      margin-bottom: 18px;
+    }
+    h1 {
+      font-family: var(--font-head);
+      font-size: clamp(2.55rem, 7vw, 5.6rem);
+      line-height: .98;
+      letter-spacing: 0;
+      max-width: 760px;
+      margin-bottom: 18px;
+    }
+    .lead {
+      color: var(--soft);
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      max-width: 660px;
+      margin-bottom: 26px;
+    }
+    .actions { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 0 18px;
+      border-radius: 8px;
+      font-weight: 800;
+      border: 1px solid var(--line-strong);
+      background: rgba(255,255,255,.05);
+      color: var(--text);
+    }
+    .btn.primary { background: var(--accent); border-color: var(--accent); color: white; }
+    .btn:hover { transform: translateY(-1px); }
 
-    /* ── MESSAGES ── */
-    .msgs { flex:1; overflow-y:auto; padding:1.25rem clamp(.75rem,3vw,3rem); display:flex; flex-direction:column; gap:0; scroll-behavior:smooth; }
-    .msgs::-webkit-scrollbar { width:3px; }
-    .msgs::-webkit-scrollbar-thumb { background:var(--border2); border-radius:3px; }
+    .preview {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.035));
+      padding: 16px;
+      box-shadow: 0 22px 80px rgba(0,0,0,.28);
+    }
+    .preview-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; color: var(--muted); font-size: .8rem; font-weight: 700; }
+    .status { display: inline-flex; align-items: center; gap: 7px; color: var(--mint); }
+    .status::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--mint); }
+    .preview-box {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #0d101b;
+      padding: 18px;
+    }
+    .note-line { height: 10px; border-radius: 999px; background: rgba(255,255,255,.12); margin-bottom: 10px; }
+    .note-line.short { width: 62%; }
+    .result-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 18px; }
+    .result {
+      min-height: 92px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255,255,255,.04);
+      padding: 12px;
+    }
+    .result strong { display: block; font-size: .82rem; margin-bottom: 8px; }
+    .mini { height: 7px; border-radius: 999px; background: rgba(79,209,197,.28); margin-bottom: 7px; }
+    .mini.w2 { width: 74%; background: rgba(111,124,255,.32); }
+    .mini.w3 { width: 48%; background: rgba(247,201,72,.32); }
 
-    /* WELCOME */
-    .welcome { flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:2rem; text-align:center; gap:.875rem; animation:fadeUp .5s ease both; }
-    .wlc-icon { width:64px; height:64px; background:linear-gradient(135deg,var(--accent),var(--accent2)); border-radius:18px; display:flex; align-items:center; justify-content:center; font-size:2rem; }
-    .welcome h1 { font-family:'Syne',sans-serif; font-weight:800; font-size:clamp(1.4rem,2.5vw,2rem); letter-spacing:-.02em; }
-    .welcome p { color:var(--muted); font-size:.875rem; max-width:440px; line-height:1.65; }
+    .section { padding: 42px 0; }
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 18px;
+    }
+    h2 { font-family: var(--font-head); font-size: clamp(1.7rem, 3vw, 2.5rem); line-height: 1.08; }
+    .section-head p { color: var(--muted); max-width: 520px; }
 
-    .wlc-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:.55rem; max-width:480px; width:100%; }
-    .wlc-card { padding:.8rem .9rem; background:rgba(255,255,255,0.03); border:1px solid var(--border); border-radius:11px; cursor:pointer; transition:all .2s; text-align:left; font-family:'DM Sans',sans-serif; }
-    .wlc-card:hover { background:rgba(108,99,255,0.08); border-color:rgba(108,99,255,0.28); transform:translateY(-1px); }
-    .wlc-ico { font-size:1.1rem; margin-bottom:.25rem; }
-    .wlc-t { font-size:.82rem; font-weight:600; color:var(--text); }
-    .wlc-s { font-size:.72rem; color:var(--muted); margin-top:.06rem; }
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .tool-card {
+      min-height: 190px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--card);
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      transition: border-color .2s, background .2s, transform .2s;
+    }
+    .tool-card:hover { border-color: rgba(111,124,255,.5); background: var(--card-2); transform: translateY(-2px); }
+    .tool-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+      font-family: var(--font-head);
+      font-weight: 800;
+      background: rgba(111,124,255,.14);
+      color: var(--accent);
+    }
+    .tool-card h3 { font-size: 1rem; line-height: 1.25; }
+    .tool-card p { color: var(--muted); font-size: .9rem; flex: 1; }
+    .tool-card span { color: var(--mint); font-size: .84rem; font-weight: 800; }
 
-    .wlc-chips { display:flex; gap:.4rem; flex-wrap:wrap; justify-content:center; }
-    .wlc-chip { padding:.35rem .8rem; background:rgba(108,99,255,0.08); border:1px solid rgba(108,99,255,0.18); border-radius:999px; font-size:.76rem; color:var(--accent); cursor:pointer; transition:all .2s; }
-    .wlc-chip:hover { background:rgba(108,99,255,0.18); }
+    .feature-band {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: linear-gradient(135deg, rgba(111,124,255,.14), rgba(79,209,197,.08));
+      padding: clamp(22px, 4vw, 34px);
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+    }
+    .feature h3 { font-size: 1rem; margin-bottom: 7px; }
+    .feature p { color: var(--muted); font-size: .92rem; }
 
-    /* MESSAGE ROW */
-    .mrow { display:flex; gap:.875rem; padding:.6rem 0; animation:msgIn .2s ease both; max-width:900px; margin:0 auto; width:100%; }
-    .mrow.user { flex-direction:row-reverse; }
-    .mavatar { width:32px; height:32px; border-radius:9px; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:.85rem; margin-top:.1rem; overflow:hidden; }
-    .mrow.ai .mavatar { background:linear-gradient(135deg,var(--accent),var(--accent2)); }
-    .mrow.user .mavatar { background:var(--user-bg); color:var(--muted); font-size:.72rem; }
-    .mrow.user .mavatar img { width:100%; height:100%; object-fit:cover; border-radius:9px; }
-    .mbody { max-width:min(76%,720px); display:flex; flex-direction:column; gap:.22rem; }
-    .mrow.user .mbody { align-items:flex-end; }
-    .mname { font-size:.67rem; font-weight:600; color:var(--muted); padding:0 .15rem; }
-    .bubble { padding:.8rem 1rem; border-radius:14px; font-size:.88rem; line-height:1.78; }
-    .mrow.ai .bubble { background:var(--ai-bg); border:1px solid var(--border); border-radius:4px 14px 14px 14px; color:#c4c4dc; }
-    .mrow.user .bubble { background:var(--user-bg); border:1px solid rgba(108,99,255,0.18); border-radius:14px 4px 14px 14px; color:#d0d0f0; }
-    .bubble strong { color:var(--text); }
-    .bubble em { color:#aaaac8; font-style:italic; }
-    .bubble p { margin-bottom:.55rem; }
-    .bubble p:last-child { margin:0; }
-    .bubble h3,.bubble h4 { font-family:'Syne',sans-serif; color:var(--accent2); margin:.8rem 0 .35rem; font-size:.9rem; }
-    .bubble h3:first-child,.bubble h4:first-child { margin-top:0; }
-    .bubble ul,.bubble ol { margin:.35rem 0 .55rem 1.15rem; }
-    .bubble li { margin-bottom:.22rem; }
-    .bubble code { background:rgba(255,255,255,0.08); padding:.1rem .3rem; border-radius:4px; font-family:monospace; font-size:.8rem; color:var(--orange); }
-    .bubble hr { border:none; border-top:1px solid var(--border); margin:.65rem 0; }
+    .article-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .article-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      background: var(--card);
+    }
+    .article-card img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; background: #111; }
+    .article-card div { padding: 16px; }
+    .article-card h3 { font-size: 1rem; line-height: 1.3; margin-bottom: 8px; }
+    .article-card p { color: var(--muted); font-size: .9rem; }
 
-    /* MODE PILLS */
-    .mode-pills { display:flex; gap:.4rem; flex-wrap:wrap; margin-top:.5rem; justify-content:center; }
-    .mode-pill { padding:.28rem .7rem; background:rgba(108,99,255,0.08); border:1px solid rgba(108,99,255,0.2); border-radius:999px; font-size:.72rem; color:var(--accent); cursor:pointer; transition:all .2s; }
-    .mode-pill:hover { background:rgba(108,99,255,0.18); }
+    .final-cta {
+      margin: 42px 0 56px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--surface);
+      padding: clamp(24px, 5vw, 44px);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+    .final-cta p { color: var(--muted); max-width: 560px; margin-top: 8px; }
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 28px 0;
+      color: var(--muted);
+      font-size: .9rem;
+    }
+    .foot-inner { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+    .foot-links { display: flex; gap: 14px; flex-wrap: wrap; }
+    .foot-links a:hover { color: var(--text); }
 
-    /* TYPING */
-    .typing { display:flex; gap:4px; align-items:center; padding:.25rem 0; }
-    .tdot { width:6px; height:6px; background:var(--muted); border-radius:50%; animation:bounce 1.2s ease infinite; }
-    .tdot:nth-child(2){animation-delay:.2s} .tdot:nth-child(3){animation-delay:.4s}
-
-    /* ERROR */
-    .error-bubble { padding:.7rem 1rem; background:rgba(255,80,80,0.08); border:1px solid rgba(255,80,80,0.2); border-radius:10px; color:#ff8080; font-size:.85rem; display:flex; align-items:center; gap:.5rem; }
-
-    /* ── TOOLS STRIP ── */
-    .tools-strip { flex-shrink:0; border-top:1px solid var(--border); padding:.5rem clamp(.75rem,3vw,3rem); background:rgba(0,0,0,0.2); display:flex; align-items:center; gap:.65rem; flex-wrap:wrap; }
-    .ts-label { font-size:.6rem; font-weight:700; text-transform:uppercase; letter-spacing:.1em; color:var(--muted); flex-shrink:0; }
-    .ts-pills { display:flex; gap:.35rem; flex-wrap:wrap; }
-    .ts-pill { padding:.28rem .65rem; background:rgba(255,255,255,0.03); border:1px solid var(--border); border-radius:999px; color:var(--muted); font-size:.72rem; text-decoration:none; transition:all .2s; }
-    .ts-pill:hover { color:var(--text); background:rgba(108,99,255,0.08); border-color:rgba(108,99,255,0.25); }
-
-    /* ── INPUT AREA ── */
-    .input-area { flex-shrink:0; padding:.75rem clamp(.75rem,3vw,3rem) 1rem; background:var(--bg); }
-    .input-wrap { max-width:800px; margin:0 auto; }
-    .input-box { display:flex; flex-direction:column; gap:.5rem; background:var(--inp); border:1px solid var(--border2); border-radius:14px; padding:.7rem .9rem; transition:border-color .2s; }
-    .input-box:focus-within { border-color:rgba(108,99,255,0.45); }
-    .file-preview { display:none; align-items:center; gap:.5rem; padding:.3rem .6rem; background:rgba(108,99,255,0.1); border:1px solid rgba(108,99,255,0.2); border-radius:7px; font-size:.74rem; color:var(--accent); }
-    .file-preview.show { display:flex; }
-    .file-remove { background:none; border:none; color:var(--muted); cursor:pointer; font-size:.8rem; margin-left:auto; }
-    .file-remove:hover { color:var(--red); }
-    .input-row { display:flex; align-items:flex-end; gap:.5rem; }
-    textarea#inp { flex:1; background:transparent; border:none; color:var(--text); font-family:'DM Sans',sans-serif; font-size:.9rem; line-height:1.55; resize:none; outline:none; max-height:160px; min-height:22px; }
-    textarea#inp::placeholder { color:var(--muted); }
-    .btn-file { width:32px; height:32px; flex-shrink:0; background:transparent; border:1px solid var(--border); border-radius:8px; color:var(--muted); cursor:pointer; display:flex; align-items:center; justify-content:center; font-size:.85rem; transition:all .2s; }
-    .btn-file:hover { color:var(--text); border-color:var(--border2); }
-    .btn-send { width:34px; height:34px; flex-shrink:0; background:var(--accent); border:none; border-radius:9px; color:#fff; cursor:pointer; font-size:.9rem; display:flex; align-items:center; justify-content:center; transition:all .2s; }
-    .btn-send:hover:not(:disabled) { box-shadow:0 4px 14px rgba(108,99,255,0.5); transform:translateY(-1px); }
-    .btn-send:disabled { opacity:.3; cursor:not-allowed; transform:none; }
-    .inp-hint { font-size:.63rem; color:var(--muted); text-align:center; margin-top:.35rem; }
-    #file-in { display:none; }
-
-    /* ── MODALS ── */
-    .overlay { position:fixed; inset:0; z-index:500; background:rgba(0,0,0,0.85); backdrop-filter:blur(8px); display:none; align-items:center; justify-content:center; padding:1rem; }
-    .overlay.show { display:flex; }
-    .modal { background:var(--card); border:1px solid var(--border2); border-radius:18px; padding:2rem; max-width:380px; width:100%; position:relative; animation:fadeUp .28s ease; }
-    .modal-x { position:absolute; top:.9rem; right:.9rem; background:none; border:none; color:var(--muted); font-size:1rem; cursor:pointer; }
-    .modal-x:hover { color:var(--text); }
-
-    /* AUTH MODAL */
-    .modal-logo { font-family:'Syne',sans-serif; font-weight:800; font-size:1rem; margin-bottom:.25rem; }
-    .modal h3 { font-family:'Syne',sans-serif; font-size:1.2rem; font-weight:800; margin-bottom:.3rem; }
-    .modal p { color:var(--muted); font-size:.82rem; margin-bottom:1.2rem; line-height:1.6; }
-    .benefit { display:flex; gap:.45rem; font-size:.8rem; color:var(--muted); margin-bottom:.38rem; }
-    .benefit::before { content:'✓'; color:var(--accent2); font-weight:700; flex-shrink:0; }
-    .benefits { margin-bottom:1.4rem; }
-    .btn-google { width:100%; padding:.75rem; background:#fff; border:none; border-radius:10px; color:#333; font-family:'DM Sans',sans-serif; font-weight:700; font-size:.875rem; cursor:pointer; transition:all .2s; display:flex; align-items:center; justify-content:center; gap:.6rem; margin-bottom:.875rem; }
-    .btn-google:hover { background:#f0f0f0; }
-    .or-div { display:flex; align-items:center; gap:.65rem; color:var(--muted); font-size:.75rem; margin-bottom:.875rem; }
-    .or-div::before,.or-div::after { content:''; flex:1; height:1px; background:var(--border); }
-    .m-inp { width:100%; padding:.65rem .875rem; background:var(--inp); border:1px solid var(--border); border-radius:9px; color:var(--text); font-family:'DM Sans',sans-serif; font-size:.85rem; outline:none; transition:border-color .2s; margin-bottom:.55rem; }
-    .m-inp:focus { border-color:rgba(108,99,255,0.5); }
-    .m-inp::placeholder { color:var(--muted); }
-    .btn-auth { width:100%; padding:.72rem; background:var(--accent); border:none; border-radius:10px; color:#fff; font-family:'DM Sans',sans-serif; font-weight:700; font-size:.85rem; cursor:pointer; transition:all .2s; margin-bottom:.5rem; }
-    .btn-auth:hover { box-shadow:0 4px 14px rgba(108,99,255,0.4); }
-    .btn-auth-sec { width:100%; padding:.72rem; background:transparent; border:1px solid var(--border); border-radius:10px; color:var(--muted); font-family:'DM Sans',sans-serif; font-weight:600; font-size:.85rem; cursor:pointer; transition:all .2s; margin-bottom:.75rem; }
-    .btn-auth-sec:hover { color:var(--text); border-color:var(--border2); }
-    .modal-note { font-size:.7rem; color:var(--muted); text-align:center; }
-    .modal-note a { color:var(--accent); text-decoration:none; }
-    .modal-err { font-size:.78rem; color:#ff8080; margin-bottom:.5rem; display:none; text-align:center; }
-    .modal-err.show { display:block; }
-
-    /* BRAINTOKENS MODAL */
-    .bt-modal-icon { font-size:3.5rem; text-align:center; margin-bottom:.75rem; }
-    .bt-modal h3 { text-align:center; margin-bottom:.5rem; }
-    .bt-modal p { text-align:center; margin-bottom:1.5rem; }
-    .bt-modal-tokens { display:flex; align-items:center; justify-content:center; gap:.5rem; font-family:'Syne',sans-serif; font-size:2rem; font-weight:800; color:var(--gold); margin-bottom:1.5rem; }
-    .btn-watch-ad { width:100%; padding:.875rem; background:linear-gradient(135deg,var(--gold),#ffaa00); border:none; border-radius:12px; color:#000; font-family:'DM Sans',sans-serif; font-weight:800; font-size:.95rem; cursor:pointer; transition:all .2s; display:flex; align-items:center; justify-content:center; gap:.5rem; margin-bottom:.75rem; }
-    .btn-watch-ad:hover { box-shadow:0 6px 20px rgba(245,197,66,0.4); transform:translateY(-1px); }
-    .btn-signin-bt { width:100%; padding:.75rem; background:rgba(108,99,255,0.12); border:1px solid rgba(108,99,255,0.3); border-radius:12px; color:var(--accent); font-family:'DM Sans',sans-serif; font-weight:700; font-size:.875rem; cursor:pointer; transition:all .2s; }
-    .btn-signin-bt:hover { background:rgba(108,99,255,0.22); }
-
-    /* SEO CONTENT */
-    .seo-hidden { position:absolute; width:1px; height:1px; overflow:hidden; left:-9999px; top:auto; }
-
-    @media(max-width:680px) {
-      .sidebar { position:fixed; z-index:100; height:100vh; }
-      .sidebar.closed { width:0; }
-      .tb-nav { display:none; }
-      .wlc-grid { grid-template-columns:1fr 1fr; }
-      .tools-strip { display:none; }
-      .bt-timer { display:none; }
+    @media (max-width: 980px) {
+      .hero { grid-template-columns: 1fr; }
+      .preview { max-width: 620px; }
+      .tools-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .article-grid { grid-template-columns: 1fr; }
+      .feature-band { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 680px) {
+      .wrap { width: min(100% - 24px, var(--max)); }
+      .nav-inner { min-height: 62px; }
+      .nav-links a:not(.nav-cta) { display: none; }
+      .hero { padding-top: 34px; }
+      .actions .btn { width: 100%; }
+      .tools-grid { grid-template-columns: 1fr; }
+      .section-head { display: block; }
+      .section-head p { margin-top: 8px; }
+      .result-grid { grid-template-columns: 1fr; }
+      .final-cta { display: block; }
+      .final-cta .btn { width: 100%; margin-top: 18px; }
     }
   </style>
 </head>
 <body>
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P8T9B392" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P8T9B392" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-
-<div class="app">
-
-  <!-- ══ SIDEBAR ══ -->
-  <aside class="sidebar" id="sidebar">
-    <div class="sb-logo">
-      <div class="sb-mark">S</div>
-      <div class="sb-name">StudyTools</div>
-      <div class="sb-ai-badge">AI</div>
-    </div>
-
-    <button class="sb-new" onclick="newChat()">✏️ New chat</button>
-
-    <div class="sb-sect">AI Modes</div>
-    <div class="sb-item on"  onclick="setMode(this,'chat')">      <span class="sb-ico">💬</span> Free chat</div>
-    <div class="sb-item"     onclick="setMode(this,'summarize')"> <span class="sb-ico">📄</span> Summarize notes</div>
-    <div class="sb-item"     onclick="setMode(this,'outline')">   <span class="sb-ico">🗂️</span> Create outline</div>
-    <div class="sb-item"     onclick="setMode(this,'test')">      <span class="sb-ico">❓</span> Practice test</div>
-    <div class="sb-item"     onclick="setMode(this,'plan')">      <span class="sb-ico">📅</span> Study plan</div>
-    <div class="sb-item"     onclick="setMode(this,'flashcards')"><span class="sb-ico">🃏</span> Flashcards</div>
-    <div class="sb-item"     onclick="setMode(this,'eli15')">     <span class="sb-ico">💡</span> Explain like I'm 15</div>
-    <div class="sb-item"     onclick="setMode(this,'stepbystep')"><span class="sb-ico">🔢</span> Step-by-step</div>
-
-    <div class="sb-sect" style="margin-top:.75rem">Free Tools</div>
-    <a href="/pomodoro-timer.html"     class="sb-item"><span class="sb-ico">⏱️</span> Pomodoro Timer</a>
-    <a href="/citation-generator.html" class="sb-item"><span class="sb-ico">📚</span> Citation Generator</a>
-    <a href="/flashcard-maker.html"    class="sb-item"><span class="sb-ico">🃏</span> Flashcard Maker</a>
-    <a href="/app.html"                class="sb-item"><span class="sb-ico">✨</span> Note Summarizer <span class="sb-tag">New</span></a>
-    <a href="/gpa-calculator.html"     class="sb-item"><span class="sb-ico">🎓</span> GPA Calculator</a>
-    <a href="/grade-calculator.html"   class="sb-item"><span class="sb-ico">📊</span> Grade Calculator</a>
-    <a href="/word-counter.html"       class="sb-item"><span class="sb-ico">📝</span> Word Counter</a>
-    <a href="/study-schedule.html"     class="sb-item"><span class="sb-ico">🗓️</span> Study Schedule</a>
-    <a href="/exam-solver.html"        class="sb-item"><span class="sb-ico">🧠</span> Exam Solver</a>
-    <a href="/blog.html"               class="sb-item"><span class="sb-ico">📖</span> Blog</a>
-    <a href="/ebooks.html"             class="sb-item"><span class="sb-ico">📘</span> eBooks</a>
-
-    <div class="sb-bottom">
-      <div class="sb-user" id="sb-user">
-        <div class="sb-avatar" id="sb-avatar">👤</div>
-        <div class="sb-uname" id="sb-uname">User</div>
-        <button class="sb-out" onclick="doSignOut()">↩</button>
-      </div>
-      <button class="sb-signin" id="sb-signin-btn" onclick="openAuthModal()">👤 Sign in / Create account</button>
-      <div class="sb-links">
-        <a href="/blog.html"    class="sb-link">Blog</a>
-        <a href="/pricing.html" class="sb-link">Pricing</a>
-        <a href="/ebooks.html"  class="sb-link">eBooks</a>
-        <a href="/privacy.html" class="sb-link">Privacy</a>
+  <nav class="nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="/" aria-label="StudyTools home"><span class="mark">S</span><span>StudyTools</span></a>
+      <div class="nav-links">
+        <a href="#tools">Tools</a>
+        <a href="blog.html">Blog</a>
+        <a href="app.html" class="nav-cta">Start studying</a>
       </div>
     </div>
-  </aside>
+  </nav>
 
-  <!-- ══ MAIN ══ -->
-  <div class="main">
-
-    <!-- TOPBAR -->
-    <div class="topbar">
-      <button class="tb-btn" onclick="toggleSidebar()">☰</button>
-      <div class="tb-title" id="tb-title">StudyTools AI</div>
-
-      <!-- BRAINTOKENS COUNTER -->
-      <div class="bt-counter" onclick="showBTInfo()" title="Click for BrainTokens info">
-        <span class="bt-icon">🧠</span>
-        <span class="bt-amount" id="bt-amount">100</span>
-        <div class="bt-bar-wrap"><div class="bt-bar" id="bt-bar" style="width:100%"></div></div>
-        <span class="bt-timer" id="bt-timer">2:00:00</span>
-      </div>
-
-      <div class="tb-status">Online</div>
-      <div class="tb-nav">
-        <a href="/blog.html">Blog</a>
-        <a href="/ebooks.html">eBooks</a>
-        <button onclick="openAuthModal()" id="tb-signin-btn">Sign in</button>
-      </div>
-    </div>
-
-    <!-- MESSAGES -->
-    <div class="msgs" id="msgs">
-      <div class="welcome" id="welcome">
-        <div class="wlc-icon">🎓</div>
-        <h1>Your free AI study assistant</h1>
-        <p>The best free AI study tools for students in 2026. Ask anything, paste your notes, or choose a quick action. Works in any language.</p>
-        <div class="wlc-grid">
-          <div class="wlc-card" onclick="quick('Summarize my notes')">
-            <div class="wlc-ico">📄</div>
-            <div class="wlc-t">Summarize notes</div>
-            <div class="wlc-s">Paste text → instant summary</div>
-          </div>
-          <div class="wlc-card" onclick="quick('Create a practice test from my notes')">
-            <div class="wlc-ico">❓</div>
-            <div class="wlc-t">Practice test</div>
-            <div class="wlc-s">5 questions from your material</div>
-          </div>
-          <div class="wlc-card" onclick="quick('Help me create a study plan')">
-            <div class="wlc-ico">📅</div>
-            <div class="wlc-t">Study plan</div>
-            <div class="wlc-s">Personalized weekly schedule</div>
-          </div>
-          <div class="wlc-card" onclick="quick('Create an outline from my notes')">
-            <div class="wlc-ico">🗂️</div>
-            <div class="wlc-t">Create outline</div>
-            <div class="wlc-s">Visual topic structure</div>
-          </div>
-        </div>
-        <div class="mode-pills">
-          <span class="mode-pill" onclick="quick('Explain this to me like I am 15 years old')">💡 Explain like I'm 15</span>
-          <span class="mode-pill" onclick="quick('Give me a step by step solution')">🔢 Step-by-step</span>
-          <span class="mode-pill" onclick="quick('Make flashcards from my notes')">🃏 Make flashcards</span>
-          <span class="mode-pill" onclick="quick('Create a quiz from my notes')">❓ Create quiz</span>
-        </div>
-        <div class="wlc-chips">
-          <span class="wlc-chip" onclick="quick('Hola! Ayúdame con mis estudios')">🇪🇸 Español</span>
-          <span class="wlc-chip" onclick="quick('Bonjour! Aide-moi à étudier')">🇫🇷 Français</span>
-          <span class="wlc-chip" onclick="quick('Olá! Me ajude a estudar')">🇧🇷 Português</span>
-          <span class="wlc-chip" onclick="quick('Quiz me on photosynthesis')">Biology</span>
-          <span class="wlc-chip" onclick="quick('Explain Newton laws of motion step by step')">Physics</span>
+  <main>
+    <section class="wrap hero">
+      <div>
+        <div class="eyebrow">Free study tools for students</div>
+        <h1>Study faster with tools that do the boring parts.</h1>
+        <p class="lead">Use AI to summarize notes, solve exam questions, make flashcards, plan study sessions, calculate grades and create citations. No sign-up needed.</p>
+        <div class="actions">
+          <a href="app.html" class="btn primary">Open AI Study Tool</a>
+          <a href="#tools" class="btn">Browse all tools</a>
         </div>
       </div>
-    </div>
-
-    <!-- TOOLS STRIP -->
-    <div class="tools-strip">
-      <div class="ts-label">Tools</div>
-      <div class="ts-pills">
-        <a href="/pomodoro-timer.html"     class="ts-pill">⏱️ Pomodoro</a>
-        <a href="/citation-generator.html" class="ts-pill">📚 Citations</a>
-        <a href="/flashcard-maker.html"    class="ts-pill">🃏 Flashcards</a>
-        <a href="/gpa-calculator.html"     class="ts-pill">🎓 GPA Calc</a>
-        <a href="/grade-calculator.html"   class="ts-pill">📊 Grade Calc</a>
-        <a href="/word-counter.html"       class="ts-pill">📝 Word Counter</a>
-        <a href="/exam-solver.html"        class="ts-pill">🧠 Exam Solver</a>
-        <a href="/app.html"                class="ts-pill">✨ Summarizer</a>
-        <a href="/ebooks.html"             class="ts-pill">📘 eBooks</a>
-      </div>
-    </div>
-
-    <!-- INPUT -->
-    <div class="input-area">
-      <div class="input-wrap">
-        <div class="input-box">
-          <div class="file-preview" id="file-preview">
-            <span id="file-name">📎 file</span>
-            <button class="file-remove" onclick="removeFile()">✕</button>
-          </div>
-          <div class="input-row">
-            <textarea id="inp" placeholder="Ask anything, paste your notes, or write in any language…" rows="1"
-              onkeydown="handleKey(event)" oninput="autoResize(this)"></textarea>
-            <button class="btn-file" onclick="document.getElementById('file-in').click()" title="Attach file">📎</button>
-            <button class="btn-send" id="send-btn" onclick="send()">➤</button>
+      <div class="preview" aria-label="StudyTools preview">
+        <div class="preview-top"><span>StudyTools AI</span><span class="status">Ready</span></div>
+        <div class="preview-box">
+          <div class="note-line"></div>
+          <div class="note-line"></div>
+          <div class="note-line short"></div>
+          <div class="result-grid">
+            <div class="result"><strong>Summary</strong><div class="mini"></div><div class="mini w2"></div><div class="mini w3"></div></div>
+            <div class="result"><strong>Practice test</strong><div class="mini w2"></div><div class="mini"></div><div class="mini w3"></div></div>
           </div>
         </div>
-        <div class="inp-hint">Enter to send · Shift+Enter for new line · 🧠 <span id="inp-bt-hint">100 BrainTokens remaining</span></div>
+      </div>
+    </section>
+
+    <section class="wrap section" id="tools">
+      <div class="section-head">
+        <h2>Choose the tool you need</h2>
+        <p>Each tool is focused on one student problem, so visitors can understand the site quickly and get value in the first minute.</p>
+      </div>
+      <div class="tools-grid">
+        <a class="tool-card" href="app.html"><span class="tool-icon">AI</span><h3>AI Study Tool</h3><p>Paste notes and get a summary, outline and practice questions.</p><span>Use tool</span></a>
+        <a class="tool-card" href="exam-solver.html"><span class="tool-icon">EX</span><h3>Exam Solver</h3><p>Break down exam questions into clearer steps and explanations.</p><span>Use tool</span></a>
+        <a class="tool-card" href="gpa-calculator.html"><span class="tool-icon">GP</span><h3>GPA Calculator</h3><p>Calculate semester or cumulative GPA with simple inputs.</p><span>Use tool</span></a>
+        <a class="tool-card" href="grade-calculator.html"><span class="tool-icon">GR</span><h3>Grade Calculator</h3><p>Find the score you need on a final exam or assignment.</p><span>Use tool</span></a>
+        <a class="tool-card" href="flashcard-maker.html"><span class="tool-icon">FC</span><h3>Flashcard Maker</h3><p>Create quick question and answer cards for active recall.</p><span>Use tool</span></a>
+        <a class="tool-card" href="citation-generator.html"><span class="tool-icon">CT</span><h3>Citation Generator</h3><p>Build clean references for essays and school projects.</p><span>Use tool</span></a>
+        <a class="tool-card" href="pomodoro-timer.html"><span class="tool-icon">25</span><h3>Pomodoro Timer</h3><p>Stay focused with short study blocks and real breaks.</p><span>Use tool</span></a>
+        <a class="tool-card" href="study-schedule.html"><span class="tool-icon">PL</span><h3>Study Schedule</h3><p>Turn deadlines and subjects into a realistic weekly plan.</p><span>Use tool</span></a>
+      </div>
+    </section>
+
+    <section class="wrap section">
+      <div class="feature-band">
+        <div class="feature"><h3>Simple first visit</h3><p>Students can choose a tool, solve a study problem and come back later without extra friction.</p></div>
+        <div class="feature"><h3>Cleaner for SEO</h3><p>The page now links clearly to the most important tools and articles, which helps users and search engines understand the site.</p></div>
+        <div class="feature"><h3>Better on mobile</h3><p>The layout adapts from desktop to phone with readable cards, large buttons and no hidden chat interface.</p></div>
+      </div>
+    </section>
+
+    <section class="wrap section">
+      <div class="section-head">
+        <h2>Helpful study guides</h2>
+        <p>Articles bring search traffic, and tools keep students on the site once they arrive.</p>
+      </div>
+      <div class="article-grid">
+        <a class="article-card" href="how-to-study-for-an-exam-in-one-week.html">
+          <img src="assets/article-exam-week.svg" alt="Student planning exam revision" loading="lazy" />
+          <div><h3>How to Study for an Exam in One Week</h3><p>A practical revision plan for students who need focus fast.</p></div>
+        </a>
+        <a class="article-card" href="what-grade-do-i-need-on-my-final.html">
+          <img src="assets/article-final-grade.svg" alt="Student calculating final grade" loading="lazy" />
+          <div><h3>What Grade Do I Need on My Final?</h3><p>Learn how final exam weight affects your target score.</p></div>
+        </a>
+        <a class="article-card" href="best-free-ai-study-tools-for-students.html">
+          <img src="assets/article-ai-study-tools.svg" alt="Students using AI study tools" loading="lazy" />
+          <div><h3>Best Free AI Study Tools for Students</h3><p>Use AI for explanations, quizzes and planning without losing control.</p></div>
+        </a>
+      </div>
+    </section>
+
+    <section class="wrap final-cta">
+      <div>
+        <h2>Start with one task.</h2>
+        <p>Paste notes, calculate a grade, make flashcards or plan your next study session. The fastest way to improve the site is to make every visit useful.</p>
+      </div>
+      <a href="app.html" class="btn primary">Open AI Study Tool</a>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap foot-inner">
+      <span>&copy; 2026 StudyTools.pro - Free study tools for students</span>
+      <div class="foot-links">
+        <a href="blog.html">Blog</a>
+        <a href="word-counter.html">Word Counter</a>
+        <a href="citation-generator.html">Citation Generator</a>
       </div>
     </div>
-    <input type="file" id="file-in" accept=".pdf,.txt,.doc,.docx,.png,.jpg,.jpeg,.webp" onchange="onFileSelect(event)" />
-  </div>
-</div>
-
-<!-- AUTH MODAL -->
-<div class="overlay" id="auth-overlay" onclick="closeOverlay('auth-overlay',event)">
-  <div class="modal">
-    <button class="modal-x" onclick="closeModal('auth-overlay')">✕</button>
-    <div class="modal-logo">StudyTools</div>
-    <h3>Sign in to save your chats</h3>
-    <p>Create a free account to save your study sessions and access them from any device.</p>
-    <div class="benefits">
-      <div class="benefit">Chat history saved automatically</div>
-      <div class="benefit">Access from phone, tablet or laptop</div>
-      <div class="benefit">AI remembers your subjects</div>
-      <div class="benefit">Free forever — no credit card needed</div>
-    </div>
-    <div class="modal-err" id="auth-err"></div>
-    <button class="btn-google" onclick="signInGoogle()">
-      <svg width="18" height="18" viewBox="0 0 24 24">
-        <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-        <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-        <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
-        <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
-      </svg>
-      Continue with Google
-    </button>
-    <div class="or-div">or</div>
-    <input type="email"    class="m-inp" placeholder="Email address"           id="m-email" />
-    <input type="password" class="m-inp" placeholder="Password (min 6 chars)"  id="m-pass"  />
-    <button class="btn-auth"     onclick="signInEmail()">Sign in</button>
-    <button class="btn-auth-sec" onclick="registerEmail()">Create new account</button>
-    <div class="modal-note">By signing in you agree to our <a href="/privacy.html">Privacy Policy</a>.</div>
-  </div>
-</div>
-
-<!-- BRAINTOKENS MODAL -->
-<div class="overlay" id="bt-overlay" onclick="closeOverlay('bt-overlay',event)">
-  <div class="modal bt-modal">
-    <button class="modal-x" onclick="closeModal('bt-overlay')">✕</button>
-    <div class="bt-modal-icon">🧠</div>
-    <h3>Out of BrainTokens!</h3>
-    <p>You've used all your BrainTokens. Watch a short video to earn +50 BrainTokens instantly, or wait for your timer to reset.</p>
-    <div class="bt-modal-tokens"><span>+50</span> 🧠</div>
-    <button class="btn-watch-ad" onclick="watchAd()">▶ Watch a short video (+50 BrainTokens)</button>
-    <button class="btn-signin-bt" onclick="closeModal('bt-overlay');openAuthModal()">👤 Sign in for more tokens</button>
-    <p style="font-size:.72rem;color:var(--muted);text-align:center;margin-top:.75rem" id="bt-reset-info">Tokens reset in <span id="bt-modal-timer">—</span></p>
-  </div>
-</div>
-
-<!-- SEO HIDDEN CONTENT -->
-<div class="seo-hidden">
-  <h2>Free AI Study Tools for Students 2026</h2>
-  <p>StudyTools offers the best free AI study tools for students in 2026. Our AI homework helper can summarize notes, create study plans, generate practice tests and explain any concept. Use our online pomodoro timer to study in focused sessions, our free citation generator for APA MLA and Chicago formats, and our AI note summarizer to convert long texts into clear bullet points. All free AI tools for students with no sign-up required.</p>
-  <h2>Best AI Tools for Students — How to Study Faster with AI</h2>
-  <p>The best AI tools for students include AI homework helpers, flashcard makers, note summarizers, exam solvers and study planners. StudyTools provides all of these free. Learn how to study faster by using AI to summarize notes, create quizzes and build personalized study plans. Our AI study assistant works in any language including English, Spanish, French and Portuguese.</p>
-  <h2>Free Flashcard Maker — Citation Generator Free — AI Note Summarizer</h2>
-  <p>Create free flashcards online with our flashcard maker. Generate APA MLA and Chicago citations instantly with our free citation generator. Summarize your notes with AI using our note summarizer. All free study tools for students, no account required.</p>
-</div>
-
-<!-- FIREBASE -->
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
-  import { getAuth, signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut as fbSignOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-auth.js";
-  import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js";
-
-  const app  = initializeApp({
-    apiKey: "AIzaSyDx4StAzPExYbQU_9yJ04R7HO2JX1_sq6w",
-    authDomain: "studytools-b60e9.firebaseapp.com",
-    projectId: "studytools-b60e9",
-    storageBucket: "studytools-b60e9.firebasestorage.app",
-    messagingSenderId: "444074505899",
-    appId: "1:444074505899:web:0bc0044a9e1e42d6a3a9ee"
-  });
-  const auth = getAuth(app);
-  const db   = getFirestore(app);
-  const gp   = new GoogleAuthProvider();
-
-  onAuthStateChanged(auth, user => {
-    window._fbUser = user;
-    if (user) {
-      document.getElementById('sb-user').classList.add('show');
-      document.getElementById('sb-signin-btn').style.display = 'none';
-      document.getElementById('tb-signin-btn').style.display = 'none';
-      document.getElementById('sb-uname').textContent = user.displayName || user.email?.split('@')[0] || 'User';
-      const av = document.getElementById('sb-avatar');
-      if (user.photoURL) av.innerHTML = `<img src="${user.photoURL}" alt="avatar"/>`;
-      else av.textContent = (user.displayName || user.email || 'U')[0].toUpperCase();
-      closeModal('auth-overlay');
-    } else {
-      document.getElementById('sb-user').classList.remove('show');
-      document.getElementById('sb-signin-btn').style.display = 'flex';
-      document.getElementById('tb-signin-btn').style.display = '';
-    }
-  });
-
-  window.signInGoogle  = async () => { try { await signInWithPopup(auth, gp); } catch(e){ showAuthErr(e.message); } };
-  window.signInEmail   = async () => {
-    const e=document.getElementById('m-email').value.trim(), p=document.getElementById('m-pass').value;
-    if(!e||!p){showAuthErr('Please enter email and password.');return;}
-    try { await signInWithEmailAndPassword(auth,e,p); } catch(err){ showAuthErr('Wrong email or password.'); }
-  };
-  window.registerEmail = async () => {
-    const e=document.getElementById('m-email').value.trim(), p=document.getElementById('m-pass').value;
-    if(!e||!p){showAuthErr('Please enter email and password.');return;}
-    if(p.length<6){showAuthErr('Password must be at least 6 characters.');return;}
-    try { await createUserWithEmailAndPassword(auth,e,p); }
-    catch(err){ showAuthErr(err.code==='auth/email-already-in-use'?'Email already in use. Try signing in.':err.message); }
-  };
-  window.doSignOut = async () => { await fbSignOut(auth); newChat(); };
-  window.saveMsg   = async (role, content) => {
-    if(!window._fbUser) return;
-    try { await addDoc(collection(db,'users',window._fbUser.uid,'chats'), { role, content, timestamp:serverTimestamp(), session:window._sessionId }); }
-    catch(e){}
-  };
-</script>
-
-<script>
-  // ═══════════════════════════════════════════
-  // BRAINTOKENS SYSTEM
-  // ═══════════════════════════════════════════
-  const BT_MAX      = 100;
-  const BT_COST     = 5;
-  const BT_RESET_MS = 2 * 60 * 60 * 1000; // 2 hours
-
-  function loadBT() {
-    const saved = localStorage.getItem('bt_data');
-    if (saved) {
-      const d = JSON.parse(saved);
-      if (Date.now() < d.resetAt) return d;
-    }
-    const fresh = { amount: BT_MAX, resetAt: Date.now() + BT_RESET_MS };
-    localStorage.setItem('bt_data', JSON.stringify(fresh));
-    return fresh;
-  }
-
-  function saveBT(d) { localStorage.setItem('bt_data', JSON.stringify(d)); }
-
-  function getBT()  { return loadBT().amount; }
-
-  function spendBT() {
-    const d = loadBT();
-    if (d.amount < BT_COST) return false;
-    d.amount -= BT_COST;
-    saveBT(d);
-    updateBTUI();
-    return true;
-  }
-
-  function addBT(n) {
-    const d = loadBT();
-    d.amount = Math.min(BT_MAX, d.amount + n);
-    saveBT(d);
-    updateBTUI();
-  }
-
-  function updateBTUI() {
-    const d = loadBT();
-    const pct = (d.amount / BT_MAX) * 100;
-    document.getElementById('bt-amount').textContent = d.amount;
-    document.getElementById('bt-bar').style.width = pct + '%';
-    document.getElementById('bt-bar').style.background = d.amount > 30 ? 'linear-gradient(90deg,#f5c542,#ffaa00)' : 'linear-gradient(90deg,#ff5a5a,#ff8800)';
-    document.getElementById('inp-bt-hint').textContent = d.amount + ' BrainTokens remaining';
-
-    const rem = Math.max(0, d.resetAt - Date.now());
-    const h = Math.floor(rem/3600000), m = Math.floor((rem%3600000)/60000), s = Math.floor((rem%60000)/1000);
-    const timeStr = h+':'+String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');
-    document.getElementById('bt-timer').textContent = timeStr;
-    document.getElementById('bt-modal-timer').textContent = timeStr;
-
-    if (rem <= 0) {
-      const fresh = { amount: BT_MAX, resetAt: Date.now() + BT_RESET_MS };
-      saveBT(fresh);
-      updateBTUI();
-    }
-  }
-
-  function showBTInfo() {
-    const d = loadBT();
-    if (d.amount < BT_COST) {
-      document.getElementById('bt-overlay').classList.add('show');
-    }
-  }
-
-  // Watch ad placeholder — wire up real ad SDK here
-  window.watchAd = function() {
-    console.log('watchAd() called — integrate real video ad here');
-    // Placeholder: award tokens immediately for now
-    addBT(50);
-    closeModal('bt-overlay');
-    addAIMsg('🎉 You earned +50 BrainTokens! You now have ' + getBT() + ' BrainTokens. Keep studying!');
-  };
-
-  setInterval(updateBTUI, 1000);
-  updateBTUI();
-
-  // ═══════════════════════════════════════════
-  // AI SYSTEM
-  // ═══════════════════════════════════════════
-  const SYSTEM = `You are StudyAI, a friendly and expert AI study assistant for StudyTools.pro.
-
-KEY RULES:
-1. Always respond in the SAME LANGUAGE the user writes in. Spanish → Spanish. French → French. English → English.
-2. Understand typos and informal language perfectly. Never comment on spelling errors.
-3. Be warm, natural and conversational. React naturally to greetings, jokes, emotions.
-4. Remember the full conversation and build on it.
-
-STUDY MODES:
-- Summarize → 3-4 sentence summary + 5 key bullet points
-- Outline → hierarchical structure (main → sub → detail)
-- Practice test → 5 multiple choice questions + explanations
-- Study plan → ask for subjects, exam dates, hours first
-- Flashcards → 8 question/answer pairs
-- Explain like I'm 15 → simple analogies, no jargon
-- Step-by-step → break any problem into numbered steps
-- Quiz → ask one question at a time, wait for answer
-
-FORMAT: Use markdown — bold key terms, bullet lists, headers. Keep responses clear and focused.`;
-
-  let history    = [];
-  let busy       = false;
-  let attached   = null;
-  window._sessionId = 'ses_' + Date.now();
-
-  const MODE_INTROS = {
-    summarize:  'Ready to summarize! Paste your notes or text and I\'ll create a clear summary with key points.',
-    outline:    'Let\'s create an outline! Paste your notes and I\'ll organize them into a visual hierarchy.',
-    test:       'Practice test mode! Paste your study material and I\'ll generate 5 multiple choice questions.',
-    plan:       'I\'ll build a personalized study plan.\n\nTell me:\n1. What subjects do you need to study?\n2. When are your exams?\n3. How many hours per day can you study?',
-    flashcards: 'Flashcard time! Paste your notes and I\'ll create 8 question/answer pairs.',
-    explain:    'What would you like me to explain? Tell me the topic and your course level.',
-    eli15:      'Explain like you\'re 15 mode! Tell me the concept and I\'ll break it down with simple words and analogies.',
-    stepbystep: 'Step-by-step mode! Give me any problem or question and I\'ll walk you through it one step at a time.',
-  };
-
-  const MODE_TITLES = {
-    chat:'StudyTools AI', summarize:'Summarize Notes', outline:'Create Outline',
-    test:'Practice Test', plan:'Study Plan', flashcards:'Flashcard Generator',
-    explain:'Explain', eli15:'Explain Like I\'m 15', stepbystep:'Step-by-Step'
-  };
-
-  async function send() {
-    const ta   = document.getElementById('inp');
-    const text = ta.value.trim();
-    if ((!text && !attached) || busy) return;
-
-    // Check BrainTokens
-    if (!spendBT()) {
-      document.getElementById('bt-overlay').classList.add('show');
-      return;
-    }
-
-    let content = text;
-    if (attached) {
-      content = attached.type === 'image'
-        ? `[Image: ${attached.name}]\n\n${text || 'Analyze this image and help me study it.'}`
-        : `[File: ${attached.name}]\n\nContent:\n${attached.content}\n\n${text || 'Summarize and help me study this.'}`;
-    }
-
-    hideWelcome();
-    ta.value = '';
-    ta.style.height = 'auto';
-    busy = true;
-    document.getElementById('send-btn').disabled = true;
-
-    addUserMsg(text || '📎 ' + attached?.name, attached?.name);
-    history.push({ role: 'user', content });
-    if (window.saveMsg) window.saveMsg('user', content);
-    removeFile();
-
-    const typId = addTyping();
-
-    try {
-      const res = await fetch('/api/chat', {
-        method:  'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body:    JSON.stringify({ messages: history, system: SYSTEM })
-      });
-
-      if (!res.ok) {
-        const err = await res.json().catch(() => ({}));
-        throw new Error(err.error || 'Server error ' + res.status);
-      }
-
-      const data  = await res.json();
-      const reply = data.reply || 'Sorry, I got an empty response. Please try again.';
-
-      removeEl(typId);
-      history.push({ role: 'assistant', content: reply });
-      addAIMsg(reply);
-      if (window.saveMsg) window.saveMsg('assistant', reply);
-
-    } catch (e) {
-      removeEl(typId);
-      addErrMsg(e.message || 'Something went wrong. Please try again.');
-      addBT(BT_COST); // refund on error
-    }
-
-    busy = false;
-    document.getElementById('send-btn').disabled = false;
-    ta.focus();
-  }
-
-  function quick(text) { hideWelcome(); document.getElementById('inp').value = text; send(); }
-
-  // ═══════════════════════════════════════════
-  // FILE HANDLING
-  // ═══════════════════════════════════════════
-  function onFileSelect(e) {
-    const file = e.target.files[0];
-    if (!file) return;
-    e.target.value = '';
-    const reader = new FileReader();
-    if (file.type.startsWith('image/')) {
-      reader.onload = () => { attached = { name:file.name, content:reader.result, type:'image' }; showFilePrev(file.name); };
-      reader.readAsDataURL(file);
-    } else {
-      reader.onload = () => { attached = { name:file.name, content:reader.result, type:'text' }; showFilePrev(file.name); };
-      reader.readAsText(file);
-    }
-  }
-  function showFilePrev(n) { document.getElementById('file-name').textContent='📎 '+n; document.getElementById('file-preview').classList.add('show'); }
-  function removeFile() { attached=null; document.getElementById('file-preview').classList.remove('show'); }
-
-  // ═══════════════════════════════════════════
-  // RENDER
-  // ═══════════════════════════════════════════
-  function addUserMsg(text, fileName) {
-    const msgs = document.getElementById('msgs');
-    const d = document.createElement('div');
-    d.className = 'mrow user';
-    const u = window._fbUser;
-    d.innerHTML = `
-      <div class="mavatar">${u?.photoURL ? `<img src="${u.photoURL}" alt="u"/>` : '👤'}</div>
-      <div class="mbody">
-        <div class="mname">${u?.displayName || 'You'}</div>
-        <div class="bubble">${fileName?`<span style="font-size:.78rem;opacity:.7">📎 ${fileName}</span><br>`:''}${esc(text).replace(/\n/g,'<br>')}</div>
-      </div>`;
-    msgs.appendChild(d);
-    scrollEnd();
-  }
-
-  function addAIMsg(text) {
-    const msgs = document.getElementById('msgs');
-    const d = document.createElement('div');
-    d.className = 'mrow ai';
-    d.innerHTML = `<div class="mavatar">🎓</div><div class="mbody"><div class="mname">StudyAI</div><div class="bubble">${fmt(text)}</div></div>`;
-    msgs.appendChild(d);
-    scrollEnd();
-  }
-
-  function addErrMsg(msg) {
-    const msgs = document.getElementById('msgs');
-    const d = document.createElement('div');
-    d.className = 'mrow ai';
-    d.innerHTML = `<div class="mavatar">🎓</div><div class="mbody"><div class="error-bubble">⚠️ ${esc(msg)}</div></div>`;
-    msgs.appendChild(d);
-    scrollEnd();
-  }
-
-  function addTyping() {
-    const msgs = document.getElementById('msgs');
-    const id = 'typ'+Date.now();
-    const d = document.createElement('div');
-    d.className='mrow ai'; d.id=id;
-    d.innerHTML=`<div class="mavatar">🎓</div><div class="mbody"><div class="mname">StudyAI</div><div class="bubble"><div class="typing"><div class="tdot"></div><div class="tdot"></div><div class="tdot"></div></div></div></div>`;
-    msgs.appendChild(d);
-    scrollEnd();
-    return id;
-  }
-
-  function removeEl(id)  { const e=document.getElementById(id); if(e) e.remove(); }
-  function scrollEnd()   { const m=document.getElementById('msgs'); setTimeout(()=>m.scrollTop=m.scrollHeight,40); }
-  function hideWelcome() { const w=document.getElementById('welcome'); if(w) w.remove(); }
-
-  // ═══════════════════════════════════════════
-  // FORMAT
-  // ═══════════════════════════════════════════
-  function fmt(t) {
-    return esc(t)
-      .replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')
-      .replace(/\*(.+?)\*/g,'<em>$1</em>')
-      .replace(/`(.+?)`/g,'<code>$1</code>')
-      .replace(/^#{1,3} (.+)$/gm,'<h4>$1</h4>')
-      .replace(/^\d+\. (.+)$/gm,'<li>$1</li>')
-      .replace(/^[-•*] (.+)$/gm,'<li>$1</li>')
-      .replace(/(<li>.+<\/li>)+/g,m=>'<ul>'+m+'</ul>')
-      .replace(/^---$/gm,'<hr>')
-      .replace(/\n\n/g,'</p><p>')
-      .replace(/\n/g,'<br>')
-      .replace(/^(?!<[hulo])(.+)$/gm,m=>m.trim()&&!m.startsWith('<')?'<p>'+m+'</p>':m);
-  }
-  function esc(t) { return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
-
-  // ═══════════════════════════════════════════
-  // CONTROLS
-  // ═══════════════════════════════════════════
-  function handleKey(e) { if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();send();} }
-  function autoResize(el) { el.style.height='auto'; el.style.height=Math.min(el.scrollHeight,160)+'px'; }
-
-  function newChat() {
-    history=[]; window._sessionId='ses_'+Date.now(); removeFile();
-    document.getElementById('msgs').innerHTML='';
-    const w=document.createElement('div'); w.className='welcome'; w.id='welcome';
-    w.innerHTML=`<div class="wlc-icon">🎓</div><h1>New chat</h1><p>Ask me anything or paste your notes. I work in any language.</p>`;
-    document.getElementById('msgs').appendChild(w);
-    document.getElementById('tb-title').textContent='StudyTools AI';
-    document.getElementById('inp').focus();
-    document.querySelectorAll('.sb-item').forEach(i=>i.classList.remove('on'));
-    document.querySelector('.sb-item').classList.add('on');
-  }
-
-  function setMode(el, mode) {
-    document.querySelectorAll('.sb-item').forEach(i=>i.classList.remove('on'));
-    el.classList.add('on');
-    document.getElementById('tb-title').textContent = MODE_TITLES[mode]||'StudyTools AI';
-    if (MODE_INTROS[mode]) {
-      history=[]; document.getElementById('msgs').innerHTML='';
-      addAIMsg(MODE_INTROS[mode]);
-      history.push({role:'assistant',content:MODE_INTROS[mode]});
-    }
-    if(window.innerWidth<=680) toggleSidebar();
-    document.getElementById('inp').focus();
-  }
-
-  function toggleSidebar() { document.getElementById('sidebar').classList.toggle('closed'); }
-
-  // ═══════════════════════════════════════════
-  // MODALS
-  // ═══════════════════════════════════════════
-  function openAuthModal()  { document.getElementById('auth-overlay').classList.add('show'); }
-  function closeModal(id)   { document.getElementById(id).classList.remove('show'); }
-  function closeOverlay(id,e){ if(e.target===document.getElementById(id)) closeModal(id); }
-  function showAuthErr(msg) { const el=document.getElementById('auth-err'); el.textContent=msg; el.classList.add('show'); }
-
-  // INIT
-  document.getElementById('inp').focus();
-</script>
-
+  </footer>
 </body>
 </html>

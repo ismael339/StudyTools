@@ -312,19 +312,18 @@ Format your response with:
 Use simple, clear language. Be educational and encouraging.`;
 
     try {
-      const response = await fetch('https://api.anthropic.com/v1/messages', {
+      const response = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          model: 'claude-sonnet-4-20250514',
-          max_tokens: 1000,
           system: systemPrompt,
           messages: [{ role: 'user', content: question }]
         })
       });
 
       const data = await response.json();
-      const text = data.content?.map(b => b.text || '').join('') || 'Sorry, I could not process this question. Please try again.';
+      if (!response.ok) throw new Error(data.error || 'AI service error');
+      const text = data.reply || 'Sorry, I could not process this question. Please try again.';
 
       document.getElementById('loading').classList.remove('show');
       displayResponse(text);

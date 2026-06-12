@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Student concentrating while studying</title>
+  <desc id="desc">A calm study desk with a laptop, notebook, timer and focus checklist.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#eef7ff"/><stop offset="1" stop-color="#f7f2ff"/></linearGradient>
+    <linearGradient id="screen" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#6f7cff"/><stop offset="1" stop-color="#4fd1c5"/></linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect x="96" y="92" width="1008" height="446" rx="24" fill="#ffffff" stroke="#d9e2f1" stroke-width="4"/>
+  <rect x="155" y="145" width="430" height="270" rx="18" fill="#172033"/>
+  <rect x="185" y="176" width="370" height="178" rx="12" fill="url(#screen)"/>
+  <circle cx="370" cy="382" r="13" fill="#eef2ff"/>
+  <rect x="245" y="415" width="250" height="24" rx="12" fill="#cbd5e1"/>
+  <rect x="645" y="148" width="300" height="48" rx="10" fill="#f1f5f9"/>
+  <rect x="645" y="222" width="370" height="22" rx="11" fill="#dbe4f0"/>
+  <rect x="645" y="266" width="315" height="22" rx="11" fill="#dbe4f0"/>
+  <rect x="645" y="310" width="350" height="22" rx="11" fill="#dbe4f0"/>
+  <rect x="645" y="374" width="110" height="110" rx="55" fill="#fff4dc" stroke="#f0a35b" stroke-width="6"/>
+  <path d="M700 405v31l28 18" fill="none" stroke="#2b3448" stroke-width="9" stroke-linecap="round"/>
+  <rect x="802" y="374" width="210" height="34" rx="17" fill="#e8fff9"/>
+  <rect x="802" y="428" width="170" height="34" rx="17" fill="#eef2ff"/>
+  <text x="645" y="126" font-family="Arial, sans-serif" font-size="34" font-weight="800" fill="#172033">Focus study session</text>
+  <text x="802" y="397" font-family="Arial, sans-serif" font-size="20" font-weight="700" fill="#15746c">Phone away</text>
+  <text x="802" y="451" font-family="Arial, sans-serif" font-size="20" font-weight="700" fill="#4d5bd1">One task only</text>
+</svg>

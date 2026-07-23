@@ -1,4 +1,17 @@
 {
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "studytools.pro"
+        }
+      ],
+      "destination": "https://www.studytools.pro/:path*",
+      "statusCode": 301
+    }
+  ],
   "functions": {
     "api/chat.js": {
       "memory": 128,

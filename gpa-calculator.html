@@ -32,7 +32,31 @@
   <meta name="twitter:card" content="summary_large_image" />
 
   <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"WebApplication","name":"GPA Calculator","description":"Free online GPA calculator for college and high school students.","url":"https://www.studytools.pro/gpa-calculator.html","applicationCategory":"EducationalApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"WebApplication",
+        "name":"GPA Calculator",
+        "description":"Free online GPA calculator for college and high school students.",
+        "url":"https://www.studytools.pro/gpa-calculator.html",
+        "applicationCategory":"EducationalApplication",
+        "operatingSystem":"Any",
+        "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
+      },
+      {
+        "@type":"ImageObject",
+        "contentUrl":"https://www.studytools.pro/assets/article-gpa-calculator.svg",
+        "url":"https://www.studytools.pro/assets/article-gpa-calculator.svg",
+        "name":"GPA Calculator Illustration",
+        "description":"Illustration showing a student calculating their GPA using StudyTools",
+        "width":"1200",
+        "height":"630",
+        "author":{"@type":"Organization","name":"StudyTools"},
+        "publisher":{"@type":"Organization","name":"StudyTools","logo":{"@type":"ImageObject","url":"https://www.studytools.pro/favicon.svg"}}
+      }
+    ]
+  }
   </script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />

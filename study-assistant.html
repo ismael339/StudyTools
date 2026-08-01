@@ -19,6 +19,10 @@
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"WebApplication","name":"StudyTools AI Tutor","url":"https://www.studytools.pro/study-assistant.html","description":"Free AI tutor and study assistant for students.","applicationCategory":"EducationalApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
   </script>
+  
+  <!-- Premium Limits System -->
+  <script src="/js/premium-limits.js"></script>
+  <script src="/js/premium-status.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -46,6 +50,7 @@
       <section class="chat" aria-label="AI tutor chat">
         <div class="chat-head"><strong>StudyTools AI Tutor</strong><span class="status" id="status">Ready</span></div>
         <div class="msgs" id="msgs"><div class="msg ai">Hi. I am your StudyTools AI tutor. Ask me a question, paste notes, or tell me what exam you are preparing for.</div></div>
+        <div id="usage-counter"></div>
         <div class="composer"><textarea id="input" placeholder="Ask your AI tutor..." oninput="resizeInput()" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendMsg();}"></textarea><button class="send" id="send" onclick="sendMsg()">Send</button></div>
         <div class="note">Tip: ask for explanations, hints, quizzes or study plans. Do not submit AI text as your own homework.</div>
       </section>
@@ -54,13 +59,72 @@
   <script>
     const messages = [];
     const system = `You are StudyTools AI Tutor, a friendly expert tutor for students. Always answer in the same language as the student. Explain step by step, use simple words, ask a short follow-up when needed, and focus on learning rather than doing homework dishonestly. If the student asks for cheating, turn it into hints, explanations and practice.`;
+    
     function usePrompt(text){ const input=document.getElementById('input'); input.value=text; input.focus(); resizeInput(); }
     function resizeInput(){ const el=document.getElementById('input'); el.style.height='auto'; el.style.height=Math.min(el.scrollHeight,160)+'px'; }
     function addMsg(text,type){ const d=document.createElement('div'); d.className='msg '+type; d.textContent=text; document.getElementById('msgs').appendChild(d); document.getElementById('msgs').scrollTop=document.getElementById('msgs').scrollHeight; }
-    async function sendMsg(){ const input=document.getElementById('input'); const text=input.value.trim(); if(!text) return; input.value=''; resizeInput(); addMsg(text,'user'); messages.push({role:'user',content:text}); document.getElementById('send').disabled=true; document.getElementById('status').textContent='Thinking...';
-      try{ const res=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({system,messages})}); const data=await res.json(); if(!res.ok) throw new Error(data.error||'AI service error'); const reply=data.reply||'I could not answer. Try again.'; messages.push({role:'assistant',content:reply}); addMsg(reply,'ai'); }
+    
+    async function sendMsg(){ 
+      const input=document.getElementById('input'); 
+      const text=input.value.trim(); 
+      
+      if(!text) return; 
+      
+      // Check if user has reached limit
+      if (window.PremiumLimits && window.PremiumLimits.hasReachedLimit('aiTutorMessages')) {
+        window.PremiumLimits.showUpgradePrompt('AI Tutor messages');
+        return;
+      }
+      
+      // Check message length limit
+      const limits = window.PremiumLimits ? window.PremiumLimits.getCurrentLimits() : { aiTutorMaxLength: 500 };
+      if (text.length > limits.aiTutorMaxLength) {
+        addMsg(`Message too long. Maximum ${limits.aiTutorMaxLength} characters. You used ${text.length} characters.`,'err');
+        return;
+      }
+      
+      input.value=''; 
+      resizeInput(); 
+      addMsg(text,'user'); 
+      messages.push({role:'user',content:text}); 
+      document.getElementById('send').disabled=true; 
+      document.getElementById('status').textContent='Thinking...';
+      
+      try{ 
+        const res=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({system,messages})}); 
+        const data=await res.json(); 
+        if(!res.ok) throw new Error(data.error||'AI service error'); 
+        const reply=data.reply||'I could not answer. Try again.'; 
+        messages.push({role:'assistant',content:reply}); 
+        addMsg(reply,'ai');
+        
+        // Increment usage after successful message
+        if (window.PremiumLimits) {
+          window.PremiumLimits.incrementUsage('aiTutorMessages');
+          updateUsageCounter();
+        }
+      }
       catch(e){ addMsg('Error: '+(e.message||'Please try again.'),'err'); }
-      document.getElementById('send').disabled=false; document.getElementById('status').textContent='Ready'; input.focus(); }
+      document.getElementById('send').disabled=false; 
+      document.getElementById('status').textContent='Ready'; 
+      input.focus(); 
+    }
+    
+    // Update usage counter display
+    function updateUsageCounter() {
+      if (window.PremiumLimits) {
+        const counter = document.getElementById('usage-counter');
+        if (counter) {
+          window.PremiumLimits.showUsageCounter('aiTutorMessages', counter);
+        }
+      }
+    }
+    
+    // Initialize usage counter when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+      // Wait for premium limits to load
+      setTimeout(updateUsageCounter, 100);
+    });
   </script>
 </body>
 </html>

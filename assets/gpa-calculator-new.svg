@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="gpaGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#6f7cff"/>
+      <stop offset="100%" style="stop-color:#4fd1c5"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="630" fill="#090a10"/>
+  
+  <!-- Decorative Elements -->
+  <circle cx="100" cy="100" r="80" fill="url(#gpaGradient)" opacity="0.1"/>
+  <circle cx="1100" cy="530" r="120" fill="url(#gpaGradient)" opacity="0.08"/>
+  
+  <!-- Main Content -->
+  <text x="600" y="250" text-anchor="middle" font-family="Arial, sans-serif" font-size="64" font-weight="bold" fill="#f4f6fb">GPA Calculator</text>
+  <text x="600" y="300" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" fill="#a6aec3">Calculate Your Grade Point Average</text>
+  
+  <!-- Calculator Icon -->
+  <g transform="translate(520, 360)">
+    <rect x="0" y="0" width="160" height="200" rx="12" fill="#111421" stroke="#6f7cff" stroke-width="3"/>
+    <text x="80" y="50" text-anchor="middle" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#4fd1c5">4.0</text>
+    <text x="80" y="90" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#a6aec3">A = 4.0</text>
+    <text x="80" y="130" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#a6aec3">B = 3.0</text>
+    <text x="80" y="170" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#a6aec3">C = 2.0</text>
+  </g>
+  
+  <!-- Features -->
+  <g transform="translate(200, 420)">
+    <circle cx="20" cy="20" r="8" fill="#4fd1c5"/>
+    <text x="40" y="28" font-family="Arial, sans-serif" font-size="16" fill="#f4f6fb">Cumulative GPA</text>
+  </g>
+  <g transform="translate(200, 460)">
+    <circle cx="20" cy="20" r="8" fill="#4fd1c5"/>
+    <text x="40" y="28" font-family="Arial, sans-serif" font-size="16" fill="#f4f4f6fb">Weighted GPA</text>
+  </g>
+  <g transform="translate(500, 420)">
+    <circle cx="20" col="20" r="8" fill="#6f7cff"/>
+    <text x="40" y="28" font-family="Arial, sans-serif" font-size="16" fill="#f4f6fb">Free & Instant</text>
+  </g>
+  <g transform="translate(500, 460)">
+    <circle cx="20" cy="20" r="8" fill="#6f7cff"/>
+    <text x="40" y="28" font-family="Arial, sans-serif" font-size="16" fill="#f4f6fb">No Sign-up</text>
+  </g>
+  
+  <!-- Branding -->
+  <text x="600" y="580" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#a6aec3">StudyTools • StudyHelper • StudeTools</text>
+</svg>

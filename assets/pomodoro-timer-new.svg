@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="pomodoroGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#6f7cff"/>
+      <stop offset="100%" style="stop-color:#4fd1c5"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="630" fill="#090a10"/>
+  
+  <!-- Decorative Elements -->
+  <circle cx="120" cy="100" r="90" fill="url(#pomodoroGradient)" opacity="0.1"/>
+  <circle cx="1080" cy="520" r="110" fill="url(#pomodoroGradient)" opacity="0.08"/>
+  
+  <!-- Main Content -->
+  <text x="600" y="250" text-anchor="middle" font-family="Arial, sans-serif" font-size="64" font-weight="bold" fill="#f4f6fb">Pomodoro Timer</text>
+  <text x="600" y="300" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" fill="#a6aec3">25-Minute Focus Sessions for Better Studying</text>
+  
+  <!-- Timer Icon -->
+  <g transform="translate(500, 360)">
+    <circle cx="100" cy="80" r="70" fill="none" stroke="#6f7cff" stroke-width="4"/>
+    <circle cx="100" cy="80" r="60" fill="none" stroke="#4fd1c5" stroke-width="8" stroke-dasharray="377" stroke-dashoffset="94"/>
+    <text x="100" y="95" text-anchor="middle" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="#f4f6fb">25</text>
+    <text x="100" y="130" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#a6aec3">Minutes</text>
+    <text x="100" y="160" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#4fd1c5">Focus Time</text>
+  </g>
+  
+  <!-- Features -->
+  <g transform="translate(200, 420)">
+    <circle cx="20" cy="20" r="8" fill="#4fd1c5"/>
+    <text x="40" y="28" font-family="Arial, sans-serif" font-size="16" fill="#f4f6fb">Customizable Intervals</text>
+  </g>
+  <g transform="translate(200, 460)">
+    <circle cx="20" cy="20" r="8" fill="#4fd1c5"/>
+    <text x="40" y="28" font-family="Arial, sans-serif" font-size="16" fill="#f4f6fb">Sound Alerts</text>
+  </g>
+  <g transform="translate(500, 420)">
+    <circle cx="20" cy="20" r="8" fill="#6f7cff"/>
+    <text x="40" y="28" font-family="Arial, sans-serif" font-size="16" fill="#f4f6fb">Session Counter</text>
+  </g>
+  <g transform="translate(500, 460)">
+    <circle cx="20" cy="20" r="8" fill="#6f7cff"/>
+    <text x="40" y="28" font-family="Arial, sans-serif" font-size="16" fill="#f4f6fb">Break Timer</text>
+  </g>
+  
+  <!-- Branding -->
+  <text x="600" y="580" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#a6aec3">StudyTools • StudyHelper • StudeTools</text>
+</svg>

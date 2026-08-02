@@ -16,9 +16,9 @@
   <url>
     <loc>https://www.studytools.pro/gpa-calculator.html</loc>
     <image:image>
-      <image:loc>https://www.studytools.pro/assets/article-gpa-calculator.svg</image:loc>
+      <image:loc>https://www.studytools.pro/assets/gpa-calculator-new.svg</image:loc>
       <image:title>GPA Calculator - Calculate Your Grade Point Average</image:title>
-      <image:caption>Free online GPA calculator for high school and college students</image:caption>
+      <image:caption>Free online GPA calculator for high school and college students - StudyTools, StudyHelper, StudeTools</image:caption>
     </image:image>
   </url>
 
@@ -26,9 +26,9 @@
   <url>
     <loc>https://www.studytools.pro/grade-calculator.html</loc>
     <image:image>
-      <image:loc>https://www.studytools.pro/assets/article-final-grade.svg</image:loc>
+      <image:loc>https://www.studytools.pro/assets/grade-calculator-new.svg</image:loc>
       <image:title>Grade Calculator - What Grade Do I Need on My Final?</image:title>
-      <image:caption>Calculate what score you need on your final exam to pass or get an A</image:caption>
+      <image:caption>Calculate what score you need on your final exam to pass or get an A - StudyTools, StudyHelper, StudeTools</image:caption>
     </image:image>
   </url>
 
@@ -36,9 +36,9 @@
   <url>
     <loc>https://www.studytools.pro/pomodoro-timer.html</loc>
     <image:image>
-      <image:loc>https://www.studytools.pro/assets/article-pomodoro.svg</image:loc>
+      <image:loc>https://www.studytools.pro/assets/pomodoro-timer-new.svg</image:loc>
       <image:title>Pomodoro Timer - Free Online Study Timer</image:title>
-      <image:caption>25-minute focus sessions with breaks for effective studying</image:caption>
+      <image:caption>25-minute focus sessions with breaks for effective studying - StudyTools, StudyHelper, StudeTools</image:caption>
     </image:image>
   </url>
 
@@ -66,9 +66,9 @@
   <url>
     <loc>https://www.studytools.pro/word-counter.html</loc>
     <image:image>
-      <image:loc>https://www.studytools.pro/assets/article-essay-fast.svg</image:loc>
+      <image:loc>https://www.studytools.pro/assets/word-counter-new.svg</image:loc>
       <image:title>Word Counter - Count Words and Characters Online</image:title>
-      <image:caption>Free online word counter for essays and text analysis</image:caption>
+      <image:caption>Free online word counter for essays and text analysis - StudyTools, StudyHelper, StudeTools</image:caption>
     </image:image>
   </url>
 
@@ -199,6 +199,16 @@
       <image:loc>https://www.studytools.pro/assets/article-study-math.svg</image:loc>
       <image:title>How to Study Math Effectively</image:title>
       <image:caption>Math study techniques and problem-solving strategies</image:caption>
+    </image:image>
+  </url>
+
+  <!-- How to Study for a Math Test -->
+  <url>
+    <loc>https://www.studytools.pro/how-to-study-for-a-math-test.html</loc>
+    <image:image>
+      <image:loc>https://www.studytools.pro/assets/article-study-math.svg</image:loc>
+      <image:title>How to Study for a Math Test and Get an A</image:title>
+      <image:caption>Proven strategies for studying for math tests and exam preparation - StudyTools, StudyHelper, StudeTools</image:caption>
     </image:image>
   </url>
 

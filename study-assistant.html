@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AI Tutor for Students - Free Study Assistant | StudyTools</title>
-  <meta name="description" content="Free AI tutor for students. Ask homework questions, explain difficult topics, create quizzes, get study plans and learn step by step with StudyTools AI." />
-  <meta name="keywords" content="AI tutor, free AI tutor for students, AI study assistant, AI homework helper, ask AI tutor, study AI, homework explanation, exam tutor" />
+  <title>AI Tutor for Students - Free Study Assistant | StudyTools, StudyHelper</title>
+  <meta name="description" content="Free AI tutor for students. Ask homework questions, explain difficult topics, create quizzes, get study plans and learn step by step with StudyTools AI. StudyTools, StudyHelper, StudeTools - your AI study assistant." />
+  <meta name="keywords" content="AI tutor, free AI tutor for students, AI study assistant, AI homework helper, ask AI tutor, study AI, homework explanation, exam tutor, study helper, studyhelper, stude tools, studetools, study assistant, homework helper, academic AI, student AI, learning AI, study tools, studytools, educational AI, tutoring AI, math help, science help, homework answers, study chat, AI chatbot" />
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
   <link rel="canonical" href="https://www.studytools.pro/study-assistant.html" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -50,7 +50,6 @@
       <section class="chat" aria-label="AI tutor chat">
         <div class="chat-head"><strong>StudyTools AI Tutor</strong><span class="status" id="status">Ready</span></div>
         <div class="msgs" id="msgs"><div class="msg ai">Hi. I am your StudyTools AI tutor. Ask me a question, paste notes, or tell me what exam you are preparing for.</div></div>
-        <div id="usage-counter"></div>
         <div class="composer"><textarea id="input" placeholder="Ask your AI tutor..." oninput="resizeInput()" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendMsg();}"></textarea><button class="send" id="send" onclick="sendMsg()">Send</button></div>
         <div class="note">Tip: ask for explanations, hints, quizzes or study plans. Do not submit AI text as your own homework.</div>
       </section>
@@ -70,19 +69,6 @@
       
       if(!text) return; 
       
-      // Check if user has reached limit
-      if (window.PremiumLimits && window.PremiumLimits.hasReachedLimit('aiTutorMessages')) {
-        window.PremiumLimits.showUpgradePrompt('AI Tutor messages');
-        return;
-      }
-      
-      // Check message length limit
-      const limits = window.PremiumLimits ? window.PremiumLimits.getCurrentLimits() : { aiTutorMaxLength: 500 };
-      if (text.length > limits.aiTutorMaxLength) {
-        addMsg(`Message too long. Maximum ${limits.aiTutorMaxLength} characters. You used ${text.length} characters.`,'err');
-        return;
-      }
-      
       input.value=''; 
       resizeInput(); 
       addMsg(text,'user'); 
@@ -97,12 +83,6 @@
         const reply=data.reply||'I could not answer. Try again.'; 
         messages.push({role:'assistant',content:reply}); 
         addMsg(reply,'ai');
-        
-        // Increment usage after successful message
-        if (window.PremiumLimits) {
-          window.PremiumLimits.incrementUsage('aiTutorMessages');
-          updateUsageCounter();
-        }
       }
       catch(e){ addMsg('Error: '+(e.message||'Please try again.'),'err'); }
       document.getElementById('send').disabled=false; 
@@ -120,11 +100,6 @@
       }
     }
     
-    // Initialize usage counter when page loads
-    document.addEventListener('DOMContentLoaded', function() {
-      // Wait for premium limits to load
-      setTimeout(updateUsageCounter, 100);
-    });
   </script>
 </body>
 </html>

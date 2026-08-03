@@ -144,6 +144,44 @@
       border: 1px solid transparent;
     }
 
+    /* Dropdown Menu Styles - SEO Friendly */
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+    .dropdown-toggle {
+      display: inline-block;
+      position: relative;
+    }
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      min-width: 200px;
+      z-index: 1000;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+    .dropdown:hover .dropdown-menu {
+      display: block;
+    }
+    .dropdown-menu a {
+      display: block;
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+      border-radius: 0;
+      font-size: 0.9rem;
+    }
+    .dropdown-menu a:last-child {
+      border-bottom: none;
+    }
+    .dropdown-menu a:hover {
+      background: rgba(255,255,255,0.05);
+    }
+
     .hero {
       padding: clamp(42px, 8vw, 92px) 0 42px;
       display: grid;
@@ -471,9 +509,20 @@
     <div class="wrap nav-inner">
       <a class="brand" href="/" aria-label="StudyTools home"><span class="mark">S</span><span>StudyTools</span></a>
       <div class="nav-links">
-        <a href="#tools">Tools</a>
+        <div class="dropdown">
+          <a href="#tools" class="dropdown-toggle">Tools ▼</a>
+          <div class="dropdown-menu">
+            <a href="gpa-calculator.html">GPA Calculator</a>
+            <a href="grade-calculator.html">Grade Calculator</a>
+            <a href="pomodoro-timer.html">Pomodoro Timer</a>
+            <a href="word-counter.html">Word Counter</a>
+            <a href="study-assistant.html">AI Tutor</a>
+            <a href="flashcard-maker.html">Flashcard Maker</a>
+            <a href="citation-generator.html">Citation Generator</a>
+            <a href="study-schedule.html">Study Schedule</a>
+          </div>
+        </div>
         <a href="#pricing">Pricing</a>
-        <a href="study-assistant.html">AI Tutor</a>
         <a href="blog.html">Blog</a>
         <a href="study-assistant.html" class="nav-cta">Ask AI Tutor</a>
       </div>

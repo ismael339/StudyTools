@@ -51,51 +51,16 @@
       }
     },
 
-    // Add login button to navigation
+    // Add login button to navigation (disabled - all features are now free)
     addLoginButton: function() {
-      const currentUser = this.getCurrentUser();
-      const navLinks = document.querySelector('.nav-links');
-      
-      if (!navLinks) return;
-
-      // Remove existing login/logout button if any
-      const existingAuthBtn = document.querySelector('.auth-button');
-      if (existingAuthBtn) existingAuthBtn.remove();
-
-      const authBtn = document.createElement('a');
-      authBtn.className = 'auth-button';
-      
-      if (currentUser) {
-        authBtn.textContent = 'Logout';
-        authBtn.href = '#';
-        authBtn.onclick = (e) => {
-          e.preventDefault();
-          this.logout();
-        };
-      } else {
-        authBtn.textContent = 'Login';
-        authBtn.href = '/auth.html';
-      }
-
-      authBtn.style.cssText = `
-        color: var(--muted);
-        font-size: 0.9rem;
-        font-weight: 700;
-        padding: 9px 12px;
-        border-radius: 8px;
-        margin-left: 8px;
-      `;
-      authBtn.onmouseover = function() { this.style.color = 'var(--text)'; this.style.background = 'rgba(255,255,255,0.06)'; };
-      authBtn.onmouseout = function() { this.style.color = 'var(--muted)'; this.style.background = 'transparent'; };
-
-      navLinks.appendChild(authBtn);
+      // Login system removed - all features are now free
+      return;
     },
 
-    // Logout user
+    // Logout user (disabled - all features are now free)
     logout: function() {
-      localStorage.removeItem('studytools_current_user');
-      // Keep subscription data as it's tied to PayPal, not session
-      window.location.href = '/';
+      // Login system removed - all features are now free
+      return;
     },
 
     // Lock premium features

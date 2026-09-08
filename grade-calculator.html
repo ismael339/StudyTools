@@ -90,6 +90,38 @@
               "@type":"Answer",
               "text":"If your syllabus doesn't specify, ask your professor. Common final exam weights are 20%, 25%, or 30%. If all assignments count equally, divide 100% by the total number of assignments to get each one's weight."
             }
+          },
+          {
+            "@type":"Question",
+            "name":"What do I need on my final to pass with a 60?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"Use the same formula with 60% as the target. If you are at 55% and the final is worth 25%, you need (0.60 - 0.55 x 0.75) / 0.25 = 78% to pass. The lower your current grade and the smaller the final's weight, the higher that number climbs."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"Can I still get an A in this class?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"Enter 90% (or your school's A cut-off) as the target grade. If the calculator returns a number at or below 100%, an A is still mathematically possible. If it returns more than 100%, it is not, and your study time is better spent on another course."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"Does a dropped lowest score change the calculation?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"Yes. If your syllabus drops the lowest quiz, exclude that score from the current-grade tab and redistribute the weight across the remaining quizzes. Forgetting this usually makes your current grade look one to three points worse than it really is."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"How do I convert my percentage to a letter grade?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"The common US scale is A 90-100%, B 80-89%, C 70-79%, D 60-69% and F below 60%, with plus and minus bands at the three-point boundaries. Your syllabus overrides this, since rounding policies differ by course."
+            }
           }
         ]
       },
@@ -197,7 +229,7 @@
     .faq-q::after{content:'+';font-size:1.2rem;color:var(--accent);transition:transform .2s}
     .faq-item.open .faq-q::after{transform:rotate(45deg)}
     .faq-a{font-size:.9rem;color:var(--muted);max-height:0;overflow:hidden;transition:max-height .3s ease,padding .3s}
-    .faq-item.open .faq-a{max-height:220px;padding-top:.75rem}
+    .faq-item.open .faq-a{max-height:600px;padding-top:.75rem}
 
     .content-section{margin-top:3rem}
     .content-section h2{font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:700;margin-bottom:1rem;letter-spacing:-.02em}
@@ -349,26 +381,76 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="faq-q" onclick="toggleFAQ(this)">What if my final has no set weight?</div>
       <div class="faq-a">If your syllabus doesn't specify, ask your professor. Common final exam weights are 20%, 25%, or 30%. If all assignments count equally, divide 100% by the total number of assignments to get each one's weight.</div>
     </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFAQ(this)">What do I need on my final to pass with a 60?</div>
+      <div class="faq-a">Use the same formula with 60% as the target. If you are sitting at 55% and the final is worth 25%, you need (0.60 − 0.55 × 0.75) ÷ 0.25 = 78% to pass. The lower your current grade and the smaller the final's weight, the higher that number climbs — which is exactly why it is worth checking in week ten rather than the night before.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFAQ(this)">Can I still get an A in this class?</div>
+      <div class="faq-a">Enter 90% (or your school's A cut-off) as the target grade. If the calculator returns a number at or below 100%, an A is still mathematically possible. If it returns more than 100%, it is not — lower the target to the next reachable grade and aim your remaining study time at the courses where the effort still changes the outcome.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFAQ(this)">Does a dropped lowest score change the calculation?</div>
+      <div class="faq-a">Yes, and it is one of the most common sources of error. If your syllabus drops the lowest quiz, exclude that score from the current-grade tab and redistribute the weight across the quizzes that remain. Forgetting to do this usually makes your current grade look one to three points worse than it really is.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFAQ(this)">How do I convert my percentage to a letter grade?</div>
+      <div class="faq-a">The common US scale is A 90–100%, B 80–89%, C 70–79%, D 60–69% and F below 60%, with plus and minus bands at the three-point boundaries. Your syllabus overrides this: some courses round, some do not, and a 89.5% can be a B+ or an A− depending on the policy printed on page one.</div>
+    </div>
   </div>
 
   <div class="content-section">
-    <h2>Why Use Our Grade Calculator?</h2>
-    <p>Our grade calculator helps students plan their final exam strategy with precision. Instead of guessing or worrying about what score you need, get an exact calculation based on your current performance and course requirements.</p>
-    
-    <h3>Key Features:</h3>
+    <h2>What Grade Do I Need on My Final? The Complete Guide</h2>
+    <p>Two weeks before finals, almost every student asks the same question in some form: <em>what do I need on the final to keep my grade?</em> It is a good question, because the answer changes how you should spend the next fortnight. A course where you need 62% to hold a B does not deserve the same hours as the course where you need 94% to avoid a C. The calculator above turns the anxiety into a number; this guide explains where the number comes from, how to avoid the three mistakes that make it wrong, and what to do once you have it.</p>
+
+    <h3>The formula behind the calculator</h3>
+    <p>Every weighted course works the same way. Your final grade is the sum of each component's score multiplied by its weight. Rearranged to solve for the score you still need:</p>
+    <p><strong>Required final score = (Target − Current grade × (1 − Final weight)) ÷ Final weight</strong></p>
+    <p>Everything is expressed as decimals or consistent percentages. "Current grade" is your average across everything graded so far, and "final weight" is the slice of the course the final exam is worth according to the syllabus — not according to how important it feels.</p>
+
+    <h3>Worked example</h3>
+    <p>You are sitting on 82% in a course. The final is worth 30%. You want to finish with 88% for an A−.</p>
     <ul>
-      <li><strong>Final Exam Calculator:</strong> Determine exactly what score you need on your final to achieve your target grade</li>
-      <li><strong>Current Grade Calculator:</strong> Track your weighted average across all assignments and tests</li>
-      <li><strong>Letter Grade Conversion:</strong> Understand how percentages translate to letter grades</li>
-      <li><strong>Instant Results:</strong> Get immediate feedback without complex manual calculations</li>
-      <li><strong>Academic Planning:</strong> Make informed decisions about studying and course priorities</li>
+      <li>Points already locked in: 0.82 × 0.70 = 0.574, or 57.4 points of the final 100.</li>
+      <li>Points still needed: 0.88 − 0.574 = 0.306.</li>
+      <li>Required score on the final: 0.306 ÷ 0.30 = <strong>102%</strong>.</li>
+    </ul>
+    <p>Which means the A− is gone unless there is extra credit. Run it again for an 85% target and the required score drops to 92% — hard but real. Run it for a B (80%) and you need 75%, which is comfortably below your current average. In sixty seconds you have learned that this course needs a solid, unspectacular effort, and that the hours you were about to spend chasing an impossible A− belong in a different class.</p>
+
+    <h3>How to work out your current grade first</h3>
+    <p>The required-score formula is only as accurate as the current grade you feed it, and your learning-management system's running total is frequently misleading: it often ignores unsubmitted work, or counts categories that are not yet complete. Use the <strong>Current Grade</strong> tab above to rebuild it properly:</p>
+    <ol>
+      <li>Open the syllabus and list every category with its weight — homework 20%, quizzes 20%, midterm 30%, final 30%.</li>
+      <li>Average your scores within each category, in percent.</li>
+      <li>Enter each category average with its weight. The calculator returns the weighted average of the work completed so far.</li>
+      <li>If a category is unfinished (three of five quizzes taken), average only what exists — do not enter zeros for work that has not happened yet, or your current grade will read far lower than it is.</li>
+    </ol>
+
+    <h3>Common mistakes and how to avoid them</h3>
+    <ul>
+      <li><strong>Counting zeros for ungraded work.</strong> The single biggest cause of panic. Unsubmitted and simply-not-yet-marked are different things.</li>
+      <li><strong>Ignoring dropped scores.</strong> If the lowest quiz is dropped, remove it before averaging. Students routinely underestimate their grade by two or three points here.</li>
+      <li><strong>Mixing points and percentages.</strong> 45 out of 50 is 90%, not 45%. Convert everything to percentages before entering it.</li>
+      <li><strong>Using the wrong final weight.</strong> "Final exam 25%, cumulative" and "final exam 25% of the exam category" mean very different things. Read the syllabus sentence, not the heading.</li>
+      <li><strong>Forgetting attendance and participation.</strong> They are often 5–10% and almost always full marks, which quietly raises your real current grade.</li>
+      <li><strong>Aiming at the exact cut-off.</strong> If you need 90% for an A, plan for 93%. Exams have a bad-question tax, and rounding policies rarely work in your favour.</li>
     </ul>
 
-    <h3>How to Use the Final Exam Calculator</h3>
-    <p>Simply enter your current grade in the class, the weight of your final exam (as a percentage), and your target grade. The calculator will instantly tell you the minimum score you need on the final to reach your goal. This helps you focus your study efforts where they matter most.</p>
-    
-    <h3>Tips for Final Exam Success</h3>
-    <p>Once you know what score you need, create a targeted study plan. Focus on areas where you can gain the most points, practice with past exams, and don't hesitate to ask your professor for clarification on difficult topics. Remember that consistent preparation often yields better results than last-minute cramming.</p>
+    <h3>Advanced tactics once you know your number</h3>
+    <p><strong>Rank your courses by marginal value.</strong> Run the calculator for every class, then sort by how much a grade boundary is actually at risk. The class where you need 91% and the class where you need 55% should not receive the same weekend.</p>
+    <p><strong>Work backwards from the exam date.</strong> Put the required score at the top of a plan and schedule backwards from it with the <a href="/study-schedule.html">study schedule maker</a>. A target with no calendar attached is a wish.</p>
+    <p><strong>Practise retrieval, not rereading.</strong> Convert the topics that carry the most exam marks into questions using the <a href="/flashcard-maker.html">flashcard maker</a>, and drill them in short timed rounds in <a href="/play.html">PLAY</a>. Thirty seconds of forced recall tells you more about your readiness than an hour of highlighting.</p>
+    <p><strong>Protect the sessions.</strong> Use the <a href="/pomodoro-timer.html">Pomodoro timer</a> so that "three hours of revision" is genuinely three hours, not three hours with a phone in it.</p>
+    <p><strong>Ask about extra credit before the last week.</strong> If the calculator says you need 103%, the conversation with your instructor is worth having immediately — while options still exist.</p>
+    <p><strong>Check the GPA impact.</strong> A B instead of an A− in a four-credit course moves your average more than most students expect. Run it through the <a href="/gpa-calculator.html">GPA calculator</a> so you are trading grades deliberately rather than by accident.</p>
+
+    <h3>How this compares with the alternatives</h3>
+    <p><strong>Versus your LMS grade page:</strong> Canvas or Blackboard shows where you stand; it does not tell you what you need. Its "what-if" features, where they exist, are usually buried and frequently mis-handle unfinished categories.</p>
+    <p><strong>Versus a spreadsheet:</strong> perfectly accurate if you build it right, but rebuilding the weighted formula for five courses every term is exactly the friction that stops people from checking at all.</p>
+    <p><strong>Versus other final grade calculators:</strong> most compute the same formula. The differences here are that the current-grade and required-score tabs live on one page, nothing needs an account, and the calculation runs in your browser rather than on someone's server.</p>
+
+    <h3>What to do next</h3>
+    <p>You have the number. Turn it into a plan: schedule the revision on the <a href="/study-schedule.html">study planner</a>, build cards for the heaviest topics in the <a href="/flashcard-maker.html">flashcard maker</a>, drill them in <a href="/play.html">PLAY</a>, and ask the <a href="/study-assistant.html">AI tutor</a> about anything on the syllabus you could not explain out loud to a classmate. When the exam is over, use the <a href="/gpa-calculator.html">GPA calculator</a> to see where the term landed.</p>
     
     <p class="keywords">Also known as: final grade calculator, what grade do I need, final exam calculator, exam score calculator, grade needed calculator, test score calculator, academic planning, study tools, studytools, study helper, studyhelper, stude tools, studetools, student tools, school tools, homework calculator, grade predictor, grade estimator, passing grade calculator, target grade calculator.</p>
   </div>

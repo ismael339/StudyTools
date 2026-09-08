@@ -12,6 +12,9 @@
       "statusCode": 301
     }
   ],
+  "rewrites": [
+    { "source": "/play", "destination": "/play.html" }
+  ],
   "functions": {
     "api/chat.js": {
       "memory": 128,

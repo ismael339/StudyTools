@@ -59,6 +59,9 @@
     .nav-logo span{width:8px;height:8px;background:var(--accent2);border-radius:50%;display:inline-block;animation:pulse 2s infinite}
     .nav-back{color:var(--muted);text-decoration:none;font-size:.875rem;transition:color .2s}
     .nav-back:hover{color:var(--text)}
+    .nav-play-link{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,#00f5d4,#3ad0ff);color:#06070d;text-decoration:none;font-weight:900;font-size:.85rem;letter-spacing:.04em;padding:8px 14px;border-radius:999px;animation:play-pulse 2.2s infinite}
+    @keyframes play-pulse{0%{box-shadow:0 0 0 0 rgba(0,245,212,.5)}70%{box-shadow:0 0 0 12px rgba(0,245,212,0)}100%{box-shadow:0 0 0 0 rgba(0,245,212,0)}}
+    @media(prefers-reduced-motion:reduce){.nav-play-link{animation:none}}
 
     .page-wrap{max-width:960px;margin:0 auto;padding:clamp(2rem,5vw,4rem) clamp(1.5rem,4vw,3rem)}
     .breadcrumb{font-size:.8rem;color:var(--muted);margin-bottom:1rem}
@@ -171,7 +174,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <nav>
   <a href="/" class="nav-logo"><span></span> StudyTools</a>
-  <a href="/" class="nav-back">← All Tools</a>
+  <div style="display:flex;align-items:center;gap:14px">
+    <a href="/play.html" class="nav-play-link">🎮 PLAY</a>
+    <a href="/" class="nav-back">← All Tools</a>
+  </div>
 </nav>
 
 <div class="page-wrap">
@@ -246,7 +252,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
     <div class="faq-item">
       <div class="faq-q" onclick="toggleFAQ(this)">Are my flashcards saved?</div>
-      <div class="faq-a">Your cards are kept in memory while the tab is open. They are not saved to a server. To keep your deck, don't close the tab while studying. We're working on local save functionality for a future update.</div>
+      <div class="faq-a">Your deck is saved automatically in your browser, so it is still there when you come back on the same device. Nothing is uploaded to a server. Your saved deck is also playable in <a href="/play.html" style="color:inherit;text-decoration:underline">Flashcard Battle</a>.</div>
     </div>
   </div>
 </div>
@@ -264,7 +270,26 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </footer>
 
 <script>
-  let deck = [];
+  const DECK_KEY = 'studytools_flashcard_deck';
+
+  function loadDeck() {
+    try {
+      const saved = JSON.parse(localStorage.getItem(DECK_KEY) || '[]');
+      return Array.isArray(saved) ? saved.filter(c => c && c.front && c.back) : [];
+    } catch (error) {
+      return [];
+    }
+  }
+
+  function saveDeck() {
+    try {
+      localStorage.setItem(DECK_KEY, JSON.stringify(deck));
+    } catch (error) {
+      /* storage unavailable, deck stays in memory for this tab */
+    }
+  }
+
+  let deck = loadDeck();
   let studyDeck = [];
   let currentIdx = 0;
   let isFlipped = false;
@@ -277,6 +302,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     const back = document.getElementById('inp-back').value.trim();
     if (!front || !back) { alert('Please fill in both sides of the card.'); return; }
     deck.push({ front, back });
+    saveDeck();
     document.getElementById('inp-front').value = '';
     document.getElementById('inp-back').value = '';
     document.getElementById('inp-front').focus();
@@ -301,6 +327,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   function deleteCard(i) {
     deck.splice(i, 1);
+    saveDeck();
     renderDeck();
     updateStudyArea();
   }
@@ -408,8 +435,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   function toggleFAQ(el) { el.parentElement.classList.toggle('open'); }
 
+  renderDeck();
 </script>
 
 
+<script src="/js/play-banner.js"></script>
 </body>
 </html>

@@ -10,6 +10,7 @@
       free: {
         aiTutorMessages: 10,      // 10 messages per day
         aiTutorMaxLength: 500,    // 500 characters max per message
+        playGames: 3,             // 3 PLAY games per day
         advancedCalculations: false,
         exportFeatures: false,
         prioritySupport: false
@@ -17,6 +18,7 @@
       premium: {
         aiTutorMessages: 100,     // 100 messages per day
         aiTutorMaxLength: 2000,   // 2000 characters max per message
+        playGames: Infinity,      // unlimited PLAY games
         advancedCalculations: true,
         exportFeatures: true,
         prioritySupport: true
@@ -92,6 +94,10 @@
       if (feature === 'aiTutorMessages') {
         return currentUsage >= limits.aiTutorMessages;
       }
+
+      if (feature === 'playGames') {
+        return currentUsage >= limits.playGames;
+      }
       
       return false;
     },
@@ -103,6 +109,10 @@
       
       if (feature === 'aiTutorMessages') {
         return Math.max(0, limits.aiTutorMessages - currentUsage);
+      }
+
+      if (feature === 'playGames') {
+        return Math.max(0, limits.playGames - currentUsage);
       }
       
       return Infinity;
@@ -126,8 +136,11 @@
 
     // Show premium upgrade prompt
     showUpgradePrompt: function(feature) {
-      const message = `You've reached your ${feature} limit for today. Upgrade to Pro for unlimited access.`;
-      
+      this.showPremiumModal(`You've reached your ${feature} limit for today. Upgrade to Pro for unlimited access.`);
+    },
+
+    // Show the premium modal with a custom message
+    showPremiumModal: function(message) {
       // Create modal
       const modal = document.createElement('div');
       modal.style.cssText = `

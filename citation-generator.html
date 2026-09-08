@@ -41,6 +41,55 @@
   {"@context":"https://schema.org","@type":"WebApplication","name":"Citation Generator","description":"Free online citation generator for APA, MLA and Chicago styles.","url":"https://www.studytools.pro/citation-generator.html","applicationCategory":"EducationalApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
   </script>
 
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"How do I cite a website in APA 7th edition?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Author, A. A. (Year, Month Day). Title of page in sentence case. Site Name. URL. If there is no author, start with the title. If there is no date, use (n.d.). Do not add a retrieval date unless the page is designed to change, such as a live statistics dashboard."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"What is the difference between APA, MLA and Chicago?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"APA is author-date and dominates psychology, education and the social sciences. MLA is author-page and dominates literature and the humanities. Chicago offers notes-and-bibliography, favoured in history, and an author-date system used in some sciences. The style is set by your department, not by preference."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"Do I need a citation for something I put in my own words?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Yes. Paraphrasing changes the wording, not the ownership of the idea. Cite the source for any fact, statistic, argument or interpretation that is not common knowledge, even when no quotation marks appear."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"How do I cite a source with no author or no date?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"With no author, move the title into the author position and use a shortened title in the in-text citation. With no date, use (n.d.) in APA and Chicago. Before doing either, check the page footer, the About page and the article byline, since the information is often present but not obvious."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"How do I cite ChatGPT or another AI tool?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"APA 7 treats it as software: OpenAI. (2024). ChatGPT (version) [Large language model]. URL. Many institutions require you to include the prompt in an appendix, and some prohibit AI-assisted work outright, so check your assessment policy before citing it."
+        }
+      }
+    ]
+  }
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
@@ -59,6 +108,9 @@
     .nav-logo span{width:8px;height:8px;background:var(--accent);border-radius:50%;display:inline-block;animation:pulse 2s infinite}
     .nav-back{color:var(--muted);text-decoration:none;font-size:.875rem;transition:color .2s}
     .nav-back:hover{color:var(--text)}
+    .nav-play-link{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,#00f5d4,#3ad0ff);color:#06070d;text-decoration:none;font-weight:900;font-size:.85rem;letter-spacing:.04em;padding:8px 14px;border-radius:999px;animation:play-pulse 2.2s infinite}
+    @keyframes play-pulse{0%{box-shadow:0 0 0 0 rgba(0,245,212,.5)}70%{box-shadow:0 0 0 12px rgba(0,245,212,0)}100%{box-shadow:0 0 0 0 rgba(0,245,212,0)}}
+    @media(prefers-reduced-motion:reduce){.nav-play-link{animation:none}}
 
     .page-wrap{max-width:900px;margin:0 auto;padding:clamp(2rem,5vw,4rem) clamp(1.5rem,4vw,3rem)}
     .breadcrumb{font-size:.8rem;color:var(--muted);margin-bottom:1rem}
@@ -131,7 +183,19 @@
     .faq-q::after{content:'+';font-size:1.2rem;color:var(--accent);transition:transform .2s}
     .faq-item.open .faq-q::after{transform:rotate(45deg)}
     .faq-a{font-size:.9rem;color:var(--muted);max-height:0;overflow:hidden;transition:max-height .3s ease,padding .3s}
-    .faq-item.open .faq-a{max-height:220px;padding-top:.75rem}
+    .faq-item.open .faq-a{max-height:600px;padding-top:.75rem}
+
+    .content-section{margin-top:3rem}
+    .content-section h2{font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:700;margin-bottom:1rem;letter-spacing:-.02em}
+    .content-section h3{font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:600;margin:2rem 0 .75rem;letter-spacing:-.02em}
+    .content-section p{color:var(--muted);font-size:.95rem;line-height:1.7;margin-bottom:1rem}
+    .content-section ul,.content-section ol{margin:1rem 0;padding-left:1.5rem;color:var(--muted);font-size:.95rem;line-height:1.7}
+    .content-section li{margin-bottom:.5rem}
+    .content-section code{background:var(--input-bg);border:1px solid var(--border);border-radius:6px;padding:.1rem .35rem;font-size:.85rem;color:var(--text)}
+    .content-section a{color:var(--accent)}
+    .content-section table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.9rem}
+    .content-section th,.content-section td{border-bottom:1px solid var(--border);padding:.6rem .5rem;text-align:left;color:var(--muted)}
+    .content-section th{color:var(--text);font-weight:600}
 
     footer{border-top:1px solid var(--border);padding:2.5rem clamp(1.5rem,5vw,4rem);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
     .footer-logo{font-family:'Syne',sans-serif;font-weight:800;color:var(--text)}
@@ -152,7 +216,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <nav>
   <a href="/" class="nav-logo"><span></span> StudyTools</a>
-  <a href="/" class="nav-back">← All Tools</a>
+  <div style="display:flex;align-items:center;gap:14px">
+    <a href="/play.html" class="nav-play-link">🎮 PLAY</a>
+    <a href="/" class="nav-back">← All Tools</a>
+  </div>
 </nav>
 
 <div class="page-wrap">
@@ -234,6 +301,80 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="faq-q" onclick="toggleFAQ(this)">What if some information is missing?</div>
       <div class="faq-a">Leave blank fields empty — the generator will skip them. APA uses "n.d." for no date, and skips the author field if unknown. Always try to find missing information directly on the source before leaving it blank.</div>
     </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFAQ(this)">Do I need a citation if I put it in my own words?</div>
+      <div class="faq-a">Yes. Paraphrasing changes the wording, not the ownership of the idea. Any fact, statistic, argument or interpretation that is not common knowledge needs a citation, even without quotation marks. The rule of thumb: if you learned it from a source rather than knowing it already, cite it.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFAQ(this)">How do I cite ChatGPT or another AI tool?</div>
+      <div class="faq-a">APA 7 treats it as software: OpenAI. (2024). <em>ChatGPT</em> (version) [Large language model]. URL. Many departments also ask you to put the exact prompt in an appendix, and some prohibit AI-assisted work entirely — read your assessment policy before you cite it.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFAQ(this)">What is the difference between a reference list and a bibliography?</div>
+      <div class="faq-a">A reference list contains only the sources you actually cited in the text — that is what APA and MLA require. A bibliography can include background reading you consulted but never cited, which is common in Chicago notes-and-bibliography style. Mixing them up is a quick way to lose formatting marks.</div>
+    </div>
+  </div>
+
+  <div class="content-section">
+    <h2>How to Cite Sources in APA, MLA and Chicago (Without Losing Marks)</h2>
+    <p>Citations are the easiest marks on any assignment and the ones students lose most often. The rules are mechanical: a fixed order of elements, a fixed punctuation pattern, a fixed way of pointing from the sentence in your text to the entry in your reference list. Nothing about it requires thought — which is precisely why it is worth automating with the generator above and spending the saved hour on the argument instead. This guide explains what the generator produces, so you can check its output rather than trust it blindly.</p>
+
+    <h3>How to use the generator</h3>
+    <ol>
+      <li><strong>Pick your style</strong> — APA 7, MLA 9 or Chicago 17. If you are not sure, the assignment brief or module handbook says so; ask before guessing, because converting an entire reference list at midnight is miserable.</li>
+      <li><strong>Pick the source type</strong> — book, journal article, website. This is what determines which elements are required and in what order.</li>
+      <li><strong>Fill in what you have.</strong> Leave unknown fields blank; the generator omits them and applies the correct no-author/no-date convention.</li>
+      <li><strong>Copy the formatted citation</strong> into your reference list, and use the matching in-text form in the sentence itself.</li>
+      <li><strong>Save as you go.</strong> Citations you generate stay in the saved list on this page, so you can collect sources while you read and export the whole list at the end.</li>
+    </ol>
+
+    <h3>The three styles at a glance</h3>
+    <table>
+      <thead><tr><th>Style</th><th>Used in</th><th>In-text</th><th>List title</th></tr></thead>
+      <tbody>
+        <tr><td>APA 7</td><td>Psychology, education, social sciences, nursing</td><td>(Smith, 2023) or (Smith, 2023, p. 14)</td><td>References</td></tr>
+        <tr><td>MLA 9</td><td>Literature, languages, cultural studies, humanities</td><td>(Smith 14)</td><td>Works Cited</td></tr>
+        <tr><td>Chicago 17</td><td>History, art history, some business schools</td><td>Footnote <sup>1</sup> or (Smith 2023, 14)</td><td>Bibliography</td></tr>
+      </tbody>
+    </table>
+    <p>The differences look small and are not: APA uses sentence case for article titles and initials for first names, MLA uses title case and full first names, and Chicago's notes system puts the full detail in a footnote the first time a source appears. Getting this consistently right by hand across thirty sources is where the hour disappears.</p>
+
+    <h3>Worked examples</h3>
+    <p><strong>A book, all three ways:</strong></p>
+    <ul>
+      <li><strong>APA:</strong> <code>Kahneman, D. (2011). Thinking, fast and slow. Farrar, Straus and Giroux.</code></li>
+      <li><strong>MLA:</strong> <code>Kahneman, Daniel. Thinking, Fast and Slow. Farrar, Straus and Giroux, 2011.</code></li>
+      <li><strong>Chicago (bibliography):</strong> <code>Kahneman, Daniel. Thinking, Fast and Slow. New York: Farrar, Straus and Giroux, 2011.</code></li>
+    </ul>
+    <p><strong>A journal article in APA:</strong> <code>Roediger, H. L., &amp; Karpicke, J. D. (2006). Test-enhanced learning. Psychological Science, 17(3), 249–255. https://doi.org/10.1111/j.1467-9280.2006.01693.x</code> — note the volume in italics, the issue in brackets, and the DOI as a full link with no full stop after it.</p>
+    <p><strong>A website with no author in MLA:</strong> <code>"How to Study Effectively." StudyTools, 2026, www.studytools.pro.</code> The title moves into the author slot, and the in-text citation becomes a shortened version of that title.</p>
+
+    <h3>Common mistakes and how to avoid them</h3>
+    <ul>
+      <li><strong>Mixing styles in one document.</strong> Half-APA, half-MLA is the single most common formatting penalty. Pick one and run a find-check on the pattern before submitting.</li>
+      <li><strong>Citing the database instead of the source.</strong> JSTOR and ProQuest are where you found the article, not who published it. Cite the journal.</li>
+      <li><strong>Missing page numbers on direct quotes.</strong> APA and MLA both require them for quotations; leaving them out edges towards a plagiarism flag rather than a formatting slip.</li>
+      <li><strong>Broken alphabetical order.</strong> Reference lists are ordered by author surname, not by the order you cited them. Sort once at the end.</li>
+      <li><strong>Uncited paraphrase.</strong> Rewording still requires a citation. Only genuinely common knowledge is exempt.</li>
+      <li><strong>Sources in the list that never appear in the text.</strong> In APA and MLA every entry must be cited somewhere. Reading list ≠ reference list.</li>
+      <li><strong>Blind trust in any generator, including this one.</strong> Automated tools reproduce whatever metadata you give them. Check capitalisation, italics and the author order against the source once before you submit.</li>
+    </ul>
+
+    <h3>Advanced tips</h3>
+    <p><strong>Cite while you read, not after you write.</strong> Generate and save the entry the moment you use a source. Reconstructing twenty references from browser history at 2 a.m. is how details get invented.</p>
+    <p><strong>Copy the DOI, not the search URL.</strong> A DOI is permanent; a session URL from a library proxy breaks within days and looks careless.</p>
+    <p><strong>Keep a one-line note with each saved citation</strong> — what the source argues and which of your points it supports. It turns a reference list into an outline.</p>
+    <p><strong>Check your word count rules.</strong> Reference lists are usually excluded from the limit but in-text citations usually are not; the <a href="/word-counter.html">word counter</a> lets you check the body text on its own.</p>
+    <p><strong>Timebox the formatting.</strong> Citations are a mechanical task, so give them one 25-minute block with the <a href="/pomodoro-timer.html">Pomodoro timer</a> rather than letting them leak across the evening.</p>
+    <p><strong>Ask when a source is unusual.</strong> Podcasts, lecture slides, datasets and interviews all have specific patterns; the <a href="/study-assistant.html">AI tutor</a> can walk you through the elements, and your library's style guide is the final authority.</p>
+
+    <h3>How this compares with the alternatives</h3>
+    <p><strong>Versus Zotero or Mendeley:</strong> reference managers are better for a dissertation with a hundred sources and Word integration. They are heavy for a 1,500-word essay with six sources, which is exactly the job this page does in two minutes with no install.</p>
+    <p><strong>Versus Word's built-in citation tool:</strong> convenient, but its style templates lag behind edition updates and it hides the formatting from you, which makes errors hard to spot.</p>
+    <p><strong>Versus other online citation generators:</strong> most upsell a subscription, wrap the output in adverts or require an account to save anything. This generator is free, needs no sign-up, saves your list locally in your browser, and never sends your sources anywhere.</p>
+
+    <h3>What to do next</h3>
+    <p>References formatted? Check the body length against the brief with the <a href="/word-counter.html">word counter</a>, plan the remaining deadlines with the <a href="/study-schedule.html">study schedule maker</a>, and once the essay is submitted, turn the topic into revision material with the <a href="/flashcard-maker.html">flashcard maker</a> and drill it in <a href="/play.html">PLAY</a>. Tracking the grade this assignment needs? Use the <a href="/grade-calculator.html">grade calculator</a>.</p>
   </div>
 </div>
 
@@ -460,5 +601,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </script>
 
 
+<script src="/js/play-banner.js"></script>
 </body>
 </html>

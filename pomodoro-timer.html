@@ -90,6 +90,38 @@
               "@type":"Answer",
               "text":"Francesco Cirillo named it after a tomato-shaped kitchen timer he used as a university student (pomodoro means tomato in Italian). The original timer happened to be set for 25 minutes, which became the standard focus interval for the technique."
             }
+          },
+          {
+            "@type":"Question",
+            "name":"Is 25 or 50 minutes better for studying?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"Use 25/5 when the work is unpleasant or you are procrastinating, because the low commitment is what gets you started. Use 50/10 for work with a long warm-up such as essay writing, coding or problem sets, where stopping at 25 minutes interrupts you mid-thought."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"How many pomodoros should I do in a day?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"Eight to twelve genuinely focused 25-minute blocks is a full, sustainable study day, which is four to five hours of real work. Four to six is a solid weekday alongside classes. If you are aiming for sixteen, you are counting time rather than attention."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"What should I do during the 5-minute break?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"Stand up, move, drink water, look out of a window. Avoid anything with an infinite feed: five minutes on social media routinely becomes twenty-five, and it does not rest the same attention system you have just been using."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"What if I get interrupted during a pomodoro?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"If it can wait, write it down and deal with it in the break. If it cannot, stop the timer and void the pomodoro, because an interrupted block does not count. Tracking voided blocks for a week shows you what is really costing you study time."
+            }
           }
         ]
       }
@@ -115,6 +147,9 @@
     .nav-logo span{width:8px;height:8px;background:var(--accent);border-radius:50%;display:inline-block;animation:pulse 2s infinite}
     .nav-back{color:var(--muted);text-decoration:none;font-size:.875rem;transition:color .2s}
     .nav-back:hover{color:var(--text)}
+    .nav-play-link{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,#00f5d4,#3ad0ff);color:#06070d;text-decoration:none;font-weight:900;font-size:.85rem;letter-spacing:.04em;padding:8px 14px;border-radius:999px;animation:play-pulse 2.2s infinite}
+    @keyframes play-pulse{0%{box-shadow:0 0 0 0 rgba(0,245,212,.5)}70%{box-shadow:0 0 0 12px rgba(0,245,212,0)}100%{box-shadow:0 0 0 0 rgba(0,245,212,0)}}
+    @media(prefers-reduced-motion:reduce){.nav-play-link{animation:none}}
 
     .page-wrap{max-width:800px;margin:0 auto;padding:clamp(2rem,5vw,4rem) clamp(1.5rem,4vw,3rem)}
     .breadcrumb{font-size:.8rem;color:var(--muted);margin-bottom:1rem}
@@ -194,7 +229,18 @@
     .faq-q::after{content:'+';font-size:1.2rem;color:var(--accent);transition:transform .2s}
     .faq-item.open .faq-q::after{transform:rotate(45deg)}
     .faq-a{font-size:.9rem;color:var(--muted);max-height:0;overflow:hidden;transition:max-height .3s ease,padding .3s}
-    .faq-item.open .faq-a{max-height:200px;padding-top:.75rem}
+    .faq-item.open .faq-a{max-height:600px;padding-top:.75rem}
+
+    .content-section{margin-top:3rem}
+    .content-section h2{font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:700;margin-bottom:1rem;letter-spacing:-.02em}
+    .content-section h3{font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:600;margin:2rem 0 .75rem;letter-spacing:-.02em}
+    .content-section p{color:var(--muted);font-size:.95rem;line-height:1.7;margin-bottom:1rem}
+    .content-section ul,.content-section ol{margin:1rem 0;padding-left:1.5rem;color:var(--muted);font-size:.95rem;line-height:1.7}
+    .content-section li{margin-bottom:.5rem}
+    .content-section a{color:var(--accent)}
+    .content-section table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.9rem}
+    .content-section th,.content-section td{border-bottom:1px solid var(--border);padding:.6rem .5rem;text-align:left;color:var(--muted)}
+    .content-section th{color:var(--text);font-weight:600}
 
     footer{border-top:1px solid var(--border);padding:2.5rem clamp(1.5rem,5vw,4rem);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
     .footer-logo{font-family:'Syne',sans-serif;font-weight:800;color:var(--text)}
@@ -215,7 +261,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <nav>
   <a href="/" class="nav-logo"><span></span> StudyTools</a>
-  <a href="/" class="nav-back">← All Tools</a>
+  <div style="display:flex;align-items:center;gap:14px">
+    <a href="/play.html" class="nav-play-link">🎮 PLAY</a>
+    <a href="/" class="nav-back">← All Tools</a>
+  </div>
 </nav>
 
 <div class="page-wrap">
@@ -325,6 +374,78 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="faq-q" onclick="toggleFAQ(this)">Why is it called Pomodoro?</div>
       <div class="faq-a">Francesco Cirillo named it after a tomato-shaped kitchen timer he used as a university student ("pomodoro" means tomato in Italian). The original timer happened to be set for 25 minutes, which became the standard focus interval for the technique.</div>
     </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFAQ(this)">Is 25 or 50 minutes better for studying?</div>
+      <div class="faq-a">Use 25/5 when the work is unpleasant or you are procrastinating — the low commitment is what gets you started. Use 50/10 for work with a long warm-up, such as essay writing, coding or problem sets, where stopping at 25 minutes interrupts you mid-thought. Most students end up using both, depending on the task.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFAQ(this)">How many pomodoros should I do in a day?</div>
+      <div class="faq-a">Eight to twelve genuinely focused 25-minute blocks is a full, sustainable day of study — that is four to five hours of real work, which is more than most people manage. Four to six is a solid weekday alongside classes. If you are aiming for sixteen, you are counting time rather than attention.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFAQ(this)">What should I do during the 5-minute break?</div>
+      <div class="faq-a">Stand up, move, drink water, look out of a window. Avoid anything with an infinite feed: five minutes on social media routinely becomes twenty-five, and it does not rest the same attention system you have just been using. The break exists to reset focus, not to entertain you.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFAQ(this)">What if I get interrupted mid-pomodoro?</div>
+      <div class="faq-a">Cirillo's rule: if it can wait, write it on a scrap of paper and deal with it in the break. If it cannot, stop the timer and void the pomodoro — an interrupted block does not count. Tracking voided blocks for a week is the fastest way to discover what is actually destroying your study time.</div>
+    </div>
+  </div>
+
+  <div class="content-section">
+    <h2>The Pomodoro Technique for Students: A Practical Guide</h2>
+    <p>Most study advice fails because it asks you to want to study. The Pomodoro Technique works because it asks for something much smaller: twenty-five minutes. You set a timer, you work on one thing until it rings, you take five minutes off, and you repeat. That is the entire method, and it survives contact with real students because starting is the hard part and a 25-minute commitment is small enough to start.</p>
+    <p>Francesco Cirillo developed it in the late 1980s with a tomato-shaped kitchen timer. What has kept it in use since is not the number 25 — it is the structure: a fixed unit of attention, a visible countdown, and a break you have earned rather than drifted into.</p>
+
+    <h3>How to run a session with the timer above</h3>
+    <ol>
+      <li><strong>Choose one task, specifically.</strong> "Study biology" is not a task. "Make cards for chapter 4" is. Vague intentions are how a 25-minute block becomes 25 minutes of reorganising folders.</li>
+      <li><strong>Start the timer and remove the phone.</strong> Not face-down — in another room, or at least in a drawer. Proximity alone measurably costs attention.</li>
+      <li><strong>Work until it rings.</strong> If a distracting thought arrives, write it down and keep going. The list is dealt with in the break.</li>
+      <li><strong>Take the full five minutes, and actually leave the chair.</strong> Skipping breaks is the most common way people burn out of this method by day three.</li>
+      <li><strong>After four blocks, take fifteen to thirty minutes.</strong> The long break is where consolidation happens; it is not optional.</li>
+    </ol>
+
+    <h3>Choosing your interval</h3>
+    <table>
+      <thead><tr><th>Pattern</th><th>Best for</th><th>Why it works</th></tr></thead>
+      <tbody>
+        <tr><td>25 / 5</td><td>Reading, flashcards, problem sets, procrastinated tasks</td><td>Low barrier to starting; frequent breaks keep recall sharp</td></tr>
+        <tr><td>50 / 10</td><td>Essays, coding, lab reports, past papers</td><td>Long enough to reach depth without an interruption mid-argument</td></tr>
+        <tr><td>90 / 20</td><td>Dissertation work, full mock exams</td><td>Matches natural ultradian attention cycles for experienced students</td></tr>
+        <tr><td>15 / 3</td><td>Very low motivation, ADHD-friendly starts, revision fatigue</td><td>Small enough that refusing feels absurd — momentum does the rest</td></tr>
+      </tbody>
+    </table>
+    <p>Adjust these in the settings panel above. The rule that matters is not the length but the ratio: roughly five parts work to one part rest, with a longer break after every three or four blocks.</p>
+
+    <h3>What a real study evening looks like</h3>
+    <p>Two exams in nine days, three hours available tonight. A workable plan: block one, 25 minutes making cards from the biology chapter you understand least. Block two, 25 minutes testing yourself on those cards — not rereading them. Long break. Block three, 50 minutes of past-paper questions under something close to exam conditions. Block four, 25 minutes marking your own answers and writing down every mistake. That is roughly two and a half hours of work that leaves evidence behind: a deck, a set of answers, and a list of gaps. Compare it with "revise biology for three hours", which typically produces a highlighted textbook and no way of knowing whether anything stuck.</p>
+
+    <h3>Common mistakes and how to avoid them</h3>
+    <ul>
+      <li><strong>Skipping breaks because you are "in flow".</strong> Occasionally justified; usually it is how you end up unable to work at all tomorrow. If you genuinely are mid-flow, finish the thought and take the break late — do not delete it.</li>
+      <li><strong>Filling breaks with the phone.</strong> Social media does not rest attention; it consumes it. Movement and water do.</li>
+      <li><strong>Starting without deciding what "done" means.</strong> Define the outcome before you start the timer, or the block quietly turns into browsing.</li>
+      <li><strong>Multitasking inside a block.</strong> One block, one task. Replying to a message inside a pomodoro voids it, by design.</li>
+      <li><strong>Counting blocks instead of results.</strong> Six pomodoros of rereading beats zero, but loses badly to three pomodoros of self-testing. The timer manages your attention; it does not choose your method.</li>
+      <li><strong>Applying it to the wrong work.</strong> Some tasks — a three-hour lab, a mock exam — need to run uninterrupted. Use the timer for the preparation, not the performance.</li>
+    </ul>
+
+    <h3>Advanced tips</h3>
+    <p><strong>Plan tomorrow in blocks, not hours.</strong> "Six pomodoros: two chemistry, two maths, two essay" is a plan you can execute and check. Build the week around it with the <a href="/study-schedule.html">study schedule maker</a>.</p>
+    <p><strong>Make the first block of the day the one you are avoiding.</strong> Whatever you dread survives all day unless it is scheduled first.</p>
+    <p><strong>Pair blocks with retrieval practice.</strong> The technique that gets you sitting down works best with the technique that makes studying effective. Build cards with the <a href="/flashcard-maker.html">flashcard maker</a>, then spend the last five minutes of each block drilling them in <a href="/play.html">PLAY</a> — a 30-second timed round is a genuinely useful way to end a session, and it is the part students actually look forward to.</p>
+    <p><strong>Log voided pomodoros for one week.</strong> The pattern in what interrupts you — flatmates, notifications, hunger — is usually fixable once you can see it.</p>
+    <p><strong>Keep a distraction list beside you.</strong> Every intrusive thought goes on paper and is handled in the break. This single habit is what makes 25 uninterrupted minutes possible.</p>
+    <p><strong>End each block by writing the next one.</strong> Twenty seconds spent naming the next task removes the restart cost entirely.</p>
+
+    <h3>How this compares with the alternatives</h3>
+    <p><strong>Versus time-blocking your calendar:</strong> calendar blocks decide when you work; pomodoros decide how you work inside that time. They complement each other — schedule the evening, then run it in blocks.</p>
+    <p><strong>Versus "just study until you are done":</strong> open-ended sessions feel virtuous and reliably decay after the first hour. Fixed blocks with real breaks hold quality far longer.</p>
+    <p><strong>Versus paid focus apps:</strong> Forest, Focus To-Do and similar apps add streaks, statistics and gamification. Useful for some people; unnecessary for most. This timer runs in the browser, is customisable, needs no account and costs nothing.</p>
+
+    <h3>What to do next</h3>
+    <p>Set your interval above and start the first block. When it rings, spend the break planning the next one — the <a href="/study-schedule.html">study schedule maker</a> turns tonight's blocks into a term plan, the <a href="/flashcard-maker.html">flashcard maker</a> turns your notes into something you can test yourself on, and <a href="/play.html">PLAY</a> makes that testing fast enough to do daily. If you are working towards a specific grade, the <a href="/grade-calculator.html">grade calculator</a> tells you exactly which course deserves tomorrow's blocks.</p>
   </div>
 </div>
 
@@ -491,5 +612,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <script src="/js/premium-limits.js"></script>
 <script src="/js/premium-status.js"></script>
 
+<script src="/js/play-banner.js"></script>
 </body>
 </html>

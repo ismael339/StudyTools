@@ -41,6 +41,55 @@
   {"@context":"https://schema.org","@type":"WebApplication","name":"Flashcard Maker","description":"Free online flashcard maker for students.","url":"https://www.studytools.pro/flashcard-maker.html","applicationCategory":"EducationalApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
   </script>
 
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"How do flashcards help you study?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Flashcards work through active recall: instead of rereading notes, you force your brain to retrieve the answer, which strengthens the memory far more than recognition does. Combined with spaced repetition, reviewing the cards you get wrong more often, flashcards are one of the most evidence-backed study methods available."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"How many flashcards should I make per topic?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Aim for 20 to 40 cards per lecture or textbook chapter. Fewer than 20 usually means you are cramming several ideas onto one card, and more than 60 usually means you are copying the text instead of selecting what matters. One testable idea per card is the standard to hold."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"How long does it take to memorize 100 flashcards?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"With spaced repetition, most students reach reliable recall of 100 simple cards in about five to seven short sessions spread over one to two weeks, roughly 15 to 20 minutes a day. Cramming the same 100 cards in one evening produces recall that mostly disappears within 48 hours."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"Are digital flashcards better than paper ones?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Digital cards are faster to make, impossible to lose and easy to shuffle or turn into a timed game. Paper cards add a small handwriting benefit and no distractions. What matters far more than the format is whether you actually answer before flipping."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"Are my flashcards saved?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Your deck is saved automatically in your browser, so it is still there when you return on the same device. Nothing is uploaded to a server, and no account is required."
+        }
+      }
+    ]
+  }
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
@@ -59,6 +108,9 @@
     .nav-logo span{width:8px;height:8px;background:var(--accent2);border-radius:50%;display:inline-block;animation:pulse 2s infinite}
     .nav-back{color:var(--muted);text-decoration:none;font-size:.875rem;transition:color .2s}
     .nav-back:hover{color:var(--text)}
+    .nav-play-link{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,#00f5d4,#3ad0ff);color:#06070d;text-decoration:none;font-weight:900;font-size:.85rem;letter-spacing:.04em;padding:8px 14px;border-radius:999px;animation:play-pulse 2.2s infinite}
+    @keyframes play-pulse{0%{box-shadow:0 0 0 0 rgba(0,245,212,.5)}70%{box-shadow:0 0 0 12px rgba(0,245,212,0)}100%{box-shadow:0 0 0 0 rgba(0,245,212,0)}}
+    @media(prefers-reduced-motion:reduce){.nav-play-link{animation:none}}
 
     .page-wrap{max-width:960px;margin:0 auto;padding:clamp(2rem,5vw,4rem) clamp(1.5rem,4vw,3rem)}
     .breadcrumb{font-size:.8rem;color:var(--muted);margin-bottom:1rem}
@@ -150,7 +202,18 @@
     .faq-q::after{content:'+';font-size:1.2rem;color:var(--accent);transition:transform .2s}
     .faq-item.open .faq-q::after{transform:rotate(45deg)}
     .faq-a{font-size:.9rem;color:var(--muted);max-height:0;overflow:hidden;transition:max-height .3s ease,padding .3s}
-    .faq-item.open .faq-a{max-height:200px;padding-top:.75rem}
+    .faq-item.open .faq-a{max-height:600px;padding-top:.75rem}
+
+    .content-section{margin-top:3rem}
+    .content-section h2{font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:700;margin-bottom:1rem;letter-spacing:-.02em}
+    .content-section h3{font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:600;margin:2rem 0 .75rem;letter-spacing:-.02em}
+    .content-section p{color:var(--muted);font-size:.95rem;line-height:1.7;margin-bottom:1rem}
+    .content-section ul,.content-section ol{margin:1rem 0;padding-left:1.5rem;color:var(--muted);font-size:.95rem;line-height:1.7}
+    .content-section li{margin-bottom:.5rem}
+    .content-section a{color:var(--accent)}
+    .content-section table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.9rem}
+    .content-section th,.content-section td{border-bottom:1px solid var(--border);padding:.6rem .5rem;text-align:left;color:var(--muted)}
+    .content-section th{color:var(--text);font-weight:600}
 
     footer{border-top:1px solid var(--border);padding:2.5rem clamp(1.5rem,5vw,4rem);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
     .footer-logo{font-family:'Syne',sans-serif;font-weight:800;color:var(--text)}
@@ -171,7 +234,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <nav>
   <a href="/" class="nav-logo"><span></span> StudyTools</a>
-  <a href="/" class="nav-back">← All Tools</a>
+  <div style="display:flex;align-items:center;gap:14px">
+    <a href="/play.html" class="nav-play-link">🎮 PLAY</a>
+    <a href="/" class="nav-back">← All Tools</a>
+  </div>
 </nav>
 
 <div class="page-wrap">
@@ -246,8 +312,86 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
     <div class="faq-item">
       <div class="faq-q" onclick="toggleFAQ(this)">Are my flashcards saved?</div>
-      <div class="faq-a">Your cards are kept in memory while the tab is open. They are not saved to a server. To keep your deck, don't close the tab while studying. We're working on local save functionality for a future update.</div>
+      <div class="faq-a">Your deck is saved automatically in your browser, so it is still there when you come back on the same device. Nothing is uploaded to a server. Your saved deck is also playable in <a href="/play.html" style="color:inherit;text-decoration:underline">Flashcard Battle</a>.</div>
     </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFAQ(this)">How many flashcards should I make per topic?</div>
+      <div class="faq-a">Twenty to forty cards per lecture or textbook chapter is the usual sweet spot. Below twenty you are probably cramming several ideas onto one card; above sixty you are copying the text instead of selecting what matters. One testable idea per card is the standard to hold yourself to.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFAQ(this)">How long does it take to memorize 100 flashcards?</div>
+      <div class="faq-a">With spaced repetition, most students reach reliable recall of 100 simple cards in five to seven short sessions across one or two weeks — about 15–20 minutes a day. The same 100 cards crammed in one evening will feel learned that night and be largely gone within 48 hours.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFAQ(this)">Are digital flashcards better than paper ones?</div>
+      <div class="faq-a">Digital cards are faster to make, impossible to lose, easy to shuffle and can be turned into a timed game. Paper adds a small handwriting benefit and zero distractions. Either beats the other by a mile if you answer out loud before flipping — and loses if you do not.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFAQ(this)">Can I use flashcards for maths and formulas?</div>
+      <div class="faq-a">Yes, but change what goes on the front. Instead of "Quadratic formula → x = (−b ± √(b²−4ac)) / 2a", put a small worked problem on the front and the solved steps on the back. Memorising a formula you cannot apply under time pressure earns no marks.</div>
+    </div>
+  </div>
+
+  <div class="content-section">
+    <h2>How to Make Flashcards That Actually Work</h2>
+    <p>Flashcards are the most misused study tool in existence. Most students make a hundred of them, flip through the stack twice, recognise every answer, feel prepared, and then blank in the exam. The cards were not the problem — the way they were written and reviewed was. This guide covers what to put on a card, how many to make, how to review them so the material actually sticks, and the specific mistakes that turn an hour of card-making into wasted time.</p>
+    <p>The underlying principle is <strong>active recall</strong>: retrieving an answer from memory strengthens that memory far more than seeing it again does. Rereading a chapter feels productive because it feels easy. Answering a question before you flip feels harder — and that difficulty is exactly what makes it work. Decades of cognitive-psychology research on the testing effect point in the same direction: students who self-test outperform students who reread, even when the rereaders spend more total time.</p>
+
+    <h3>How to use this flashcard maker</h3>
+    <ol>
+      <li><strong>Type the question on the front and the answer on the back.</strong> Front should be a genuine prompt, not a topic heading.</li>
+      <li><strong>Add cards as you read.</strong> Making cards while working through a chapter forces you to decide what is testable, which is half the learning.</li>
+      <li><strong>Study the deck.</strong> Say your answer out loud <em>before</em> flipping. If you flip first, you are reading, not recalling.</li>
+      <li><strong>Be honest about misses.</strong> "I nearly had it" is a miss. Nearly does not score marks.</li>
+      <li><strong>Come back tomorrow.</strong> Your deck is saved in your browser, so the same cards are waiting. Spacing the reviews is where the memory is built.</li>
+      <li><strong>Turn it into a game.</strong> Your saved deck feeds straight into <a href="/play.html">Flashcard Battle in PLAY</a> — a 30-second timed round with scoring and streaks, which is the easiest way to make daily review something you actually do.</li>
+    </ol>
+
+    <h3>What makes a good card (and a bad one)</h3>
+    <table>
+      <thead><tr><th>Bad card</th><th>Better card</th><th>Why</th></tr></thead>
+      <tbody>
+        <tr><td>Front: "Mitochondria"</td><td>Front: "What process happens in the mitochondria, and what does it produce?"</td><td>A topic is not a question; a question forces retrieval</td></tr>
+        <tr><td>Front: "French Revolution" / Back: five paragraphs</td><td>Five cards, one cause each</td><td>You cannot half-know a five-paragraph card, so it never gets marked as learned</td></tr>
+        <tr><td>Front: "Ecosystem = ?"</td><td>Front: "Give an example of an ecosystem and name two abiotic factors in it"</td><td>Application beats definition, and exams test application</td></tr>
+        <tr><td>Front: "Newton's second law"</td><td>Front: "A 4 kg mass accelerates at 3 m/s². What force is acting?"</td><td>Solving beats reciting for anything quantitative</td></tr>
+      </tbody>
+    </table>
+    <p>The single best test of a card: could you answer it correctly while knowing almost nothing about the topic? If yes — because the answer is obvious from the wording, or because it is always "true" — rewrite it.</p>
+
+    <h3>A practical example: one biology chapter</h3>
+    <p>Say you have a chapter on cellular respiration and an exam in ten days. Read it once with the card maker open. Every time the text states something you could be asked about, make a card: "Where does glycolysis take place?", "How many ATP does glycolysis net produce?", "Why does the Krebs cycle stop without oxygen?". That is roughly 30 cards for a dense chapter.</p>
+    <p>Then review on a schedule, not on a mood: day 1 all 30 cards, day 2 only the ones you missed plus a sample of the rest, day 4 the whole deck again, day 7 the whole deck, day 10 the misses. Total time invested: under two hours. Compare it with three hours of highlighting, which produces a colourful chapter and no evidence you know anything.</p>
+    <p>For language vocabulary the same structure applies, with one addition: make cards in both directions. Recognising "le bâtiment" means building is easy; producing "bâtiment" when prompted with "building" is what you need in a writing exam.</p>
+
+    <h3>Common mistakes and how to avoid them</h3>
+    <ul>
+      <li><strong>Flipping too early.</strong> The three seconds of struggle before the answer arrives is the entire mechanism. Wait them out.</li>
+      <li><strong>Cards that are copied sentences.</strong> If the back has more than about 20 words, split the card.</li>
+      <li><strong>Only reviewing the deck in the order you made it.</strong> You end up learning the sequence, not the content. Shuffle — or use the timed random rounds in <a href="/play.html">PLAY</a>.</li>
+      <li><strong>Dropping cards as soon as you get them right once.</strong> One correct answer is not learning; it is a coin flip you happened to win. Retire a card after three correct recalls on three different days.</li>
+      <li><strong>Making the entire deck the night before.</strong> Card-making is not studying. If cards and exam are the same night, you have bought yourself a well-organised panic.</li>
+      <li><strong>Ignoring the cards you hate.</strong> The cards you keep skipping are precisely the material that will appear in the exam. Start each session with the five you got wrong last time.</li>
+      <li><strong>Studying with the answers visible.</strong> Recognition feels like knowledge and is not. Cover, answer, then check.</li>
+    </ul>
+
+    <h3>Advanced tips</h3>
+    <p><strong>Use spaced intervals, not daily grinding.</strong> Review at 1 day, 3 days, 7 days and 14 days. Expanding intervals produce dramatically better long-term retention than the same total time spent in consecutive days.</p>
+    <p><strong>Interleave subjects.</strong> Mixing chemistry and maths cards in one session feels worse and tests better, because exams do not arrive topic by topic.</p>
+    <p><strong>Add a "why" card for every "what" card.</strong> Definitions get you passing marks; explanations get you the top band.</p>
+    <p><strong>Write cards in your own words.</strong> The act of rephrasing is itself a comprehension check — if you cannot rephrase it, you have found a gap.</p>
+    <p><strong>Attach cards to a timer.</strong> Twenty-five focused minutes with the <a href="/pomodoro-timer.html">Pomodoro timer</a> beats an unfocused hour, and card review fits a single block almost perfectly.</p>
+    <p><strong>Schedule the reviews, do not remember them.</strong> Put the day-3 and day-7 passes in the <a href="/study-schedule.html">study schedule maker</a> the moment you build the deck.</p>
+    <p><strong>Get unstuck instead of guessing.</strong> When a card keeps failing, the problem is usually understanding, not memory — ask the <a href="/study-assistant.html">AI study assistant</a> to explain the concept, then rewrite the card.</p>
+
+    <h3>How this compares with the alternatives</h3>
+    <p><strong>Versus Quizlet:</strong> Quizlet has huge shared deck libraries and more study modes, but pushes you towards an account, adverts and a subscription for its better features. Shared decks are also a trap — someone else's cards skip the most valuable part, which is deciding what matters.</p>
+    <p><strong>Versus Anki:</strong> Anki's scheduling algorithm is the best there is for long-term retention, and its learning curve and interface put most students off within a week. This tool is the fast entry point: no install, no account, working deck in five minutes.</p>
+    <p><strong>Versus paper cards:</strong> paper wins on distraction-free focus and the small memory benefit of handwriting. It loses on speed, shuffling, and the fact that a paper deck cannot be turned into a timed scoring game.</p>
+    <p><strong>Versus rereading your notes:</strong> not a real contest. Rereading is the most popular study method and one of the least effective; retrieval practice is the opposite on both counts.</p>
+
+    <h3>What to do next</h3>
+    <p>Build the deck above, then play it in <a href="/play.html">PLAY</a> for a timed round with streak scoring. Plan the spaced reviews with the <a href="/study-schedule.html">study schedule maker</a>, run each session in blocks with the <a href="/pomodoro-timer.html">Pomodoro timer</a>, and check which subject deserves the time using the <a href="/grade-calculator.html">grade calculator</a> and the <a href="/gpa-calculator.html">GPA calculator</a>.</p>
   </div>
 </div>
 
@@ -264,7 +408,26 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </footer>
 
 <script>
-  let deck = [];
+  const DECK_KEY = 'studytools_flashcard_deck';
+
+  function loadDeck() {
+    try {
+      const saved = JSON.parse(localStorage.getItem(DECK_KEY) || '[]');
+      return Array.isArray(saved) ? saved.filter(c => c && c.front && c.back) : [];
+    } catch (error) {
+      return [];
+    }
+  }
+
+  function saveDeck() {
+    try {
+      localStorage.setItem(DECK_KEY, JSON.stringify(deck));
+    } catch (error) {
+      /* storage unavailable, deck stays in memory for this tab */
+    }
+  }
+
+  let deck = loadDeck();
   let studyDeck = [];
   let currentIdx = 0;
   let isFlipped = false;
@@ -277,6 +440,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     const back = document.getElementById('inp-back').value.trim();
     if (!front || !back) { alert('Please fill in both sides of the card.'); return; }
     deck.push({ front, back });
+    saveDeck();
     document.getElementById('inp-front').value = '';
     document.getElementById('inp-back').value = '';
     document.getElementById('inp-front').focus();
@@ -301,6 +465,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   function deleteCard(i) {
     deck.splice(i, 1);
+    saveDeck();
     renderDeck();
     updateStudyArea();
   }
@@ -408,8 +573,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   function toggleFAQ(el) { el.parentElement.classList.toggle('open'); }
 
+  renderDeck();
 </script>
 
 
+<script src="/js/play-banner.js"></script>
 </body>
 </html>

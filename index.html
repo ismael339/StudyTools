@@ -143,6 +143,42 @@
       color: #0b0c12 !important;
       border: 1px solid transparent;
     }
+    .nav-links a.nav-play {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: #06070d !important;
+      background: linear-gradient(135deg, #00f5d4, #3ad0ff);
+      font-weight: 900;
+      letter-spacing: .04em;
+      animation: play-pulse 2.2s infinite;
+    }
+    @keyframes play-pulse {
+      0% { box-shadow: 0 0 0 0 rgba(0,245,212,.5); }
+      70% { box-shadow: 0 0 0 12px rgba(0,245,212,0); }
+      100% { box-shadow: 0 0 0 0 rgba(0,245,212,0); }
+    }
+    @media (prefers-reduced-motion: reduce) { .nav-links a.nav-play { animation: none; } }
+
+    .play-band {
+      margin: 8px 0 34px;
+      border: 1px solid rgba(0,245,212,.25);
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(0,245,212,.12), rgba(255,61,154,.1));
+      padding: clamp(22px, 4vw, 34px);
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 20px;
+      align-items: center;
+    }
+    .play-band .eyebrow { color: #00f5d4; background: rgba(0,245,212,.12); border-color: rgba(0,245,212,.28); }
+    .play-band h2 { margin-bottom: 8px; }
+    .play-band p { color: var(--soft); max-width: 620px; }
+    .play-stats { display: flex; gap: 22px; flex-wrap: wrap; margin-top: 16px; }
+    .play-stat strong { display: block; font-family: var(--font-head); font-size: 1.35rem; color: #00f5d4; }
+    .play-stat span { color: var(--muted); font-size: .85rem; font-weight: 700; }
+    .btn.play { background: linear-gradient(135deg, #00f5d4, #3ad0ff); border-color: transparent; color: #06070d; }
+    @media (max-width: 860px) { .play-band { grid-template-columns: 1fr; } .play-band .btn { width: 100%; } }
 
     /* Dropdown Menu Styles - SEO Friendly */
     .dropdown {
@@ -490,7 +526,7 @@
     @media (max-width: 680px) {
       .wrap { width: min(100% - 24px, var(--max)); }
       .nav-inner { min-height: 62px; }
-      .nav-links a:not(.nav-cta) { display: none; }
+      .nav-links a:not(.nav-cta):not(.nav-play) { display: none; }
       .hero { padding-top: 34px; }
       .actions .btn { width: 100%; }
       .tools-grid { grid-template-columns: 1fr; }
@@ -522,6 +558,7 @@
             <a href="study-schedule.html">Study Schedule</a>
           </div>
         </div>
+        <a href="play.html" class="nav-play">🎮 PLAY</a>
         <a href="#pricing">Pricing</a>
         <a href="blog.html">Blog</a>
         <a href="study-assistant.html" class="nav-cta">Ask AI Tutor</a>
@@ -554,6 +591,22 @@
       </div>
     </section>
 
+    <section class="wrap">
+      <div class="play-band">
+        <div>
+          <div class="eyebrow">New - StudyTools PLAY</div>
+          <h2>Turn your flashcards into a 30-second game.</h2>
+          <p>Flashcard Battle scores your recall in real time: +10 for every correct answer, -5 for a mistake and double points once you hit a three-answer streak. Play your own deck or the demo deck, then check the daily leaderboard.</p>
+          <div class="play-stats">
+            <div class="play-stat"><strong>30s</strong><span>per battle</span></div>
+            <div class="play-stat"><strong>x2</strong><span>streak multiplier</span></div>
+            <div class="play-stat"><strong>3 free</strong><span>games per day</span></div>
+          </div>
+        </div>
+        <a href="play.html" class="btn play">🎮 Play now</a>
+      </div>
+    </section>
+
     <section class="wrap section" id="tools">
       <div class="section-head">
         <h2>Choose the tool you need</h2>
@@ -569,6 +622,7 @@
         <a class="tool-card" href="citation-generator.html"><span class="tool-icon">CT</span><h3>Citation Generator</h3><p>Build clean references for essays and school projects.</p><span>Use tool</span></a>
         <a class="tool-card" href="pomodoro-timer.html"><span class="tool-icon">25</span><h3>Pomodoro Timer</h3><p>Stay focused with short study blocks and real breaks.</p><span>Use tool</span></a>
         <a class="tool-card" href="study-schedule.html"><span class="tool-icon">PL</span><h3>Study Schedule</h3><p>Turn deadlines and subjects into a realistic weekly plan.</p><span>Use tool</span></a>
+        <a class="tool-card" href="play.html"><span class="tool-icon">🎮</span><h3>PLAY: Flashcard Battle</h3><p>Score your recall in a 30-second flashcard game with streak multipliers.</p><span>Play now</span></a>
       </div>
     </section>
 
@@ -658,9 +712,9 @@
           <img src="assets/article-final-grade.svg" alt="Student calculating final grade" loading="lazy" />
           <div><h3>What Grade Do I Need on My Final?</h3><p>Learn how final exam weight affects your target score.</p></div>
         </a>
-        <a class="article-card" href="best-free-ai-study-tools-for-students.html">
-          <img src="assets/article-ai-study-tools.svg" alt="Students using AI study tools" loading="lazy" />
-          <div><h3>Best Free AI Study Tools for Students</h3><p>Use AI for explanations, quizzes and planning without losing control.</p></div>
+        <a class="article-card" href="active-recall-study-method.html">
+          <img src="assets/article-ai-study-tools.svg" alt="Student practising active recall" loading="lazy" />
+          <div><h3>The Active Recall Study Method</h3><p>Test yourself instead of rereading, and remember more in less time.</p></div>
         </a>
       </div>
     </section>
@@ -678,6 +732,7 @@
     <div class="wrap foot-inner">
       <span>&copy; 2026 StudyTools.pro - Free study tools for students</span>
       <div class="foot-links">
+        <a href="play.html">PLAY</a>
         <a href="blog.html">Blog</a>
         <a href="word-counter.html">Word Counter</a>
         <a href="citation-generator.html">Citation Generator</a>

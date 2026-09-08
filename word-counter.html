@@ -57,6 +57,51 @@
         "publisher":{"@type":"Organization","name":"StudyTools","logo":{"@type":"ImageObject","url":"https://www.studytools.pro/favicon.svg"}}
       },
       {
+        "@type":"FAQPage",
+        "mainEntity":[
+          {
+            "@type":"Question",
+            "name":"How many pages is 1000 words?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"1,000 words is about 4 pages double-spaced or 2 pages single-spaced, using 12pt Times New Roman with 1-inch margins. Handwritten, 1,000 words is roughly 4 to 5 pages depending on the size of your writing."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"How long does it take to read 1000 words?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"About 4 minutes at the average adult silent reading speed of 250 words per minute, or 5 minutes at the more conservative 200 words per minute used by this tool. Read aloud, the same 1,000 words takes roughly 7 to 8 minutes."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"How many words is a 5 minute speech?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"Around 650 words at a normal presenting pace of 130 words per minute. Aim for 600 to 700 words for a five-minute talk, and cut rather than speed up if you run long, because nerves usually make you speak faster than you rehearsed."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"Does the word count include the title and references?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"That depends on your assignment brief. Most universities exclude the title page, reference list and appendices, and include everything in the body plus in-text citations. Paste only the sections that count into the counter so the number matches what your marker will see."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"Is my text saved anywhere?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"No. All counting happens in your browser. Nothing is uploaded to a server, no account is needed, and closing the tab deletes the text."
+            }
+          }
+        ]
+      },
+      {
         "@type":"BreadcrumbList",
         "itemListElement":[
           {
@@ -95,6 +140,9 @@
     .nav-logo span{width:8px;height:8px;background:var(--accent);border-radius:50%;display:inline-block;animation:pulse 2s infinite}
     .nav-back{color:var(--muted);text-decoration:none;font-size:.875rem;transition:color .2s}
     .nav-back:hover{color:var(--text)}
+    .nav-play-link{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,#00f5d4,#3ad0ff);color:#06070d;text-decoration:none;font-weight:900;font-size:.85rem;letter-spacing:.04em;padding:8px 14px;border-radius:999px;animation:play-pulse 2.2s infinite}
+    @keyframes play-pulse{0%{box-shadow:0 0 0 0 rgba(0,245,212,.5)}70%{box-shadow:0 0 0 12px rgba(0,245,212,0)}100%{box-shadow:0 0 0 0 rgba(0,245,212,0)}}
+    @media(prefers-reduced-motion:reduce){.nav-play-link{animation:none}}
 
     .page-wrap{max-width:960px;margin:0 auto;padding:clamp(2rem,5vw,4rem) clamp(1.5rem,4vw,3rem)}
     .breadcrumb{font-size:.8rem;color:var(--muted);margin-bottom:1rem}
@@ -165,7 +213,10 @@
     .faq-q::after{content:'+';font-size:1.2rem;color:var(--accent);transition:transform .2s}
     .faq-item.open .faq-q::after{transform:rotate(45deg)}
     .faq-a{font-size:.9rem;color:var(--muted);max-height:0;overflow:hidden;transition:max-height .3s ease,padding .3s}
-    .faq-item.open .faq-a{max-height:220px;padding-top:.75rem}
+    .faq-item.open .faq-a{max-height:600px;padding-top:.75rem}
+    .content-section table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.9rem}
+    .content-section th,.content-section td{border-bottom:1px solid var(--border);padding:.6rem .5rem;text-align:left;color:var(--muted)}
+    .content-section th{color:var(--text);font-weight:600}
 
     .content-section{margin-top:3rem}
     .content-section h2{font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:700;margin-bottom:1rem;letter-spacing:-.02em}
@@ -194,7 +245,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <nav>
   <a href="/" class="nav-logo"><span></span> StudyTools</a>
-  <a href="/" class="nav-back">← All Tools</a>
+  <div style="display:flex;align-items:center;gap:14px">
+    <a href="/play.html" class="nav-play-link">🎮 PLAY</a>
+    <a href="/" class="nav-back">← All Tools</a>
+  </div>
 </nav>
 
 <div class="page-wrap">
@@ -275,6 +329,22 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="faq-q" onclick="toggleFAQ(this)">What are common essay word counts?</div>
       <div class="faq-a">A standard paragraph is 100–200 words. A short essay is 500–800 words. A typical college essay is 500–650 words. A 5-paragraph essay is around 500–1000 words. A research paper is usually 1500–5000 words depending on the assignment.</div>
     </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFAQ(this)">How many pages is 1,000 words?</div>
+      <div class="faq-a">About 4 pages double-spaced or 2 pages single-spaced in 12pt Times New Roman with 1-inch margins. Handwritten it is roughly 4–5 pages. The full conversion table is further down this page.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFAQ(this)">How many words is a 5-minute speech?</div>
+      <div class="faq-a">Around 650 words at a normal presenting pace of 130 words per minute. Write 600–700 words, then rehearse with a timer: nerves make almost everyone speak faster than they planned, so cutting content beats speeding up.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFAQ(this)">Does the word count include the title and references?</div>
+      <div class="faq-a">It depends on the brief. Most universities exclude the title page, reference list and appendices, and include the body text plus in-text citations. Paste only the sections that count so your number matches your marker's.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFAQ(this)">How strict is a 10% word count tolerance?</div>
+      <div class="faq-a">Where a tolerance exists it is usually ±10%, so a 2,000-word essay is safe between 1,800 and 2,200. Some departments apply a penalty from the first word over the limit instead. Check the module handbook — it is one of the cheapest marks you will ever protect.</div>
+    </div>
   </div>
 
   <div class="content-section">
@@ -290,11 +360,64 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <li><strong>Privacy Focused:</strong> All processing happens in your browser—nothing is stored</li>
     </ul>
 
-    <h3>Common Word Count Requirements</h3>
-    <p>Different assignments and platforms have specific word count requirements. A typical high school essay is 500-800 words, while college essays often range from 500-650 words for common application essays. Blog posts typically run 800-1500 words, and social media platforms have character limits (Twitter: 280, Instagram: 2200).</p>
-    
-    <h3>Tips for Meeting Word Count Requirements</h3>
-    <p>If you're struggling to meet a word count, focus on expanding your ideas with specific examples, quotes, and deeper analysis. Avoid fluff—instead, add substance by exploring implications, counterarguments, or real-world applications. Our keyword density feature can help you identify repetitive language that might need variety.</p>
+    <h3>How many pages is my word count?</h3>
+    <p>This is the question the counter cannot answer on its own, because pages depend on formatting. The table below uses the academic default — 12pt Times New Roman, 1-inch margins, standard line spacing — which is what almost every school and university specifies.</p>
+    <table>
+      <thead><tr><th>Words</th><th>Single-spaced</th><th>Double-spaced</th><th>Reading time</th><th>Speaking time</th></tr></thead>
+      <tbody>
+        <tr><td>250 words</td><td>½ page</td><td>1 page</td><td>1 min</td><td>2 min</td></tr>
+        <tr><td>500 words</td><td>1 page</td><td>2 pages</td><td>2 min</td><td>4 min</td></tr>
+        <tr><td>750 words</td><td>1½ pages</td><td>3 pages</td><td>3 min</td><td>6 min</td></tr>
+        <tr><td>1,000 words</td><td>2 pages</td><td>4 pages</td><td>4 min</td><td>8 min</td></tr>
+        <tr><td>1,500 words</td><td>3 pages</td><td>6 pages</td><td>6 min</td><td>12 min</td></tr>
+        <tr><td>2,000 words</td><td>4 pages</td><td>8 pages</td><td>8 min</td><td>15 min</td></tr>
+        <tr><td>2,500 words</td><td>5 pages</td><td>10 pages</td><td>10 min</td><td>19 min</td></tr>
+        <tr><td>3,000 words</td><td>6 pages</td><td>12 pages</td><td>12 min</td><td>23 min</td></tr>
+        <tr><td>5,000 words</td><td>10 pages</td><td>20 pages</td><td>20 min</td><td>38 min</td></tr>
+        <tr><td>10,000 words</td><td>20 pages</td><td>40 pages</td><td>40 min</td><td>77 min</td></tr>
+      </tbody>
+    </table>
+    <p>Two things shift these numbers. Font choice matters more than people expect — Arial 12pt runs roughly 5–10% longer than Times New Roman 12pt for the same text — and so does paragraph density: an essay full of short paragraphs and block quotes fills pages faster than a solid wall of prose. If your brief specifies pages rather than words, work to the lower end of the range and check the actual document before you submit.</p>
+
+    <h3>How long is my speech or presentation?</h3>
+    <p>Speaking pace sits between 120 and 150 words per minute for clear delivery; this tool uses 130. That gives a reliable set of anchors: a <strong>1-minute</strong> introduction is about 130 words, a <strong>3-minute</strong> pitch about 400, a <strong>5-minute</strong> class presentation about 650, a <strong>10-minute</strong> seminar talk about 1,300, and a <strong>20-minute</strong> conference paper about 2,600. Subtract time for slides, questions and pauses — a genuinely good ten-minute talk is usually nearer 1,100 words with room to breathe.</p>
+
+    <h3>Typical length by assignment type</h3>
+    <ul>
+      <li><strong>Paragraph:</strong> 100–200 words — one idea, evidence, and a link to the next point.</li>
+      <li><strong>Common App / personal statement:</strong> 500–650 words, and the limit is enforced.</li>
+      <li><strong>High school essay:</strong> 300–1,000 words.</li>
+      <li><strong>Undergraduate essay:</strong> 1,500–3,000 words.</li>
+      <li><strong>Literature review:</strong> 2,000–6,000 words.</li>
+      <li><strong>Dissertation chapter:</strong> 5,000–10,000 words.</li>
+      <li><strong>Abstract:</strong> 150–300 words.</li>
+      <li><strong>Blog post that ranks:</strong> 1,200–2,000 words.</li>
+    </ul>
+
+    <h3>Common mistakes and how to avoid them</h3>
+    <ul>
+      <li><strong>Padding to hit the number.</strong> "It is important to note that" adds seven words and zero marks. Markers notice filler instantly; add an example or a counter-argument instead.</li>
+      <li><strong>Counting the wrong parts.</strong> Including the reference list when the brief excludes it can leave you 300 words short of the real requirement.</li>
+      <li><strong>Trusting an ancient words-per-page rule.</strong> "250 words per page" assumes double spacing; single-spaced it is closer to 500. Always check the actual document.</li>
+      <li><strong>Writing to the maximum.</strong> Where the limit is 2,000, a tight 1,850 usually scores better than a padded 2,000.</li>
+      <li><strong>Ignoring the character limit.</strong> Application portals frequently cap characters, not words, and silently truncate. Use the "no spaces" stat before pasting.</li>
+      <li><strong>Leaving the cut to the end.</strong> Trimming 400 words in the final hour destroys structure. Check the count after each section instead.</li>
+    </ul>
+
+    <h3>Advanced tips</h3>
+    <p><strong>Use the target field as a pacing tool.</strong> Set your goal, then write in fixed blocks with the <a href="/pomodoro-timer.html">Pomodoro timer</a>. Two 25-minute blocks at 300 words each is a finished 600-word draft before lunch, which is far more achievable than "write the essay".</p>
+    <p><strong>Read the keyword density panel as a repetition check.</strong> If one content word appears in 3% or more of your text, you are circling. Vary the phrasing or, more often, vary the idea.</p>
+    <p><strong>Budget words per section before writing.</strong> For a 2,000-word essay: 200 introduction, 1,500 body across three or four arguments, 300 conclusion. Writing to a budget prevents the classic essay that spends 900 words on background and 200 on analysis.</p>
+    <p><strong>Count as you cut, not after.</strong> Paste each finished section here and check whether it earned its length. The paragraph you cannot summarise in one sentence is usually the one to cut.</p>
+    <p><strong>Do the mechanics separately.</strong> Build your reference list with the <a href="/citation-generator.html">citation generator</a> and check terminology with the <a href="/study-assistant.html">AI tutor</a> so writing time stays writing time.</p>
+
+    <h3>How this compares with the alternatives</h3>
+    <p><strong>Versus Microsoft Word or Google Docs:</strong> both count words accurately, but they count the whole document. Checking one section means selecting it first, and neither gives you reading time, speaking time or keyword density at a glance. This tool is for the quick check on a fragment.</p>
+    <p><strong>Versus other online counters:</strong> the maths is the same everywhere; the differences are adverts, sign-up prompts and, on some sites, sending your text to a server. Everything here runs locally in your browser and stays there.</p>
+    <p><strong>Versus counting characters by hand:</strong> for a tweet or an application field with a hard character cap, the "no spaces" and total character stats above remove the guesswork entirely.</p>
+
+    <h3>What to do next</h3>
+    <p>Essay length sorted? Format the sources with the <a href="/citation-generator.html">citation generator</a>, plan the remaining deadlines with the <a href="/study-schedule.html">study schedule maker</a>, and when the writing is done and revision starts, turn your notes into cards with the <a href="/flashcard-maker.html">flashcard maker</a> and drill them in <a href="/play.html">PLAY</a>, our 30-second flashcard battle. Tracking your term average? The <a href="/gpa-calculator.html">GPA calculator</a> and <a href="/grade-calculator.html">grade calculator</a> are one click away.</p>
     
     <p class="keywords">Also known as: word counter, character counter, word count tool, essay word counter, reading time calculator, paragraph counter, sentence counter, online word counter, text counter, document counter, writing tools, study tools, studytools, study helper, studyhelper, stude tools, studetools, student tools, school tools, homework helper, academic writing tools, essay counter, text analysis tool, word counter free, character count tool, online character counter.</p>
   </div>
@@ -405,5 +528,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <script src="/js/premium-limits.js"></script>
 <script src="/js/premium-status.js"></script>
 
+<script src="/js/play-banner.js"></script>
 </body>
 </html>

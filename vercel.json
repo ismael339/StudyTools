@@ -10,10 +10,128 @@
       ],
       "destination": "https://www.studytools.pro/:path*",
       "statusCode": 301
+    },
+    {
+      "source": "/ai-for-students-2026.html",
+      "destination": "/ai-homework-helper.html",
+      "permanent": true
+    },
+    {
+      "source": "/best-free-ai-study-tools-for-students.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/how-to-do-homework-without-getting-distracted.html",
+      "destination": "/how-to-stop-procrastinating-homework.html",
+      "permanent": true
+    },
+    {
+      "source": "/how-to-get-better-grades-in-high-school.html",
+      "destination": "/best-study-routine-for-high-school-students.html",
+      "permanent": true
+    },
+    {
+      "source": "/how-to-improve-concentration-while-studying.html",
+      "destination": "/how-to-stop-procrastinating-homework.html",
+      "permanent": true
+    },
+    {
+      "source": "/how-to-improve-reading-comprehension.html",
+      "destination": "/how-to-take-notes-from-a-textbook.html",
+      "permanent": true
+    },
+    {
+      "source": "/how-to-pass-a-hard-exam.html",
+      "destination": "/how-to-study-for-an-exam-in-one-week.html",
+      "permanent": true
+    },
+    {
+      "source": "/how-to-prepare-for-multiple-exams.html",
+      "destination": "/how-to-make-a-study-plan-for-finals.html",
+      "permanent": true
+    },
+    {
+      "source": "/how-to-remember-what-you-study.html",
+      "destination": "/active-recall-study-method.html",
+      "permanent": true
+    },
+    {
+      "source": "/how-to-study-after-school.html",
+      "destination": "/best-study-routine-for-high-school-students.html",
+      "permanent": true
+    },
+    {
+      "source": "/how-to-study-faster-without-forgetting.html",
+      "destination": "/active-recall-study-method.html",
+      "permanent": true
+    },
+    {
+      "source": "/how-to-study-for-a-math-test.html",
+      "destination": "/how-to-study-math-effectively.html",
+      "permanent": true
+    },
+    {
+      "source": "/how-to-study-for-multiple-choice-tests.html",
+      "destination": "/how-to-study-for-an-exam-in-one-week.html",
+      "permanent": true
+    },
+    {
+      "source": "/how-to-study-history-for-exams.html",
+      "destination": "/how-to-memorize-vocabulary-fast.html",
+      "permanent": true
+    },
+    {
+      "source": "/how-to-study-science-effectively.html",
+      "destination": "/active-recall-study-method.html",
+      "permanent": true
+    },
+    {
+      "source": "/how-to-study-without-cramming.html",
+      "destination": "/how-to-study-for-an-exam-in-one-week.html",
+      "permanent": true
+    },
+    {
+      "source": "/how-to-use-ai-to-summarize-notes.html",
+      "destination": "/app.html",
+      "permanent": true
+    },
+    {
+      "source": "/how-to-use-flashcards-for-exams.html",
+      "destination": "/how-to-make-flashcards-that-work.html",
+      "permanent": true
+    },
+    {
+      "source": "/how-to-write-an-essay-fast.html",
+      "destination": "/how-to-summarize-a-chapter.html",
+      "permanent": true
+    },
+    {
+      "source": "/pomodoro-technique-for-students.html",
+      "destination": "/pomodoro-timer.html",
+      "permanent": true
+    },
+    {
+      "source": "/spaced-repetition-for-students.html",
+      "destination": "/active-recall-study-method.html",
+      "permanent": true
+    },
+    {
+      "source": "/study-mistakes-students-make.html",
+      "destination": "/best-study-routine-for-high-school-students.html",
+      "permanent": true
+    },
+    {
+      "source": "/what-to-do-the-night-before-an-exam.html",
+      "destination": "/how-to-reduce-exam-stress.html",
+      "permanent": true
     }
   ],
   "rewrites": [
-    { "source": "/play", "destination": "/play.html" }
+    {
+      "source": "/play",
+      "destination": "/play.html"
+    }
   ],
   "functions": {
     "api/chat.js": {

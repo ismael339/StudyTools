@@ -103,14 +103,6 @@
   </url>
 
   <!-- Study Mistakes Article -->
-  <url>
-    <loc>https://www.studytools.pro/study-mistakes-students-make.html</loc>
-    <image:image>
-      <image:loc>https://www.studytools.pro/assets/article-study-mistakes.svg</image:loc>
-      <image:title>Common Study Mistakes Students Make and How to Fix Them</image:title>
-      <image:caption>Discover common study mistakes and learn better study habits</image:caption>
-    </image:image>
-  </url>
 
   <!-- Active Recall -->
   <url>
@@ -123,44 +115,12 @@
   </url>
 
   <!-- Spaced Repetition -->
-  <url>
-    <loc>https://www.studytools.pro/spaced-repetition-for-students.html</loc>
-    <image:image>
-      <image:loc>https://www.studytools.pro/assets/article-spaced-repetition.svg</image:loc>
-      <image:title>Spaced Repetition - Remember More by Studying Less</image:title>
-      <image:caption>Learn spaced repetition technique for effective studying</image:caption>
-    </image:image>
-  </url>
 
   <!-- Study Faster -->
-  <url>
-    <loc>https://www.studytools.pro/how-to-study-faster-without-forgetting.html</loc>
-    <image:image>
-      <image:loc>https://www.studytools.pro/assets/article-study-faster.svg</image:loc>
-      <image:title>How to Study Faster Without Forgetting</image:title>
-      <image:caption>Study techniques to learn faster and remember more</image:caption>
-    </image:image>
-  </url>
 
   <!-- Night Before Exam -->
-  <url>
-    <loc>https://www.studytools.pro/what-to-do-the-night-before-an-exam.html</loc>
-    <image:image>
-      <image:loc>https://www.studytools.pro/assets/article-night-before-exam.svg</image:loc>
-      <image:title>What to Do the Night Before an Exam</image:title>
-      <image:caption>Last-minute exam preparation tips and strategies</image:caption>
-    </image:image>
-  </url>
 
   <!-- Multiple Exams -->
-  <url>
-    <loc>https://www.studytools.pro/how-to-prepare-for-multiple-exams.html</loc>
-    <image:image>
-      <image:loc>https://www.studytools.pro/assets/article-multiple-exams.svg</image:loc>
-      <image:title>How to Prepare for Multiple Exams at Once</image:title>
-      <image:caption>Strategies for studying for multiple exams simultaneously</image:caption>
-    </image:image>
-  </url>
 
   <!-- Study Motivation -->
   <url>
@@ -173,24 +133,8 @@
   </url>
 
   <!-- Study Concentration -->
-  <url>
-    <loc>https://www.studytools.pro/how-to-improve-concentration-while-studying.html</loc>
-    <image:image>
-      <image:loc>https://www.studytools.pro/assets/article-concentration-study.svg</image:loc>
-      <image:title>How to Improve Concentration While Studying</image:title>
-      <image:caption>Focus improvement techniques for better studying</image:caption>
-    </image:image>
-  </url>
 
   <!-- Study Without Cramming -->
-  <url>
-    <loc>https://www.studytools.pro/how-to-study-without-cramming.html</loc>
-    <image:image>
-      <image:loc>https://www.studytools.pro/assets/article-without-cramming.svg</image:loc>
-      <image:title>How to Study Without Cramming</image:title>
-      <image:caption>Long-term study strategies instead of last-minute cramming</image:caption>
-    </image:image>
-  </url>
 
   <!-- Study Math -->
   <url>
@@ -203,34 +147,10 @@
   </url>
 
   <!-- How to Study for a Math Test -->
-  <url>
-    <loc>https://www.studytools.pro/how-to-study-for-a-math-test.html</loc>
-    <image:image>
-      <image:loc>https://www.studytools.pro/assets/article-study-math.svg</image:loc>
-      <image:title>How to Study for a Math Test and Get an A</image:title>
-      <image:caption>Proven strategies for studying for math tests and exam preparation - StudyTools, StudyHelper, StudeTools</image:caption>
-    </image:image>
-  </url>
 
   <!-- Study Science -->
-  <url>
-    <loc>https://www.studytools.pro/how-to-study-science-effectively.html</loc>
-    <image:image>
-      <image:loc>https://www.studytools.pro/assets/article-study-science.svg</image:loc>
-      <image:title>How to Study Science Effectively</image:title>
-      <image:caption>Science study methods and lab work strategies</image:caption>
-    </image:image>
-  </url>
 
   <!-- Study History -->
-  <url>
-    <loc>https://www.studytools.pro/how-to-study-history-for-exams.html</loc>
-    <image:image>
-      <image:loc>https://www.studytools.pro/assets/article-study-history.svg</image:loc>
-      <image:title>How to Study History for Exams</image:title>
-      <image:caption>History study techniques and memorization strategies</image:caption>
-    </image:image>
-  </url>
 
   <!-- Procrastination -->
   <url>
@@ -243,14 +163,6 @@
   </url>
 
   <!-- Homework Distractions -->
-  <url>
-    <loc>https://www.studytools.pro/how-to-do-homework-without-getting-distracted.html</loc>
-    <image:image>
-      <image:loc>https://www.studytools.pro/assets/article-homework-distractions.svg</image:loc>
-      <image:title>How to Do Homework Without Getting Distracted</image:title>
-      <image:caption>Minimize distractions and focus on homework completion</image:caption>
-    </image:image>
-  </url>
 
   <!-- Final Grade Calculator -->
   <url>
@@ -273,14 +185,6 @@
   </url>
 
   <!-- Better Grades -->
-  <url>
-    <loc>https://www.studytools.pro/how-to-get-better-grades-in-high-school.html</loc>
-    <image:image>
-      <image:loc>https://www.studytools.pro/assets/article-better-grades.svg</image:loc>
-      <image:title>How to Get Better Grades in High School</image:title>
-      <image:caption>High school study tips and grade improvement strategies</image:caption>
-    </image:image>
-  </url>
 
   <!-- Vocabulary -->
   <url>
@@ -293,14 +197,6 @@
   </url>
 
   <!-- Reading Comprehension -->
-  <url>
-    <loc>https://www.studytools.pro/how-to-improve-reading-comprehension.html</loc>
-    <image:image>
-      <image:loc>https://www.studytools.pro/assets/article-reading-comprehension.svg</image:loc>
-      <image:title>How to Improve Reading Comprehension</image:title>
-      <image:caption>Reading comprehension improvement strategies for students</image:caption>
-    </image:image>
-  </url>
 
   <!-- Take Notes -->
   <url>
@@ -333,44 +229,12 @@
   </url>
 
   <!-- Summarize Notes -->
-  <url>
-    <loc>https://www.studytools.pro/how-to-use-ai-to-summarize-notes.html</loc>
-    <image:image>
-      <image:loc>https://www.studytools.pro/assets/article-summarize-notes.svg</image:loc>
-      <image:title>How to Use AI to Summarize Notes</image:title>
-      <image:caption>AI-powered note summarization for efficient studying</image:caption>
-    </image:image>
-  </url>
 
   <!-- Remember Study -->
-  <url>
-    <loc>https://www.studytools.pro/how-to-remember-what-you-study.html</loc>
-    <image:image>
-      <image:loc>https://www.studytools.pro/assets/article-remember-study.svg</image:loc>
-      <image:title>How to Remember What You Study</image:title>
-      <image:caption>Memory techniques for better retention of study material</image:caption>
-    </image:image>
-  </url>
 
   <!-- Pass Hard Exam -->
-  <url>
-    <loc>https://www.studytools.pro/how-to-pass-a-hard-exam.html</loc>
-    <image:image>
-      <image:loc>https://www.studytools.pro/assets/article-pass-hard-exam.svg</image:loc>
-      <image:title>How to Pass a Hard Exam</image:title>
-      <image:caption>Strategies for passing difficult exams and challenging tests</image:caption>
-    </image:image>
-  </url>
 
   <!-- Write Essay Fast -->
-  <url>
-    <loc>https://www.studytools.pro/how-to-write-an-essay-fast.html</loc>
-    <image:image>
-      <image:loc>https://www.studytools.pro/assets/article-essay-fast.svg</image:loc>
-      <image:title>How to Write an Essay Fast</image:title>
-      <image:caption>Essay writing techniques for quick and effective composition</image:caption>
-    </image:image>
-  </url>
 
   <!-- Finals Study Plan -->
   <url>
@@ -393,14 +257,6 @@
   </url>
 
   <!-- Study After School -->
-  <url>
-    <loc>https://www.studytools.pro/how-to-study-after-school.html</loc>
-    <image:image>
-      <image:loc>https://www.studytools.pro/assets/article-after-school-study.svg</image:loc>
-      <image:title>How to Study After School Effectively</image:title>
-      <image:caption>After-school study routines and time management</image:caption>
-    </image:image>
-  </url>
 
   <!-- High School Routine -->
   <url>
@@ -423,34 +279,10 @@
   </url>
 
   <!-- Use Flashcards -->
-  <url>
-    <loc>https://www.studytools.pro/how-to-use-flashcards-for-exams.html</loc>
-    <image:image>
-      <image:loc>https://www.studytools.pro/assets/article-flashcards-exams.svg</image:loc>
-      <image:title>How to Use Flashcards for Exams Effectively</image:title>
-      <image:caption>Flashcard study techniques for exam preparation</image:caption>
-    </image:image>
-  </url>
 
   <!-- Multiple Choice -->
-  <url>
-    <loc>https://www.studytools.pro/how-to-study-for-multiple-choice-tests.html</loc>
-    <image:image>
-      <image:loc>https://www.studytools.pro/assets/article-multiple-choice.svg</image:loc>
-      <image:title>How to Study for Multiple Choice Tests</image:title>
-      <image:caption>Multiple choice test preparation strategies</image:caption>
-    </image:image>
-  </url>
 
   <!-- AI for Students -->
-  <url>
-    <loc>https://www.studytools.pro/ai-for-students-2026.html</loc>
-    <image:image>
-      <image:loc>https://www.studytools.pro/assets/article-ai-study-tools.svg</image:loc>
-      <image:title>AI for Students in 2026 - Guide to AI Study Tools</image:title>
-      <image:caption>Comprehensive guide to AI tools for students in 2026</image:caption>
-    </image:image>
-  </url>
 
   <!-- AI Homework Helper -->
   <url>
@@ -483,14 +315,6 @@
   </url>
 
   <!-- Best Free AI Study Tools -->
-  <url>
-    <loc>https://www.studytools.pro/best-free-ai-study-tools-for-students.html</loc>
-    <image:image>
-      <image:loc>https://www.studytools.pro/assets/article-ai-study-tools.svg</image:loc>
-      <image:title>Best Free AI Study Tools for Students</image:title>
-      <image:caption>Top free AI-powered study tools and applications</image:caption>
-    </image:image>
-  </url>
 
   <!-- Make Flashcards -->
   <url>
@@ -503,14 +327,6 @@
   </url>
 
   <!-- Pomodoro Technique -->
-  <url>
-    <loc>https://www.studytools.pro/pomodoro-technique-for-students.html</loc>
-    <image:image>
-      <image:loc>https://www.studytools.pro/assets/article-pomodoro.svg</image:loc>
-      <image:title>Pomodoro Technique for Students - Study Method</image:title>
-      <image:caption>Pomodoro technique implementation for student studying</image:caption>
-    </image:image>
-  </url>
 
   <!-- Create Study Schedule -->
   <url>

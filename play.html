@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PLAY - StudyTools Gamified Learning Hub</title>
+  <meta name="description" content="Turn your study into a game with PLAY - Flashcard Battle, Memory Match, and Exam Rush. Compete, learn, and have fun while studying." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://www.studytools.pro/play.html" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  
+  <style>
+    :root {
+      --bg: #0a0a12;
+      --card: #14141f;
+      --accent: #00f0ff;
+      --accent-secondary: #ff00aa;
+      --text: #ffffff;
+      --text-muted: #8888aa;
+      --border: rgba(255, 255, 255, 0.1);
+      --neon-blue: #00f0ff;
+      --neon-pink: #ff00aa;
+      --neon-green: #00ff88;
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--neon-blue), var(--neon-pink));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-decoration: none;
+    }
+    
+    .nav-links {
+      display: flex;
+      gap: 20px;
+    }
+    
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    
+    .nav-links a:hover {
+      color: var(--text);
+    }
+    
+    .hero {
+      text-align: center;
+      padding: 60px 20px;
+    }
+    
+    .hero h1 {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 800;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, var(--neon-blue), var(--neon-pink));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+    
+    @keyframes glow {
+      from {
+        text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+      }
+      to {
+        text-shadow: 0 0 20px rgba(255, 0, 170, 0.5);
+      }
+    }
+    
+    .hero p {
+      font-size: 1.2rem;
+      color: var(--text-muted);
+      margin-bottom: 40px;
+    }
+    
+    .games-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      padding: 40px 0;
+    }
+    
+    .game-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 30px;
+      text-align: center;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .game-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--neon-blue), var(--neon-pink));
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+    
+    .game-card:hover::before {
+      transform: scaleX(1);
+    }
+    
+    .game-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0, 240, 255, 0.2);
+    }
+    
+    .game-icon {
+      font-size: 3rem;
+      margin-bottom: 20px;
+    }
+    
+    .game-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+    }
+    
+    .game-card p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-bottom: 20px;
+    }
+    
+    .play-button {
+      background: linear-gradient(135deg, var(--neon-blue), var(--neon-pink));
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      border-radius: 50px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    .play-button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 5px 20px rgba(0, 240, 255, 0.4);
+    }
+    
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      padding: 40px 0;
+    }
+    
+    .stat-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 20px;
+      text-align: center;
+    }
+    
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--neon-blue), var(--neon-green));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .stat-label {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-top: 5px;
+    }
+    
+    .coming-soon {
+      opacity: 0.5;
+      pointer-events: none;
+    }
+    
+    .premium-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .premium-modal.active {
+      display: flex;
+    }
+    
+    .premium-content {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 40px;
+      max-width: 500px;
+      text-align: center;
+      animation: slideUp 0.3s ease;
+    }
+    
+    @keyframes slideUp {
+      from {
+        transform: translateY(50px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+    
+    .premium-content h2 {
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+      background: linear-gradient(135deg, var(--neon-blue), var(--neon-pink));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .premium-content p {
+      color: var(--text-muted);
+      margin-bottom: 25px;
+      line-height: 1.6;
+    }
+    
+    .premium-button {
+      background: linear-gradient(135deg, var(--neon-blue), var(--neon-pink));
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      border-radius: 50px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+    }
+    
+    .premium-button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 5px 20px rgba(0, 240, 255, 0.4);
+    }
+    
+    .close-button {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+    
+    @media (max-width: 768px) {
+      .games-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .hero h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav">
+      <a href="/" class="logo">StudyTools</a>
+      <div class="nav-links">
+        <a href="/">Tools</a>
+        <a href="/study-assistant.html">AI Tutor</a>
+        <a href="/blog.html">Blog</a>
+      </div>
+    </nav>
+    
+    <div class="hero">
+      <h1>PLAY</h1>
+      <p>Turn your study into a game. Learn faster, have more fun.</p>
+    </div>
+    
+    <div class="games-grid">
+      <div class="game-card" onclick="startFlashcardBattle()">
+        <div class="game-icon">⚔️</div>
+        <h3>Flashcard Battle</h3>
+        <p>Answer as many flashcards as possible in 30 seconds. Compete for the high score!</p>
+        <button class="play-button">Play Now</button>
+      </div>
+      
+      <div class="game-card coming-soon">
+        <div class="game-icon">🧠</div>
+        <h3>Memory Match</h3>
+        <p>Match pairs of concepts to test your memory. Coming soon!</p>
+        <button class="play-button" disabled>Coming Soon</button>
+      </div>
+      
+      <div class="game-card coming-soon">
+        <div class="game-icon">🏃</div>
+        <h3>Exam Rush</h3>
+        <p>Race against time to answer exam questions. Coming soon!</p>
+        <button class="play-button" disabled>Coming Soon</button>
+      </div>
+    </div>
+    
+    <div class="stats">
+      <div class="stat-card">
+        <div class="stat-number">3</div>
+        <div class="stat-label">Free Games Daily</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">∞</div>
+        <div class="stat-label">Premium Access</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">87%</div>
+        <div class="stat-label">Top Students Play</div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="premium-modal" id="premiumModal">
+    <div class="premium-content">
+      <button class="close-button" onclick="closePremiumModal()">×</button>
+      <h2>Daily Limit Reached</h2>
+      <p>You've reached your daily PLAY limit. 87% of top students play unlimited. Upgrade to Premium for $3.99/month and unlock unlimited games, exclusive features, and advanced study tools.</p>
+      <a href="/pro.html" class="premium-button">Upgrade to Premium</a>
+    </div>
+  </div>
+  
+  <script>
+    let gamesPlayedToday = parseInt(localStorage.getItem('playGamesToday') || '0');
+    const freeLimit = 3;
+    
+    function startFlashcardBattle() {
+      if (gamesPlayedToday >= freeLimit) {
+        document.getElementById('premiumModal').classList.add('active');
+        return;
+      }
+      
+      gamesPlayedToday++;
+      localStorage.setItem('playGamesToday', gamesPlayedToday.toString());
+      
+      // TODO: Implement Flashcard Battle game
+      alert('Flashcard Battle coming soon! Games played today: ' + gamesPlayedToday + '/' + freeLimit);
+    }
+    
+    function closePremiumModal() {
+      document.getElementById('premiumModal').classList.remove('active');
+    }
+    
+    // Reset daily limit at midnight
+    const lastReset = localStorage.getItem('playLastReset');
+    const today = new Date().toDateString();
+    
+    if (lastReset !== today) {
+      gamesPlayedToday = 0;
+      localStorage.setItem('playGamesToday', '0');
+      localStorage.setItem('playLastReset', today);
+    }
+  </script>
+</body>
+</html>

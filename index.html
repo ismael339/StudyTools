@@ -138,6 +138,18 @@
     }
     .nav-links a:hover { color: var(--text); background: rgba(255,255,255,.06); }
     .nav-login { color: var(--muted); font-size: 0.9rem; font-weight: 700; padding: 9px 12px; border-radius: 8px; }
+    .nav-play {
+      background: linear-gradient(135deg, var(--accent), var(--mint));
+      color: white !important;
+      font-weight: 800;
+      padding: 9px 16px;
+      border-radius: 50px;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(91, 106, 240, 0.7); }
+      50% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(91, 106, 240, 0); }
+    }
     .nav-cta {
       background: var(--text);
       color: #0b0c12 !important;
@@ -522,6 +534,7 @@
             <a href="study-schedule.html">Study Schedule</a>
           </div>
         </div>
+        <a href="play.html" class="nav-play">🎮 PLAY</a>
         <a href="#pricing">Pricing</a>
         <a href="blog.html">Blog</a>
         <a href="study-assistant.html" class="nav-cta">Ask AI Tutor</a>

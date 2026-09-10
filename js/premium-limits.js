@@ -8,8 +8,9 @@
     // Usage limits configuration
     limits: {
       free: {
-        aiTutorMessages: 10,      // 10 messages per day
+        aiTutorMessages: 5,       // 5 messages per day
         aiTutorMaxLength: 500,    // 500 characters max per message
+        examQuestions: 5,         // 5 exam questions per day
         advancedCalculations: false,
         exportFeatures: false,
         prioritySupport: false
@@ -17,6 +18,7 @@
       premium: {
         aiTutorMessages: 100,     // 100 messages per day
         aiTutorMaxLength: 2000,   // 2000 characters max per message
+        examQuestions: 999,       // Unlimited exam questions per day
         advancedCalculations: true,
         exportFeatures: true,
         prioritySupport: true
@@ -88,11 +90,15 @@
     hasReachedLimit: function(feature) {
       const limits = this.getCurrentLimits();
       const currentUsage = this.getDailyUsage(feature);
-      
+
       if (feature === 'aiTutorMessages') {
         return currentUsage >= limits.aiTutorMessages;
       }
-      
+
+      if (feature === 'examQuestions') {
+        return currentUsage >= limits.examQuestions;
+      }
+
       return false;
     },
 
@@ -100,11 +106,15 @@
     getRemainingUsage: function(feature) {
       const limits = this.getCurrentLimits();
       const currentUsage = this.getDailyUsage(feature);
-      
+
       if (feature === 'aiTutorMessages') {
         return Math.max(0, limits.aiTutorMessages - currentUsage);
       }
-      
+
+      if (feature === 'examQuestions') {
+        return Math.max(0, limits.examQuestions - currentUsage);
+      }
+
       return Infinity;
     },
 

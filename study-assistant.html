@@ -3,21 +3,62 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AI Tutor for Students - Free Study Assistant | StudyTools, StudyHelper</title>
-  <meta name="description" content="Free AI tutor for students. Ask homework questions, explain difficult topics, create quizzes, get study plans and learn step by step with StudyTools AI. StudyTools, StudyHelper, StudeTools - your AI study assistant." />
-  <meta name="keywords" content="AI tutor, free AI tutor for students, AI study assistant, AI homework helper, ask AI tutor, study AI, homework explanation, exam tutor, study helper, studyhelper, stude tools, studetools, study assistant, homework helper, academic AI, student AI, learning AI, study tools, studytools, educational AI, tutoring AI, math help, science help, homework answers, study chat, AI chatbot" />
+  <title>Free AI Tutor for Students - Ask Questions & Get Explanations | StudyTools</title>
+  <meta name="description" content="Free AI tutor for students. Ask homework questions, get step-by-step explanations, create quizzes, and generate study plans. No sign-up required. Perfect for math, science, and humanities." />
+  <meta name="keywords" content="AI tutor, free AI tutor for students, AI study assistant, AI homework helper, ask AI tutor, homework explanation, exam tutor, study assistant" />
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
   <link rel="canonical" href="https://www.studytools.pro/study-assistant.html" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="icon" type="image/x-icon" href="/favicon.ico" />
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="AI Tutor for Students - Free Study Assistant" />
-  <meta property="og:description" content="Chat with a free AI tutor that explains topics, quizzes you and helps you study step by step." />
+  <meta property="og:title" content="Free AI Tutor for Students - Ask Questions & Get Explanations | StudyTools" />
+  <meta property="og:description" content="Free AI tutor for students. Ask homework questions, get step-by-step explanations, create quizzes, and generate study plans. No sign-up required." />
   <meta property="og:url" content="https://www.studytools.pro/study-assistant.html" />
   <meta property="og:image" content="https://www.studytools.pro/og-image.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"WebApplication","name":"StudyTools AI Tutor","url":"https://www.studytools.pro/study-assistant.html","description":"Free AI tutor and study assistant for students.","applicationCategory":"EducationalApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is this AI tutor free for students?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, this AI tutor is completely free for students. Free users can ask up to 5 questions per day without signing up."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What subjects can the AI tutor help with?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The AI tutor works for math, science, history, literature, economics, and most academic subjects. It can explain concepts, solve problems step by step, and create study plans."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I use this for homework help?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes — the AI tutor is designed to help you understand concepts, not just give answers. It provides step-by-step explanations and guidance to help you learn."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is there a limit to how many questions I can ask?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Free users can ask up to 5 questions per day. For unlimited access and additional features, upgrade to Pro for $3.99/month."
+        }
+      }
+    ]
+  }
   </script>
   
   <!-- Premium Limits System -->
@@ -37,8 +78,8 @@
     <main class="shell">
       <aside class="side">
         <div class="eyebrow">Free AI tutor</div>
-        <h1>Ask anything. Learn it step by step.</h1>
-        <p>Use this AI tutor to explain homework, quiz you before an exam, simplify notes or create a study plan. Write naturally, even with mistakes.</p>
+        <h1>Free AI Tutor for Students</h1>
+        <p>Ask homework questions, get step-by-step explanations, create quizzes, and generate study plans. Write naturally, even with mistakes. No sign-up required.</p>
         <div class="quick">
           <button onclick="usePrompt('Explain this topic like I am 15: photosynthesis')">Explain a topic simply</button>
           <button onclick="usePrompt('Quiz me on this topic one question at a time: World War I causes')">Quiz me for an exam</button>
@@ -63,26 +104,37 @@
     function resizeInput(){ const el=document.getElementById('input'); el.style.height='auto'; el.style.height=Math.min(el.scrollHeight,160)+'px'; }
     function addMsg(text,type){ const d=document.createElement('div'); d.className='msg '+type; d.textContent=text; document.getElementById('msgs').appendChild(d); document.getElementById('msgs').scrollTop=document.getElementById('msgs').scrollHeight; }
     
-    async function sendMsg(){ 
-      const input=document.getElementById('input'); 
-      const text=input.value.trim(); 
-      
-      if(!text) return; 
-      
-      input.value=''; 
-      resizeInput(); 
-      addMsg(text,'user'); 
-      messages.push({role:'user',content:text}); 
-      document.getElementById('send').disabled=true; 
+    async function sendMsg(){
+      const input=document.getElementById('input');
+      const text=input.value.trim();
+
+      if(!text) return;
+
+      // Check usage limits
+      if (window.PremiumLimits && PremiumLimits.hasReachedLimit('aiTutorMessages')) {
+        PremiumLimits.showUpgradePrompt('AI tutor messages');
+        return;
+      }
+
+      input.value='';
+      resizeInput();
+      addMsg(text,'user');
+      messages.push({role:'user',content:text});
+      document.getElementById('send').disabled=true;
       document.getElementById('status').textContent='Thinking...';
       
       try{ 
         const res=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({system,messages})}); 
         const data=await res.json(); 
         if(!res.ok) throw new Error(data.error||'AI service error'); 
-        const reply=data.reply||'I could not answer. Try again.'; 
-        messages.push({role:'assistant',content:reply}); 
+        const reply=data.reply||'I could not answer. Try again.';
+        messages.push({role:'assistant',content:reply});
         addMsg(reply,'ai');
+
+        // Increment usage
+        if (window.PremiumLimits) {
+          PremiumLimits.incrementUsage('aiTutorMessages');
+        }
       }
       catch(e){ addMsg('Error: '+(e.message||'Please try again.'),'err'); }
       document.getElementById('send').disabled=false; 
@@ -99,7 +151,49 @@
         }
       }
     }
-    
+
+    // Initialize usage counter on load
+    document.addEventListener('DOMContentLoaded', function() {
+      if (window.PremiumLimits) {
+        const remaining = PremiumLimits.getRemainingUsage('aiTutorMessages');
+        const status = document.getElementById('status');
+        if (status && remaining < 999) {
+          status.textContent = remaining + ' messages remaining today';
+        }
+      }
+    });
+
   </script>
+
+  <!-- SEO CONTENT -->
+  <div style="max-width: 1120px; margin: 0 auto; padding: 2rem 28px 4rem;">
+    <h2 style="font-family: 'Syne', sans-serif; font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem; color: #f4f6fb;">Why Students Use This Free AI Tutor</h2>
+    <p style="color: #99a1b8; margin-bottom: 1rem; line-height: 1.6;">This free AI tutor helps students understand difficult concepts across all subjects. Instead of just giving answers, it provides step-by-step explanations that teach you the reasoning behind each solution. Whether you're stuck on a math problem, need help understanding a science concept, or want to break down a history essay, this AI tutor adapts to your learning level.</p>
+    <p style="color: #99a1b8; margin-bottom: 1rem; line-height: 1.6;">Students use this AI tutor for homework help, exam preparation, and concept review. The tutor explains complex ideas in simple language, making it easier to grasp difficult topics. You can ask questions about algebra, calculus, chemistry, physics, history, literature, economics, and more. For more study strategies, check out our guide on <a href="/how-to-study-for-an-exam-in-one-week.html" style="color: #6f7cff;">how to study for an exam in one week</a>.</p>
+    <p style="color: #99a1b8; margin-bottom: 1rem; line-height: 1.6;">This AI tutor is particularly useful for STEM subjects where showing your work is essential. It excels at humanities questions by breaking down essay prompts and explaining key historical events. Use it alongside your regular study routine to reinforce what you learn in class. The tutor can also create quizzes to test your understanding and generate personalized study plans.</p>
+    <p style="color: #99a1b8; line-height: 1.6;">The tool is designed to be a learning assistant, not a cheating shortcut. By reading through the step-by-step explanations, you build problem-solving skills that help you perform better on actual exams. Try asking a question today and see how clear explanations can improve your understanding.</p>
+  </div>
+
+  <!-- FAQ SECTION -->
+  <div style="max-width: 1120px; margin: 0 auto; padding: 0 28px 4rem;">
+    <h2 style="font-family: 'Syne', sans-serif; font-size: 1.5rem; font-weight: 700; margin-bottom: 1.5rem; color: #f4f6fb;">Frequently Asked Questions</h2>
+    <div style="border-bottom: 1px solid rgba(255,255,255,0.12); padding: 1.25rem 0;">
+      <div style="font-weight: 600; color: #f4f6fb; margin-bottom: 0.75rem;">Is this AI tutor free for students?</div>
+      <div style="color: #99a1b8; font-size: 0.95rem;">Yes, this AI tutor is completely free for students. Free users can ask up to 5 questions per day without signing up.</div>
+    </div>
+    <div style="border-bottom: 1px solid rgba(255,255,255,0.12); padding: 1.25rem 0;">
+      <div style="font-weight: 600; color: #f4f6fb; margin-bottom: 0.75rem;">What subjects can the AI tutor help with?</div>
+      <div style="color: #99a1b8; font-size: 0.95rem;">The AI tutor works for math, science, history, literature, economics, and most academic subjects. It can explain concepts, solve problems step by step, and create study plans.</div>
+    </div>
+    <div style="border-bottom: 1px solid rgba(255,255,255,0.12); padding: 1.25rem 0;">
+      <div style="font-weight: 600; color: #f4f6fb; margin-bottom: 0.75rem;">Can I use this for homework help?</div>
+      <div style="color: #99a1b8; font-size: 0.95rem;">Yes — the AI tutor is designed to help you understand concepts, not just give answers. It provides step-by-step explanations and guidance to help you learn.</div>
+    </div>
+    <div style="padding: 1.25rem 0;">
+      <div style="font-weight: 600; color: #f4f6fb; margin-bottom: 0.75rem;">Is there a limit to how many questions I can ask?</div>
+      <div style="color: #99a1b8; font-size: 0.95rem;">Free users can ask up to 5 questions per day. For unlimited access and additional features, upgrade to Pro for $3.99/month.</div>
+    </div>
+  </div>
+
 </body>
 </html>

@@ -1,0 +1,11 @@
+{
+  "name": "studytools-email-automation",
+  "version": "1.0.0",
+  "description": "Email automation for StudyTools",
+  "scripts": {
+    "send-update": "node .github/scripts/send-update-email.js"
+  },
+  "dependencies": {
+    "resend": "^3.2.0"
+  }
+}

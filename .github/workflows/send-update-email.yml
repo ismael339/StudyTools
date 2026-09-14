@@ -1,0 +1,35 @@
+name: Send Update Email to Users
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  send-email:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Get commit message
+        id: commit
+        run: |
+          COMMIT_MESSAGE=$(git log -1 --pretty=%B)
+          echo "message=$COMMIT_MESSAGE" >> $GITHUB_OUTPUT
+
+      - name: Send update emails
+        env:
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          FIREBASE_PROJECT_ID: ${{ secrets.FIREBASE_PROJECT_ID }}
+          FIREBASE_API_KEY: ${{ secrets.FIREBASE_API_KEY }}
+          COMMIT_MESSAGE: ${{ steps.commit.outputs.message }}
+        run: node .github/scripts/send-update-email.js

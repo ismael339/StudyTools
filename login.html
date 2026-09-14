@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login - StudyTools</title>
+  <meta name="description" content="Login to your StudyTools account to access premium features and track your progress." />
+  <link rel="canonical" href="https://www.studytools.pro/login.html" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root{--bg:#090a10;--card:#111421;--text:#f4f6fb;--muted:#99a1b8;--accent:#6f7cff;--mint:#4fd1c5}
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;line-height:1.6;min-height:100vh;display:flex;align-items:center;justify-content:center}
+    .container{max-width:400px;width:90%;padding:2rem}
+    .card{background:var(--card);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:2rem}
+    h1{font-family:'Syne',sans-serif;font-size:1.8rem;font-weight:700;margin-bottom:0.5rem;text-align:center}
+    .subtitle{color:var(--muted);text-align:center;margin-bottom:2rem;font-size:0.9rem}
+    .form-group{margin-bottom:1rem}
+    label{display:block;color:var(--muted);font-size:0.85rem;margin-bottom:0.5rem;font-weight:600}
+    input{width:100%;padding:0.75rem;border:1px solid rgba(255,255,255,0.1);border-radius:6px;background:#090a10;color:var(--text);font-size:1rem}
+    input:focus{outline:none;border-color:var(--accent)}
+    .btn{width:100%;padding:0.75rem;border:none;border-radius:6px;font-weight:700;cursor:pointer;font-size:1rem;margin-top:1rem}
+    .btn-primary{background:linear-gradient(135deg,var(--accent),var(--mint));color:#000}
+    .btn-secondary{background:transparent;border:1px solid rgba(255,255,255,0.1);color:var(--text);margin-top:0.5rem}
+    .links{text-align:center;margin-top:1.5rem;font-size:0.85rem}
+    .links a{color:var(--accent);text-decoration:none}
+    .error{color:#ff6b7a;font-size:0.85rem;margin-top:1rem;text-align:center;display:none}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <h1>🎓 Login</h1>
+      <p class="subtitle">Accede a tu cuenta StudyTools</p>
+      
+      <form id="login-form">
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" id="email" required placeholder="tu@email.com">
+        </div>
+        <div class="form-group">
+          <label>Contraseña</label>
+          <input type="password" id="password" required placeholder="•••••••••">
+        </div>
+        <button type="submit" class="btn btn-primary">Iniciar sesión</button>
+      </form>
+      
+      <div class="error" id="error"></div>
+      
+      <div class="links">
+        <p>¿No tienes cuenta? <a href="/register.html">Regístrate gratis</a></p>
+        <p><a href="/">Volver al inicio</a></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+  <script src="/js/firebase-config.js"></script>
+  <script>
+    try {
+      firebase.initializeApp(firebaseConfig);
+      console.log('Firebase initialized successfully');
+    } catch (error) {
+      console.error('Firebase initialization error:', error);
+    }
+    const auth = firebase.auth();
+
+    document.getElementById('login-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const errorDiv = document.getElementById('error');
+
+      try {
+        await auth.signInWithEmailAndPassword(email, password);
+        window.location.href = '/profile.html';
+      } catch (error) {
+        errorDiv.textContent = 'Email o contraseña incorrectos';
+        errorDiv.style.display = 'block';
+      }
+    });
+  </script>
+</body>
+</html>

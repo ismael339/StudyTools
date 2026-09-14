@@ -8,3 +8,12 @@ const firebaseConfig = {
   appId: "1:444074505899:web:0bc0044a9e1e42d6a3a9ee",
   measurementId: "G-HHLZRTX7WN"
 };
+
+// Check if user is logged in
+function isUserLoggedIn() {
+  return localStorage.getItem('studytools_logged_in') === 'true';
+}
+
+function getCurrentUserEmail() {
+  return localStorage.getItem('studytools_user_email');
+}

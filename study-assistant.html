@@ -213,21 +213,23 @@
   <!-- STICKY BANNER -->
   <div id="sticky-banner" style="position: fixed; bottom: 0; left: 0; right: 0; background: linear-gradient(135deg, #6f7cff, #4fd1c5); padding: 1rem; text-align: center; z-index: 1000; display: none;">
     <div style="max-width: 1120px; margin: 0 auto; display: flex; align-items: center; justify-content: center; gap: 1rem; flex-wrap: wrap;">
-      <span style="color: white; font-weight: 600; font-size: 0.95rem;">¿Quieres guardar tu progreso? Crea cuenta gratis</span>
-      <button onclick="showEmailPopup()" style="background: white; color: #6f7cff; border: none; padding: 0.5rem 1rem; border-radius: 6px; font-weight: 700; cursor: pointer; font-size: 0.9rem;">Crear cuenta</button>
+      <span style="color: white; font-weight: 600; font-size: 0.95rem;">¿Quieres guardar tu progreso y ganar logros? Crea cuenta gratis</span>
+      <button onclick="showLoginPopup()" style="background: white; color: #6f7cff; border: none; padding: 0.5rem 1rem; border-radius: 6px; font-weight: 700; cursor: pointer; font-size: 0.9rem;">Crear cuenta</button>
       <button onclick="closeBanner()" style="background: transparent; border: 1px solid rgba(255,255,255,0.3); color: white; padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer; font-size: 0.85rem;">✕</button>
     </div>
   </div>
 
-  <!-- EMAIL POPUP -->
-  <div id="email-popup" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); display: none; align-items: center; justify-content: center; z-index: 2000;">
+  <!-- LOGIN POPUP -->
+  <div id="login-popup" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); display: none; align-items: center; justify-content: center; z-index: 2000;">
     <div style="background: #111421; border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 2rem; max-width: 400px; width: 90%; text-align: center;">
       <div style="font-size: 2rem; margin-bottom: 1rem;">🎓</div>
       <h3 style="font-family: 'Syne', sans-serif; font-size: 1.3rem; font-weight: 700; margin-bottom: 0.5rem; color: #f4f6fb;">Únete a +500 estudiantes</h3>
-      <p style="color: #99a1b8; margin-bottom: 1.5rem; font-size: 0.95rem;">Guarda tu progreso, accede a más usos diarios y recibe tips de estudio.</p>
-      <input type="email" id="email-input" placeholder="tu@email.com" style="width: 100%; padding: 0.75rem; border: 1px solid rgba(255,255,255,0.1); border-radius: 6px; background: #090a10; color: #f4f6fb; margin-bottom: 1rem; font-size: 0.95rem;">
-      <button onclick="submitEmail()" style="width: 100%; background: linear-gradient(135deg, #6f7cff, #4fd1c5); color: white; border: none; padding: 0.75rem; border-radius: 6px; font-weight: 700; cursor: pointer; font-size: 0.95rem;">Empezar gratis</button>
-      <button onclick="closeEmailPopup()" style="background: transparent; border: none; color: #99a1b8; padding: 0.75rem; cursor: pointer; font-size: 0.85rem; margin-top: 0.5rem;">Quizás más tarde</button>
+      <p style="color: #99a1b8; margin-bottom:1.5rem; font-size: 0.95rem;">Guarda tu progreso, accede a más usos diarios, gana logros y recibe tips de estudio.</p>
+      <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+        <button onclick="showRegister()" style="flex: 1; background: linear-gradient(135deg, #6f7cff, #4fd1c5); color: white; border: none; padding: 0.75rem; border-radius: 6px; font-weight: 700; cursor: pointer; font-size: 0.9rem;">Crear cuenta</button>
+        <button onclick="showLogin()" style="flex: 1; background: transparent; border: 1px solid rgba(255,255,255,0.1); color: #99a1b8; padding: 0.75rem; border-radius: 6px; font-weight: 700; cursor: pointer; font-size: 0.9rem;">Iniciar sesión</button>
+      </div>
+      <button onclick="closeLoginPopup()" style="background: transparent; border: none; color: #99a1b8; padding: 0.75rem; cursor: pointer; font-size: 0.85rem;">Quizás más tarde</button>
     </div>
   </div>
 
@@ -244,60 +246,20 @@
       localStorage.setItem('studytools_banner_closed', 'true');
     }
 
-    function showEmailPopup() {
-      document.getElementById('email-popup').style.display = 'flex';
+    function showLoginPopup() {
+      document.getElementById('login-popup').style.display = 'flex';
     }
 
-    function closeEmailPopup() {
-      document.getElementById('email-popup').style.display = 'none';
+    function closeLoginPopup() {
+      document.getElementById('login-popup').style.display = 'none';
     }
 
-    function submitEmail() {
-      const email = document.getElementById('email-input').value;
-      console.log('submitEmail called with email:', email);
+    function showRegister() {
+      window.location.href = '/register.html';
+    }
 
-      if (email && email.includes('@')) {
-        console.log('Email is valid, attempting to save to Firebase');
-        // Save to Firebase Firestore
-        if (typeof firebase !== 'undefined') {
-          console.log('Firebase is available');
-          const db = firebase.firestore();
-          db.collection('emails').add({
-            email: email,
-            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-            source: 'study-assistant'
-          })
-          .then(() => {
-            console.log('Email saved to Firebase successfully');
-            localStorage.setItem('studytools_email', email);
-            localStorage.setItem('studytools_banner_closed', 'true');
-            document.getElementById('email-popup').style.display = 'none';
-            document.getElementById('sticky-banner').style.display = 'none';
-            alert('¡Gracias! Te hemos enviado un correo de confirmación.');
-          })
-          .catch((error) => {
-            console.error('Error saving email:', error);
-            // Fallback to localStorage if Firebase fails
-            console.log('Firebase failed, using localStorage fallback');
-            localStorage.setItem('studytools_email', email);
-            localStorage.setItem('studytools_banner_closed', 'true');
-            document.getElementById('email-popup').style.display = 'none';
-            document.getElementById('sticky-banner').style.display = 'none';
-            alert('¡Gracias! Te hemos registrado.');
-          });
-        } else {
-          console.log('Firebase is not available, using localStorage fallback');
-          // Fallback if Firebase not loaded
-          localStorage.setItem('studytools_email', email);
-          localStorage.setItem('studytools_banner_closed', 'true');
-          document.getElementById('email-popup').style.display = 'none';
-          document.getElementById('sticky-banner').style.display = 'none';
-          alert('¡Gracias! Te hemos enviado un correo de confirmación.');
-        }
-      } else {
-        console.log('Email is invalid');
-        alert('Por favor, introduce un email válido');
-      }
+    function showLogin() {
+      window.location.href = '/login.html';
     }
 
     // Show popup on 2nd use

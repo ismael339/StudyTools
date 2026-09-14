@@ -1,53 +1,87 @@
 // Navigation and user menu system for StudyTools
 
 function initNavigation() {
-  const auth = firebase.auth();
+  console.log('initNavigation called');
+  const navContainer = document.getElementById('user-nav');
 
-  auth.onAuthStateChanged((user) => {
-    const navContainer = document.getElementById('user-nav');
-    if (!navContainer) return;
+  if (!navContainer) {
+    console.error('user-nav element not found');
+    return;
+  }
 
-    if (user) {
-      // User is logged in - show avatar with dropdown
-      navContainer.innerHTML = `
-        <div class="user-menu">
-          <div class="user-avatar" onclick="toggleUserMenu()">
-            <span class="avatar-letter">${user.email[0].toUpperCase()}</span>
-          </div>
-          <div class="user-dropdown" id="user-dropdown" style="display: none;">
-            <div class="dropdown-header">
-              <div class="dropdown-avatar">${user.email[0].toUpperCase()}</div>
-              <div class="dropdown-info">
-                <div class="dropdown-email">${user.email}</div>
-                <div class="dropdown-plan">Plan Free</div>
-              </div>
+  console.log('user-nav element found');
+
+  // Check if Firebase is available
+  if (typeof firebase === 'undefined') {
+    console.error('Firebase is not available');
+    navContainer.innerHTML = `
+      <button class="login-btn" onclick="showLoginModal()">
+        <span>👤</span> Iniciar sesión
+      </button>
+    `;
+    return;
+  }
+
+  console.log('Firebase is available');
+
+  try {
+    const auth = firebase.auth();
+    console.log('Firebase auth initialized');
+
+    auth.onAuthStateChanged((user) => {
+      console.log('Auth state changed, user:', user ? user.email : 'not logged in');
+
+      if (user) {
+        // User is logged in - show avatar with dropdown
+        navContainer.innerHTML = `
+          <div class="user-menu">
+            <div class="user-avatar" onclick="toggleUserMenu()">
+              <span class="avatar-letter">${user.email[0].toUpperCase()}</span>
             </div>
-            <div class="dropdown-divider"></div>
-            <a href="/profile.html" class="dropdown-item">
-              <span>👤</span> Mi perfil
-            </a>
-            <a href="/pricing.html" class="dropdown-item">
-              <span>⭐</span> Mejorar plan
-            </a>
-            <a href="/privacy.html" class="dropdown-item">
-              <span>🔒</span> Privacidad
-            </a>
-            <div class="dropdown-divider"></div>
-            <a href="#" onclick="logout()" class="dropdown-item logout">
-              <span>🚪</span> Cerrar sesión
-            </a>
+            <div class="user-dropdown" id="user-dropdown" style="display: none;">
+              <div class="dropdown-header">
+                <div class="dropdown-avatar">${user.email[0].toUpperCase()}</div>
+                <div class="dropdown-info">
+                  <div class="dropdown-email">${user.email}</div>
+                  <div class="dropdown-plan">Plan Free</div>
+                </div>
+              </div>
+              <div class="dropdown-divider"></div>
+              <a href="/profile.html" class="dropdown-item">
+                <span>👤</span> Mi perfil
+              </a>
+              <a href="/pricing.html" class="dropdown-item">
+                <span>⭐</span> Mejorar plan
+              </a>
+              <a href="/privacy.html" class="dropdown-item">
+                <span>🔒</span> Privacidad
+              </a>
+              <div class="dropdown-divider"></div>
+              <a href="#" onclick="logout()" class="dropdown-item logout">
+                <span>🚪</span> Cerrar sesión
+              </a>
+            </div>
           </div>
-        </div>
-      `;
-    } else {
-      // User is not logged in - show login button
-      navContainer.innerHTML = `
-        <button class="login-btn" onclick="showLoginModal()">
-          <span>👤</span> Iniciar sesión
-        </button>
-      `;
-    }
-  });
+        `;
+        console.log('User menu rendered');
+      } else {
+        // User is not logged in - show login button
+        navContainer.innerHTML = `
+          <button class="login-btn" onclick="showLoginModal()">
+            <span>👤</span> Iniciar sesión
+          </button>
+        `;
+        console.log('Login button rendered');
+      }
+    });
+  } catch (error) {
+    console.error('Error initializing Firebase auth:', error);
+    navContainer.innerHTML = `
+      <button class="login-btn" onclick="showLoginModal()">
+        <span>👤</span> Iniciar sesión
+      </button>
+    `;
+  }
 }
 
 function toggleUserMenu() {

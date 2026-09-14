@@ -69,6 +69,15 @@
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
   <script src="/js/firebase-config.js"></script>
+  <script>
+    // Initialize Firebase
+    try {
+      firebase.initializeApp(firebaseConfig);
+      console.log('Firebase initialized successfully');
+    } catch (error) {
+      console.error('Firebase initialization error:', error);
+    }
+  </script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -245,9 +254,13 @@
 
     function submitEmail() {
       const email = document.getElementById('email-input').value;
+      console.log('submitEmail called with email:', email);
+
       if (email && email.includes('@')) {
+        console.log('Email is valid, attempting to save to Firebase');
         // Save to Firebase Firestore
         if (typeof firebase !== 'undefined') {
+          console.log('Firebase is available');
           const db = firebase.firestore();
           db.collection('emails').add({
             email: email,
@@ -255,6 +268,7 @@
             source: 'study-assistant'
           })
           .then(() => {
+            console.log('Email saved to Firebase successfully');
             localStorage.setItem('studytools_email', email);
             localStorage.setItem('studytools_banner_closed', 'true');
             document.getElementById('email-popup').style.display = 'none';
@@ -264,6 +278,7 @@
           .catch((error) => {
             console.error('Error saving email:', error);
             // Fallback to localStorage if Firebase fails
+            console.log('Firebase failed, using localStorage fallback');
             localStorage.setItem('studytools_email', email);
             localStorage.setItem('studytools_banner_closed', 'true');
             document.getElementById('email-popup').style.display = 'none';
@@ -271,6 +286,7 @@
             alert('¡Gracias! Te hemos registrado.');
           });
         } else {
+          console.log('Firebase is not available, using localStorage fallback');
           // Fallback if Firebase not loaded
           localStorage.setItem('studytools_email', email);
           localStorage.setItem('studytools_banner_closed', 'true');
@@ -279,6 +295,7 @@
           alert('¡Gracias! Te hemos enviado un correo de confirmación.');
         }
       } else {
+        console.log('Email is invalid');
         alert('Por favor, introduce un email válido');
       }
     }

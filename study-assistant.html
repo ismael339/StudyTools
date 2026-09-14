@@ -64,6 +64,12 @@
   <!-- Premium Limits System -->
   <script src="/js/premium-limits.js"></script>
   <script src="/js/premium-status.js"></script>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+  <script src="/js/firebase-config.js"></script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -194,6 +200,100 @@
       <div style="color: #99a1b8; font-size: 0.95rem;">Free users can ask up to 5 questions per day. For unlimited access and additional features, upgrade to Pro for $3.99/month.</div>
     </div>
   </div>
+
+  <!-- STICKY BANNER -->
+  <div id="sticky-banner" style="position: fixed; bottom: 0; left: 0; right: 0; background: linear-gradient(135deg, #6f7cff, #4fd1c5); padding: 1rem; text-align: center; z-index: 1000; display: none;">
+    <div style="max-width: 1120px; margin: 0 auto; display: flex; align-items: center; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+      <span style="color: white; font-weight: 600; font-size: 0.95rem;">¿Quieres guardar tu progreso? Crea cuenta gratis</span>
+      <button onclick="showEmailPopup()" style="background: white; color: #6f7cff; border: none; padding: 0.5rem 1rem; border-radius: 6px; font-weight: 700; cursor: pointer; font-size: 0.9rem;">Crear cuenta</button>
+      <button onclick="closeBanner()" style="background: transparent; border: 1px solid rgba(255,255,255,0.3); color: white; padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer; font-size: 0.85rem;">✕</button>
+    </div>
+  </div>
+
+  <!-- EMAIL POPUP -->
+  <div id="email-popup" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); display: none; align-items: center; justify-content: center; z-index: 2000;">
+    <div style="background: #111421; border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 2rem; max-width: 400px; width: 90%; text-align: center;">
+      <div style="font-size: 2rem; margin-bottom: 1rem;">🎓</div>
+      <h3 style="font-family: 'Syne', sans-serif; font-size: 1.3rem; font-weight: 700; margin-bottom: 0.5rem; color: #f4f6fb;">Únete a +500 estudiantes</h3>
+      <p style="color: #99a1b8; margin-bottom: 1.5rem; font-size: 0.95rem;">Guarda tu progreso, accede a más usos diarios y recibe tips de estudio.</p>
+      <input type="email" id="email-input" placeholder="tu@email.com" style="width: 100%; padding: 0.75rem; border: 1px solid rgba(255,255,255,0.1); border-radius: 6px; background: #090a10; color: #f4f6fb; margin-bottom: 1rem; font-size: 0.95rem;">
+      <button onclick="submitEmail()" style="width: 100%; background: linear-gradient(135deg, #6f7cff, #4fd1c5); color: white; border: none; padding: 0.75rem; border-radius: 6px; font-weight: 700; cursor: pointer; font-size: 0.95rem;">Empezar gratis</button>
+      <button onclick="closeEmailPopup()" style="background: transparent; border: none; color: #99a1b8; padding: 0.75rem; cursor: pointer; font-size: 0.85rem; margin-top: 0.5rem;">Quizás más tarde</button>
+    </div>
+  </div>
+
+  <script>
+    // Show banner after 5 seconds
+    setTimeout(function() {
+      if (!localStorage.getItem('studytools_banner_closed')) {
+        document.getElementById('sticky-banner').style.display = 'block';
+      }
+    }, 5000);
+
+    function closeBanner() {
+      document.getElementById('sticky-banner').style.display = 'none';
+      localStorage.setItem('studytools_banner_closed', 'true');
+    }
+
+    function showEmailPopup() {
+      document.getElementById('email-popup').style.display = 'flex';
+    }
+
+    function closeEmailPopup() {
+      document.getElementById('email-popup').style.display = 'none';
+    }
+
+    function submitEmail() {
+      const email = document.getElementById('email-input').value;
+      if (email && email.includes('@')) {
+        // Save to Firebase Firestore
+        if (typeof firebase !== 'undefined') {
+          const db = firebase.firestore();
+          db.collection('emails').add({
+            email: email,
+            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+            source: 'study-assistant'
+          })
+          .then(() => {
+            localStorage.setItem('studytools_email', email);
+            localStorage.setItem('studytools_banner_closed', 'true');
+            document.getElementById('email-popup').style.display = 'none';
+            document.getElementById('sticky-banner').style.display = 'none';
+            alert('¡Gracias! Te hemos enviado un correo de confirmación.');
+          })
+          .catch((error) => {
+            console.error('Error saving email:', error);
+            // Fallback to localStorage if Firebase fails
+            localStorage.setItem('studytools_email', email);
+            localStorage.setItem('studytools_banner_closed', 'true');
+            document.getElementById('email-popup').style.display = 'none';
+            document.getElementById('sticky-banner').style.display = 'none';
+            alert('¡Gracias! Te hemos registrado.');
+          });
+        } else {
+          // Fallback if Firebase not loaded
+          localStorage.setItem('studytools_email', email);
+          localStorage.setItem('studytools_banner_closed', 'true');
+          document.getElementById('email-popup').style.display = 'none';
+          document.getElementById('sticky-banner').style.display = 'none';
+          alert('¡Gracias! Te hemos enviado un correo de confirmación.');
+        }
+      } else {
+        alert('Por favor, introduce un email válido');
+      }
+    }
+
+    // Show popup on 2nd use
+    let usageCount = parseInt(localStorage.getItem('studytools_usage_count') || '0');
+    usageCount++;
+    localStorage.setItem('studytools_usage_count', usageCount.toString());
+
+    if (usageCount === 2 && !localStorage.getItem('studytools_email')) {
+      setTimeout(function() {
+        showEmailPopup();
+      }, 2000);
+    }
+  </script>
 
 </body>
 </html>

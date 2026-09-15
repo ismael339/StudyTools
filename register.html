@@ -51,6 +51,12 @@
         </div>
         <button type="submit" class="btn btn-primary">Crear cuenta gratis</button>
       </form>
+
+      <div style="text-align: center; margin: 1.5rem 0; color: var(--muted); font-size: 0.85rem;">O continúa con</div>
+
+      <button onclick="signInWithGoogle()" class="btn btn-secondary" style="display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
+        <span style="font-size: 1.2rem;">G</span> Google
+      </button>
       
       <div class="error" id="error"></div>
       
@@ -89,7 +95,17 @@
       }
 
       try {
-        await auth.createUserWithEmailAndPassword(email, password);
+        try {
+          await auth.createUserWithEmailAndPassword(email, password);
+        } catch (createError) {
+          if (createError.code === 'auth/email-already-in-use') {
+            errorDiv.textContent = 'Este email ya está registrado. Inicia sesión en su lugar.';
+            errorDiv.style.display = 'block';
+            return;
+          }
+          throw createError;
+        }
+
         // Save user data to Firestore
         const db = firebase.firestore();
         await db.collection('users').doc(email).set({
@@ -106,6 +122,36 @@
         errorDiv.style.display = 'block';
       }
     });
+
+    async function signInWithGoogle() {
+      const errorDiv = document.getElementById('error');
+      try {
+        const provider = new firebase.auth.GoogleAuthProvider();
+        const result = await auth.signInWithPopup(provider);
+
+        // Check if user document exists
+        const db = firebase.firestore();
+        const userDoc = await db.collection('users').doc(result.user.email).get();
+
+        if (!userDoc.exists) {
+          // Create user document if it doesn't exist
+          await db.collection('users').doc(result.user.email).set({
+            email: result.user.email,
+            name: result.user.displayName || 'Usuario',
+            createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+            plan: 'free',
+            usageCount: 0,
+            achievements: [],
+            badges: []
+          });
+        }
+
+        window.location.href = '/profile.html';
+      } catch (error) {
+        errorDiv.textContent = 'Error: ' + error.message;
+        errorDiv.style.display = 'block';
+      }
+    }
   </script>
 </body>
 </html>

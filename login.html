@@ -47,6 +47,12 @@
         </div>
         <button type="submit" class="btn btn-primary">Iniciar sesión</button>
       </form>
+
+      <div style="text-align: center; margin: 1.5rem 0; color: var(--muted); font-size: 0.85rem;">O continúa con</div>
+
+      <button onclick="signInWithGoogle()" class="btn btn-secondary" style="display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
+        <span style="font-size: 1.2rem;">G</span> Google
+      </button>
       
       <div class="error" id="error"></div>
       
@@ -84,6 +90,36 @@
         errorDiv.style.display = 'block';
       }
     });
+
+    async function signInWithGoogle() {
+      const errorDiv = document.getElementById('error');
+      try {
+        const provider = new firebase.auth.GoogleAuthProvider();
+        const result = await auth.signInWithPopup(provider);
+
+        // Check if user document exists
+        const db = firebase.firestore();
+        const userDoc = await db.collection('users').doc(result.user.email).get();
+
+        if (!userDoc.exists) {
+          // Create user document if it doesn't exist
+          await db.collection('users').doc(result.user.email).set({
+            email: result.user.email,
+            name: result.user.displayName || 'Usuario',
+            createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+            plan: 'free',
+            usageCount: 0,
+            achievements: [],
+            badges: []
+          });
+        }
+
+        window.location.href = '/profile.html';
+      } catch (error) {
+        errorDiv.textContent = 'Error: ' + error.message;
+        errorDiv.style.display = 'block';
+      }
+    }
   </script>
 </body>
 </html>

@@ -9,6 +9,20 @@ const firebaseConfig = {
   measurementId: "G-HHLZRTX7WN"
 };
 
+// Initialize Firebase with persistence for auto-login
+if (typeof firebase !== 'undefined') {
+  firebase.initializeApp(firebaseConfig);
+
+  // Set auth persistence to LOCAL for auto-login
+  firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+    .then(() => {
+      console.log('Firebase auth persistence set to LOCAL');
+    })
+    .catch((error) => {
+      console.error('Error setting auth persistence:', error);
+    });
+}
+
 // Check if user is logged in
 function isUserLoggedIn() {
   return localStorage.getItem('studytools_logged_in') === 'true';

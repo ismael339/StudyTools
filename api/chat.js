@@ -17,8 +17,8 @@ export default async function handler(req, res) {
   console.log('Using Hugging Face API key:', apiKey.substring(0, 10) + '...');
 
   try {
-    // Use basic Hugging Face Inference API endpoint
-    const response = await fetch('https://api-inference.huggingface.co/models/mistralai/Mistral-7B-Instruct-v0.2', {
+    // Use correct Hugging Face Inference API endpoint
+    const response = await fetch('https://huggingface.co/api/inference/models/mistralai/Mistral-7B-Instruct-v0.2', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

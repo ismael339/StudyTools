@@ -18,7 +18,7 @@ export default async function handler(req, res) {
     const prompt = messages.map(m => `${m.role}: ${m.content}`).join('\n');
     const fullPrompt = `${system}\n\n${prompt}`;
 
-    const response = await fetch('https://api-inference.huggingface.co/models/meta-llama/Meta-Llama-3.1-70B-Instruct', {
+    const response = await fetch('https://api-inference.huggingface.co/models/mistralai/Mistral-7B-Instruct-v0.2', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

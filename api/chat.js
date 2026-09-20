@@ -31,7 +31,7 @@ export default async function handler(req, res) {
           message: m.content
         })),
         preamble: system || 'You are a helpful AI study assistant.',
-        model: 'command-r',
+        model: 'command',
         max_tokens: 1500,
         temperature: 0.7
       })

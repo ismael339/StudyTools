@@ -9,27 +9,20 @@ jobs:
   send-email:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-
-      - name: Install dependencies
-        run: npm install
-
       - name: Get commit message
         id: commit
         run: |
           COMMIT_MESSAGE=$(git log -1 --pretty=%B)
           echo "message=${COMMIT_MESSAGE}" >> $GITHUB_OUTPUT
 
-      - name: Send update emails
-        env:
-          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
-          FIREBASE_PROJECT_ID: ${{ secrets.FIREBASE_PROJECT_ID }}
-          FIREBASE_API_KEY: ${{ secrets.FIREBASE_API_KEY }}
-          COMMIT_MESSAGE: ${{ steps.commit.outputs.message }}
-        run: node .github/scripts/send-update-email.js
+      - name: Send update email notification
+        run: |
+          curl -X POST https://api.resend.com/emails \
+            -H "Authorization: Bearer ${{ secrets.RESEND_API_KEY }}" \
+            -H "Content-Type: application/json" \
+            -d '{
+              "from": "StudyTools <noreply@studytools.pro>",
+              "to": ["ismael339@gmail.com"],
+              "subject": "🚀 StudyTools - Nueva actualización desplegada",
+              "html": "<!DOCTYPE html><html><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><title>StudyTools Update</title><style>body{font-family:Arial,sans-serif;line-height:1.6;color:#333;max-width:600px;margin:0 auto;padding:20px;background:#f4f4f4}.container{background:#fff;border-radius:10px;padding:30px;box-shadow:0 2px 10px rgba(0,0,0,.1)}.header{background:linear-gradient(135deg,#6f7cff,#4fd1c5);color:#fff;padding:20px;border-radius:10px 10px 0 0;text-align:center}.header h1{margin:0;font-size:24px}.content{padding:20px 0}.cta{background:linear-gradient(135deg,#6f7cff,#4fd1c5);color:#fff;padding:12px 30px;text-decoration:none;border-radius:5px;display:inline-block;margin:20px 0;font-weight:bold}.footer{margin-top:30px;padding-top:20px;border-top:1px solid #eee;color:#777;font-size:12px;text-align:center}</style></head><body><div class=\"container\"><div class=\"header\"><h1>🎓 StudyTools - Actualización desplegada</h1></div><div class=\"content\"><p>Hola,</p><p>Se ha desplegado una nueva actualización en StudyTools.</p><p><strong>Commit:</strong> '"${{ steps.commit.outputs.message }}"'</p><p><a href=\"https://www.studytools.pro\" class=\"cta\">Ver StudyTools →</a></p><p>Si hay algún problema, revisa el repositorio de GitHub.</p></div><div class=\"footer\"><p>© 2026 StudyTools.pro</p></div></div></body></html>"
+            }'

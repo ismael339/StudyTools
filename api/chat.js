@@ -14,23 +14,21 @@ export default async function handler(req, res) {
   }
 
   try {
-    // Format messages for Hugging Face
-    const prompt = messages.map(m => `${m.role}: ${m.content}`).join('\n');
-    const fullPrompt = `${system}\n\n${prompt}`;
-
-    const response = await fetch('https://api-inference.huggingface.co/models/mistralai/Mistral-7B-Instruct-v0.2', {
+    // Use OpenAI-compatible format that Hugging Face supports
+    const response = await fetch('https://api-inference.huggingface.co/models/mistralai/Mistral-7B-Instruct-v0.2/v1/chat/completions', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${apiKey}`
       },
       body: JSON.stringify({
-        inputs: fullPrompt,
-        parameters: {
-          max_new_tokens: 1500,
-          temperature: 0.7,
-          return_full_text: false
-        }
+        model: 'mistralai/Mistral-7B-Instruct-v0.2',
+        messages: [
+          { role: 'system', content: system || 'You are a helpful AI study assistant.' },
+          ...messages
+        ],
+        max_tokens: 1500,
+        temperature: 0.7
       })
     });
 
@@ -45,15 +43,7 @@ export default async function handler(req, res) {
     const data  = await response.json();
     console.log('Hugging Face response:', data);
 
-    // Handle different response formats
-    let reply = '';
-    if (Array.isArray(data) && data[0]) {
-      reply = data[0].generated_text || '';
-    } else if (data.generated_text) {
-      reply = data.generated_text;
-    } else if (data[0]?.generated_text) {
-      reply = data[0].generated_text;
-    }
+    const reply = data.choices?.[0]?.message?.content || '';
 
     if (!reply) {
       return res.status(500).json({ error: 'Empty response from Hugging Face' });

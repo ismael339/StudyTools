@@ -14,6 +14,10 @@ export default async function handler(req, res) {
   }
 
   try {
+    // Format messages for Hugging Face
+    const prompt = messages.map(m => `${m.role}: ${m.content}`).join('\n');
+    const fullPrompt = `${system}\n\n${prompt}`;
+
     const response = await fetch('https://api-inference.huggingface.co/models/meta-llama/Meta-Llama-3.1-70B-Instruct', {
       method: 'POST',
       headers: {
@@ -21,23 +25,35 @@ export default async function handler(req, res) {
         'Authorization': `Bearer ${apiKey}`
       },
       body: JSON.stringify({
-        inputs: system + '\n\n' + messages.map(m => `${m.role}: ${m.content}`).join('\n'),
+        inputs: fullPrompt,
         parameters: {
           max_new_tokens: 1500,
-          temperature: 0.7
+          temperature: 0.7,
+          return_full_text: false
         }
       })
     });
 
     if (!response.ok) {
-      const err = await response.json();
+      const errorText = await response.text();
+      console.error('Hugging Face API error:', errorText);
       return res.status(response.status).json({
-        error: err.error || 'Hugging Face API error'
+        error: `Hugging Face API error: ${errorText}`
       });
     }
 
     const data  = await response.json();
-    const reply = data[0]?.generated_text || '';
+    console.log('Hugging Face response:', data);
+
+    // Handle different response formats
+    let reply = '';
+    if (Array.isArray(data) && data[0]) {
+      reply = data[0].generated_text || '';
+    } else if (data.generated_text) {
+      reply = data.generated_text;
+    } else if (data[0]?.generated_text) {
+      reply = data[0].generated_text;
+    }
 
     if (!reply) {
       return res.status(500).json({ error: 'Empty response from Hugging Face' });
@@ -47,6 +63,6 @@ export default async function handler(req, res) {
 
   } catch (error) {
     console.error('Hugging Face error:', error);
-    return res.status(500).json({ error: 'Internal server error' });
+    return res.status(500).json({ error: `Internal server error: ${error.message}` });
   }
 }

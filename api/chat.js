@@ -8,29 +8,32 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'Missing messages' });
   }
 
-  const apiKey = process.env.HUGGINGFACE_API_KEY;
+  const apiKey = process.env.COHERE_API_KEY;
   if (!apiKey) {
-    console.error('HUGGINGFACE_API_KEY not configured');
+    console.error('COHERE_API_KEY not configured');
     return res.status(500).json({ error: 'API key not configured in environment variables' });
   }
 
-  console.log('Using Hugging Face API key:', apiKey.substring(0, 10) + '...');
+  console.log('Using Cohere API key:', apiKey.substring(0, 10) + '...');
 
   try {
-    // Use correct Hugging Face Inference API endpoint
-    const response = await fetch('https://huggingface.co/api/inference/models/mistralai/Mistral-7B-Instruct-v0.2', {
+    const response = await fetch('https://api.cohere.ai/v1/chat', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${apiKey}`
+        'Authorization': `Bearer ${apiKey}`,
+        'X-Client-Name': 'StudyTools'
       },
       body: JSON.stringify({
-        inputs: system + '\n\n' + messages.map(m => `${m.role}: ${m.content}`).join('\n'),
-        parameters: {
-          max_new_tokens: 1500,
-          temperature: 0.7,
-          return_full_text: false
-        }
+        message: messages[messages.length - 1].content,
+        chat_history: messages.slice(0, -1).map(m => ({
+          role: m.role === 'assistant' ? 'CHATBOT' : 'USER',
+          message: m.content
+        })),
+        preamble: system || 'You are a helpful AI study assistant.',
+        model: 'command-r-plus',
+        max_tokens: 1500,
+        temperature: 0.7
       })
     });
 
@@ -38,35 +41,25 @@ export default async function handler(req, res) {
 
     if (!response.ok) {
       const errorText = await response.text();
-      console.error('Hugging Face API error:', errorText);
+      console.error('Cohere API error:', errorText);
       return res.status(response.status).json({
-        error: `Hugging Face API error: ${errorText}`
+        error: `Cohere API error: ${errorText}`
       });
     }
 
     const data  = await response.json();
-    console.log('Hugging Face response:', data);
+    console.log('Cohere response:', data);
 
-    // Handle different response formats
-    let reply = '';
-    if (Array.isArray(data) && data[0]) {
-      reply = data[0].generated_text || '';
-    } else if (data.generated_text) {
-      reply = data.generated_text;
-    } else if (data[0]?.generated_text) {
-      reply = data[0].generated_text;
-    }
-
-    console.log('Extracted reply:', reply);
+    const reply = data.text || '';
 
     if (!reply) {
-      return res.status(500).json({ error: 'Empty response from Hugging Face' });
+      return res.status(500).json({ error: 'Empty response from Cohere' });
     }
 
     return res.status(200).json({ reply });
 
   } catch (error) {
-    console.error('Hugging Face error:', error);
+    console.error('Cohere error:', error);
     return res.status(500).json({ error: `Internal server error: ${error.message}` });
   }
 }

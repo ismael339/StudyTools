@@ -8,20 +8,20 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'Missing messages' });
   }
 
-  const apiKey = process.env.OPENAI_API_KEY;
+  const apiKey = process.env.GROQ_API_KEY;
   if (!apiKey) {
     return res.status(500).json({ error: 'API key not configured' });
   }
 
   try {
-    const response = await fetch('https://api.openai.com/v1/chat/completions', {
+    const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${apiKey}`
       },
       body: JSON.stringify({
-        model: 'gpt-3.5-turbo',
+        model: 'llama-3.1-70b-versatile',
         messages: [
           { role: 'system', content: system || 'You are a helpful AI study assistant.' },
           ...messages
@@ -34,7 +34,7 @@ export default async function handler(req, res) {
     if (!response.ok) {
       const err = await response.json();
       return res.status(response.status).json({
-        error: err.error?.message || 'OpenAI API error'
+        error: err.error?.message || 'Groq API error'
       });
     }
 
@@ -42,13 +42,13 @@ export default async function handler(req, res) {
     const reply = data.choices?.[0]?.message?.content || '';
 
     if (!reply) {
-      return res.status(500).json({ error: 'Empty response from OpenAI' });
+      return res.status(500).json({ error: 'Empty response from Groq' });
     }
 
     return res.status(200).json({ reply });
 
   } catch (error) {
-    console.error('OpenAI error:', error);
+    console.error('Groq error:', error);
     return res.status(500).json({ error: 'Internal server error' });
   }
 }

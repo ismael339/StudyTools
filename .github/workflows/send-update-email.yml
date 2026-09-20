@@ -8,4 +8,15 @@ on:
 jobs:
   send-email:
     runs-on: ubuntu-latest
-    if: false  # Temporarily disabled
+    steps:
+      - name: Send simple notification
+        run: |
+          curl -X POST https://api.resend.com/emails \
+            -H "Authorization: Bearer ${{ secrets.RESEND_API_KEY }}" \
+            -H "Content-Type: application/json" \
+            -d '{
+              "from": "StudyTools <noreply@studytools.pro>",
+              "to": ["ismael339@gmail.com"],
+              "subject": "StudyTools - Push realizado",
+              "html": "<p>Se ha realizado un push a StudyTools.</p>"
+            }'

@@ -1,5 +1,9 @@
 User-agent: *
 Allow: /
-
+Disallow: /api/
+Disallow: /dashboard.html
+Disallow: /profile.html
+Disallow: /login.html
+Disallow: /register.html
+Disallow: /pro-success.html
 Sitemap: https://www.studytools.pro/sitemap.xml
-Sitemap: https://www.studytools.pro/image-sitemap.xml

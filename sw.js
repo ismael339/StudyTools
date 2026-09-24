@@ -15,9 +15,13 @@ self.addEventListener('activate', event => {
 self.addEventListener('fetch', event => {
   const request = event.request;
   if (request.method !== 'GET') return;
+
   if (request.mode === 'navigate' || request.destination === 'document') {
-    event.respondWith(fetch(request, { cache: 'no-store' }).catch(() => caches.match(request)));
+    event.respondWith(
+      fetch(request, { cache: 'no-store' }).catch(() => caches.match(request))
+    );
     return;
   }
+
   event.respondWith(fetch(request).catch(() => caches.match(request)));
 });

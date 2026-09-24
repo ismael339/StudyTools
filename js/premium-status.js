@@ -1,162 +1,87 @@
 // Premium Status Manager for StudyTools
-// This script handles user premium status detection and UI updates
-
-(function() {
+(function () {
   'use strict';
 
+  function loadSharedToolTheme() {
+    if (document.querySelector('link[data-studytools-tool-theme]')) return;
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = '/css/tool-pages.css';
+    link.dataset.studytoolsToolTheme = 'true';
+    document.head.appendChild(link);
+  }
+
   const PremiumManager = {
-    // Check if user is premium
-    isUserPremium: function() {
-      // Check current user first
-      const currentUser = JSON.parse(localStorage.getItem('studytools_current_user') || 'null');
-      if (currentUser && currentUser.isPremium) {
-        return true;
+    isUserPremium() {
+      try {
+        const currentUser = JSON.parse(localStorage.getItem('studytools_current_user') || 'null');
+        const subscription = JSON.parse(localStorage.getItem('studytools_subscription') || 'null');
+        return Boolean(currentUser?.isPremium || subscription?.isActive);
+      } catch (_) {
+        return false;
       }
-
-      // Check subscription data
-      const subscriptionData = JSON.parse(localStorage.getItem('studytools_subscription') || 'null');
-      if (subscriptionData && subscriptionData.isActive) {
-        return true;
-      }
-
-      return false;
     },
 
-    // Get current user
-    getCurrentUser: function() {
-      return JSON.parse(localStorage.getItem('studytools_current_user') || 'null');
+    getCurrentUser() {
+      try { return JSON.parse(localStorage.getItem('studytools_current_user') || 'null'); }
+      catch (_) { return null; }
     },
 
-    // Add premium badge to navigation
-    addPremiumBadge: function() {
+    addPremiumBadge() {
       if (!this.isUserPremium()) return;
-
       const navLinks = document.querySelector('.nav-links');
-      if (navLinks && !document.querySelector('.premium-badge')) {
-        const badge = document.createElement('span');
-        badge.className = 'premium-badge';
-        badge.innerHTML = '⭐ Pro';
-        badge.style.cssText = `
-          background: linear-gradient(135deg, var(--accent), var(--mint));
-          color: white;
-          padding: 4px 10px;
-          border-radius: 999px;
-          font-size: 0.75rem;
-          font-weight: 700;
-          margin-left: 8px;
-          cursor: pointer;
-        `;
-        badge.onclick = () => window.location.href = '/pro.html';
-        navLinks.appendChild(badge);
-      }
+      if (!navLinks || document.querySelector('.premium-badge')) return;
+      const badge = document.createElement('a');
+      badge.className = 'premium-badge';
+      badge.href = '/pro.html';
+      badge.textContent = 'Pro';
+      navLinks.appendChild(badge);
     },
 
-    // Add login button to navigation (disabled - all features are now free)
-    addLoginButton: function() {
-      // Login system removed - all features are now free
-      return;
-    },
+    addLoginButton() {},
+    logout() {},
 
-    // Logout user (disabled - all features are now free)
-    logout: function() {
-      // Login system removed - all features are now free
-      return;
-    },
-
-    // Lock premium features
-    lockPremiumFeatures: function() {
+    lockPremiumFeatures() {
       if (this.isUserPremium()) return;
-
-      // Find elements with premium-lock class
-      const premiumElements = document.querySelectorAll('.premium-lock');
-      premiumElements.forEach(element => {
+      document.querySelectorAll('.premium-lock').forEach(element => {
         element.style.opacity = '0.5';
         element.style.pointerEvents = 'none';
         element.style.position = 'relative';
+        if (element.querySelector('.premium-overlay')) return;
+        const overlay = document.createElement('div');
+        overlay.className = 'premium-overlay';
+        overlay.innerHTML = '<div class="premium-overlay-inner"><strong>Premium feature</strong><span>Upgrade to Pro to unlock</span><a href="/pro.html">View Pro</a></div>';
+        element.appendChild(overlay);
+      });
+    },
 
-        // Add lock overlay
-        if (!element.querySelector('.premium-overlay')) {
-          const overlay = document.createElement('div');
-          overlay.className = 'premium-overlay';
-          overlay.innerHTML = `
-            <div style="
-              position: absolute;
-              top: 0;
-              left: 0;
-              right: 0;
-              bottom: 0;
-              background: rgba(0,0,0,0.7);
-              display: flex;
-              flex-direction: column;
-              align-items: center;
-              justify-content: center;
-              border-radius: inherit;
-              color: white;
-              text-align: center;
-              padding: 1rem;
-            ">
-              <div style="font-size: 2rem; margin-bottom: 0.5rem;">🔒</div>
-              <div style="font-weight: 700; margin-bottom: 0.5rem;">Premium Feature</div>
-              <div style="font-size: 0.85rem; opacity: 0.9;">Upgrade to Pro to unlock</div>
-              <a href="/pro.html" style="
-                margin-top: 1rem;
-                background: linear-gradient(135deg, var(--accent), var(--mint));
-                color: white;
-                padding: 0.5rem 1rem;
-                border-radius: 6px;
-                text-decoration: none;
-                font-weight: 700;
-                font-size: 0.85rem;
-              ">Upgrade Now</a>
-            </div>
-          `;
-          element.appendChild(overlay);
+    addPremiumBadges() {
+      document.querySelectorAll('.premium-feature').forEach(element => {
+        if (!this.isUserPremium() && !element.querySelector('.premium-badge')) {
+          const badge = document.createElement('span');
+          badge.className = 'premium-badge';
+          badge.textContent = 'Pro';
+          element.appendChild(badge);
         }
       });
     },
 
-    // Add premium feature badges
-    addPremiumBadges: function() {
-      const premiumBadges = document.querySelectorAll('.premium-feature');
-      premiumBadges.forEach(badge => {
-        if (!this.isUserPremium()) {
-          badge.innerHTML = `
-            <span style="
-              background: linear-gradient(135deg, var(--accent), var(--mint));
-              color: white;
-              padding: 2px 8px;
-              border-radius: 999px;
-              font-size: 0.7rem;
-              font-weight: 700;
-              margin-left: 8px;
-            ">⭐ Pro</span>
-          `;
-        }
-      });
-    },
-
-    // Initialize premium manager
-    init: function() {
+    init() {
+      loadSharedToolTheme();
       this.addPremiumBadge();
-      this.addLoginButton();
       this.lockPremiumFeatures();
       this.addPremiumBadges();
-
-      // Dispatch custom event for other scripts to listen
       document.dispatchEvent(new CustomEvent('premiumStatusLoaded', {
         detail: { isPremium: this.isUserPremium() }
       }));
     }
   };
 
-  // Auto-initialize when DOM is ready
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => PremiumManager.init());
   } else {
     PremiumManager.init();
   }
 
-  // Make available globally
   window.PremiumManager = PremiumManager;
-
 })();

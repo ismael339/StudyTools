@@ -27,8 +27,7 @@
 
     // Get current user limits
     getCurrentLimits: function() {
-      const currentUser = this.getCurrentUser();
-      if (currentUser && currentUser.isPremium) {
+      if (this.isUserPremium()) {
         return this.limits.premium;
       }
       return this.limits.free;
@@ -36,8 +35,14 @@
 
     // Check if user is premium
     isUserPremium: function() {
-      const currentUser = this.getCurrentUser();
-      return currentUser && currentUser.isPremium;
+      try {
+        const plan = localStorage.getItem('studytools_user_plan');
+        if (plan === 'premium') return true;
+        const currentUser = this.getCurrentUser();
+        return Boolean(currentUser && (currentUser.isPremium || currentUser.plan === 'premium'));
+      } catch (_) {
+        return false;
+      }
     },
 
     // Get current user

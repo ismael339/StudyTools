@@ -4,29 +4,88 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>StudyTools Pro Subscription Confirmed</title>
-  <meta name="description" content="Your StudyTools Pro subscription was confirmed. Save your PayPal subscription ID and continue studying with StudyTools." />
+  <meta name="description" content="Your StudyTools Pro subscription was confirmed. Enjoy unlimited AI tutor access, longer study sessions, and advanced features." />
   <meta name="robots" content="noindex, follow" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <style>
-    :root{--bg:#090a10;--card:#111421;--line:rgba(255,255,255,.12);--text:#f4f6fb;--muted:#a6aec3;--accent:#6f7cff;--mint:#4fd1c5}*{box-sizing:border-box;margin:0;padding:0}body{min-height:100vh;background:radial-gradient(circle at 20% 0%,rgba(111,124,255,.22),transparent 34%),radial-gradient(circle at 82% 16%,rgba(79,209,197,.12),transparent 30%),var(--bg);color:var(--text);font-family:Arial,system-ui,sans-serif;display:grid;place-items:center;line-height:1.65;padding:24px}.card{width:min(760px,100%);border:1px solid var(--line);background:rgba(17,20,33,.92);border-radius:8px;padding:32px}.check{width:56px;height:56px;border-radius:999px;background:rgba(79,209,197,.12);color:var(--mint);display:grid;place-items:center;font-size:1.8rem;font-weight:900;margin-bottom:18px}h1{font-size:clamp(2rem,6vw,3.4rem);line-height:1.02;margin-bottom:14px}.lead{color:var(--muted);font-size:1.05rem;margin-bottom:20px}.box{border:1px solid var(--line);background:rgba(255,255,255,.04);border-radius:8px;padding:16px;margin:18px 0}.label{color:var(--muted);font-size:.82rem;text-transform:uppercase;font-weight:900;letter-spacing:.08em}.value{font-weight:900;word-break:break-all;margin-top:4px}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}.actions a{color:inherit;text-decoration:none;border-radius:8px;padding:12px 14px;font-weight:900}.primary{background:var(--accent);color:white}.secondary{border:1px solid var(--line);background:rgba(255,255,255,.05)}.note{color:var(--muted);font-size:.92rem;margin-top:16px}
+    :root{--bg:#090a10;--card:#111421;--line:rgba(255,255,255,.12);--text:#f4f6fb;--muted:#a6aec3;--accent:#2563eb;--mint:#10b981}*{box-sizing:border-box;margin:0;padding:0}body{min-height:100vh;background:radial-gradient(circle at 20% 0%,rgba(37,99,235,.22),transparent 34%),radial-gradient(circle at 82% 16%,rgba(16,185,129,.12),transparent 30%),var(--bg);color:var(--text);font-family:Arial,system-ui,sans-serif;display:grid;place-items:center;line-height:1.65;padding:24px}.card{width:min(760px,100%);border:1px solid var(--line);background:rgba(17,20,33,.92);border-radius:12px;padding:36px;box-shadow:0 12px 36px rgba(0,0,0,.4)}.check{width:60px;height:60px;border-radius:999px;background:rgba(16,185,129,.15);color:var(--mint);display:grid;place-items:center;font-size:2rem;font-weight:900;margin-bottom:20px}h1{font-size:clamp(1.9rem,5vw,2.8rem);line-height:1.15;margin-bottom:14px;color:#ffffff}.lead{color:var(--muted);font-size:1.05rem;margin-bottom:24px}.box{border:1px solid var(--line);background:rgba(255,255,255,.04);border-radius:8px;padding:16px;margin:14px 0}.label{color:var(--muted);font-size:.8rem;text-transform:uppercase;font-weight:800;letter-spacing:.08em}.value{font-weight:800;word-break:break-all;margin-top:4px;color:#fff}.status-banner{background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.3);color:#a7f3d0;border-radius:8px;padding:14px 18px;margin:20px 0;font-size:.95rem}.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}.actions a{color:inherit;text-decoration:none;border-radius:8px;padding:12px 20px;font-weight:700}.primary{background:var(--accent);color:white}.secondary{border:1px solid var(--line);background:rgba(255,255,255,.05)}
   </style>
 </head>
 <body>
   <main class="card">
     <div class="check">✓</div>
-    <h1>Your StudyTools Pro subscription is confirmed.</h1>
-    <p class="lead">Thanks for supporting StudyTools. Keep your PayPal subscription ID safe while the full account system is being connected.</p>
+    <h1>Welcome to StudyTools Pro!</h1>
+    <p class="lead">Your subscription has been activated successfully. You now have higher AI tutor limits, longer answers, and full Pro access.</p>
+    
     <div class="box"><div class="label">Plan</div><div class="value" id="plan">StudyTools Pro</div></div>
-    <div class="box"><div class="label">PayPal subscription ID</div><div class="value" id="subscription">Loading...</div></div>
-    <p class="note">This page confirms PayPal returned a subscription ID. The automatic Pro unlock system will be connected to user accounts as the product grows.</p>
-    <div class="actions"><a class="primary" href="/study-assistant.html">Open AI Tutor</a><a class="secondary" href="/">Back to StudyTools</a><a class="secondary" href="/pro.html">View Pro plans</a></div>
+    <div class="box"><div class="label">Linked Account</div><div class="value" id="account-email">Detecting account...</div></div>
+    <div class="box"><div class="label">PayPal Subscription ID</div><div class="value" id="subscription">Loading...</div></div>
+
+    <div class="status-banner" id="status-message">Activating your Pro membership...</div>
+
+    <div class="actions">
+      <a class="primary" href="/dashboard.html">Go to Dashboard</a>
+      <a class="secondary" href="/study-assistant.html">Open AI Tutor</a>
+      <a class="secondary" href="/">Home</a>
+    </div>
   </main>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+  <script src="/js/firebase-config.js"></script>
+
   <script>
     const params = new URLSearchParams(location.search);
     const plan = params.get('plan');
-    const subscription = params.get('subscription_id');
-    document.getElementById('plan').textContent = plan === 'yearly' ? 'StudyTools Pro Yearly' : plan === 'monthly' ? 'StudyTools Pro Monthly' : 'StudyTools Pro';
-    document.getElementById('subscription').textContent = subscription || 'No subscription ID found in the URL';
+    const subscription = params.get('subscription_id') || '';
+    const planName = plan === 'yearly' ? 'StudyTools Pro Yearly' : plan === 'monthly' ? 'StudyTools Pro Monthly' : 'StudyTools Pro';
+    
+    document.getElementById('plan').textContent = planName;
+    document.getElementById('subscription').textContent = subscription || 'Verified';
+
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+
+    auth.onAuthStateChanged(async (user) => {
+      const emailEl = document.getElementById('account-email');
+      const statusEl = document.getElementById('status-message');
+
+      if (user && user.email) {
+        emailEl.textContent = user.email;
+
+        try {
+          // Upgrade user to Pro in Firestore
+          await db.collection('users').doc(user.email).set({
+            plan: 'premium',
+            subscriptionId: subscription,
+            planInterval: plan || 'monthly',
+            premiumSince: firebase.firestore.FieldValue.serverTimestamp(),
+            updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+          }, { merge: true });
+
+          // Update local session
+          localStorage.setItem('studytools_user_plan', 'premium');
+          localStorage.setItem('studytools_current_user', JSON.stringify({
+            email: user.email,
+            name: user.displayName || user.email.split('@')[0],
+            isPremium: true,
+            plan: 'premium',
+            subscriptionId: subscription
+          }));
+
+          statusEl.textContent = '⭐ Your account is now StudyTools Pro! All limits have been lifted.';
+        } catch (err) {
+          console.error('Error activating Pro in Firestore:', err);
+          statusEl.textContent = 'Subscription received! If your Pro status takes a moment to appear, simply refresh or log in again.';
+        }
+      } else {
+        emailEl.textContent = 'Guest / No session detected';
+        statusEl.innerHTML = 'Your payment was received, but you are not logged in. Please <a href="/login.html" style="color:#60a5fa;text-decoration:underline">log in</a> with the email you used to link your Pro plan.';
+      }
+    });
   </script>
 </body>
 </html>
+

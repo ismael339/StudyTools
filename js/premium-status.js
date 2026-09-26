@@ -14,9 +14,10 @@
   const PremiumManager = {
     isUserPremium() {
       try {
+        const plan = localStorage.getItem('studytools_user_plan');
+        if (plan === 'premium') return true;
         const currentUser = JSON.parse(localStorage.getItem('studytools_current_user') || 'null');
-        const subscription = JSON.parse(localStorage.getItem('studytools_subscription') || 'null');
-        return Boolean(currentUser?.isPremium || subscription?.isActive);
+        return Boolean(currentUser?.isPremium || currentUser?.plan === 'premium');
       } catch (_) {
         return false;
       }
@@ -29,7 +30,7 @@
 
     addPremiumBadge() {
       if (!this.isUserPremium()) return;
-      const navLinks = document.querySelector('.nav-links');
+      const navLinks = document.querySelector('.nav-links, .public-nav');
       if (!navLinks || document.querySelector('.premium-badge')) return;
       const badge = document.createElement('a');
       badge.className = 'premium-badge';
@@ -42,7 +43,16 @@
     logout() {},
 
     lockPremiumFeatures() {
-      if (this.isUserPremium()) return;
+      if (this.isUserPremium()) {
+        // Unlock if user became premium
+        document.querySelectorAll('.premium-lock').forEach(element => {
+          element.style.opacity = '1';
+          element.style.pointerEvents = 'auto';
+          const overlay = element.querySelector('.premium-overlay');
+          if (overlay) overlay.remove();
+        });
+        return;
+      }
       document.querySelectorAll('.premium-lock').forEach(element => {
         element.style.opacity = '0.5';
         element.style.pointerEvents = 'none';
@@ -85,3 +95,4 @@
 
   window.PremiumManager = PremiumManager;
 })();
+

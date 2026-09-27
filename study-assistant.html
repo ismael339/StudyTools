@@ -102,10 +102,10 @@
         <h1>Free AI Tutor for Students</h1>
         <p>Ask homework questions, get step-by-step explanations, create quizzes, and generate study plans. Write naturally, even with mistakes. No sign-up required.</p>
         <div class="quick">
-          <button onclick="usePrompt('Explain this topic like I am 15: photosynthesis')">Explain a topic simply</button>
-          <button onclick="usePrompt('Quiz me on this topic one question at a time: World War I causes')">Quiz me for an exam</button>
-          <button onclick="usePrompt('Help me solve this step by step: ') ">Solve step by step</button>
-          <button onclick="usePrompt('Create a 7 day study plan for: ') ">Create a study plan</button>
+          <button onclick="setStudyMode('feynman', 'Explica de forma ultra sencilla (técnica Feynman): ')">🎯 Explicar fácil (Feynman)</button>
+          <button onclick="setStudyMode('exam', 'Hazme 3 preguntas tipo examen con respuestas razonadas sobre: ')">📝 Preguntas de examen</button>
+          <button onclick="setStudyMode('mnemonic', 'Dame reglas mnemotécnicas y trucos de memoria para recordar: ')">🧠 Trucos mnemotécnicos</button>
+          <button onclick="setStudyMode('solve', 'Resuelve paso a paso explicando el porqué de cada paso: ')">🔍 Resolver paso a paso</button>
         </div>
         <div class="tools"><a href="/exam-solver.html">Exam Solver</a><a href="/flashcard-maker.html">Flashcards</a><a href="/gpa-calculator.html">GPA</a><a href="/citation-generator.html">Citations</a></div>
       </aside>
@@ -126,7 +126,29 @@
   </div>
   <script>
     const messages = [];
-    const system = `You are StudyTools AI Tutor, a friendly expert tutor for students. Always answer in the same language as the student. Explain step by step, use simple words, ask a short follow-up when needed, and focus on learning rather than doing homework dishonestly. If the student asks for cheating, turn it into hints, explanations and practice.`;
+    let currentMode = 'general';
+
+    function setStudyMode(mode, starterText) {
+      currentMode = mode;
+      usePrompt(starterText);
+    }
+
+    function getSystemPrompt() {
+      const base = "You are StudyTools AI Tutor, an elite academic private tutor designed for serious students. Always answer in the exact same language as the student. Structure answers cleanly with bold highlights and bullet points. Never provide bare homework solutions to copy—explain the foundational principles clearly.";
+      if (currentMode === 'feynman') {
+        return base + " MODE: FEYNMAN TECHNIQUE. Explain concepts using real-world everyday analogies, zero academic jargon, and clear intuition so a 12-year-old would understand.";
+      }
+      if (currentMode === 'exam') {
+        return base + " MODE: EXAM PREPARATION. Generate realistic high-yield exam questions, provide model answers, highlight common pitfalls students fall into, and explain grading criteria.";
+      }
+      if (currentMode === 'mnemonic') {
+        return base + " MODE: MEMORY ACCELERATION. Provide clever acronyms, memory palaces, visualization tricks, and associations to help the student memorize terms and formulas permanently.";
+      }
+      if (currentMode === 'solve') {
+        return base + " MODE: STEP-BY-STEP PROBLEM SOLVER. Break down math, science, or logic problems into numbered, bite-sized steps. For each step, state WHAT is done and WHY.";
+      }
+      return base;
+    }
     
     function usePrompt(text){ const input=document.getElementById('input'); input.value=text; input.focus(); resizeInput(); }
     function resizeInput(){ const el=document.getElementById('input'); el.style.height='auto'; el.style.height=Math.min(el.scrollHeight,160)+'px'; }
@@ -152,6 +174,7 @@
       document.getElementById('status').textContent='Thinking...';
       
       try{ 
+        const system = getSystemPrompt();
         const res=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({system,messages})}); 
         const data=await res.json(); 
         if(!res.ok) throw new Error(data.error||'AI service error'); 
@@ -162,6 +185,7 @@
         // Increment usage
         if (window.PremiumLimits) {
           PremiumLimits.incrementUsage('aiTutorMessages');
+          updateUsageCounter();
         }
       }
       catch(e){ addMsg('Error: '+(e.message||'Please try again.'),'err'); }

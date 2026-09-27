@@ -9,7 +9,8 @@
     limits: {
       free: {
         aiTutorMessages: 5,       // 5 messages per day
-        aiTutorMaxLength: 500,    // 500 characters max per message
+        aiTutorMaxLength: 600,    // 600 characters max per message
+        aiNotesSets: 3,           // 3 study sets per day
         examQuestions: 5,         // 5 exam questions per day
         advancedCalculations: false,
         exportFeatures: false,
@@ -17,7 +18,8 @@
       },
       premium: {
         aiTutorMessages: 100,     // 100 messages per day
-        aiTutorMaxLength: 2000,   // 2000 characters max per message
+        aiTutorMaxLength: 4000,   // 4000 characters max per message
+        aiNotesSets: 999,         // Unlimited study sets
         examQuestions: 999,       // Unlimited exam questions per day
         advancedCalculations: true,
         exportFeatures: true,
@@ -93,11 +95,16 @@
 
     // Check if user has reached limit for a feature
     hasReachedLimit: function(feature) {
+      if (this.isUserPremium()) return false;
       const limits = this.getCurrentLimits();
       const currentUsage = this.getDailyUsage(feature);
 
       if (feature === 'aiTutorMessages') {
         return currentUsage >= limits.aiTutorMessages;
+      }
+
+      if (feature === 'aiNotesSets') {
+        return currentUsage >= limits.aiNotesSets;
       }
 
       if (feature === 'examQuestions') {
@@ -109,11 +116,16 @@
 
     // Get remaining usage for a feature
     getRemainingUsage: function(feature) {
+      if (this.isUserPremium()) return 999;
       const limits = this.getCurrentLimits();
       const currentUsage = this.getDailyUsage(feature);
 
       if (feature === 'aiTutorMessages') {
         return Math.max(0, limits.aiTutorMessages - currentUsage);
+      }
+
+      if (feature === 'aiNotesSets') {
+        return Math.max(0, limits.aiNotesSets - currentUsage);
       }
 
       if (feature === 'examQuestions') {
@@ -141,54 +153,74 @@
 
     // Show premium upgrade prompt
     showUpgradePrompt: function(feature) {
-      const message = `You've reached your ${feature} limit for today. Upgrade to Pro for unlimited access.`;
-      
-      // Create modal
+      if (document.getElementById('st-upgrade-modal')) return;
+
       const modal = document.createElement('div');
+      modal.id = 'st-upgrade-modal';
       modal.style.cssText = `
         position: fixed;
         top: 0;
         left: 0;
         right: 0;
         bottom: 0;
-        background: rgba(0,0,0,0.8);
+        background: rgba(10, 15, 30, 0.85);
+        backdrop-filter: blur(8px);
         display: flex;
         align-items: center;
         justify-content: center;
         z-index: 10000;
+        padding: 20px;
+        animation: fadeIn 0.2s ease-out;
       `;
       
       modal.innerHTML = `
         <div style="
-          background: #13131a;
-          border: 1px solid rgba(255,255,255,0.1);
-          border-radius: 12px;
-          padding: 2rem;
-          max-width: 400px;
+          background: #ffffff;
+          border: 1px solid #e2e8f0;
+          border-radius: 16px;
+          padding: 32px 28px;
+          max-width: 440px;
+          width: 100%;
           text-align: center;
-          color: #e8e8f0;
+          color: #0f172a;
+          box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+          font-family: system-ui, -apple-system, sans-serif;
         ">
-          <div style="font-size: 2rem; margin-bottom: 1rem;">⭐</div>
-          <h3 style="font-size: 1.5rem; margin-bottom: 1rem; font-weight: 700;">Upgrade to Pro</h3>
-          <p style="color: #7a7a90; margin-bottom: 1.5rem;">${message}</p>
-          <div style="display: flex; gap: 1rem; flex-direction: column;">
+          <div style="display:inline-flex; align-items:center; justify-content:center; width:52px; height:52px; border-radius:50%; background:#eff6ff; color:#2563eb; font-size:26px; margin-bottom:16px;">
+            ⚡
+          </div>
+          <h3 style="font-size: 1.45rem; font-weight: 800; color: #0f172a; margin-bottom: 8px; line-height: 1.2;">Has alcanzado tu límite gratuito</h3>
+          <p style="color: #64748b; font-size: 0.95rem; line-height: 1.5; margin-bottom: 24px;">
+            Asegura tus mejores notas con <strong>StudyTools Pro</strong>. Preguntas ilimitadas, explicaciones en profundidad y modo examen sin interrupciones.
+          </p>
+
+          <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:12px; padding:14px; text-align:left; margin-bottom:24px; font-size:0.88rem; color:#334155;">
+            <div style="margin-bottom:6px;">✓ <strong>100 mensajes IA / día</strong> (vs 5 del plan gratis)</div>
+            <div style="margin-bottom:6px;">✓ <strong>Explicaciones de examen completas</strong></div>
+            <div>✓ <strong>Solo €3.99/mes</strong> · Cancela cuando quieras</div>
+          </div>
+
+          <div style="display: flex; gap: 10px; flex-direction: column;">
             <a href="/pro.html" style="
-              background: linear-gradient(135deg, #5b6af0, #00d4aa);
+              background: #2563eb;
               color: white;
-              padding: 1rem;
-              border-radius: 8px;
+              padding: 14px 20px;
+              border-radius: 10px;
               text-decoration: none;
               font-weight: 700;
-            ">Upgrade Now</a>
-            <button onclick="this.closest('div').parentElement.remove()" style="
+              font-size: 1rem;
+              transition: background 0.15s ease;
+              display: block;
+            ">Desbloquear StudyTools Pro</a>
+            <button onclick="document.getElementById('st-upgrade-modal').remove()" style="
               background: transparent;
-              border: 1px solid rgba(255,255,255,0.1);
-              color: #7a7a90;
-              padding: 1rem;
-              border-radius: 8px;
+              border: none;
+              color: #94a3b8;
+              padding: 10px;
               cursor: pointer;
-              font-weight: 700;
-            ">Maybe Later</button>
+              font-weight: 600;
+              font-size: 0.88rem;
+            ">Continuar en plan gratis mañana</button>
           </div>
         </div>
       `;

@@ -1,3 +1,289 @@
-/* Shared light theme for legacy StudyTools tools. Loaded by js/premium-status.js. */
-:root{--bg:#f8fafc;--bg2:#fff;--card-bg:#fff;--input-bg:#f8fafc;--text:#111827;--muted:#64748b;--border:#dbe4f0;--accent:#2563eb;--accent2:#2563eb;--accent3:#2563eb;--navy:#172554}
-*,*::before,*::after{box-sizing:border-box}body{background:var(--bg)!important;color:var(--text)!important}nav{background:#fff!important;border-bottom:1px solid var(--border)!important;backdrop-filter:none!important}.nav-logo,.nav-back,.footer-logo{color:var(--navy)!important}.nav-logo span{background:var(--accent)!important}.calc-card,.form-card,.deck-card,.timer-card,.settings-section,.schedule-card,.input-card,.response-card,.result-card,.app-card,.tip-card,.scale-table,table{background:#fff!important;border-color:var(--border)!important;box-shadow:0 8px 28px rgba(23,37,84,.05)}input,select,textarea,.btn-secondary,.mode-btn,.btn-sm,.nav-btn{background:var(--input-bg)!important;color:var(--text)!important;border-color:var(--border)!important}input:focus,select:focus,textarea:focus{outline:3px solid #dbeafe!important;border-color:#7da4f5!important}.page-desc,.faq-a,.content-section p,.info-section p,.tip-card p,.muted,.char-count,.toolbar-label{color:var(--muted)!important}h1,h2,h3,.question-text,.study-title,.deck-title,.settings-title{color:var(--navy)!important}.btn-primary,.btn-solve,.btn-add,.btn-add-card,.btn-generate,.ctrl-start,.btn-sm-primary{background:var(--accent)!important;color:#fff!important}.btn-primary:hover,.btn-solve:hover,.btn-add:hover,.btn-add-card:hover{box-shadow:0 8px 24px rgba(37,99,235,.22)!important}.result-panel{background:var(--bg)!important;border-color:var(--border)!important}.response-body{color:#334155!important}.response-body p,.response-body ol,.response-body ul{color:#475569!important}.footer-links a{color:var(--muted)!important}.premium-badge{display:inline-flex;align-items:center;background:var(--accent);color:#fff!important;border-radius:999px;padding:4px 10px;margin-left:8px;font-size:.75rem;font-weight:750;text-decoration:none}.premium-overlay{position:absolute;inset:0;z-index:2}.premium-overlay-inner{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;border-radius:inherit;background:rgba(23,37,84,.82);color:#fff;text-align:center;padding:16px}.premium-overlay-inner span{font-size:.85rem;opacity:.9}.premium-overlay-inner a{background:#fff;color:var(--navy);border-radius:8px;padding:8px 12px;font-weight:750;text-decoration:none}@media(max-width:640px){nav{padding-inline:16px!important}.page-wrap{padding-inline:16px!important}.builder-layout,.form-grid,.selectors{grid-template-columns:1fr!important}.courses-header,.course-row,.assignments-header,.assignment-row{grid-template-columns:1fr 80px 80px 40px!important;gap:8px!important}.input-footer,.timer-controls,.settings-footer{align-items:stretch;flex-direction:column}.btn-solve,.ctrl-btn{width:100%}}
+﻿/* Shared light theme for StudyTools tools. Loaded by js/premium-status.js. */
+:root {
+  --bg: #f8fafc;
+  --bg2: #ffffff;
+  --card-bg: #ffffff;
+  --input-bg: #ffffff;
+  --text: #0f172a;
+  --muted: #64748b;
+  --border: #e2e8f0;
+  --line: #e2e8f0;
+  --accent: #2563eb;
+  --accent2: #2563eb;
+  --accent3: #2563eb;
+  --navy: #0f172a;
+  --panel: #ffffff;
+  --card: #f8fafc;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--bg) !important;
+  color: var(--text) !important;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+}
+
+nav {
+  background: #ffffff !important;
+  border-bottom: 1px solid var(--border) !important;
+  backdrop-filter: none !important;
+}
+
+.nav a, .nav-links a {
+  color: #475569 !important;
+}
+
+.nav a:hover, .nav-links a:hover {
+  color: #0f172a !important;
+  background: #f1f5f9 !important;
+}
+
+.nav-logo, .nav-back, .footer-logo, .brand {
+  color: var(--navy) !important;
+}
+
+.nav-logo span, .mark {
+  background: var(--accent) !important;
+  color: #ffffff !important;
+}
+
+.calc-card, .form-card, .deck-card, .timer-card, .settings-section,
+.schedule-card, .input-card, .response-card, .result-card, .app-card,
+.tip-card, .scale-table, table, .side, .chat {
+  background: #ffffff !important;
+  border-color: var(--border) !important;
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.04) !important;
+  color: var(--text) !important;
+}
+
+.side {
+  background: #ffffff !important;
+  border: 1px solid var(--border) !important;
+}
+
+.side h1, .side p {
+  color: var(--navy) !important;
+}
+
+.side p {
+  color: var(--muted) !important;
+}
+
+.quick button {
+  background: #f8fafc !important;
+  color: #1e293b !important;
+  border: 1px solid var(--border) !important;
+}
+
+.quick button:hover {
+  background: #f1f5f9 !important;
+  border-color: #cbd5e1 !important;
+}
+
+.tools a {
+  background: #eff6ff !important;
+  color: #2563eb !important;
+  border: 1px solid #bfdbfe !important;
+  border-radius: 6px;
+  padding: 4px 8px;
+}
+
+.chat {
+  background: #ffffff !important;
+  border: 1px solid var(--border) !important;
+}
+
+.chat-head {
+  background: #ffffff !important;
+  border-bottom: 1px solid var(--border) !important;
+  color: #0f172a !important;
+}
+
+.chat-head strong {
+  color: #0f172a !important;
+}
+
+.chat-actions button {
+  background: #f8fafc !important;
+  border: 1px solid var(--border) !important;
+  color: #334155 !important;
+}
+
+.chat-actions button:hover {
+  background: #f1f5f9 !important;
+  border-color: var(--accent) !important;
+}
+
+.msgs {
+  background: #f8fafc !important;
+}
+
+.msg {
+  color: #0f172a !important;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.03) !important;
+}
+
+.msg.ai {
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  color: #0f172a !important;
+}
+
+.msg.user {
+  background: #2563eb !important;
+  color: #ffffff !important;
+  border: 1px solid #2563eb !important;
+}
+
+.msg.err {
+  background: #fef2f2 !important;
+  color: #991b1b !important;
+  border: 1px solid #fecaca !important;
+}
+
+.composer {
+  background: #ffffff !important;
+  border-top: 1px solid var(--border) !important;
+}
+
+.composer textarea {
+  background: #f8fafc !important;
+  color: #0f172a !important;
+  border: 1px solid var(--border) !important;
+}
+
+.composer textarea:focus {
+  background: #ffffff !important;
+  outline: 2px solid #2563eb !important;
+  border-color: #2563eb !important;
+}
+
+.send {
+  background: #2563eb !important;
+  color: #ffffff !important;
+  border: none !important;
+  cursor: pointer;
+  border-radius: 8px;
+  padding: 0 20px;
+  font-weight: 700;
+}
+
+.send:hover {
+  background: #1d4ed8 !important;
+}
+
+.note {
+  color: #64748b !important;
+  background: #ffffff !important;
+}
+
+input, select, textarea, .btn-secondary, .mode-btn, .btn-sm, .nav-btn {
+  background: var(--input-bg) !important;
+  color: var(--text) !important;
+  border-color: var(--border) !important;
+}
+
+input:focus, select:focus, textarea:focus {
+  outline: 2px solid #93c5fd !important;
+  border-color: #3b82f6 !important;
+}
+
+.page-desc, .faq-a, .content-section p, .info-section p, .tip-card p, .muted, .char-count, .toolbar-label {
+  color: var(--muted) !important;
+}
+
+h1, h2, h3, .question-text, .study-title, .deck-title, .settings-title {
+  color: var(--navy) !important;
+}
+
+.btn-primary, .btn-solve, .btn-add, .btn-add-card, .btn-generate, .ctrl-start, .btn-sm-primary {
+  background: var(--accent) !important;
+  color: #fff !important;
+}
+
+.btn-primary:hover, .btn-solve:hover, .btn-add:hover, .btn-add-card:hover {
+  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.22) !important;
+}
+
+.result-panel {
+  background: var(--bg) !important;
+  border-color: var(--border) !important;
+}
+
+.response-body {
+  color: #1e293b !important;
+}
+
+.response-body p, .response-body ol, .response-body ul {
+  color: #334155 !important;
+}
+
+.footer-links a {
+  color: var(--muted) !important;
+}
+
+.premium-badge {
+  display: inline-flex;
+  align-items: center;
+  background: var(--accent);
+  color: #fff !important;
+  border-radius: 999px;
+  padding: 4px 10px;
+  margin-left: 8px;
+  font-size: 0.75rem;
+  font-weight: 750;
+  text-decoration: none;
+}
+
+.premium-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+}
+
+.premium-overlay-inner {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: inherit;
+  background: rgba(15, 23, 42, 0.85);
+  color: #fff;
+  text-align: center;
+  padding: 16px;
+}
+
+.premium-overlay-inner span {
+  font-size: 0.85rem;
+  opacity: 0.9;
+}
+
+.premium-overlay-inner a {
+  background: #fff;
+  color: var(--navy);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-weight: 750;
+  text-decoration: none;
+}
+
+@media (max-width: 640px) {
+  nav { padding-inline: 16px !important; }
+  .page-wrap { padding-inline: 16px !important; }
+  .builder-layout, .form-grid, .selectors { grid-template-columns: 1fr !important; }
+  .courses-header, .course-row, .assignments-header, .assignment-row {
+    grid-template-columns: 1fr 80px 80px 40px !important;
+    gap: 8px !important;
+  }
+  .input-footer, .timer-controls, .settings-footer {
+    align-items: stretch;
+    flex-direction: column;
+  }
+  .btn-solve, .ctrl-btn { width: 100%; }
+}

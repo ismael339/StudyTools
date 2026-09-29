@@ -46,7 +46,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
 
   <style>
-    :root{--bg:#0a0a0f;--bg2:#111118;--border:rgba(255,255,255,0.07);--text:#e8e8f0;--muted:#7a7a90;--accent:#78b4ff;--accent2:#5b6af0;--accent3:#00d4aa;--card-bg:#13131a;--input-bg:#0d0d14;}
+    :root{--bg:#f8fafc;--bg2:#f1f5f9;--border:#e2e8f0;--text:#0f172a;--muted:#64748b;--accent:#2563eb;--accent2:#7c3aed;--accent3:#0d9488;--card-bg:#ffffff;--input-bg:#ffffff;--line:#e2e8f0;}
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     html{scroll-behavior:smooth}
     body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:16px;line-height:1.6;min-height:100vh}
@@ -54,7 +54,7 @@
     @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
     @keyframes slideIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
 
-    nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(1.5rem,5vw,4rem);height:64px;background:rgba(10,10,15,0.9);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+    nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(1.5rem,5vw,4rem);height:64px;background:rgba(255,255,255,0.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
     .nav-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.2rem;color:var(--text);text-decoration:none;display:flex;align-items:center;gap:.5rem}
     .nav-logo span{width:8px;height:8px;background:var(--accent);border-radius:50%;display:inline-block;animation:pulse 2s infinite}
     .nav-back{color:var(--muted);text-decoration:none;font-size:.875rem;transition:color .2s}
@@ -75,7 +75,6 @@
     .style-btn.active{background:var(--accent2);border-color:var(--accent2);color:#fff;font-weight:700}
     select{width:100%;padding:.7rem .875rem;background:var(--input-bg);border:1px solid var(--border);border-radius:9px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:.9rem;outline:none;transition:border-color .2s}
     select:focus{border-color:var(--accent)}
-    select option{background:#1a1a24}
 
     .form-card{background:var(--card-bg);border:1px solid var(--border);border-radius:16px;overflow:hidden;margin-bottom:1.5rem}
     .form-card-header{padding:1rem 1.25rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:.6rem;font-family:'Syne',sans-serif;font-weight:700;font-size:.95rem}
@@ -89,15 +88,15 @@
     .span-2{grid-column:span 2}
 
     .author-row{display:grid;grid-template-columns:1fr 1fr 36px;gap:.5rem;margin-bottom:.5rem;animation:slideIn .2s ease}
-    .btn-remove-sm{width:36px;height:38px;background:rgba(240,91,91,0.1);border:1px solid rgba(240,91,91,0.2);border-radius:8px;color:#f05b5b;cursor:pointer;font-size:.85rem;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0}
-    .btn-remove-sm:hover{background:rgba(240,91,91,0.2)}
+    .btn-remove-sm{width:36px;height:38px;background:rgba(220,38,38,0.08);border:1px solid rgba(220,38,38,0.15);border-radius:8px;color:#dc2626;cursor:pointer;font-size:.85rem;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0}
+    .btn-remove-sm:hover{background:rgba(220,38,38,0.15)}
     .btn-add-author{background:transparent;border:1px dashed var(--border);border-radius:8px;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:.82rem;padding:.45rem .875rem;cursor:pointer;transition:all .2s;margin-bottom:1rem}
     .btn-add-author:hover{border-color:var(--accent);color:var(--accent)}
 
     .btn-generate{width:100%;padding:.9rem;background:var(--accent2);color:#fff;border:none;border-radius:11px;font-family:'DM Sans',sans-serif;font-weight:700;font-size:1rem;cursor:pointer;transition:all .2s;margin-top:1rem}
-    .btn-generate:hover{box-shadow:0 6px 20px rgba(91,106,240,0.4);transform:translateY(-1px)}
+    .btn-generate:hover{box-shadow:0 6px 20px rgba(37,99,235,0.24);transform:translateY(-1px)}
 
-    .result-card{background:var(--card-bg);border:1px solid rgba(120,180,255,0.25);border-radius:16px;overflow:hidden;margin-bottom:2rem;display:none;animation:fadeUp .3s ease}
+    .result-card{background:var(--card-bg);border:1px solid rgba(37,99,235,0.15);border-radius:16px;overflow:hidden;margin-bottom:2rem;display:none;animation:fadeUp .3s ease}
     .result-card.show{display:block}
     .result-header{padding:1rem 1.25rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.75rem}
     .result-badge{display:flex;align-items:center;gap:.5rem;font-family:'Syne',sans-serif;font-weight:700;font-size:.9rem}
@@ -105,24 +104,24 @@
     .result-body{padding:1.5rem}
     .citation-text{font-size:1rem;line-height:1.8;color:var(--text);margin-bottom:1.25rem;padding:1rem;background:var(--input-bg);border-radius:9px;border:1px solid var(--border)}
     .result-actions{display:flex;gap:.75rem;flex-wrap:wrap}
-    .copy-btn{padding:.65rem 1.25rem;background:var(--accent3);border:none;border-radius:9px;color:#000;font-family:'DM Sans',sans-serif;font-weight:700;font-size:.875rem;cursor:pointer;transition:all .2s}
-    .copy-btn:hover{box-shadow:0 4px 14px rgba(0,212,170,0.35)}
+    .copy-btn{padding:.65rem 1.25rem;background:var(--accent3);border:none;border-radius:9px;color:#ffffff;font-family:'DM Sans',sans-serif;font-weight:700;font-size:.875rem;cursor:pointer;transition:all .2s}
+    .copy-btn:hover{box-shadow:0 4px 14px rgba(13,148,136,0.19)}
     .copy-btn.copied{background:#22c55e}
     .save-btn{padding:.65rem 1.25rem;background:transparent;border:1px solid var(--border);border-radius:9px;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:.875rem;cursor:pointer;transition:all .2s}
-    .save-btn:hover{color:var(--text);border-color:rgba(255,255,255,0.2)}
+    .save-btn:hover{color:var(--text);border-color:rgba(15,23,42,0.32)}
 
     .saved-section{margin-bottom:2rem}
     .saved-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem}
     .saved-title{font-family:'Syne',sans-serif;font-weight:700;font-size:1rem}
     .btn-clear-saved{background:transparent;border:none;color:var(--muted);font-size:.8rem;cursor:pointer;transition:color .2s}
-    .btn-clear-saved:hover{color:#f05b5b}
+    .btn-clear-saved:hover{color:#dc2626}
     .saved-item{background:var(--card-bg);border:1px solid var(--border);border-radius:12px;padding:1rem 1.25rem;display:flex;gap:1rem;align-items:flex-start;margin-bottom:.75rem}
     .saved-text{flex:1;font-size:.875rem;line-height:1.6;color:var(--muted)}
     .saved-actions{display:flex;gap:.4rem;flex-shrink:0;align-items:center}
     .btn-copy-sm{padding:.35rem .65rem;background:var(--input-bg);border:1px solid var(--border);border-radius:7px;color:var(--muted);font-size:.75rem;cursor:pointer;transition:all .2s}
     .btn-copy-sm:hover{color:var(--text)}
     .btn-del-sm{padding:.35rem .5rem;background:transparent;border:none;color:var(--muted);font-size:.8rem;cursor:pointer;transition:color .2s}
-    .btn-del-sm:hover{color:#f05b5b}
+    .btn-del-sm:hover{color:#dc2626}
 
     .faq-section{margin-top:3rem}
     .faq-section h2{font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:700;margin-bottom:1.5rem;letter-spacing:-.02em}
@@ -142,6 +141,8 @@
 
     @media(max-width:600px){.selectors{grid-template-columns:1fr}.form-grid{grid-template-columns:1fr}.span-2{grid-column:span 1}.author-row{grid-template-columns:1fr 1fr 36px}}
   </style>
+  <link rel="stylesheet" href="/css/tool-pages.css" data-studytools-tool-theme="true" />
+<style>html{color-scheme:light}</style>
 </head>
 <body>
 
@@ -239,23 +240,23 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <!-- SEO CONTENT SECTION -->
 <section style="max-width:860px;margin:0 auto;padding:2.5rem clamp(1.5rem,4vw,3rem) 3rem">
-  <div style="background:#13131a;border:1px solid rgba(255,255,255,0.07);border-radius:16px;padding:2rem">
+  <div style="background:#ffffff;border:1px solid rgba(15,23,42,0.07);border-radius:16px;padding:2rem">
     <h2 style="font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:700;margin-bottom:1rem;letter-spacing:-.02em">One of the best free AI study tools for students</h2>
-    <p style="color:#7a7a90;font-size:.9rem;line-height:1.8;margin-bottom:.875rem">
-      The Citation Generator is part of <strong style="color:#e8e8f0">StudyTools</strong> — a free platform with the best AI study tools for students who want to study faster and be more productive. Whether you need to generate citations in seconds, summarize notes with AI, or create a study plan, StudyTools has everything in one place.
+    <p style="color:#64748b;font-size:.9rem;line-height:1.8;margin-bottom:.875rem">
+      The Citation Generator is part of <strong style="color:#0f172a">StudyTools</strong> — a free platform with the best AI study tools for students who want to study faster and be more productive. Whether you need to generate citations in seconds, summarize notes with AI, or create a study plan, StudyTools has everything in one place.
     </p>
-    <p style="color:#7a7a90;font-size:.9rem;line-height:1.8;margin-bottom:.875rem">
-      <strong style="color:#e8e8f0">How to study faster with AI:</strong> Students who use AI study tools spend less time on repetitive tasks like formatting citations and more time on active learning. Tools like our AI study assistant can explain concepts, quiz you on any subject and even summarize your notes in seconds — making you significantly more productive as a student.
+    <p style="color:#64748b;font-size:.9rem;line-height:1.8;margin-bottom:.875rem">
+      <strong style="color:#0f172a">How to study faster with AI:</strong> Students who use AI study tools spend less time on repetitive tasks like formatting citations and more time on active learning. Tools like our AI study assistant can explain concepts, quiz you on any subject and even summarize your notes in seconds — making you significantly more productive as a student.
     </p>
-    <p style="color:#7a7a90;font-size:.9rem;line-height:1.8;margin-bottom:1.25rem">
-      <strong style="color:#e8e8f0">AI tools for students — the complete toolkit:</strong> Our platform includes a free citation generator, AI study assistant, exam question solver, flashcard maker, GPA calculator, pomodoro timer, grade calculator and word counter. All free, all browser-based, no sign-up required.
+    <p style="color:#64748b;font-size:.9rem;line-height:1.8;margin-bottom:1.25rem">
+      <strong style="color:#0f172a">AI tools for students — the complete toolkit:</strong> Our platform includes a free citation generator, AI study assistant, exam question solver, flashcard maker, GPA calculator, pomodoro timer, grade calculator and word counter. All free, all browser-based, no sign-up required.
     </p>
     <div style="display:flex;gap:.5rem;flex-wrap:wrap">
-      <a href="/" style="padding:.35rem .875rem;background:rgba(91,106,240,0.1);border:1px solid rgba(91,106,240,0.25);border-radius:999px;color:#5b6af0;font-size:.78rem;text-decoration:none">🤖 AI Study Assistant</a>
-      <a href="/exam-solver.html" style="padding:.35rem .875rem;background:rgba(91,106,240,0.1);border:1px solid rgba(91,106,240,0.25);border-radius:999px;color:#5b6af0;font-size:.78rem;text-decoration:none">🧠 Exam Solver</a>
-      <a href="/flashcard-maker.html" style="padding:.35rem .875rem;background:rgba(91,106,240,0.1);border:1px solid rgba(91,106,240,0.25);border-radius:999px;color:#5b6af0;font-size:.78rem;text-decoration:none">🃏 Flashcard Maker</a>
-      <a href="/pomodoro-timer.html" style="padding:.35rem .875rem;background:rgba(91,106,240,0.1);border:1px solid rgba(91,106,240,0.25);border-radius:999px;color:#5b6af0;font-size:.78rem;text-decoration:none">⏱️ Pomodoro Timer</a>
-      <a href="/blog.html" style="padding:.35rem .875rem;background:rgba(91,106,240,0.1);border:1px solid rgba(91,106,240,0.25);border-radius:999px;color:#5b6af0;font-size:.78rem;text-decoration:none">📖 Study Tips Blog</a>
+      <a href="/" style="padding:.35rem .875rem;background:rgba(37,99,235,0.06);border:1px solid rgba(37,99,235,0.15);border-radius:999px;color:#2563eb;font-size:.78rem;text-decoration:none">🤖 AI Study Assistant</a>
+      <a href="/exam-solver.html" style="padding:.35rem .875rem;background:rgba(37,99,235,0.06);border:1px solid rgba(37,99,235,0.15);border-radius:999px;color:#2563eb;font-size:.78rem;text-decoration:none">🧠 Exam Solver</a>
+      <a href="/flashcard-maker.html" style="padding:.35rem .875rem;background:rgba(37,99,235,0.06);border:1px solid rgba(37,99,235,0.15);border-radius:999px;color:#2563eb;font-size:.78rem;text-decoration:none">🃏 Flashcard Maker</a>
+      <a href="/pomodoro-timer.html" style="padding:.35rem .875rem;background:rgba(37,99,235,0.06);border:1px solid rgba(37,99,235,0.15);border-radius:999px;color:#2563eb;font-size:.78rem;text-decoration:none">⏱️ Pomodoro Timer</a>
+      <a href="/blog.html" style="padding:.35rem .875rem;background:rgba(37,99,235,0.06);border:1px solid rgba(37,99,235,0.15);border-radius:999px;color:#2563eb;font-size:.78rem;text-decoration:none">📖 Study Tips Blog</a>
     </div>
   </div>
 </section>

@@ -46,7 +46,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
 
   <style>
-    :root{--bg:#0a0a0f;--bg2:#111118;--border:rgba(255,255,255,0.07);--text:#e8e8f0;--muted:#7a7a90;--accent:#a078ff;--accent2:#00d4aa;--card-bg:#13131a;--input-bg:#0d0d14;}
+    :root{--bg:#f8fafc;--bg2:#f1f5f9;--border:#e2e8f0;--text:#0f172a;--muted:#64748b;--accent:#2563eb;--accent2:#7c3aed;--card-bg:#ffffff;--input-bg:#ffffff;--line:#e2e8f0;}
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     html{scroll-behavior:smooth}
     body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:16px;line-height:1.6;min-height:100vh}
@@ -54,7 +54,7 @@
     @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
     @keyframes flipIn{from{transform:rotateY(-90deg);opacity:0}to{transform:rotateY(0deg);opacity:1}}
 
-    nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(1.5rem,5vw,4rem);height:64px;background:rgba(10,10,15,0.9);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+    nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(1.5rem,5vw,4rem);height:64px;background:rgba(255,255,255,0.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
     .nav-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.2rem;color:var(--text);text-decoration:none;display:flex;align-items:center;gap:.5rem}
     .nav-logo span{width:8px;height:8px;background:var(--accent2);border-radius:50%;display:inline-block;animation:pulse 2s infinite}
     .nav-back{color:var(--muted);text-decoration:none;font-size:.875rem;transition:color .2s}
@@ -80,7 +80,7 @@
     textarea.inp:focus{border-color:var(--accent)}
     textarea.inp::placeholder{color:var(--muted)}
     .btn-add-card{width:100%;padding:.8rem;background:var(--accent);color:#fff;border:none;border-radius:10px;font-family:'DM Sans',sans-serif;font-weight:700;font-size:.9rem;cursor:pointer;transition:all .2s}
-    .btn-add-card:hover{box-shadow:0 6px 20px rgba(160,120,255,0.4);transform:translateY(-1px)}
+    .btn-add-card:hover{box-shadow:0 6px 20px rgba(124,58,237,0.24);transform:translateY(-1px)}
 
     /* DECK LIST */
     .deck-card{background:var(--card-bg);border:1px solid var(--border);border-radius:16px;overflow:hidden}
@@ -89,13 +89,13 @@
     .deck-count{font-size:.78rem;color:var(--muted)}
     .deck-body{padding:1rem;max-height:320px;overflow-y:auto}
     .deck-empty{color:var(--muted);font-size:.875rem;text-align:center;padding:2rem 0}
-    .card-item{display:flex;align-items:flex-start;gap:.75rem;padding:.65rem .5rem;border-bottom:1px solid rgba(255,255,255,0.04);cursor:pointer;border-radius:8px;transition:background .15s}
-    .card-item:hover{background:rgba(160,120,255,0.06)}
+    .card-item{display:flex;align-items:flex-start;gap:.75rem;padding:.65rem .5rem;border-bottom:1px solid rgba(15,23,42,0.04);cursor:pointer;border-radius:8px;transition:background .15s}
+    .card-item:hover{background:rgba(124,58,237,0.06)}
     .card-item:last-child{border:none}
     .card-item-front{flex:1;font-size:.85rem;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
     .card-item-back{font-size:.78rem;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:120px}
     .card-item-del{background:none;border:none;color:var(--muted);cursor:pointer;font-size:.85rem;padding:0;transition:color .2s;flex-shrink:0}
-    .card-item-del:hover{color:#f05b5b}
+    .card-item-del:hover{color:#dc2626}
 
     /* STUDY MODE */
     .study-section{margin-bottom:2rem}
@@ -103,9 +103,9 @@
     .study-title{font-family:'Syne',sans-serif;font-weight:700;font-size:1.1rem}
     .study-btns{display:flex;gap:.6rem;flex-wrap:wrap}
     .btn-sm{padding:.5rem 1rem;border-radius:8px;border:1px solid var(--border);background:transparent;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:.82rem;font-weight:500;cursor:pointer;transition:all .2s}
-    .btn-sm:hover{color:var(--text);border-color:rgba(255,255,255,0.2)}
-    .btn-sm.primary{background:var(--accent2);border-color:var(--accent2);color:#000;font-weight:700}
-    .btn-sm.primary:hover{box-shadow:0 4px 14px rgba(0,212,170,0.3)}
+    .btn-sm:hover{color:var(--text);border-color:rgba(15,23,42,0.32)}
+    .btn-sm.primary{background:var(--accent2);border-color:var(--accent2);color:#ffffff;font-weight:700}
+    .btn-sm.primary:hover{box-shadow:0 4px 14px rgba(13,148,136,0.17)}
 
     /* FLASHCARD */
     .flashcard-wrap{perspective:1000px;margin-bottom:1.5rem}
@@ -113,7 +113,7 @@
     .flashcard.flipped{transform:rotateY(180deg)}
     .card-face{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2.5rem;border-radius:20px;backface-visibility:hidden;-webkit-backface-visibility:hidden;text-align:center}
     .card-front{background:var(--card-bg);border:1px solid var(--border)}
-    .card-back{background:linear-gradient(135deg,#1a0f2e,#0f1a2e);border:1px solid rgba(160,120,255,0.3);transform:rotateY(180deg)}
+    .card-back{background:linear-gradient(135deg,#eef2ff,#e0f2fe);border:1px solid rgba(124,58,237,0.18);transform:rotateY(180deg)}
     .card-label{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:.875rem}
     .card-text{font-family:'Syne',sans-serif;font-size:clamp(1.1rem,3vw,1.5rem);font-weight:700;line-height:1.35}
     .card-front .card-text{color:var(--text)}
@@ -130,10 +130,10 @@
 
     /* RESULT BTNS */
     .result-btns{display:flex;gap:.75rem;justify-content:center;margin-top:1rem;flex-wrap:wrap}
-    .btn-know{padding:.65rem 1.5rem;background:rgba(0,212,170,0.15);border:1px solid rgba(0,212,170,0.3);color:var(--accent2);border-radius:10px;font-family:'DM Sans',sans-serif;font-weight:600;cursor:pointer;transition:all .2s}
-    .btn-know:hover{background:rgba(0,212,170,0.25)}
-    .btn-dontknow{padding:.65rem 1.5rem;background:rgba(240,91,91,0.1);border:1px solid rgba(240,91,91,0.2);color:#f05b5b;border-radius:10px;font-family:'DM Sans',sans-serif;font-weight:600;cursor:pointer;transition:all .2s}
-    .btn-dontknow:hover{background:rgba(240,91,91,0.2)}
+    .btn-know{padding:.65rem 1.5rem;background:rgba(13,148,136,0.08);border:1px solid rgba(13,148,136,0.17);color:var(--accent2);border-radius:10px;font-family:'DM Sans',sans-serif;font-weight:600;cursor:pointer;transition:all .2s}
+    .btn-know:hover{background:rgba(13,148,136,0.14)}
+    .btn-dontknow{padding:.65rem 1.5rem;background:rgba(220,38,38,0.08);border:1px solid rgba(220,38,38,0.15);color:#dc2626;border-radius:10px;font-family:'DM Sans',sans-serif;font-weight:600;cursor:pointer;transition:all .2s}
+    .btn-dontknow:hover{background:rgba(220,38,38,0.15)}
 
     /* SCORE */
     .score-bar{display:flex;gap:1rem;margin-top:1.25rem;flex-wrap:wrap}
@@ -141,7 +141,7 @@
     .score-num{font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800}
     .score-label{font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
     .score-green{color:var(--accent2)}
-    .score-red{color:#f05b5b}
+    .score-red{color:#dc2626}
 
     .faq-section{margin-top:3rem}
     .faq-section h2{font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:700;margin-bottom:1.5rem;letter-spacing:-.02em}
@@ -161,6 +161,8 @@
 
     @media(max-width:640px){.builder-layout{grid-template-columns:1fr}.card-face{padding:1.5rem}}
   </style>
+  <link rel="stylesheet" href="/css/tool-pages.css" data-studytools-tool-theme="true" />
+<style>html{color-scheme:light}</style>
 </head>
 <body>
 
@@ -346,11 +348,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   function renderCard() {
     if (!studyDeck.length || currentIdx >= studyDeck.length) {
       document.getElementById('flashcard-area').innerHTML = `
-        <div class="card-empty-state" style="border-color:rgba(0,212,170,0.3)">
+        <div class="card-empty-state" style="border-color:rgba(13,148,136,0.17)">
           <div style="font-size:2.5rem">🎉</div>
           <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:1.1rem">Deck complete!</div>
           <div>You know ${scoreKnow} of ${studyDeck.length} cards</div>
-          <button onclick="startStudy()" style="margin-top:1rem;padding:.65rem 1.5rem;background:var(--accent2);border:none;border-radius:10px;color:#000;font-family:'DM Sans',sans-serif;font-weight:700;cursor:pointer">Study Again</button>
+          <button onclick="startStudy()" style="margin-top:1rem;padding:.65rem 1.5rem;background:var(--accent2);border:none;border-radius:10px;color:#ffffff;font-family:'DM Sans',sans-serif;font-weight:700;cursor:pointer">Study Again</button>
         </div>`;
       return;
     }

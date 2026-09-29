@@ -244,7 +244,7 @@
         container.innerHTML = `
           <div style="
             font-size: 0.85rem;
-            color: #7a7a90;
+            color: #64748b;
             margin-bottom: 1rem;
             text-align: center;
           ">

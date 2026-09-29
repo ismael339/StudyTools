@@ -1,1 +1,1 @@
-(function(){const l=document.createElement('link');l.rel='stylesheet';l.href='/css/tool-pages.css';document.head.appendChild(l)})();
+(function(){if(document.querySelector('link[data-studytools-tool-theme]'))return;const l=document.createElement('link');l.rel='stylesheet';l.href='/css/tool-pages.css';l.dataset.studytoolsToolTheme='true';document.head.appendChild(l)})();

@@ -75,28 +75,30 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet" />
 
-  <style>
+  <style>html{color-scheme:light}
     :root {
-      --bg:#0a0a0b; --surface:#111114; --card:#15151a; --border:#222228;
-      --accent:#7c6af5; --accent-dim:rgba(124,106,245,.12); --accent-glow:rgba(124,106,245,.18);
-      --teal:#4fd1c5; --teal-dim:rgba(79,209,197,.1);
-      --text:#e8e8f0; --muted:#7a7a94; --faint:#44445a;
+      --bg:#f8fafc; --surface:#f1f5f9; --card:#ffffff; --border:#e2e8f0;
+      --accent:#2563eb; --accent-dim:rgba(37,99,235,0.07); --accent-glow:rgba(37,99,235,0.11);
+      --teal:#0f766e; --teal-dim:rgba(13,148,136,0.06);
+      --text:#0f172a; --muted:#64748b; --faint:#44445a;
       --font-head:'DM Serif Display',Georgia,serif;
       --font-body:'DM Sans',system-ui,sans-serif;
       --r:14px; --max:820px; --t:.22s cubic-bezier(.4,0,.2,1);
-    }
+    --line:#e2e8f0;
+    --bg2:#f1f5f9;
+}
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     html{scroll-behavior:smooth}
     body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-size:1rem;line-height:1.8;min-height:100vh;overflow-x:hidden}
     body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");pointer-events:none;z-index:0}
-    body::after{content:'';position:fixed;top:-200px;left:50%;transform:translateX(-50%);width:800px;height:500px;background:radial-gradient(ellipse at center,rgba(124,106,245,.05) 0%,transparent 70%);pointer-events:none;z-index:0}
+    body::after{content:'';position:fixed;top:-200px;left:50%;transform:translateX(-50%);width:800px;height:500px;background:radial-gradient(ellipse at center,rgba(37,99,235,0.06) 0%,transparent 70%);pointer-events:none;z-index:0}
     a{color:inherit;text-decoration:none}
     .wrap{position:relative;z-index:1;max-width:var(--max);margin:0 auto;padding:0 24px}
 
     /* NAV */
     .top-nav{padding:28px 0 0;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
     .btn-home{display:inline-flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--border);color:var(--muted);font-family:var(--font-body);font-size:.83rem;font-weight:500;letter-spacing:.04em;padding:8px 18px;border-radius:99px;transition:color var(--t),border-color var(--t),background var(--t)}
-    .btn-home:hover{color:var(--text);border-color:var(--accent);background:#1c1c24}
+    .btn-home:hover{color:var(--text);border-color:var(--accent);background:#f1f5f9}
     .btn-home svg{width:14px;height:14px}
     .breadcrumb{font-size:.78rem;color:var(--muted);display:flex;align-items:center;gap:8px;flex-wrap:wrap}
     .breadcrumb a{color:var(--muted);transition:color var(--t)}.breadcrumb a:hover{color:var(--accent)}
@@ -104,7 +106,7 @@
 
     /* HERO */
     .hero{padding:52px 0 0}
-    .hero-eyebrow{font-size:.7rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);background:var(--accent-dim);border:1px solid rgba(124,106,245,.22);padding:5px 14px;border-radius:99px;display:inline-block;margin-bottom:20px}
+    .hero-eyebrow{font-size:.7rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);background:var(--accent-dim);border:1px solid rgba(37,99,235,0.13);padding:5px 14px;border-radius:99px;display:inline-block;margin-bottom:20px}
     .hero h1{font-family:var(--font-head);font-size:clamp(2rem,5vw,2.9rem);line-height:1.17;letter-spacing:-.015em;color:#fff;margin-bottom:18px}
     .hero h1 em{font-style:italic;background:linear-gradient(100deg,var(--accent),var(--teal));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
     .hero-sub{font-size:1.05rem;color:var(--muted);max-width:640px;margin-bottom:24px;line-height:1.75}
@@ -129,7 +131,7 @@
     .article{padding:0 0 64px}
     .article h2{font-family:var(--font-head);font-size:clamp(1.5rem,3vw,2rem);color:#fff;line-height:1.2;margin:56px 0 16px}
     .article h2:first-child{margin-top:0}
-    .article h3{font-family:var(--font-head);font-size:1.18rem;color:#e0e0ee;margin:36px 0 12px;line-height:1.3}
+    .article h3{font-family:var(--font-head);font-size:1.18rem;color:#0f172a;margin:36px 0 12px;line-height:1.3}
     .article p{color:var(--muted);margin-bottom:18px;font-size:.98rem;line-height:1.82}
     .article p strong{color:var(--text);font-weight:600}
     .article ul{list-style:none;padding:0;margin:0 0 22px;display:flex;flex-direction:column;gap:11px}
@@ -138,29 +140,29 @@
     .article ul li strong{color:var(--text)}
 
     /* INLINE ILLUSTRATION PANELS */
-    .illo{width:100%;border-radius:var(--r);overflow:hidden;border:1px solid var(--border);margin:36px 0;background:linear-gradient(135deg,#13121e 0%,#0f0f18 100%)}
+    .illo{width:100%;border-radius:var(--r);overflow:hidden;border:1px solid var(--border);margin:36px 0;background:linear-gradient(135deg,#f1f5f9 0%,#f1f5f9 100%)}
     .illo svg{display:block;width:100%;height:auto}
 
     /* SPLIT ILLO (image left, text right) */
     .split{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--border);border-radius:var(--r);overflow:hidden;margin:36px 0;background:var(--card)}
-    .split-visual{background:linear-gradient(135deg,#13121e 0%,#0f0f18 100%);display:flex;align-items:center;justify-content:center;padding:32px;border-right:1px solid var(--border)}
+    .split-visual{background:linear-gradient(135deg,#f1f5f9 0%,#f1f5f9 100%);display:flex;align-items:center;justify-content:center;padding:32px;border-right:1px solid var(--border)}
     .split-visual svg{width:100%;max-width:220px;height:auto}
     .split-text{padding:32px 30px;display:flex;flex-direction:column;justify-content:center}
-    .split-text h3{font-family:var(--font-head);font-size:1.1rem;color:#fff;margin:0 0 12px}
+    .split-text h3{font-family:var(--font-head);font-size:1.1rem;color:#0f172a;margin:0 0 12px}
     .split-text p{font-size:.9rem;color:var(--muted);line-height:1.72;margin:0}
 
     /* BENEFIT CARDS */
     .benefit-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:28px 0 40px}
     .benefit-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:0;overflow:hidden;transition:border-color var(--t)}
-    .benefit-card:hover{border-color:rgba(124,106,245,.35)}
-    .benefit-icon-wrap{background:linear-gradient(135deg,#13121e,#0f0f18);padding:22px 22px 14px;border-bottom:1px solid var(--border);display:flex;justify-content:center}
+    .benefit-card:hover{border-color:rgba(37,99,235,0.21)}
+    .benefit-icon-wrap{background:linear-gradient(135deg,#f1f5f9,#f1f5f9);padding:22px 22px 14px;border-bottom:1px solid var(--border);display:flex;justify-content:center}
     .benefit-icon-wrap svg{width:80px;height:80px}
     .benefit-body{padding:18px 20px 20px}
-    .benefit-body h3{font-family:var(--font-head);font-size:1rem;color:#fff;margin:0 0 8px;line-height:1.3}
+    .benefit-body h3{font-family:var(--font-head);font-size:1rem;color:#0f172a;margin:0 0 8px;line-height:1.3}
     .benefit-body p{font-size:.86rem;color:var(--muted);margin:0;line-height:1.65}
 
     /* HIGHLIGHT BOX */
-    .hl{background:linear-gradient(135deg,var(--accent-dim),rgba(79,209,197,.05));border:1px solid rgba(124,106,245,.2);border-radius:var(--r);padding:24px 28px;margin:28px 0}
+    .hl{background:linear-gradient(135deg,var(--accent-dim),rgba(13,148,136,0.06));border:1px solid rgba(37,99,235,0.12);border-radius:var(--r);padding:24px 28px;margin:28px 0}
     .hl p{color:var(--text);margin:0;font-size:.97rem;line-height:1.75}
     .hl p strong{color:var(--accent)}
 
@@ -175,29 +177,29 @@
 
     /* FAQ */
     .faq{border-top:1px solid var(--border);padding:56px 0 0;margin-top:56px}
-    .faq h2{font-family:var(--font-head);font-size:clamp(1.4rem,3vw,1.8rem);color:#fff;margin-bottom:32px}
+    .faq h2{font-family:var(--font-head);font-size:clamp(1.4rem,3vw,1.8rem);color:#0f172a;margin-bottom:32px}
     .faq-item{border-bottom:1px solid var(--border);padding:22px 0}
     .faq-item:last-child{border-bottom:none}
-    .faq-q{font-size:.97rem;font-weight:600;color:#fff;margin-bottom:10px}
+    .faq-q{font-size:.97rem;font-weight:600;color:#0f172a;margin-bottom:10px}
     .faq-a{font-size:.92rem;color:var(--muted);line-height:1.75}
     .faq-a a{color:var(--accent);text-decoration:underline;text-underline-offset:3px}
 
     /* RELATED */
     .related{border-top:1px solid var(--border);padding:48px 0 0;margin-top:56px}
-    .related h2{font-family:var(--font-head);font-size:1.4rem;color:#fff;margin-bottom:22px}
+    .related h2{font-family:var(--font-head);font-size:1.4rem;color:#0f172a;margin-bottom:22px}
     .related-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
     .related-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;display:block;transition:border-color var(--t),transform var(--t)}
     .related-card:hover{border-color:var(--accent);transform:translateY(-2px)}
-    .related-visual{background:linear-gradient(135deg,#13121e,#0f0f18);padding:20px;display:flex;justify-content:center;border-bottom:1px solid var(--border)}
+    .related-visual{background:linear-gradient(135deg,#f1f5f9,#f1f5f9);padding:20px;display:flex;justify-content:center;border-bottom:1px solid var(--border)}
     .related-visual svg{width:80px;height:60px}
     .related-body{padding:18px 20px 20px}
     .related-tag{font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--teal);display:block;margin-bottom:7px}
-    .related-body h3{font-family:var(--font-head);font-size:.95rem;color:#fff;line-height:1.3;margin-bottom:10px}
+    .related-body h3{font-family:var(--font-head);font-size:.95rem;color:#0f172a;line-height:1.3;margin-bottom:10px}
     .related-link{font-size:.78rem;font-weight:600;color:var(--accent);display:flex;align-items:center;gap:5px}
 
     /* CTA */
-    .cta{background:linear-gradient(135deg,#16142a 0%,#111118 60%,#0f1a18 100%);border:1px solid rgba(124,106,245,.2);border-radius:18px;padding:52px 40px;text-align:center;margin:56px 0 64px}
-    .cta h2{font-family:var(--font-head);font-size:clamp(1.4rem,3vw,2rem);color:#fff;margin-bottom:12px}
+    .cta{background:linear-gradient(135deg,#16142a 0%,#f1f5f9 60%,#0f1a18 100%);border:1px solid rgba(37,99,235,0.12);border-radius:18px;padding:52px 40px;text-align:center;margin:56px 0 64px}
+    .cta h2{font-family:var(--font-head);font-size:clamp(1.4rem,3vw,2rem);color:#0f172a;margin-bottom:12px}
     .cta p{color:var(--muted);max-width:440px;margin:0 auto 26px;font-size:.95rem}
     .btn-cta{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:#fff;font-family:var(--font-body);font-size:.9rem;font-weight:600;padding:13px 28px;border-radius:99px;transition:opacity var(--t),transform var(--t)}
     .btn-cta:hover{opacity:.88;transform:translateY(-1px)}
@@ -258,9 +260,9 @@
     <div class="hero-banner" aria-hidden="true">
       <svg viewBox="0 0 820 300" fill="none" xmlns="http://www.w3.org/2000/svg">
         <defs>
-          <linearGradient id="hbg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#13121e"/><stop offset="100%" stop-color="#0c0c14"/></linearGradient>
-          <linearGradient id="hac" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#7c6af5"/><stop offset="100%" stop-color="#4fd1c5"/></linearGradient>
-          <radialGradient id="hgl" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#7c6af5" stop-opacity=".18"/><stop offset="100%" stop-color="#7c6af5" stop-opacity="0"/></radialGradient>
+          <linearGradient id="hbg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#f1f5f9"/><stop offset="100%" stop-color="#f1f5f9"/></linearGradient>
+          <linearGradient id="hac" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#7c3aed"/><stop offset="100%" stop-color="#0f766e"/></linearGradient>
+          <radialGradient id="hgl" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#7c3aed" stop-opacity=".18"/><stop offset="100%" stop-color="#7c3aed" stop-opacity="0"/></radialGradient>
         </defs>
         <rect width="820" height="300" fill="url(#hbg)"/>
         <ellipse cx="410" cy="150" rx="320" ry="140" fill="url(#hgl)"/>
@@ -276,78 +278,78 @@
         <line x1="684" y1="0" x2="684" y2="300" stroke="#1e1e2a" stroke-width="1"/>
 
         <!-- LEFT: Student at desk -->
-        <rect x="60" y="180" width="120" height="70" rx="6" fill="#16151f" stroke="#2e2e3a" stroke-width="1.5"/>
+        <rect x="60" y="180" width="120" height="70" rx="6" fill="#16151f" stroke="#dbe4f0" stroke-width="1.5"/>
         <!-- laptop screen -->
-        <rect x="68" y="188" width="104" height="54" rx="4" fill="#1a1828" stroke="#3a3858" stroke-width="1"/>
-        <rect x="74" y="194" width="92" height="42" rx="3" fill="#0f0f18"/>
+        <rect x="68" y="188" width="104" height="54" rx="4" fill="#1a1828" stroke="#dbe4f0" stroke-width="1"/>
+        <rect x="74" y="194" width="92" height="42" rx="3" fill="#f1f5f9"/>
         <!-- code lines on screen -->
-        <rect x="80" y="200" width="40" height="4" rx="2" fill="#7c6af5" opacity=".7"/>
-        <rect x="80" y="210" width="55" height="4" rx="2" fill="#3a3858"/>
-        <rect x="80" y="220" width="35" height="4" rx="2" fill="#4fd1c5" opacity=".6"/>
-        <rect x="80" y="230" width="48" height="4" rx="2" fill="#3a3858"/>
+        <rect x="80" y="200" width="40" height="4" rx="2" fill="#7c3aed" opacity=".7"/>
+        <rect x="80" y="210" width="55" height="4" rx="2" fill="#dbe4f0"/>
+        <rect x="80" y="220" width="35" height="4" rx="2" fill="#0f766e" opacity=".6"/>
+        <rect x="80" y="230" width="48" height="4" rx="2" fill="#dbe4f0"/>
         <!-- laptop base -->
-        <rect x="56" y="248" width="128" height="6" rx="3" fill="#1a1828" stroke="#2e2e3a" stroke-width="1"/>
+        <rect x="56" y="248" width="128" height="6" rx="3" fill="#1a1828" stroke="#dbe4f0" stroke-width="1"/>
         <!-- student person -->
-        <circle cx="120" cy="148" r="18" fill="#1e1c30" stroke="#3a3858" stroke-width="1.5"/>
-        <rect x="104" y="165" width="32" height="18" rx="8" fill="#16151f" stroke="#3a3858" stroke-width="1"/>
+        <circle cx="120" cy="148" r="18" fill="#1e1c30" stroke="#dbe4f0" stroke-width="1.5"/>
+        <rect x="104" y="165" width="32" height="18" rx="8" fill="#16151f" stroke="#dbe4f0" stroke-width="1"/>
 
         <!-- CENTER: AI brain hub -->
-        <circle cx="410" cy="150" r="55" fill="#13121e" stroke="#3a3858" stroke-width="1.5"/>
-        <circle cx="410" cy="150" r="42" fill="#0f0f18" stroke="#2e2e3a" stroke-width="1"/>
+        <circle cx="410" cy="150" r="55" fill="#f1f5f9" stroke="#dbe4f0" stroke-width="1.5"/>
+        <circle cx="410" cy="150" r="42" fill="#f1f5f9" stroke="#dbe4f0" stroke-width="1"/>
         <!-- brain folds -->
-        <path d="M375 143 Q385 133 395 143 Q405 153 415 143 Q425 133 435 143" stroke="#3a3858" stroke-width="1.8" fill="none" stroke-linecap="round"/>
-        <path d="M370 158 Q382 148 392 158 Q402 168 412 158 Q422 148 432 158 Q442 168 448 160" stroke="#3a3858" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+        <path d="M375 143 Q385 133 395 143 Q405 153 415 143 Q425 133 435 143" stroke="#dbe4f0" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+        <path d="M370 158 Q382 148 392 158 Q402 168 412 158 Q422 148 432 158 Q442 168 448 160" stroke="#dbe4f0" stroke-width="1.5" fill="none" stroke-linecap="round"/>
         <path d="M378 172 Q390 163 400 172 Q410 181 420 172 Q430 163 440 172" stroke="#2e2e45" stroke-width="1.3" fill="none" stroke-linecap="round"/>
         <!-- brain nodes -->
-        <circle cx="390" cy="140" r="4" fill="#7c6af5" opacity=".9"/>
-        <circle cx="410" cy="135" r="3" fill="#4fd1c5" opacity=".85"/>
-        <circle cx="430" cy="142" r="4" fill="#7c6af5" opacity=".85"/>
-        <circle cx="385" cy="160" r="3" fill="#4fd1c5" opacity=".75"/>
-        <circle cx="410" cy="165" r="4" fill="#7c6af5" opacity=".9"/>
-        <circle cx="432" cy="158" r="3" fill="#4fd1c5" opacity=".8"/>
+        <circle cx="390" cy="140" r="4" fill="#7c3aed" opacity=".9"/>
+        <circle cx="410" cy="135" r="3" fill="#0f766e" opacity=".85"/>
+        <circle cx="430" cy="142" r="4" fill="#7c3aed" opacity=".85"/>
+        <circle cx="385" cy="160" r="3" fill="#0f766e" opacity=".75"/>
+        <circle cx="410" cy="165" r="4" fill="#7c3aed" opacity=".9"/>
+        <circle cx="432" cy="158" r="3" fill="#0f766e" opacity=".8"/>
         <!-- connections -->
-        <line x1="390" y1="140" x2="410" y2="135" stroke="#7c6af5" stroke-width="1" opacity=".4"/>
-        <line x1="410" y1="135" x2="430" y2="142" stroke="#4fd1c5" stroke-width="1" opacity=".4"/>
-        <line x1="385" y1="160" x2="410" y2="165" stroke="#7c6af5" stroke-width="1" opacity=".4"/>
-        <line x1="410" y1="165" x2="432" y2="158" stroke="#4fd1c5" stroke-width="1" opacity=".4"/>
+        <line x1="390" y1="140" x2="410" y2="135" stroke="#7c3aed" stroke-width="1" opacity=".4"/>
+        <line x1="410" y1="135" x2="430" y2="142" stroke="#0f766e" stroke-width="1" opacity=".4"/>
+        <line x1="385" y1="160" x2="410" y2="165" stroke="#7c3aed" stroke-width="1" opacity=".4"/>
+        <line x1="410" y1="165" x2="432" y2="158" stroke="#0f766e" stroke-width="1" opacity=".4"/>
         <!-- orbit ring -->
         <ellipse cx="410" cy="150" rx="55" ry="55" stroke="url(#hac)" stroke-width="1" opacity=".3" stroke-dasharray="6 4"/>
 
         <!-- Connecting beams: student → brain -->
         <line x1="183" y1="200" x2="356" y2="160" stroke="url(#hac)" stroke-width="1.5" opacity=".4" stroke-dasharray="8 5"/>
-        <circle cx="183" cy="200" r="4" fill="#7c6af5" opacity=".8"/>
+        <circle cx="183" cy="200" r="4" fill="#7c3aed" opacity=".8"/>
 
         <!-- RIGHT: 8 benefit icons floating -->
         <!-- Book -->
-        <rect x="530" y="70" width="44" height="54" rx="5" fill="#16151f" stroke="#3a3858" stroke-width="1.5"/>
+        <rect x="530" y="70" width="44" height="54" rx="5" fill="#16151f" stroke="#dbe4f0" stroke-width="1.5"/>
         <line x1="552" y1="72" x2="552" y2="122" stroke="#2e2e45" stroke-width="1"/>
-        <rect x="536" y="82" width="10" height="5" rx="2" fill="#7c6af5" opacity=".6"/>
-        <rect x="536" y="93" width="10" height="4" rx="2" fill="#3a3858"/>
-        <rect x="536" y="103" width="10" height="4" rx="2" fill="#3a3858"/>
-        <rect x="558" y="82" width="10" height="5" rx="2" fill="#4fd1c5" opacity=".6"/>
-        <rect x="558" y="93" width="10" height="4" rx="2" fill="#3a3858"/>
+        <rect x="536" y="82" width="10" height="5" rx="2" fill="#7c3aed" opacity=".6"/>
+        <rect x="536" y="93" width="10" height="4" rx="2" fill="#dbe4f0"/>
+        <rect x="536" y="103" width="10" height="4" rx="2" fill="#dbe4f0"/>
+        <rect x="558" y="82" width="10" height="5" rx="2" fill="#0f766e" opacity=".6"/>
+        <rect x="558" y="93" width="10" height="4" rx="2" fill="#dbe4f0"/>
         <!-- Clock -->
-        <circle cx="630" cy="92" r="24" fill="#13121e" stroke="#3a3858" stroke-width="1.5"/>
-        <line x1="630" y1="92" x2="630" y2="78" stroke="#7c6af5" stroke-width="2" stroke-linecap="round"/>
-        <line x1="630" y1="92" x2="640" y2="98" stroke="#4fd1c5" stroke-width="2" stroke-linecap="round"/>
-        <circle cx="630" cy="92" r="3" fill="#7c6af5"/>
+        <circle cx="630" cy="92" r="24" fill="#f1f5f9" stroke="#dbe4f0" stroke-width="1.5"/>
+        <line x1="630" y1="92" x2="630" y2="78" stroke="#7c3aed" stroke-width="2" stroke-linecap="round"/>
+        <line x1="630" y1="92" x2="640" y2="98" stroke="#0f766e" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="630" cy="92" r="3" fill="#7c3aed"/>
         <!-- Trophy -->
-        <rect x="536" y="170" width="36" height="26" rx="4" fill="#16151f" stroke="#3a3858" stroke-width="1.5"/>
+        <rect x="536" y="170" width="36" height="26" rx="4" fill="#16151f" stroke="#dbe4f0" stroke-width="1.5"/>
         <rect x="546" y="195" width="16" height="8" rx="2" fill="#2e2e45"/>
         <rect x="540" y="202" width="28" height="4" rx="2" fill="#2e2e45"/>
-        <polygon points="554,158 557,166 565,166 559,171 561,179 554,174 547,179 549,171 543,166 551,166" fill="#7c6af5" opacity=".8"/>
+        <polygon points="554,158 557,166 565,166 559,171 561,179 554,174 547,179 549,171 543,166 551,166" fill="#7c3aed" opacity=".8"/>
         <!-- Chart up -->
-        <rect x="620" y="165" width="60" height="50" rx="5" fill="#13121e" stroke="#2e2e3a" stroke-width="1.2"/>
-        <polyline points="628,207 638,198 650,202 662,188 672,192" stroke="#4fd1c5" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-        <circle cx="672" cy="192" r="3" fill="#4fd1c5"/>
+        <rect x="620" y="165" width="60" height="50" rx="5" fill="#f1f5f9" stroke="#dbe4f0" stroke-width="1.2"/>
+        <polyline points="628,207 638,198 650,202 662,188 672,192" stroke="#0f766e" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="672" cy="192" r="3" fill="#0f766e"/>
         <!-- Connecting beams: brain → icons -->
         <line x1="462" y1="140" x2="528" y2="95" stroke="url(#hac)" stroke-width="1.5" opacity=".35" stroke-dasharray="7 4"/>
         <line x1="462" y1="155" x2="525" y2="180" stroke="url(#hac)" stroke-width="1.5" opacity=".35" stroke-dasharray="7 4"/>
-        <line x1="462" y1="160" x2="618" y2="100" stroke="#7c6af5" stroke-width="1" opacity=".2" stroke-dasharray="5 5"/>
-        <line x1="462" y1="165" x2="618" y2="192" stroke="#4fd1c5" stroke-width="1" opacity=".2" stroke-dasharray="5 5"/>
+        <line x1="462" y1="160" x2="618" y2="100" stroke="#7c3aed" stroke-width="1" opacity=".2" stroke-dasharray="5 5"/>
+        <line x1="462" y1="165" x2="618" y2="192" stroke="#0f766e" stroke-width="1" opacity=".2" stroke-dasharray="5 5"/>
 
         <!-- Label bottom -->
-        <text x="410" y="285" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="11" fill="#3a3858" letter-spacing="3">AI-POWERED EDUCATION ECOSYSTEM · 2026</text>
+        <text x="410" y="285" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="11" fill="#dbe4f0" letter-spacing="3">AI-POWERED EDUCATION ECOSYSTEM · 2026</text>
       </svg>
     </div>
   </header>
@@ -376,34 +378,34 @@
     <div class="infographic" aria-label="Before vs After AI in Education comparison" aria-hidden="true">
       <svg viewBox="0 0 820 220" fill="none" xmlns="http://www.w3.org/2000/svg">
         <defs>
-          <linearGradient id="ibg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#13121e"/><stop offset="100%" stop-color="#0f0f18"/></linearGradient>
+          <linearGradient id="ibg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#f1f5f9"/><stop offset="100%" stop-color="#f1f5f9"/></linearGradient>
         </defs>
         <rect width="820" height="220" fill="url(#ibg)"/>
-        <line x1="410" y1="20" x2="410" y2="200" stroke="#2e2e3a" stroke-width="1.5" stroke-dasharray="6 4"/>
+        <line x1="410" y1="20" x2="410" y2="200" stroke="#dbe4f0" stroke-width="1.5" stroke-dasharray="6 4"/>
         <!-- BEFORE label -->
         <text x="205" y="44" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" font-weight="600" fill="#555570" letter-spacing="3">BEFORE AI</text>
         <!-- AFTER label -->
-        <text x="615" y="44" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" font-weight="600" fill="#7c6af5" letter-spacing="3">WITH AI</text>
+        <text x="615" y="44" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" font-weight="600" fill="#7c3aed" letter-spacing="3">WITH AI</text>
         <!-- Row 1 -->
         <text x="380" y="76" text-anchor="end" font-family="DM Sans,sans-serif" font-size="13" fill="#555570">Feedback after days</text>
-        <text x="430" y="76" text-anchor="start" font-family="DM Sans,sans-serif" font-size="13" fill="#e8e8f0" font-weight="500">Feedback in seconds</text>
-        <circle cx="410" cy="72" r="5" fill="#7c6af5" opacity=".8"/>
+        <text x="430" y="76" text-anchor="start" font-family="DM Sans,sans-serif" font-size="13" fill="#0f172a" font-weight="500">Feedback in seconds</text>
+        <circle cx="410" cy="72" r="5" fill="#7c3aed" opacity=".8"/>
         <!-- Row 2 -->
         <text x="380" y="106" text-anchor="end" font-family="DM Sans,sans-serif" font-size="13" fill="#555570">One pace for everyone</text>
-        <text x="430" y="106" text-anchor="start" font-family="DM Sans,sans-serif" font-size="13" fill="#e8e8f0" font-weight="500">Adapts to your level</text>
-        <circle cx="410" cy="102" r="5" fill="#4fd1c5" opacity=".8"/>
+        <text x="430" y="106" text-anchor="start" font-family="DM Sans,sans-serif" font-size="13" fill="#0f172a" font-weight="500">Adapts to your level</text>
+        <circle cx="410" cy="102" r="5" fill="#0f766e" opacity=".8"/>
         <!-- Row 3 -->
         <text x="380" y="136" text-anchor="end" font-family="DM Sans,sans-serif" font-size="13" fill="#555570">Help ends at 4 PM</text>
-        <text x="430" y="136" text-anchor="start" font-family="DM Sans,sans-serif" font-size="13" fill="#e8e8f0" font-weight="500">Available 24 / 7</text>
-        <circle cx="410" cy="132" r="5" fill="#7c6af5" opacity=".8"/>
+        <text x="430" y="136" text-anchor="start" font-family="DM Sans,sans-serif" font-size="13" fill="#0f172a" font-weight="500">Available 24 / 7</text>
+        <circle cx="410" cy="132" r="5" fill="#7c3aed" opacity=".8"/>
         <!-- Row 4 -->
         <text x="380" y="166" text-anchor="end" font-family="DM Sans,sans-serif" font-size="13" fill="#555570">Tutoring costs $80/hr</text>
-        <text x="430" y="166" text-anchor="start" font-family="DM Sans,sans-serif" font-size="13" fill="#e8e8f0" font-weight="500">Tutoring is free</text>
-        <circle cx="410" cy="162" r="5" fill="#4fd1c5" opacity=".8"/>
+        <text x="430" y="166" text-anchor="start" font-family="DM Sans,sans-serif" font-size="13" fill="#0f172a" font-weight="500">Tutoring is free</text>
+        <circle cx="410" cy="162" r="5" fill="#0f766e" opacity=".8"/>
         <!-- Row 5 -->
         <text x="380" y="196" text-anchor="end" font-family="DM Sans,sans-serif" font-size="13" fill="#555570">Fixed, static content</text>
-        <text x="430" y="196" text-anchor="start" font-family="DM Sans,sans-serif" font-size="13" fill="#e8e8f0" font-weight="500">Personalised for you</text>
-        <circle cx="410" cy="192" r="5" fill="#7c6af5" opacity=".8"/>
+        <text x="430" y="196" text-anchor="start" font-family="DM Sans,sans-serif" font-size="13" fill="#0f172a" font-weight="500">Personalised for you</text>
+        <circle cx="410" cy="192" r="5" fill="#7c3aed" opacity=".8"/>
       </svg>
     </div>
 
@@ -416,11 +418,11 @@
       <div class="benefit-card" role="listitem">
         <div class="benefit-icon-wrap" aria-hidden="true">
           <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="40" cy="40" r="36" fill="#1a1828" stroke="#2e2e3a" stroke-width="1.5"/>
-            <circle cx="40" cy="28" r="10" fill="#16151f" stroke="#3a3858" stroke-width="1.5"/>
-            <path d="M20 58 Q20 44 40 44 Q60 44 60 58" stroke="#7c6af5" stroke-width="2" fill="none" stroke-linecap="round"/>
-            <circle cx="40" cy="28" r="4" fill="#7c6af5" opacity=".8"/>
-            <path d="M54 18 L58 14 M60 24 L66 24 M54 30 L58 34" stroke="#4fd1c5" stroke-width="1.5" stroke-linecap="round" opacity=".7"/>
+            <circle cx="40" cy="40" r="36" fill="#1a1828" stroke="#dbe4f0" stroke-width="1.5"/>
+            <circle cx="40" cy="28" r="10" fill="#16151f" stroke="#dbe4f0" stroke-width="1.5"/>
+            <path d="M20 58 Q20 44 40 44 Q60 44 60 58" stroke="#7c3aed" stroke-width="2" fill="none" stroke-linecap="round"/>
+            <circle cx="40" cy="28" r="4" fill="#7c3aed" opacity=".8"/>
+            <path d="M54 18 L58 14 M60 24 L66 24 M54 30 L58 34" stroke="#0f766e" stroke-width="1.5" stroke-linecap="round" opacity=".7"/>
           </svg>
         </div>
         <div class="benefit-body">
@@ -433,10 +435,10 @@
       <div class="benefit-card" role="listitem">
         <div class="benefit-icon-wrap" aria-hidden="true">
           <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="40" cy="40" r="36" fill="#1a1828" stroke="#2e2e3a" stroke-width="1.5"/>
+            <circle cx="40" cy="40" r="36" fill="#1a1828" stroke="#dbe4f0" stroke-width="1.5"/>
             <!-- lightning bolt -->
-            <path d="M44 18 L30 42 H42 L36 62 L54 36 H42 Z" fill="#7c6af5" opacity=".85"/>
-            <path d="M44 18 L30 42 H42 L36 62 L54 36 H42 Z" stroke="#4fd1c5" stroke-width="1" fill="none" opacity=".5"/>
+            <path d="M44 18 L30 42 H42 L36 62 L54 36 H42 Z" fill="#7c3aed" opacity=".85"/>
+            <path d="M44 18 L30 42 H42 L36 62 L54 36 H42 Z" stroke="#0f766e" stroke-width="1" fill="none" opacity=".5"/>
           </svg>
         </div>
         <div class="benefit-body">
@@ -449,16 +451,16 @@
       <div class="benefit-card" role="listitem">
         <div class="benefit-icon-wrap" aria-hidden="true">
           <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="40" cy="40" r="36" fill="#1a1828" stroke="#2e2e3a" stroke-width="1.5"/>
+            <circle cx="40" cy="40" r="36" fill="#1a1828" stroke="#dbe4f0" stroke-width="1.5"/>
             <!-- clock -->
-            <circle cx="40" cy="40" r="22" fill="#13121e" stroke="#3a3858" stroke-width="1.5"/>
-            <line x1="40" y1="40" x2="40" y2="25" stroke="#7c6af5" stroke-width="2.5" stroke-linecap="round"/>
-            <line x1="40" y1="40" x2="52" y2="48" stroke="#4fd1c5" stroke-width="2.5" stroke-linecap="round"/>
-            <circle cx="40" cy="40" r="3" fill="#7c6af5"/>
-            <circle cx="40" cy="20" r="2" fill="#3a3858"/>
-            <circle cx="60" cy="40" r="2" fill="#3a3858"/>
-            <circle cx="40" cy="60" r="2" fill="#3a3858"/>
-            <circle cx="20" cy="40" r="2" fill="#3a3858"/>
+            <circle cx="40" cy="40" r="22" fill="#f1f5f9" stroke="#dbe4f0" stroke-width="1.5"/>
+            <line x1="40" y1="40" x2="40" y2="25" stroke="#7c3aed" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="40" y1="40" x2="52" y2="48" stroke="#0f766e" stroke-width="2.5" stroke-linecap="round"/>
+            <circle cx="40" cy="40" r="3" fill="#7c3aed"/>
+            <circle cx="40" cy="20" r="2" fill="#dbe4f0"/>
+            <circle cx="60" cy="40" r="2" fill="#dbe4f0"/>
+            <circle cx="40" cy="60" r="2" fill="#dbe4f0"/>
+            <circle cx="20" cy="40" r="2" fill="#dbe4f0"/>
           </svg>
         </div>
         <div class="benefit-body">
@@ -471,14 +473,14 @@
       <div class="benefit-card" role="listitem">
         <div class="benefit-icon-wrap" aria-hidden="true">
           <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="40" cy="40" r="36" fill="#1a1828" stroke="#2e2e3a" stroke-width="1.5"/>
+            <circle cx="40" cy="40" r="36" fill="#1a1828" stroke="#dbe4f0" stroke-width="1.5"/>
             <!-- globe -->
-            <circle cx="40" cy="40" r="22" fill="#13121e" stroke="#3a3858" stroke-width="1.5"/>
+            <circle cx="40" cy="40" r="22" fill="#f1f5f9" stroke="#dbe4f0" stroke-width="1.5"/>
             <ellipse cx="40" cy="40" rx="10" ry="22" stroke="#2e2e45" stroke-width="1.2" fill="none"/>
             <line x1="18" y1="40" x2="62" y2="40" stroke="#2e2e45" stroke-width="1.2"/>
             <line x1="20" y1="30" x2="60" y2="30" stroke="#2e2e45" stroke-width="1"/>
             <line x1="20" y1="50" x2="60" y2="50" stroke="#2e2e45" stroke-width="1"/>
-            <circle cx="40" cy="40" r="4" fill="#4fd1c5" opacity=".8"/>
+            <circle cx="40" cy="40" r="4" fill="#0f766e" opacity=".8"/>
           </svg>
         </div>
         <div class="benefit-body">
@@ -491,12 +493,12 @@
       <div class="benefit-card" role="listitem">
         <div class="benefit-icon-wrap" aria-hidden="true">
           <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="40" cy="40" r="36" fill="#1a1828" stroke="#2e2e3a" stroke-width="1.5"/>
+            <circle cx="40" cy="40" r="36" fill="#1a1828" stroke="#dbe4f0" stroke-width="1.5"/>
             <!-- accessibility symbol -->
-            <circle cx="40" cy="22" r="6" fill="#7c6af5" opacity=".8"/>
-            <path d="M26 34 Q40 30 54 34" stroke="#7c6af5" stroke-width="2" fill="none" stroke-linecap="round"/>
-            <line x1="40" y1="34" x2="40" y2="52" stroke="#3a3858" stroke-width="2" stroke-linecap="round"/>
-            <path d="M40 52 L30 64 M40 52 L50 64" stroke="#4fd1c5" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="40" cy="22" r="6" fill="#7c3aed" opacity=".8"/>
+            <path d="M26 34 Q40 30 54 34" stroke="#7c3aed" stroke-width="2" fill="none" stroke-linecap="round"/>
+            <line x1="40" y1="34" x2="40" y2="52" stroke="#dbe4f0" stroke-width="2" stroke-linecap="round"/>
+            <path d="M40 52 L30 64 M40 52 L50 64" stroke="#0f766e" stroke-width="2" stroke-linecap="round"/>
           </svg>
         </div>
         <div class="benefit-body">
@@ -509,17 +511,17 @@
       <div class="benefit-card" role="listitem">
         <div class="benefit-icon-wrap" aria-hidden="true">
           <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="40" cy="40" r="36" fill="#1a1828" stroke="#2e2e3a" stroke-width="1.5"/>
+            <circle cx="40" cy="40" r="36" fill="#1a1828" stroke="#dbe4f0" stroke-width="1.5"/>
             <!-- brain small -->
-            <ellipse cx="40" cy="40" rx="20" ry="17" fill="#13121e" stroke="#3a3858" stroke-width="1.5"/>
-            <path d="M24 38 Q30 31 36 38 Q42 45 48 38 Q54 31 58 36" stroke="#3a3858" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            <ellipse cx="40" cy="40" rx="20" ry="17" fill="#f1f5f9" stroke="#dbe4f0" stroke-width="1.5"/>
+            <path d="M24 38 Q30 31 36 38 Q42 45 48 38 Q54 31 58 36" stroke="#dbe4f0" stroke-width="1.5" fill="none" stroke-linecap="round"/>
             <path d="M23 46 Q30 40 36 46 Q42 52 48 46 Q54 40 58 44" stroke="#2e2e45" stroke-width="1.3" fill="none" stroke-linecap="round"/>
-            <circle cx="34" cy="36" r="3" fill="#7c6af5" opacity=".85"/>
-            <circle cx="46" cy="34" r="2.5" fill="#4fd1c5" opacity=".8"/>
-            <circle cx="52" cy="40" r="3" fill="#7c6af5" opacity=".75"/>
+            <circle cx="34" cy="36" r="3" fill="#7c3aed" opacity=".85"/>
+            <circle cx="46" cy="34" r="2.5" fill="#0f766e" opacity=".8"/>
+            <circle cx="52" cy="40" r="3" fill="#7c3aed" opacity=".75"/>
             <!-- arrows circling = recall -->
-            <path d="M20 30 Q10 40 20 50" stroke="#4fd1c5" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-dasharray="3 3"/>
-            <path d="M60 30 Q70 40 60 50" stroke="#7c6af5" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-dasharray="3 3"/>
+            <path d="M20 30 Q10 40 20 50" stroke="#0f766e" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-dasharray="3 3"/>
+            <path d="M60 30 Q70 40 60 50" stroke="#7c3aed" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-dasharray="3 3"/>
           </svg>
         </div>
         <div class="benefit-body">
@@ -532,12 +534,12 @@
       <div class="benefit-card" role="listitem">
         <div class="benefit-icon-wrap" aria-hidden="true">
           <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="40" cy="40" r="36" fill="#1a1828" stroke="#2e2e3a" stroke-width="1.5"/>
+            <circle cx="40" cy="40" r="36" fill="#1a1828" stroke="#dbe4f0" stroke-width="1.5"/>
             <!-- two people + heart -->
-            <circle cx="30" cy="28" r="8" fill="#16151f" stroke="#3a3858" stroke-width="1.5"/>
-            <circle cx="50" cy="28" r="8" fill="#16151f" stroke="#3a3858" stroke-width="1.5"/>
-            <path d="M14 52 Q14 40 30 40 Q40 40 40 40 Q40 40 50 40 Q66 40 66 52" stroke="#7c6af5" stroke-width="1.8" fill="none" stroke-linecap="round"/>
-            <path d="M40 34 Q38 30 35 31 Q32 32 33 35 Q34 38 40 42 Q46 38 47 35 Q48 32 45 31 Q42 30 40 34Z" fill="#4fd1c5" opacity=".7"/>
+            <circle cx="30" cy="28" r="8" fill="#16151f" stroke="#dbe4f0" stroke-width="1.5"/>
+            <circle cx="50" cy="28" r="8" fill="#16151f" stroke="#dbe4f0" stroke-width="1.5"/>
+            <path d="M14 52 Q14 40 30 40 Q40 40 40 40 Q40 40 50 40 Q66 40 66 52" stroke="#7c3aed" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+            <path d="M40 34 Q38 30 35 31 Q32 32 33 35 Q34 38 40 42 Q46 38 47 35 Q48 32 45 31 Q42 30 40 34Z" fill="#0f766e" opacity=".7"/>
           </svg>
         </div>
         <div class="benefit-body">
@@ -550,15 +552,15 @@
       <div class="benefit-card" role="listitem">
         <div class="benefit-icon-wrap" aria-hidden="true">
           <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="40" cy="40" r="36" fill="#1a1828" stroke="#2e2e3a" stroke-width="1.5"/>
+            <circle cx="40" cy="40" r="36" fill="#1a1828" stroke="#dbe4f0" stroke-width="1.5"/>
             <!-- chart with alert -->
-            <rect x="18" y="46" width="44" height="18" rx="3" fill="#13121e" stroke="#2e2e3a" stroke-width="1.2"/>
-            <polyline points="24,56 32,50 42,54 52,44 58,47" stroke="#4fd1c5" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-            <circle cx="58" cy="47" r="3" fill="#4fd1c5"/>
+            <rect x="18" y="46" width="44" height="18" rx="3" fill="#f1f5f9" stroke="#dbe4f0" stroke-width="1.2"/>
+            <polyline points="24,56 32,50 42,54 52,44 58,47" stroke="#0f766e" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="58" cy="47" r="3" fill="#0f766e"/>
             <!-- alert triangle -->
-            <polygon points="40,16 26,38 54,38" fill="#1e1c30" stroke="#7c6af5" stroke-width="1.8"/>
-            <line x1="40" y1="24" x2="40" y2="32" stroke="#7c6af5" stroke-width="2" stroke-linecap="round"/>
-            <circle cx="40" cy="35" r="1.5" fill="#7c6af5"/>
+            <polygon points="40,16 26,38 54,38" fill="#1e1c30" stroke="#7c3aed" stroke-width="1.8"/>
+            <line x1="40" y1="24" x2="40" y2="32" stroke="#7c3aed" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="40" cy="35" r="1.5" fill="#7c3aed"/>
           </svg>
         </div>
         <div class="benefit-body">
@@ -574,30 +576,30 @@
       <div class="split-visual" aria-hidden="true">
         <svg viewBox="0 0 220 200" fill="none" xmlns="http://www.w3.org/2000/svg">
           <defs>
-            <linearGradient id="sg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#7c6af5" stop-opacity=".2"/><stop offset="100%" stop-color="#4fd1c5" stop-opacity=".05"/></linearGradient>
+            <linearGradient id="sg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#7c3aed" stop-opacity=".2"/><stop offset="100%" stop-color="#0f766e" stop-opacity=".05"/></linearGradient>
           </defs>
           <rect width="220" height="200" fill="url(#sg1)" rx="4"/>
           <!-- Forgetting curve vs AI-spaced -->
           <text x="110" y="22" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#44445a" letter-spacing="2">MEMORY RETENTION</text>
           <!-- axes -->
-          <line x1="30" y1="160" x2="195" y2="160" stroke="#2e2e3a" stroke-width="1.2"/>
-          <line x1="30" y1="30" x2="30" y2="162" stroke="#2e2e3a" stroke-width="1.2"/>
+          <line x1="30" y1="160" x2="195" y2="160" stroke="#dbe4f0" stroke-width="1.2"/>
+          <line x1="30" y1="30" x2="30" y2="162" stroke="#dbe4f0" stroke-width="1.2"/>
           <!-- Ebbinghaus curve (no AI) -->
           <path d="M30 50 Q60 70 90 110 Q120 135 195 155" stroke="#44445a" stroke-width="2" fill="none" stroke-linecap="round"/>
           <!-- AI-spaced retention curve -->
-          <path d="M30 50 Q55 55 85 58 Q115 62 145 65 Q170 68 195 72" stroke="#7c6af5" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <path d="M30 50 Q55 55 85 58 Q115 62 145 65 Q170 68 195 72" stroke="#7c3aed" stroke-width="2.5" fill="none" stroke-linecap="round"/>
           <!-- fill under AI curve -->
-          <path d="M30 50 Q55 55 85 58 Q115 62 145 65 Q170 68 195 72 L195 160 L30 160 Z" fill="#7c6af5" opacity=".06"/>
+          <path d="M30 50 Q55 55 85 58 Q115 62 145 65 Q170 68 195 72 L195 160 L30 160 Z" fill="#7c3aed" opacity=".06"/>
           <!-- labels -->
           <text x="170" y="152" font-family="DM Sans,sans-serif" font-size="8.5" fill="#44445a">Without AI</text>
-          <text x="150" y="68" font-family="DM Sans,sans-serif" font-size="8.5" fill="#7c6af5">With AI Spaced</text>
+          <text x="150" y="68" font-family="DM Sans,sans-serif" font-size="8.5" fill="#7c3aed">With AI Spaced</text>
           <!-- axis labels -->
           <text x="110" y="178" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#44445a">Time →</text>
           <text x="16" y="105" font-family="DM Sans,sans-serif" font-size="8" fill="#44445a" transform="rotate(-90,16,105)">Retention %</text>
           <!-- dot markers -->
           <circle cx="85" cy="110" r="3" fill="#44445a"/>
-          <circle cx="85" cy="58" r="3" fill="#7c6af5"/>
-          <line x1="85" y1="58" x2="85" y2="110" stroke="#3a3858" stroke-width="1" stroke-dasharray="3 3"/>
+          <circle cx="85" cy="58" r="3" fill="#7c3aed"/>
+          <line x1="85" y1="58" x2="85" y2="110" stroke="#dbe4f0" stroke-width="1" stroke-dasharray="3 3"/>
         </svg>
       </div>
       <div class="split-text">
@@ -612,19 +614,19 @@
     <!-- ILLO: three mechanisms -->
     <div class="illo" aria-label="Three core learning mechanisms powered by AI" aria-hidden="true">
       <svg viewBox="0 0 820 180" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect width="820" height="180" fill="#13121e"/>
+        <rect width="820" height="180" fill="#f1f5f9"/>
         <!-- dividers -->
-        <line x1="273" y1="20" x2="273" y2="160" stroke="#2e2e3a" stroke-width="1"/>
-        <line x1="547" y1="20" x2="547" y2="160" stroke="#2e2e3a" stroke-width="1"/>
+        <line x1="273" y1="20" x2="273" y2="160" stroke="#dbe4f0" stroke-width="1"/>
+        <line x1="547" y1="20" x2="547" y2="160" stroke="#dbe4f0" stroke-width="1"/>
 
         <!-- 1 Spacing Effect -->
         <text x="136" y="44" text-anchor="middle" font-family="DM Serif Display,serif" font-size="15" fill="#fff">Spacing Effect</text>
         <!-- spaced dots on timeline -->
-        <line x1="50" y1="100" x2="222" y2="100" stroke="#2e2e3a" stroke-width="1.5"/>
-        <circle cx="70" cy="100" r="8" fill="#7c6af5" opacity=".9"/>
-        <circle cx="105" cy="100" r="8" fill="#7c6af5" opacity=".75"/>
-        <circle cx="148" cy="100" r="8" fill="#7c6af5" opacity=".65"/>
-        <circle cx="202" cy="100" r="8" fill="#7c6af5" opacity=".55"/>
+        <line x1="50" y1="100" x2="222" y2="100" stroke="#dbe4f0" stroke-width="1.5"/>
+        <circle cx="70" cy="100" r="8" fill="#7c3aed" opacity=".9"/>
+        <circle cx="105" cy="100" r="8" fill="#7c3aed" opacity=".75"/>
+        <circle cx="148" cy="100" r="8" fill="#7c3aed" opacity=".65"/>
+        <circle cx="202" cy="100" r="8" fill="#7c3aed" opacity=".55"/>
         <text x="70" y="124" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#7a7a94">Day 1</text>
         <text x="105" y="124" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#7a7a94">Day 3</text>
         <text x="148" y="124" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#7a7a94">Day 7</text>
@@ -634,28 +636,28 @@
         <!-- 2 Testing Effect -->
         <text x="410" y="44" text-anchor="middle" font-family="DM Serif Display,serif" font-size="15" fill="#fff">Testing Effect</text>
         <!-- bar chart read vs recall -->
-        <rect x="318" y="80" width="28" height="60" rx="3" fill="#2e2e3a"/>
+        <rect x="318" y="80" width="28" height="60" rx="3" fill="#dbe4f0"/>
         <rect x="318" y="110" width="28" height="30" rx="3" fill="#44445a"/>
-        <rect x="358" y="80" width="28" height="60" rx="3" fill="#2e2e3a"/>
-        <rect x="358" y="80" width="28" height="55" rx="3" fill="#7c6af5" opacity=".85"/>
+        <rect x="358" y="80" width="28" height="60" rx="3" fill="#dbe4f0"/>
+        <rect x="358" y="80" width="28" height="55" rx="3" fill="#7c3aed" opacity=".85"/>
         <text x="332" y="156" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#7a7a94">Re-read</text>
-        <text x="372" y="156" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#7c6af5">AI Quiz</text>
+        <text x="372" y="156" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#7c3aed">AI Quiz</text>
         <text x="410" y="75" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#44445a">+2× retention vs passive review</text>
         <!-- bar labels -->
         <text x="332" y="107" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#44445a">42%</text>
-        <text x="372" y="78" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#e8e8f0">85%</text>
+        <text x="372" y="78" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#0f172a">85%</text>
 
         <!-- 3 Reducing Cognitive Load -->
         <text x="684" y="44" text-anchor="middle" font-family="DM Serif Display,serif" font-size="15" fill="#fff">Reduced Friction</text>
         <!-- funnel from stuck to understanding -->
-        <path d="M600 68 L660 68 L645 100 L615 100 Z" fill="#1e1c30" stroke="#3a3858" stroke-width="1.5"/>
+        <path d="M600 68 L660 68 L645 100 L615 100 Z" fill="#1e1c30" stroke="#dbe4f0" stroke-width="1.5"/>
         <text x="630" y="88" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#7a7a94">Stuck</text>
-        <line x1="630" y1="100" x2="630" y2="114" stroke="#7c6af5" stroke-width="1.5" stroke-dasharray="3 3"/>
+        <line x1="630" y1="100" x2="630" y2="114" stroke="#7c3aed" stroke-width="1.5" stroke-dasharray="3 3"/>
         <!-- AI box -->
-        <rect x="597" y="114" width="66" height="24" rx="5" fill="#1a1828" stroke="#7c6af5" stroke-width="1.2"/>
-        <text x="630" y="130" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#7c6af5" font-weight="600">AI Explain</text>
-        <line x1="630" y1="138" x2="630" y2="148" stroke="#4fd1c5" stroke-width="1.5"/>
-        <text x="630" y="158" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#4fd1c5" font-weight="600">Understood ✓</text>
+        <rect x="597" y="114" width="66" height="24" rx="5" fill="#1a1828" stroke="#7c3aed" stroke-width="1.2"/>
+        <text x="630" y="130" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#7c3aed" font-weight="600">AI Explain</text>
+        <line x1="630" y1="138" x2="630" y2="148" stroke="#0f766e" stroke-width="1.5"/>
+        <text x="630" y="158" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#0f766e" font-weight="600">Understood ✓</text>
       </svg>
     </div>
 
@@ -679,24 +681,24 @@
     <div class="split" aria-label="Students who benefit most from AI tools">
       <div class="split-visual" aria-hidden="true">
         <svg viewBox="0 0 220 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <defs><linearGradient id="sg2" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#4fd1c5" stop-opacity=".15"/><stop offset="100%" stop-color="#7c6af5" stop-opacity=".05"/></linearGradient></defs>
+          <defs><linearGradient id="sg2" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#0f766e" stop-opacity=".15"/><stop offset="100%" stop-color="#7c3aed" stop-opacity=".05"/></linearGradient></defs>
           <rect width="220" height="200" fill="url(#sg2)" rx="4"/>
           <!-- Venn-style circles -->
-          <circle cx="90" cy="95" r="52" fill="#7c6af5" opacity=".08" stroke="#7c6af5" stroke-width="1.2" stroke-dasharray="4 3"/>
-          <circle cx="132" cy="95" r="52" fill="#4fd1c5" opacity=".08" stroke="#4fd1c5" stroke-width="1.2" stroke-dasharray="4 3"/>
+          <circle cx="90" cy="95" r="52" fill="#7c3aed" opacity=".08" stroke="#7c3aed" stroke-width="1.2" stroke-dasharray="4 3"/>
+          <circle cx="132" cy="95" r="52" fill="#0f766e" opacity=".08" stroke="#0f766e" stroke-width="1.2" stroke-dasharray="4 3"/>
           <!-- intersect -->
-          <text x="110" y="91" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#e8e8f0" font-weight="600">All</text>
-          <text x="110" y="103" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#e8e8f0" font-weight="600">Students</text>
+          <text x="110" y="91" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#0f172a" font-weight="600">All</text>
+          <text x="110" y="103" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#0f172a" font-weight="600">Students</text>
           <!-- left labels -->
-          <text x="72" y="66" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#7c6af5">Non-average</text>
-          <text x="72" y="76" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#7c6af5">learners</text>
-          <text x="72" y="116" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#7c6af5">Low-income</text>
-          <text x="72" y="126" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#7c6af5">students</text>
+          <text x="72" y="66" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#7c3aed">Non-average</text>
+          <text x="72" y="76" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#7c3aed">learners</text>
+          <text x="72" y="116" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#7c3aed">Low-income</text>
+          <text x="72" y="126" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#7c3aed">students</text>
           <!-- right labels -->
-          <text x="150" y="66" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#4fd1c5">Learning</text>
-          <text x="150" y="76" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#4fd1c5">differences</text>
-          <text x="150" y="116" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#4fd1c5">Adult &amp;</text>
-          <text x="150" y="126" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#4fd1c5">working learners</text>
+          <text x="150" y="66" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#0f766e">Learning</text>
+          <text x="150" y="76" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#0f766e">differences</text>
+          <text x="150" y="116" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#0f766e">Adult &amp;</text>
+          <text x="150" y="126" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#0f766e">working learners</text>
           <text x="110" y="170" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#44445a">Language learners benefit too</text>
         </svg>
       </div>
@@ -720,31 +722,31 @@
     <!-- ILLO: responsible use framework -->
     <div class="illo" aria-label="Responsible AI use framework for students" aria-hidden="true">
       <svg viewBox="0 0 820 160" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect width="820" height="160" fill="#13121e"/>
+        <rect width="820" height="160" fill="#f1f5f9"/>
         <text x="410" y="30" text-anchor="middle" font-family="DM Serif Display,serif" font-size="16" fill="#fff">Responsible AI Use Framework</text>
         <!-- 5 steps horizontal -->
         <!-- Step boxes -->
-        <rect x="28" y="48" width="132" height="68" rx="8" fill="#16151f" stroke="#2e2e3a" stroke-width="1.2"/>
-        <rect x="176" y="48" width="132" height="68" rx="8" fill="#16151f" stroke="#2e2e3a" stroke-width="1.2"/>
-        <rect x="324" y="48" width="172" height="68" rx="8" fill="#16151f" stroke="#7c6af5" stroke-width="1.2"/>
-        <rect x="512" y="48" width="132" height="68" rx="8" fill="#16151f" stroke="#2e2e3a" stroke-width="1.2"/>
-        <rect x="660" y="48" width="132" height="68" rx="8" fill="#16151f" stroke="#2e2e3a" stroke-width="1.2"/>
+        <rect x="28" y="48" width="132" height="68" rx="8" fill="#16151f" stroke="#dbe4f0" stroke-width="1.2"/>
+        <rect x="176" y="48" width="132" height="68" rx="8" fill="#16151f" stroke="#dbe4f0" stroke-width="1.2"/>
+        <rect x="324" y="48" width="172" height="68" rx="8" fill="#16151f" stroke="#7c3aed" stroke-width="1.2"/>
+        <rect x="512" y="48" width="132" height="68" rx="8" fill="#16151f" stroke="#dbe4f0" stroke-width="1.2"/>
+        <rect x="660" y="48" width="132" height="68" rx="8" fill="#16151f" stroke="#dbe4f0" stroke-width="1.2"/>
         <!-- Arrows -->
-        <line x1="160" y1="82" x2="176" y2="82" stroke="#3a3858" stroke-width="1.5" marker-end="url(#arr)"/>
-        <line x1="308" y1="82" x2="324" y2="82" stroke="#3a3858" stroke-width="1.5"/>
-        <line x1="496" y1="82" x2="512" y2="82" stroke="#3a3858" stroke-width="1.5"/>
-        <line x1="644" y1="82" x2="660" y2="82" stroke="#3a3858" stroke-width="1.5"/>
-        <text x="168" y="79" font-family="DM Sans,sans-serif" font-size="13" fill="#3a3858">›</text>
-        <text x="316" y="79" font-family="DM Sans,sans-serif" font-size="13" fill="#3a3858">›</text>
-        <text x="504" y="79" font-family="DM Sans,sans-serif" font-size="13" fill="#3a3858">›</text>
-        <text x="652" y="79" font-family="DM Sans,sans-serif" font-size="13" fill="#3a3858">›</text>
+        <line x1="160" y1="82" x2="176" y2="82" stroke="#dbe4f0" stroke-width="1.5" marker-end="url(#arr)"/>
+        <line x1="308" y1="82" x2="324" y2="82" stroke="#dbe4f0" stroke-width="1.5"/>
+        <line x1="496" y1="82" x2="512" y2="82" stroke="#dbe4f0" stroke-width="1.5"/>
+        <line x1="644" y1="82" x2="660" y2="82" stroke="#dbe4f0" stroke-width="1.5"/>
+        <text x="168" y="79" font-family="DM Sans,sans-serif" font-size="13" fill="#dbe4f0">›</text>
+        <text x="316" y="79" font-family="DM Sans,sans-serif" font-size="13" fill="#dbe4f0">›</text>
+        <text x="504" y="79" font-family="DM Sans,sans-serif" font-size="13" fill="#dbe4f0">›</text>
+        <text x="652" y="79" font-family="DM Sans,sans-serif" font-size="13" fill="#dbe4f0">›</text>
         <!-- Labels -->
         <text x="94" y="72" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#7a7a94">Attempt</text>
         <text x="94" y="86" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#7a7a94">it first</text>
         <text x="242" y="72" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#7a7a94">Ask AI to</text>
         <text x="242" y="86" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#7a7a94">explain</text>
-        <text x="410" y="72" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#e8e8f0" font-weight="600">Understand,</text>
-        <text x="410" y="86" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#7c6af5" font-weight="600">don't copy</text>
+        <text x="410" y="72" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#0f172a" font-weight="600">Understand,</text>
+        <text x="410" y="86" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#7c3aed" font-weight="600">don't copy</text>
         <text x="578" y="72" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#7a7a94">Practice</text>
         <text x="578" y="86" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#7a7a94">without AI</text>
         <text x="726" y="72" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#7a7a94">Verify key</text>
@@ -752,7 +754,7 @@
         <!-- step numbers -->
         <text x="94" y="58" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#44445a">01</text>
         <text x="242" y="58" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#44445a">02</text>
-        <text x="410" y="58" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#7c6af5">03</text>
+        <text x="410" y="58" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#7c3aed">03</text>
         <text x="578" y="58" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#44445a">04</text>
         <text x="726" y="58" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#44445a">05</text>
       </svg>
@@ -801,9 +803,9 @@
       <a href="ai-homework-helper.html" class="related-card" aria-label="Read: AI Homework Helper">
         <div class="related-visual" aria-hidden="true">
           <svg viewBox="0 0 80 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="8" y="5" width="56" height="50" rx="5" fill="#16151f" stroke="#2e2e3a" stroke-width="1.2"/>
-            <rect x="8" y="5" width="12" height="50" rx="5" fill="#1e1c30" stroke="#2e2e3a" stroke-width="1.2"/>
-            <rect x="26" y="16" width="30" height="5" rx="2" fill="#7c6af5" opacity=".7"/>
+            <rect x="8" y="5" width="56" height="50" rx="5" fill="#16151f" stroke="#dbe4f0" stroke-width="1.2"/>
+            <rect x="8" y="5" width="12" height="50" rx="5" fill="#1e1c30" stroke="#dbe4f0" stroke-width="1.2"/>
+            <rect x="26" y="16" width="30" height="5" rx="2" fill="#7c3aed" opacity=".7"/>
             <rect x="26" y="26" width="24" height="4" rx="2" fill="#2e2e45"/>
             <rect x="26" y="34" width="28" height="4" rx="2" fill="#2e2e45"/>
             <rect x="26" y="42" width="20" height="4" rx="2" fill="#2e2e45"/>
@@ -818,13 +820,13 @@
       <a href="how-ai-improves-learning.html" class="related-card" aria-label="Read: How AI Improves Learning">
         <div class="related-visual" aria-hidden="true">
           <svg viewBox="0 0 80 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <ellipse cx="40" cy="26" rx="22" ry="18" fill="#13121e" stroke="#2e2e3a" stroke-width="1.2"/>
-            <path d="M22 24 Q28 18 34 24 Q40 30 46 24 Q52 18 58 24" stroke="#3a3858" stroke-width="1.3" fill="none" stroke-linecap="round"/>
-            <circle cx="32" cy="22" r="3" fill="#7c6af5" opacity=".8"/>
-            <circle cx="40" cy="20" r="2.5" fill="#4fd1c5" opacity=".75"/>
-            <circle cx="48" cy="22" r="3" fill="#7c6af5" opacity=".8"/>
-            <polyline points="18,52 26,46 36,49 46,40 58,43" stroke="#4fd1c5" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-            <circle cx="58" cy="43" r="3" fill="#4fd1c5"/>
+            <ellipse cx="40" cy="26" rx="22" ry="18" fill="#f1f5f9" stroke="#dbe4f0" stroke-width="1.2"/>
+            <path d="M22 24 Q28 18 34 24 Q40 30 46 24 Q52 18 58 24" stroke="#dbe4f0" stroke-width="1.3" fill="none" stroke-linecap="round"/>
+            <circle cx="32" cy="22" r="3" fill="#7c3aed" opacity=".8"/>
+            <circle cx="40" cy="20" r="2.5" fill="#0f766e" opacity=".75"/>
+            <circle cx="48" cy="22" r="3" fill="#7c3aed" opacity=".8"/>
+            <polyline points="18,52 26,46 36,49 46,40 58,43" stroke="#0f766e" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="58" cy="43" r="3" fill="#0f766e"/>
           </svg>
         </div>
         <div class="related-body">

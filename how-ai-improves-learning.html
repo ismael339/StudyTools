@@ -23,13 +23,13 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet" />
 
-  <style>
-    :root{--bg:#0a0a0f;--bg2:#111118;--border:rgba(255,255,255,0.07);--text:#eeeef5;--muted:#6a6a84;--accent:#5b6af0;--accent2:#00d4aa;--accent3:#f0a050;--card:#13131a;}
+  <style>html{color-scheme:light}
+    :root{--bg:#f8fafc;--bg2:#f1f5f9;--border:#e2e8f0;--text:#0f172a;--muted:#64748b;--accent:#2563eb;--accent2:#7c3aed;--accent3:#0d9488;--card:#ffffff;--line:#e2e8f0;}
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     html{scroll-behavior:smooth}
     body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:16px;line-height:1.75;overflow-x:hidden}
 
-    nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(1.5rem,5vw,4rem);height:68px;background:rgba(10,10,15,0.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+    nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(1.5rem,5vw,4rem);height:68px;background:rgba(255,255,255,0.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
     .nav-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.35rem;color:var(--text);text-decoration:none}
 
     .hero{padding:clamp(4rem,10vw,7.5rem) clamp(1.5rem,5vw,4rem) 3rem;text-align:center;background:linear-gradient(to bottom, #1a1a28, var(--bg));}
@@ -43,7 +43,7 @@
     .article-body p{margin-bottom:1.35rem;color:#ddd}
     .article-body ul{margin:1.5rem 0;padding-left:1.4rem}
     .article-body li{margin-bottom:0.85rem}
-    .callout{background:rgba(91,106,240,0.1);border-left:5px solid var(--accent);padding:1.5rem 1.75rem;margin:2rem 0;border-radius:0 10px 10px 0}
+    .callout{background:rgba(37,99,235,0.06);border-left:5px solid var(--accent);padding:1.5rem 1.75rem;margin:2rem 0;border-radius:0 10px 10px 0}
 
     .back-button{display:inline-flex;align-items:center;gap:10px;background:var(--accent);color:white;padding:14px 28px;border-radius:999px;text-decoration:none;font-weight:600;margin:2.5rem 0;transition:all .3s}
     .back-button:hover{transform:scale(1.05);background:#4a5be0}

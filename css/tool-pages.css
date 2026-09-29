@@ -1,5 +1,7 @@
-﻿/* Shared light theme for StudyTools tools. Loaded by js/premium-status.js. */
-:root {
+﻿/* Shared light theme for StudyTools tools. Loaded statically from every tool page <head>
+   and re-injected as a fallback by js/premium-status.js. */
+:root:root {
+  color-scheme: light;
   --bg: #f8fafc;
   --bg2: #ffffff;
   --card-bg: #ffffff;
@@ -14,6 +16,11 @@
   --navy: #0f172a;
   --panel: #ffffff;
   --card: #f8fafc;
+}
+
+/* Keep native widgets (dropdown popups, scrollbars, spinners, pickers) light. */
+html {
+  color-scheme: light !important;
 }
 
 *, *::before, *::after {
@@ -286,4 +293,34 @@ h1, h2, h3, .question-text, .study-title, .deck-title, .settings-title {
     flex-direction: column;
   }
   .btn-solve, .ctrl-btn { width: 100%; }
+}
+
+/* --- Dropdowns: the legacy pages still declare dark tokens inline, so the
+   shared light values are pinned here for the control and its popup. --- */
+select {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+  border-color: #cbd5e1 !important;
+}
+
+select:focus {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+  border-color: #3b82f6 !important;
+  outline: 2px solid #93c5fd !important;
+}
+
+select option,
+select optgroup,
+select[multiple] option {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+  font-weight: inherit;
+}
+
+select option:checked,
+select option:hover,
+select option:focus {
+  background: #eff6ff !important;
+  color: #1d4ed8 !important;
 }

@@ -1,4 +1,4 @@
-const CACHE_RESET = 'studytools-cache-reset-2026-09-24-v3';
+const CACHE_RESET = 'studytools-cache-reset-2026-09-26-v2';
 
 self.addEventListener('install', event => {
   event.waitUntil(self.skipWaiting());

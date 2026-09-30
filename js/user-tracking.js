@@ -1,5 +1,18 @@
 // User tracking and stats system for StudyTools
 
+// Profile docs used to be keyed by email, new ones use the uid.
+// Use whichever document actually exists so old accounts keep their stats.
+async function resolveUserRef(user) {
+  const db = firebase.firestore();
+  const byUid = db.collection('users').doc(user.uid);
+  if ((await byUid.get()).exists) return byUid;
+  if (user.email) {
+    const byEmail = db.collection('users').doc(user.email);
+    if ((await byEmail.get()).exists) return byEmail;
+  }
+  return byUid;
+}
+
 async function trackUsage(toolName) {
   try {
     const auth = firebase.auth();
@@ -10,8 +23,7 @@ async function trackUsage(toolName) {
       return;
     }
 
-    const db = firebase.firestore();
-    const userRef = db.collection('users').doc(user.email);
+    const userRef = await resolveUserRef(user);
 
     // Get current user data
     const userDoc = await userRef.get();
@@ -67,7 +79,7 @@ async function trackUsage(toolName) {
     });
 
     // Check for achievements
-    await checkAchievements(user.email, stats);
+    await checkAchievements(user, stats);
 
     console.log(`Usage tracked for ${toolName}:`, stats);
   } catch (error) {
@@ -75,10 +87,9 @@ async function trackUsage(toolName) {
   }
 }
 
-async function checkAchievements(email, stats) {
+async function checkAchievements(user, stats) {
   try {
-    const db = firebase.firestore();
-    const userRef = db.collection('users').doc(email);
+    const userRef = await resolveUserRef(user);
     const userDoc = await userRef.get();
     const userData = userDoc.data();
     const achievements = userData.achievements || [];

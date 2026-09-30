@@ -32,9 +32,13 @@ if (typeof firebase !== 'undefined') {
 
       try {
         const db = firebase.firestore();
-        const doc = await db.collection('users').doc(user.email).get();
-        if (doc.exists) {
-          const data = doc.data();
+        // Profiles are keyed by uid now; older accounts used the email as id.
+        let snap = await db.collection('users').doc(user.uid).get();
+        if (!snap.exists) {
+          snap = await db.collection('users').doc(user.email).get();
+        }
+        if (snap.exists) {
+          const data = snap.data();
           const isPro = data.plan === 'premium';
           localStorage.setItem('studytools_user_plan', data.plan || 'free');
           localStorage.setItem('studytools_current_user', JSON.stringify({

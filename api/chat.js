@@ -1,3 +1,112 @@
+// StudyTools AI proxy: Groq relay with server-side quota enforcement.
+//
+// The browser sends its Firebase ID token. The plan and the daily counter are read
+// and written through the Firestore REST API acting as that same user, so the
+// security rules stay in charge and no service-account key lives in this repo.
+// Every auth step fails open: a broken check must never take the tutor down.
+
+const PROJECT_ID = process.env.FIREBASE_PROJECT_ID || 'studytools-b60e9';
+const WEB_API_KEY = process.env.FIREBASE_WEB_API_KEY || 'AIzaSyDx4StAzPExYbQU_9yJ04R7HO2JX1_sq6w';
+const VERIFY_URL = 'https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyIdToken?key=' + WEB_API_KEY;
+const DOC_BASE = 'https://firestore.googleapis.com/v1/projects/' + PROJECT_ID + '/databases/(default)/documents/';
+const FREE_DAILY_LIMIT = Number(process.env.FREE_DAILY_LIMIT || 15);
+const PRO_DAILY_LIMIT = Number(process.env.PRO_DAILY_LIMIT || 2000);
+const ANON_HOURLY_LIMIT = Number(process.env.ANON_HOURLY_LIMIT || 20);
+
+// Best effort per instance cap for visitors without an account.
+const anonBuckets = new Map();
+
+function clientIp(req) {
+  const forwarded = req.headers['x-forwarded-for'] || '';
+  return String(forwarded.split(',')[0] || 'unknown').trim();
+}
+
+function anonAllowed(ip) {
+  const slot = Math.floor(Date.now() / 3600000);
+  const suffix = '|' + slot;
+  const key = ip + suffix;
+  const hits = (anonBuckets.get(key) || 0) + 1;
+  anonBuckets.set(key, hits);
+  if (anonBuckets.size > 4000) {
+    for (const stale of anonBuckets.keys()) {
+      if (!stale.endsWith(suffix)) anonBuckets.delete(stale);
+    }
+  }
+  return hits <= ANON_HOURLY_LIMIT;
+}
+
+function bearerToken(req) {
+  const header = req.headers.authorization || '';
+  if (header.indexOf('Bearer ') === 0 || header.indexOf('bearer ') === 0) return header.slice(7);
+  return null;
+}
+
+async function verifyToken(token) {
+  try {
+    const response = await fetch(VERIFY_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ idToken: token })
+    });
+    if (!response.ok) return { status: 'invalid' };
+    const data = await response.json();
+    const uid = data.user_id || data.localId;
+    if (!uid) return { status: 'invalid' };
+    return { status: 'ok', uid: uid, email: data.email || '' };
+  } catch (error) {
+    console.warn('Token verification unavailable:', error && error.message);
+    return { status: 'unavailable' };
+  }
+}
+
+// Firestore REST helpers. Called with the caller's own ID token, so the rules
+// decide what is readable; a denied read simply counts as missing data.
+async function readDoc(path, token) {
+  try {
+    const response = await fetch(DOC_BASE + path, { headers: { Authorization: 'Bearer ' + token } });
+    if (response.status !== 200) return null;
+    const json = await response.json();
+    return json.fields || null;
+  } catch (error) {
+    return null;
+  }
+}
+
+function stringField(fields, name) {
+  const value = fields && fields[name];
+  return value && typeof value.stringValue === 'string' ? value.stringValue : '';
+}
+
+function intField(fields, name) {
+  const value = fields && fields[name];
+  return value && typeof value.integerValue !== 'undefined' ? Number(value.integerValue) : 0;
+}
+
+async function bumpUsage(uid, token, day) {
+  const path = 'usage/' + uid + '_' + day;
+  const current = await readDoc(path, token);
+  const next = (current ? intField(current, 'count') : 0) + 1;
+  try {
+    const response = await fetch(DOC_BASE + path + '?currentDocument.exists=' + (current ? 'true' : 'false'), {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + token },
+      body: JSON.stringify({
+        fields: {
+          uid: { stringValue: uid },
+          day: { stringValue: day },
+          tool: { stringValue: 'chat' },
+          count: { integerValue: String(next) },
+          updatedAt: { timestampValue: new Date().toISOString() }
+        }
+      })
+    });
+    if (!response.ok) console.warn('Usage write rejected (' + response.status + ')');
+  } catch (error) {
+    console.warn('Usage write failed:', error && error.message);
+  }
+  return next;
+}
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
@@ -8,18 +117,13 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'Missing or invalid messages array' });
   }
 
-  // Server-side security & payload validation
   const lastUserMessage = [...messages].reverse().find(m => m.role === 'user');
   if (!lastUserMessage || !lastUserMessage.content || typeof lastUserMessage.content !== 'string') {
     return res.status(400).json({ error: 'A valid user message is required' });
   }
-
-  // Guard against massive payloads / token drain attacks (max 12,000 characters per request)
   if (lastUserMessage.content.length > 12000) {
     return res.status(413).json({ error: 'Message payload too large. Please shorten your text.' });
   }
-
-  // Cap message history length to avoid token waste
   const trimmedMessages = messages.slice(-10);
 
   const apiKey = process.env.GROQ_API_KEY;
@@ -28,12 +132,50 @@ export default async function handler(req, res) {
     return res.status(500).json({ error: 'API key not configured in environment variables' });
   }
 
+  // Quota check. Signed-in requests are counted per day in Firestore, anonymous
+  // requests only get the per-instance hourly cap.
+  const token = bearerToken(req);
+  let identity = { status: 'anonymous', uid: '', email: '' };
+  if (token) {
+    const checked = await verifyToken(token);
+    if (checked.status === 'ok') identity = checked;
+  }
+
+  const day = new Date().toISOString().slice(0, 10).split('-').join('');
+  let plan = 'free';
+  let limit = FREE_DAILY_LIMIT;
+  let used = 0;
+
+  if (identity.status === 'ok' && token) {
+    let profile = await readDoc('users/' + identity.uid, token);
+    if (!profile && identity.email) profile = await readDoc('users/' + identity.email, token);
+    plan = stringField(profile, 'plan') || 'free';
+    limit = plan === 'premium' ? PRO_DAILY_LIMIT : FREE_DAILY_LIMIT;
+    const usage = await readDoc('usage/' + identity.uid + '_' + day, token);
+    used = usage ? intField(usage, 'count') : 0;
+    if (used >= limit) {
+      return res.status(429).json({
+        error: plan === 'premium'
+          ? 'Daily limit reached. Your counter resets every 24 hours.'
+          : 'Free daily limit reached. Create an account or go Pro for unlimited answers.',
+        code: 'quota',
+        limit: limit,
+        used: used
+      });
+    }
+  } else if (!anonAllowed(clientIp(req))) {
+    return res.status(429).json({
+      error: 'Too many requests from this device. Please sign in and keep studying.',
+      code: 'quota'
+    });
+  }
+
   try {
     const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${apiKey}`
+        'Authorization': 'Bearer ' + apiKey
       },
       body: JSON.stringify({
         model: 'openai/gpt-oss-20b',
@@ -55,17 +197,28 @@ export default async function handler(req, res) {
     }
 
     const data = await response.json();
-    const reply = data.choices?.[0]?.message?.content || '';
+    const first = data.choices && data.choices[0] ? data.choices[0] : null;
+    const reply = first && first.message ? first.message.content : '';
 
     if (!reply) {
       return res.status(500).json({ error: 'Empty response from AI engine' });
     }
 
-    return res.status(200).json({ reply });
+    if (identity.status === 'ok' && token) {
+      bumpUsage(identity.uid, token, day).catch(err => console.warn('Usage counter:', err && err.message));
+    }
 
+    return res.status(200).json({
+      reply: reply,
+      quota: {
+        plan: plan,
+        limit: limit,
+        used: used + 1,
+        remaining: Math.max(0, limit - used - 1)
+      }
+    });
   } catch (error) {
     console.error('Groq error:', error);
     return res.status(500).json({ error: 'Unable to process your request. Please try again.' });
   }
 }
-

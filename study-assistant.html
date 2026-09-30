@@ -64,18 +64,19 @@
   <!-- Premium Limits System -->
   <script src="/js/premium-limits.js"></script>
   <script src="/js/premium-status.js"></script>
-  <script src="/js/user-tracking.js"></script>
-  <script src="/js/user-storage.js"></script>
 
   <!-- Firebase SDK -->
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
   <script src="/js/firebase-config.js"></script>
+  <script src="/js/user-tracking.js"></script>
+  <script src="/js/library.js"></script>
+  <script src="/js/tutor-history.js"></script>
   <script>
     // Initialize Firebase
     try {
-      firebase.initializeApp(firebaseConfig);
+      if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
       console.log('Firebase initialized successfully');
     } catch (error) {
       console.error('Firebase initialization error:', error);
@@ -116,8 +117,8 @@
           <strong>StudyTools AI Tutor</strong>
           <span class="status" id="status">Ready</span>
           <div class="chat-actions">
-            <button onclick="saveCurrentConversation()" title="Guardar conversación">💾 Guardar</button>
-            <button onclick="loadSavedConversations()" title="Cargar conversaciones guardadas">📂 Historial</button>
+            <button id="save-chat-btn" onclick="saveCurrentConversation()" title="Guardar conversación">💾 Guardar</button>
+            <button id="history-chat-btn" onclick="loadSavedConversations()" title="Cargar conversaciones guardadas">📂 Historial</button>
           </div>
         </div>
         <div class="msgs" id="msgs"><div class="msg ai">Hi. I am your StudyTools AI tutor. Ask me a question, paste notes, or tell me what exam you are preparing for.</div></div>
@@ -127,7 +128,7 @@
     </main>
   </div>
   <script>
-    const messages = [];
+    var messages = [];
     let currentMode = 'general';
 
     function setStudyMode(mode, starterText) {
@@ -177,7 +178,9 @@
       
       try{ 
         const system = getSystemPrompt();
-        const res=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({system,messages})}); 
+        const tk=(typeof firebase!=='undefined'&&firebase.auth().currentUser)?await firebase.auth().currentUser.getIdToken():null; 
+        const chatHeaders={'Content-Type':'application/json'};if(tk)chatHeaders.Authorization='Bearer '+tk; 
+        const res=await fetch('/api/chat',{method:'POST',headers:chatHeaders,body:JSON.stringify({system,messages})}); 
         const data=await res.json(); 
         if(!res.ok) throw new Error(data.error||'AI service error'); 
         const reply=data.reply||'I could not answer. Try again.';

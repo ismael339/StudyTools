@@ -327,7 +327,7 @@ Example: 'What is the difference between mitosis and meiosis?'" oninput="onType(
   ];
 
   let currentSubject = '';
-  let history = [];
+  let savedHistory = [];
 
   function setSubject(el, subject) {
     document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
@@ -368,9 +368,12 @@ Format your response with:
 Use simple, clear language. Be educational and encouraging.`;
 
     try {
+      const tk = (typeof firebase !== 'undefined' && firebase.auth().currentUser) ? await firebase.auth().currentUser.getIdToken() : null;
+      const chatHeaders = { 'Content-Type': 'application/json' };
+      if (tk) chatHeaders.Authorization = 'Bearer ' + tk;
       const response = await fetch('/api/chat', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: chatHeaders,
         body: JSON.stringify({
           system: systemPrompt,
           messages: [{ role: 'user', content: question }]
@@ -385,8 +388,9 @@ Use simple, clear language. Be educational and encouraging.`;
       displayResponse(text);
 
       // Save to history
-      history.unshift({ q: question.slice(0, 80) + (question.length > 80 ? '...' : ''), full: question, time: new Date().toLocaleTimeString() });
-      if (history.length > 5) history.pop();
+      savedHistory.unshift({ q: question.slice(0, 80) + (question.length > 80 ? '...' : ''), full: question, time: new Date().toLocaleTimeString() });
+      if (savedHistory.length > 20) savedHistory.pop();
+      if (window.StudyExamHistory) StudyExamHistory.persist(savedHistory[0], currentSubject);
       renderHistory();
 
     } catch (err) {
@@ -418,9 +422,9 @@ Use simple, clear language. Be educational and encouraging.`;
   }
 
   function renderHistory() {
-    if (!history.length) return;
+    if (!savedHistory.length) return;
     document.getElementById('history-section').style.display = 'block';
-    document.getElementById('history-list').innerHTML = history.map((h, i) => `
+    document.getElementById('history-list').innerHTML = savedHistory.map((h, i) => `
       <div class="history-item" onclick="loadFromHistory(${i})">
         <div class="history-q">${h.q}</div>
         <div class="history-meta">${h.time}</div>
@@ -429,13 +433,13 @@ Use simple, clear language. Be educational and encouraging.`;
   }
 
   function loadFromHistory(i) {
-    document.getElementById('question-input').value = history[i].full;
+    document.getElementById('question-input').value = savedHistory[i].full;
     onType();
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   function clearHistory() {
-    history = [];
+    savedHistory = [];
     document.getElementById('history-section').style.display = 'none';
   }
 
@@ -444,5 +448,12 @@ Use simple, clear language. Be educational and encouraging.`;
 </script>
 
 
-</body>
+  <!-- saved history: Firebase + shared library -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+  <script src="/js/firebase-config.js"></script>
+  <script src="/js/library.js"></script>
+  <script src="/js/exam-history.js"></script>
+
 </html>

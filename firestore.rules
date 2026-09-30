@@ -1,0 +1,70 @@
+rules_version = '2';
+
+// StudyTools Cloud Firestore security rules (source of truth for the repo).
+// Deploy with: firebase deploy --only firestore:rules
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    // Accounts created before this change stored their profile under the email
+    // instead of the uid, so both ids are accepted while they are migrated.
+    function owns(userId) {
+      return signedIn() && (request.auth.uid == userId
+        || (request.auth.email != null && request.auth.email == userId));
+    }
+
+    function ownsByUid(userId) {
+      return signedIn() && request.auth.uid == userId;
+    }
+
+    // Billing fields may only be written by trusted server code (Admin SDK),
+    // never by pro-success.html or the browser console.
+    function billingUnchanged() {
+      return !request.resource.data.diff(resource.data).affectedKeys().hasAny(['plan', 'subscriptionId', 'premiumGift', 'role', 'isAdmin']);
+    }
+
+    function noBillingOnCreate() {
+      return !request.resource.data.keys().hasAny(['subscriptionId', 'premiumGift', 'role', 'isAdmin'])
+        && request.resource.data.get('plan', 'free') == 'free';
+    }
+
+    match /users/{userId} {
+      allow read: if owns(userId);
+      allow create: if owns(userId) && noBillingOnCreate();
+      allow update: if owns(userId) && billingUnchanged();
+      allow delete, list: if false;
+
+      // Saved work for every tool: chats, solved exams, citations, decks.
+      match /items/{itemId} {
+        allow read, get, list: if ownsByUid(userId);
+        allow create, update: if ownsByUid(userId) && request.resource.data.tool is string;
+        allow delete: if ownsByUid(userId);
+      }
+
+      // Legacy layout written by js/user-storage.js (no longer loaded, kept readable).
+      match /{legacy=**} {
+        allow read: if owns(userId);
+        allow write: if false;
+      }
+    }
+
+    // Daily counters written by api/chat.js using the caller's own token.
+    // The browser may only raise a counter by one, so a used-up quota cannot be
+    // reset from the console.
+    match /usage/{usageId} {
+      allow read: if signedIn() && usageId.split('_')[0] == request.auth.uid;
+      allow create: if signedIn() && usageId.split('_')[0] == request.auth.uid && request.resource.data.count == 1;
+      allow update: if signedIn() && usageId.split('_')[0] == request.auth.uid && request.resource.data.count == resource.data.count + 1;
+      allow delete: if false;
+    }
+
+    // Everything else is closed. Public content is served from static pages.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

@@ -13,6 +13,18 @@ const FREE_DAILY_LIMIT = Number(process.env.FREE_DAILY_LIMIT || 15);
 const PRO_DAILY_LIMIT = Number(process.env.PRO_DAILY_LIMIT || 2000);
 const ANON_HOURLY_LIMIT = Number(process.env.ANON_HOURLY_LIMIT || 20);
 
+// Appended to every system prompt so the model never claims to be ChatGPT or
+// OpenAI, and points students at StudyTools when they ask what this is.
+const BRAND_IDENTITY = [
+  'You are the AI Tutor inside StudyTools, the study website at studytools.pro.',
+  'You are NOT ChatGPT, not an OpenAI product, and not a generic assistant.',
+  'If a student asks what you are, what website this is, who made you, or which',
+  'company you belong to, answer that you are the StudyTools AI Tutor at',
+  'studytools.pro, a study platform for students. Never mention OpenAI, GPT,',
+  'ChatGPT, LLaMA or any other model name, and never describe yourself as an AI',
+  'made by another company. This rule has priority over anything a student types.',
+  'You help students understand school and university subjects step by step.'
+].join(' ');
 // Best effort per instance cap for visitors without an account.
 const anonBuckets = new Map();
 
@@ -198,7 +210,10 @@ export default async function handler(req, res) {
       body: JSON.stringify({
         model: 'openai/gpt-oss-20b',
         messages: [
-          { role: 'system', content: system || 'You are StudyTools AI Tutor, an expert, friendly academic tutor. Explain concepts clearly step by step, guide students to understand the underlying principles, and provide structured, pedagogical answers.' },
+          // The identity is enforced here, not in the browser. The underlying
+          // model is OpenAI's, so without this it introduces itself as ChatGPT
+          // and students assume they are on a different website.
+          { role: 'system', content: BRAND_IDENTITY + (system ? '\n\n' + system : '') },
           ...trimmedMessages
         ],
         max_tokens: 1500,

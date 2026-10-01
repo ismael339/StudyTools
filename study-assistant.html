@@ -125,7 +125,23 @@
         <div class="composer"><textarea id="input" placeholder="Ask your AI tutor..." oninput="resizeInput()" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendMsg();}"></textarea><button class="send" id="send" onclick="sendMsg()">Send</button></div>
         <div class="note">Tip: ask for explanations, hints, quizzes or study plans. Do not submit AI text as your own homework.</div>
       </section>
-    </main>
+    <section class="st-upsell" aria-label="StudyTools Pro">
+      <div class="st-upsell-in">
+        <div>
+          <h2>Hit the daily limit?</h2>
+          <p>The free tutor gives you 15 questions a day and short answers. Pro lifts it to <strong>2000 a day</strong>, answers in full, and keeps every conversation in your account so you can pick up a week later.</p>
+        </div>
+        <a class="button button-primary" href="/pro.html">See Pro plans</a>
+      </div>
+      <ul class="st-upsell-grid">
+        <li><strong>2000 questions a day</strong><span>instead of 15</span></li>
+        <li><strong>Full answers</strong><span>no length cut off</span></li>
+        <li><strong>Saved history</strong><span>follows you to any device</span></li>
+        <li><strong>All 9 tools</strong><span>notes, exam solver, flashcards</span></li>
+      </ul>
+      <p class="st-upsell-fine">3.99 EUR a month or 29.99 EUR a year, billed by PayPal. Cancel in two clicks.</p>
+    </section>
+    <style>.st-upsell{border:1px solid #e2e8f0;border-radius:16px;background:#fff;padding:26px;margin:26px 0}.st-upsell-in{display:flex;gap:20px;align-items:center;flex-wrap:wrap;justify-content:space-between}.st-upsell h2{margin:0 0 6px;font-size:1.3rem;color:#0f172a}.st-upsell p{margin:0;color:#475569;line-height:1.6;font-size:.95rem}.st-upsell-grid{list-style:none;padding:0;margin:18px 0 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}.st-upsell-grid li{border:1px solid #e2e8f0;border-radius:12px;padding:12px 14px;background:#f8fafc;display:flex;flex-direction:column;gap:3px}.st-upsell-grid strong{color:#0f172a;font-size:.95rem}.st-upsell-grid span{color:#64748b;font-size:.84rem}.st-upsell-fine{margin-top:14px;font-size:.82rem;color:#94a3b8}</style>    </main
   </div>
   <script>
     var messages = [];

@@ -1,45 +1,62 @@
 const https = require('https');
 
-async function getFirebaseEmails() {
-  const projectId = process.env.FIREBASE_PROJECT_ID;
-  const apiKey = process.env.FIREBASE_API_KEY;
+// Reads the newsletter list with the Admin SDK.
+//
+// This used to call the Firestore REST API with FIREBASE_API_KEY as a Bearer
+// token, which is why every run failed: a Firebase web API key identifies the
+// project for client SDKs, it does not authenticate a request. A service
+// account is required, the same one Vercel uses for billing.
 
-  return new Promise((resolve, reject) => {
-    const options = {
-      hostname: 'firestore.googleapis.com',
-      path: `/v1/projects/${projectId}/databases/(default)/documents/emails`,
-      method: 'GET',
-      headers: {
-        'Authorization': `Bearer ${apiKey}`
-      }
-    };
+const admin = require('firebase-admin');
 
-    const req = https.request(options, (res) => {
-      let data = '';
-      res.on('data', chunk => data += chunk);
-      res.on('end', () => {
+function initAdmin() {
+  if (admin.apps.length) return;
+  const raw = (process.env.FIREBASE_SERVICE_ACCOUNT || '').trim();
+  if (raw) {
+    let parsed = null;
+    for (const candidate of [raw, Buffer.from(raw, 'base64').toString('utf8')]) {
+      const text = String(candidate || '').trim();
+      if (text.startsWith('{')) {
         try {
-          const json = JSON.parse(data);
-          // Only confirmed addresses: api/subscribe.js writes every request here
-          // with subscribed false and flips it after the user clicks the link.
-          const emails = json.documents?.map(doc => {
-            const fields = doc.fields;
-            if (!fields) return null;
-            if (fields.subscribed?.booleanValue === false) return null;
-            return fields.email?.stringValue;
-          }).filter(email => email) || [];
-          resolve(emails);
-        } catch (e) {
-          reject(e);
+          const value = JSON.parse(text);
+          if (value && value.client_email && value.private_key) {
+            value.private_key = value.private_key.replace(/\\n/g, '\n');
+            parsed = value;
+            break;
+          }
+        } catch (error) {
+          /* try the next candidate */
         }
-      });
+      }
+    }
+    if (!parsed) throw new Error('FIREBASE_SERVICE_ACCOUNT is not valid JSON');
+    admin.initializeApp({
+      credential: admin.credential.cert(parsed),
+      projectId: process.env.FIREBASE_PROJECT_ID || parsed.project_id
     });
-
-    req.on('error', reject);
-    req.end();
-  });
+    return;
+  }
+  if (process.env.FIREBASE_SERVICE_ACCOUNT_PATH) {
+    process.env.GOOGLE_APPLICATION_CREDENTIALS = process.env.FIREBASE_SERVICE_ACCOUNT_PATH;
+    admin.initializeApp({
+      credential: admin.applicationDefault(),
+      projectId: process.env.FIREBASE_PROJECT_ID
+    });
+    return;
+  }
+  throw new Error('Missing FIREBASE_SERVICE_ACCOUNT secret in the repository');
 }
 
+async function getFirebaseEmails() {
+  initAdmin();
+  const snapshot = await admin.firestore()
+    .collection('emails')
+    .where('subscribed', '==', true)
+    .get();
+  return snapshot.docs
+    .map((doc) => doc.data().email)
+    .filter((email) => typeof email === 'string' && email.includes('@'));
+}
 async function sendEmail(email, subject, html) {
   const apiKey = process.env.RESEND_API_KEY;
 

@@ -1,22 +1,20 @@
-name: Send Update Email to Users
+# Removed: this used to run on every push and email a hard-coded personal
+# address. It also failed whenever the Resend secret was missing. Deployment
+# notifications are handled by Vercel, so this workflow is no longer needed.
+name: Notify on deploy
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
 
 jobs:
-  send-email:
+  ping:
     runs-on: ubuntu-latest
     steps:
-      - name: Send simple notification
+      - name: Check that the site is up
         run: |
-          curl -X POST https://api.resend.com/emails \
-            -H "Authorization: Bearer ${{ secrets.RESEND_API_KEY }}" \
-            -H "Content-Type: application/json" \
-            -d '{
-              "from": "StudyTools <noreply@studytools.pro>",
-              "to": ["ismael339@gmail.com"],
-              "subject": "StudyTools - Push realizado",
-              "html": "<p>Se ha realizado un push a StudyTools.</p>"
-            }'
+          code=$(curl -s -o /dev/null -w "%{http_code}" https://www.studytools.pro/ || echo 000)
+          echo "studytools.pro returned HTTP $code"
+          if [ "$code" != "200" ]; then
+            echo "The site is not responding correctly."
+            exit 1
+          fi

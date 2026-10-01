@@ -1,2 +1,231 @@
-<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Dashboard | StudyTools</title><meta name="robots" content="noindex,nofollow"><link rel="stylesheet" href="/css/studytools-design.css"><link rel="stylesheet" href="/css/auth-workspace.css"><style>html{color-scheme:light}</style>
-</head><body><main class="profile-shell"><nav class="profile-nav"><a href="/">StudyTools</a><div class="links"><a href="/app.html">AI Notes</a><a href="/study-assistant.html">AI Tutor</a><a href="/profile.html">Profile</a><a href="#" id="logout">Log out</a></div></nav><section class="profile-section"><p class="eyebrow">Your workspace</p><h1 style="color:var(--navy);font-size:clamp(42px,6vw,64px);line-height:1.05;margin:0 0 8px">Good afternoon<span id="first-name">.</span></h1><p class="profile-muted" style="font-size:22px">What do you want to study today?</p></section><section class="profile-card" style="padding:22px;margin-top:28px"><form action="/app.html"><label for="quick-start" style="display:block;color:var(--navy);font-weight:750;margin-bottom:10px">Start with a study task</label><div style="display:flex;gap:12px"><input id="quick-start" placeholder="Ask a question, paste notes, or choose a tool…" style="flex:1;border:1px solid var(--line);border-radius:10px;padding:14px;font:inherit"><button class="button button-primary">Go</button></div></form></section><section class="profile-section"><h2>Continue studying</h2><div class="tool-grid"><a class="tool-card" href="/app.html"><span class="tool-label">AI Notes + Quiz</span><h3>Biology — Cell Respiration</h3><p>Review a summary and practice set from your notes.</p><span class="card-link">Continue →</span></a><a class="tool-card" href="/flashcard-maker.html"><span class="tool-label">Flashcards</span><h3>History — French Revolution</h3><p>Keep building active-recall cards.</p><span class="card-link">Continue →</span></a><a class="tool-card" href="/study-assistant.html"><span class="tool-label">AI Tutor</span><h3>Economics — Market Structures</h3><p>Ask for an explanation or worked example.</p><span class="card-link">Continue →</span></a></div></section><section class="profile-section"><h2>Tools</h2><div class="output-grid"><a href="/study-assistant.html"><strong>AI Tutor</strong><span>Understand a difficult topic</span></a><a href="/app.html"><strong>AI Notes</strong><span>Summarize and organize notes</span></a><a href="/exam-solver.html"><strong>Exam Solver</strong><span>Work through a question</span></a><a href="/flashcard-maker.html"><strong>Flashcards</strong><span>Practice active recall</span></a><a href="/gpa-calculator.html"><strong>GPA Calculator</strong><span>Check your academic average</span></a><a href="/study-schedule.html"><strong>Study Planner</strong><span>Plan your next sessions</span></a></div></section></main><script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script><script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script><script src="/js/firebase-config.js"></script><script>firebase.initializeApp(firebaseConfig);const auth=firebase.auth();auth.onAuthStateChanged(user=>{if(!user)return;const first=(user.displayName||user.email||'').split(/[ @]/)[0];if(first)document.querySelector('#first-name').textContent=', '+first+'.'});document.querySelector('#logout').onclick=e=>{e.preventDefault();auth.signOut().then(()=>location.href='/')};</script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Your study dashboard | StudyTools</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="stylesheet" href="/css/studytools-design.css">
+<link rel="stylesheet" href="/css/auth-workspace.css">
+<style>html{color-scheme:light}
+  .gate{min-height:100vh;display:grid;place-items:center;text-align:center;padding:30px}
+  .gate h1{color:var(--navy);font-size:clamp(1.6rem,4vw,2.2rem);margin:0 0 10px}
+  .gate p{color:#64748b;max-width:44ch;margin:0 auto 22px;line-height:1.65}
+  .plan-chip{display:inline-flex;align-items:center;gap:7px;border-radius:999px;padding:6px 14px;font-size:.8rem;font-weight:800;letter-spacing:.03em;margin-top:10px}
+  .plan-free{background:#f1f5f9;color:#475569}
+  .plan-pro{background:#ecfdf5;color:#047857}
+  .ob{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin:16px 0 0}
+  .ob-item{border:1px solid #e2e8f0;border-radius:14px;padding:16px;background:#fff;display:flex;gap:12px;align-items:flex-start}
+  .ob-num{width:26px;height:26px;border-radius:999px;background:#eff6ff;color:#1d4ed8;font-weight:900;font-size:.82rem;display:grid;place-items:center;flex:none}
+  .ob-item h3{margin:0 0 3px;font-size:.95rem;color:#0f172a}
+  .ob-item p{margin:0;font-size:.85rem;color:#64748b;line-height:1.55}
+  .ob-item a{display:inline-block;margin-top:7px;color:#1d4ed8;font-weight:800;font-size:.83rem;text-decoration:none}
+  .empty{border:1px dashed #cbd5e1;border-radius:14px;padding:26px;text-align:center;color:#64748b;font-size:.92rem;background:#fbfdff}
+  .qbar{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+  .qbar a{border:1px solid #e2e8f0;background:#fff;border-radius:999px;padding:9px 15px;font-size:.86rem;color:#334155;text-decoration:none;font-weight:700}
+  .qbar a:hover{border-color:#2563eb;color:#1d4ed8}
+  .pro-nudge{border:1px solid #bfdbfe;background:#eff6ff;border-radius:14px;padding:18px;margin-top:22px;display:flex;gap:16px;align-items:center;flex-wrap:wrap;justify-content:space-between}
+  .pro-nudge h3{margin:0 0 4px;font-size:1.02rem;color:#0f172a}
+  .pro-nudge p{margin:0;font-size:.88rem;color:#475569;line-height:1.55}
+  .hist{border:1px solid #e2e8f0;border-radius:12px;background:#fff;padding:14px 16px;margin-top:10px}
+  .hist h3{margin:0 0 4px;font-size:.98rem;color:#0f172a}
+  .hist p{margin:0;font-size:.84rem;color:#64748b}
+</style>
+</head>
+<body>
+
+<!-- Gate: shown until Firebase confirms there is a real signed-in user. -->
+<div class="gate" id="gate">
+  <div>
+    <p style="font-size:1.4rem;font-weight:800;color:#0f172a;margin:0 0 10px">Checking your session</p>
+    <p id="gate-msg">One moment while we confirm you are signed in.</p>
+    <a class="button button-primary" id="gate-btn" href="/dashboard.html" style="display:none">Log in</a>
+  </div>
+</div>
+
+<main class="profile-shell" id="app" hidden>
+  <nav class="profile-nav">
+    <a href="/">StudyTools</a>
+    <div class="links">
+      <a href="/study-assistant.html">AI Tutor</a>
+      <a href="/app.html">AI Notes</a>
+      <a href="/profile.html">Profile</a>
+      <a href="#" id="logout">Log out</a>
+    </div>
+  </nav>
+
+  <section class="profile-section">
+    <p class="eyebrow">Your workspace</p>
+    <h1 style="color:var(--navy);font-size:clamp(34px,5.4vw,54px);line-height:1.05;margin:0 0 6px">Good <span id="part-of-day">day</span><span id="first-name">.</span></h1>
+    <p class="profile-muted" style="font-size:19px">What do you want to study today?</p>
+    <div id="plan-chip"></div>
+  </section>
+
+  <section class="profile-card" style="padding:22px;margin-top:22px">
+    <label for="quick-start" style="display:block;color:var(--navy);font-weight:750;margin-bottom:10px">Start with a study task</label>
+    <div style="display:flex;gap:12px;flex-wrap:wrap">
+      <input id="quick-start" placeholder="Ask a question, paste notes, or choose a tool…" style="flex:1;min-width:220px;border:1px solid var(--line);border-radius:10px;padding:14px;font:inherit">
+      <button class="button button-primary" id="quick-go">Go</button>
+    </div>
+    <div class="qbar">
+      <a href="/study-assistant.html">Ask the AI tutor</a>
+      <a href="/app.html">Summarize notes</a>
+      <a href="/exam-solver.html">Solve a question</a>
+      <a href="/flashcard-maker.html">Make flashcards</a>
+      <a href="/pomodoro-timer.html">Start a focus block</a>
+    </div>
+  </section>
+
+  <section class="profile-section" id="getting-started">
+    <h2>Four things worth doing first</h2>
+    <p class="profile-muted" style="font-size:.95rem;margin:0 0 4px">New here? These take about ten minutes and make the tools far more useful.</p>
+    <div class="ob">
+      <div class="ob-item"><span class="ob-num">1</span><div><h3>Ask one real question</h3><p>Something from the homework you actually have.</p><a href="/study-assistant.html">Open the tutor</a></div></div>
+      <div class="ob-item"><span class="ob-num">2</span><div><h3>Turn notes into a study set</h3><p>Paste a chapter and ask for flashcards plus a quiz.</p><a href="/app.html">Open AI Notes</a></div></div>
+      <div class="ob-item"><span class="ob-num">3</span><div><h3>Test yourself, do not just read</h3><p>Active recall is what turns reading into marks.</p><a href="/flashcard-maker.html">Make flashcards</a></div></div>
+      <div class="ob-item"><span class="ob-num">4</span><div><h3>Plan when you will study</h3><p>Aimless revision gets skipped. A plan gets done.</p><a href="/study-schedule.html">Build a schedule</a></div></div>
+    </div>
+  </section>
+
+  <section class="profile-section" id="continue-section">
+    <h2>Continue studying</h2>
+    <div id="recent"></div>
+  </section>
+
+  <section class="profile-section" id="nudge-section" hidden>
+    <div class="pro-nudge">
+      <div>
+        <h3>You are on the free plan</h3>
+        <p>Free gives you 15 AI requests a day. Pro lifts it to 2000 and saves your work across devices, from 3.99 EUR a month.</p>
+      </div>
+      <a class="button button-primary" href="/pro.html">See Pro plans</a>
+    </div>
+  </section>
+
+  <section class="profile-section">
+    <h2>Tools</h2>
+    <div class="output-grid">
+      <a href="/study-assistant.html"><strong>AI Tutor</strong><span>Understand a difficult topic</span></a>
+      <a href="/app.html"><strong>AI Notes</strong><span>Summarize and organize notes</span></a>
+      <a href="/exam-solver.html"><strong>Exam Solver</strong><span>Work through a question</span></a>
+      <a href="/flashcard-maker.html"><strong>Flashcards</strong><span>Practice active recall</span></a>
+      <a href="/gpa-calculator.html"><strong>GPA Calculator</strong><span>Check your academic average</span></a>
+      <a href="/study-schedule.html"><strong>Study Planner</strong><span>Plan your next sessions</span></a>
+    </div>
+  </section>
+</main>
+
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+<script src="/js/firebase-config.js"></script>
+<script>
+(function () {
+  var gate = document.getElementById('gate');
+  var app = document.getElementById('app');
+
+  function block(reason) {
+    document.getElementById('gate-msg').textContent = reason;
+    var button = document.getElementById('gate-btn');
+    button.style.display = 'inline-block';
+    button.href = '/login.html?redirect=' + encodeURIComponent('/dashboard.html');
+    button.textContent = 'Log in';
+  }
+
+  // The old page rendered this content for anyone who opened the URL, and it
+  // showed invented history entries. Nothing here is drawn until Firebase has
+  // confirmed a real user, and the history comes from Firestore.
+  function partOfDay() {
+    var hour = new Date().getHours();
+    if (hour < 12) return 'morning';
+    if (hour < 18) return 'afternoon';
+    return 'evening';
+  }
+
+  firebase.auth().onAuthStateChanged(function (user) {
+    if (!user) {
+      block('You need to be signed in to see your workspace. Nothing here is private, but there is no account to load yet.');
+      return;
+    }
+    gate.hidden = true;
+    app.hidden = false;
+
+    var name = (user.displayName || user.email || '').split(/[ @]/)[0];
+    document.getElementById('first-name').textContent = name ? ', ' + name + '.' : '.';
+    document.getElementById('part-of-day').textContent = partOfDay();
+
+    if (window.PremiumLimits && PremiumLimits.refresh) {
+      PremiumLimits.refresh(true).then(renderPlan).catch(function () { renderPlan(null); });
+    } else {
+      renderPlan(null);
+    }
+
+    loadHistory(user);
+  });
+
+  function renderPlan(state) {
+    var chip = document.getElementById('plan-chip');
+    var isPro = state && state.active === true;
+    chip.innerHTML = isPro
+      ? '<span class="plan-chip plan-pro">&#10003; StudyTools Pro</span>'
+      : '<span class="plan-chip plan-free">Free plan &middot; 15 AI requests a day</span>';
+    document.getElementById('nudge-section').hidden = isPro;
+  }
+
+  // Only real saved work, read through the security rules as this user.
+  function loadHistory(user) {
+    var host = document.getElementById('recent');
+    host.innerHTML = '<div class="empty">Loading your saved work...</div>';
+    var db = firebase.firestore();
+    db.collection('users').doc(user.uid).collection('items')
+      .orderBy('updatedAt', 'desc')
+      .limit(4)
+      .get()
+      .then(function (snapshot) {
+        if (snapshot.empty) {
+          host.innerHTML = '<div class="empty">Nothing saved yet. Anything you create in the AI Tutor, AI Notes or the exam solver is saved here automatically, so you can pick it up on any device.</div>';
+          return;
+        }
+        var html = '';
+        snapshot.forEach(function (doc) {
+          var data = doc.data();
+          var title = data.title || data.question || 'Untitled study set';
+          var tool = data.tool || 'study set';
+          var when = '';
+          var updated = data.updatedAt;
+          if (updated && updated.toDate) {
+            when = ' · ' + updated.toDate().toLocaleDateString();
+          }
+          html += '<div class="hist"><h3>' + String(title).slice(0, 90) + '</h3><p>' + String(tool) + when + '</p></div>';
+        });
+        host.innerHTML = html;
+      })
+      .catch(function () {
+        host.innerHTML = '<div class="empty">Your saved work will appear here once you create something.</div>';
+      });
+  }
+
+  document.getElementById('quick-go').addEventListener('click', function () {
+    var value = document.getElementById('quick-start').value.trim();
+    if (!value) {
+      location.href = '/study-assistant.html';
+      return;
+    }
+    sessionStorage.setItem('studytools_quick_question', value);
+    location.href = '/study-assistant.html';
+  });
+  document.getElementById('quick-start').addEventListener('keydown', function (event) {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      document.getElementById('quick-go').click();
+    }
+  });
+
+  document.getElementById('logout').addEventListener('click', function (event) {
+    event.preventDefault();
+    firebase.auth().signOut().then(function () { location.href = '/'; });
+  });
+})();
+</script>
+</body>
+</html>

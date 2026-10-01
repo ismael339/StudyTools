@@ -2,9 +2,9 @@ name: Weekly Study Tips Email
 
 on:
   schedule:
-    # Every Monday at 9:00 AM UTC
+    # Every Monday at 09:00 UTC
     - cron: '0 9 * * 1'
-  workflow_dispatch: # Allow manual trigger
+  workflow_dispatch:
 
 jobs:
   send-weekly-email:
@@ -16,14 +16,17 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version: '20'
 
       - name: Install dependencies
-        run: npm install
+        run: npm install --no-audit --no-fund
 
+      # The Admin SDK needs a service account. The old run passed
+      # FIREBASE_API_KEY, which cannot authenticate a Firestore request, so
+      # every scheduled run failed before sending anything.
       - name: Send weekly emails
         env:
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
           FIREBASE_PROJECT_ID: ${{ secrets.FIREBASE_PROJECT_ID }}
-          FIREBASE_API_KEY: ${{ secrets.FIREBASE_API_KEY }}
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
         run: node .github/scripts/send-weekly-email.js

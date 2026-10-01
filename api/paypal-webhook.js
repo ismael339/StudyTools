@@ -16,12 +16,21 @@ const PAYPAL_API = process.env.PAYPAL_ENV === 'sandbox'
 // kept until this moment and only then withdrawn.
 const KEEP_UNTIL_NOW_STATUSES = ['CANCELLED'];
 
+// The secret was added in Vercel under a name chosen when the panel was filled
+// in, so several spellings are accepted. Whichever one exists, it is used.
+function paypalSecret() {
+  return process.env.PAYPAL_CLIENT_SECRET
+    || process.env.PAYPAL_SECRET
+    || process.env.PAYPAL_API_SECRET
+    || process.env.PAYPAL_API_SECRET_KEY
+    || '';
+}
 let paypalToken = null;
 let paypalTokenExpiry = 0;
 
 async function getPayPalAccessToken() {
   const clientId = process.env.PAYPAL_CLIENT_ID;
-  const secret = process.env.PAYPAL_CLIENT_SECRET;
+  const secret = paypalSecret();
   if (!clientId || !secret) return null;
   if (paypalToken && Date.now() < paypalTokenExpiry) return paypalToken;
   const response = await fetch(PAYPAL_API + '/v1/oauth2/token', {

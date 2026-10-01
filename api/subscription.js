@@ -23,6 +23,15 @@ const GRANT_COOLDOWN_MS = 90 * 1000;
 const ACTIVE_STATUSES = ['ACTIVE'];
 const PENDING_STATUSES = ['APPROVAL_PENDING'];
 
+// The secret was added in Vercel under a name chosen when the panel was filled
+// in, so several spellings are accepted. Whichever one exists, it is used.
+function paypalSecret() {
+  return process.env.PAYPAL_CLIENT_SECRET
+    || process.env.PAYPAL_SECRET
+    || process.env.PAYPAL_API_SECRET
+    || process.env.PAYPAL_API_SECRET_KEY
+    || '';
+}
 function bearerToken(req) {
   const header = req.headers.authorization || '';
   if (header.indexOf('Bearer ') === 0 || header.indexOf('bearer ') === 0) return header.slice(7);
@@ -50,7 +59,7 @@ let paypalTokenExpiry = 0;
 
 async function getPayPalAccessToken() {
   const clientId = process.env.PAYPAL_CLIENT_ID;
-  const secret = process.env.PAYPAL_CLIENT_SECRET;
+  const secret = paypalSecret();
   if (!clientId || !secret) return null;
   if (paypalToken && Date.now() < paypalTokenExpiry) return paypalToken;
   const response = await fetch(PAYPAL_API + '/v1/oauth2/token', {

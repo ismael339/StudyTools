@@ -41,10 +41,13 @@ export default async function handler(req, res) {
       FIREBASE_SERVICE_ACCOUNT: describe('FIREBASE_SERVICE_ACCOUNT'),
       PAYPAL_CLIENT_ID: describe('PAYPAL_CLIENT_ID'),
       PAYPAL_CLIENT_SECRET: describe('PAYPAL_CLIENT_SECRET'),
+      PAYPAL_SECRET: describe('PAYPAL_SECRET'),
+      PAYPAL_API_SECRET: describe('PAYPAL_API_SECRET'),
       PAYPAL_WEBHOOK_ID: describe('PAYPAL_WEBHOOK_ID'),
       GROQ_API_KEY: describe('GROQ_API_KEY'),
       RESEND_API_KEY: describe('RESEND_API_KEY'),
-      FIREBASE_PROJECT_ID: describe('FIREBASE_PROJECT_ID')
+      FIREBASE_PROJECT_ID: describe('FIREBASE_PROJECT_ID'),
+      FIREBASE_WEB_API_KEY: describe('FIREBASE_WEB_API_KEY')
     },
     hint: firestore === 'ok'
       ? 'Billing is fully configured. A real payment will now activate Pro automatically.'

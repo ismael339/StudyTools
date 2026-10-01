@@ -31,6 +31,7 @@
     "api/entitlement.js": { "memory": 128, "maxDuration": 10 },
     "api/subscription.js": { "memory": 128, "maxDuration": 20 },
     "api/paypal-webhook.js": { "memory": 256, "maxDuration": 30 },
-    "api/subscribe.js": { "memory": 128, "maxDuration": 15 }
+    "api/subscribe.js": { "memory": 128, "maxDuration": 15 },
+    "api/env-check.js": { "memory": 128, "maxDuration": 15 }
   }
 }

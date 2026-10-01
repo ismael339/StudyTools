@@ -1,9 +1,21 @@
+# StudyTools - https://www.studytools.pro
 User-agent: *
 Allow: /
-Disallow: /api/
 Disallow: /dashboard.html
 Disallow: /profile.html
+Disallow: /pro-success.html
+Disallow: /api/
+
+# Signed-in areas and payment confirmations are useless in a search result.
 Disallow: /login.html
 Disallow: /register.html
-Disallow: /pro-success.html
+
+# AI crawlers: the tool list and the study guides, in plain text.
+User-agent: GPTBot
+Allow: /
+User-agent: ClaudeBot
+Allow: /
+User-agent: PerplexityBot
+Allow: /
+
 Sitemap: https://www.studytools.pro/sitemap.xml

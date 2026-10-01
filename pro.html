@@ -1,2 +1,251 @@
-<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>StudyTools Pro | More room to study</title><meta name="description" content="Upgrade to StudyTools Pro for higher AI study limits and longer study sessions."><link rel="stylesheet" href="/css/studytools-design.css"><link rel="icon" href="/favicon.svg"><script type="application/ld+json">{"@context":"https://schema.org","@type":"Product","name":"StudyTools Pro","brand":{"@type":"Brand","name":"StudyTools"},"offers":[{"@type":"Offer","price":"3.99","priceCurrency":"EUR"},{"@type":"Offer","price":"29.99","priceCurrency":"EUR"}]}</script><style>html{color-scheme:light}</style>
-</head><body><header class="site-header"><a class="logo" href="/">StudyTools</a><nav class="public-nav"><a href="/dashboard.html">Dashboard</a><a href="/profile.html">Profile</a></nav></header><main class="container section"><div class="section-heading"><div><p class="eyebrow">StudyTools Pro</p><h1 style="color:var(--navy);font-size:clamp(42px,6vw,68px);line-height:1.05;margin:0">More room for focused study.</h1></div><p>Start free, then upgrade when you need higher AI limits and longer explanations.</p></div><div class="pricing-grid"><article class="price-card"><h3>Free</h3><p class="price">€0 <small>forever</small></p><p>Core tools for everyday study.</p><ul><li>AI study tools</li><li>Calculators and focus timer</li><li>Limited AI usage</li></ul><a class="button button-secondary" href="/app.html">Use free tools</a></article><article class="price-card highlighted"><span class="badge">Student-friendly</span><h3>Pro Monthly</h3><p class="price">€3.99 <small>/ month</small></p><p>More AI help when exams and assignments get busy.</p><ul><li>Everything in Free</li><li>More AI Tutor messages</li><li>Longer explanations and plans</li></ul><div id="paypal-monthly"></div></article><article class="price-card"><h3>Pro Yearly</h3><p class="price">€29.99 <small>/ year</small></p><p>A lower effective price for regular study.</p><ul><li>Everything in Pro Monthly</li><li>One simple yearly payment</li><li>Cancel through PayPal</li></ul><div id="paypal-yearly"></div></article></div><section class="section"><h2>What changes with Pro?</h2><div class="task-grid"><div>✓ <strong>More AI Tutor help</strong></div><div>✓ <strong>Longer explanations</strong></div><div>✓ <strong>Advanced study planning</strong></div></div></section></main><script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script><script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script><script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script><script src="/js/firebase-config.js"></script><script src="https://www.paypal.com/sdk/js?client-id=AYvOTOt-rN_CEBn-ybGmMFeHt8zHSBzx7ze5QHuhbDXTerKFiz7SgjEGzxIZLNbww4K6Y4CRRXUANsPZ&vault=true&intent=subscription"></script><script>const plans=[['P-44976517YC761723RNI6W5AY','#paypal-monthly','monthly'],['P-14N28530X9822712DNI6W7NQ','#paypal-yearly','yearly']];addEventListener('load',()=>{const auth=firebase.auth();let currentUser=auth.currentUser;auth.onAuthStateChanged(u=>{currentUser=u});plans.forEach(([id,el,name])=>{if(!window.paypal)return;paypal.Buttons({style:{shape:'pill',color:'gold',layout:'vertical',label:'subscribe'},onClick:(data,actions)=>{if(!currentUser){alert('Please sign in or create an account first so your Pro subscription is linked to your email.');location.href='/login.html?redirect='+encodeURIComponent('/pro.html');return actions.reject();}},createSubscription:(d,a)=>a.subscription.create({plan_id:id}),onApprove:d=>location.href='/pro-success.html?plan='+name+'&subscription_id='+encodeURIComponent(d.subscriptionID)}).render(el)})});</script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>StudyTools Pro | More AI study help for students</title>
+<meta name="description" content="StudyTools Pro raises your AI study limits to 2000 requests a day, gives full-length explanations and saves every study set to your account. From 3.99 EUR a month, cancel any time in PayPal.">
+<link rel="canonical" href="https://www.studytools.pro/pro.html">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="StudyTools">
+<meta property="og:title" content="StudyTools Pro | More AI study help for students">
+<meta property="og:description" content="2000 AI requests a day, full-length explanations and cloud sync. From 3.99 EUR a month.">
+<meta property="og:url" content="https://www.studytools.pro/pro.html">
+<meta property="og:image" content="https://www.studytools.pro/og-generic.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="StudyTools Pro | More AI study help for students">
+<meta name="twitter:description" content="2000 AI requests a day, full-length explanations and cloud sync. From 3.99 EUR a month.">
+<meta name="twitter:image" content="https://www.studytools.pro/og-generic.png">
+<meta name="author" content="StudyTools">
+<link rel="stylesheet" href="/css/studytools-design.css">
+<link rel="icon" href="/favicon.svg">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Product",
+      "name": "StudyTools Pro",
+      "description": "StudyTools Pro raises the daily AI allowance of the StudyTools study workspace and keeps every study set in the cloud.",
+      "brand": { "@type": "Brand", "name": "StudyTools" },
+      "url": "https://www.studytools.pro/pro.html",
+      "image": "https://www.studytools.pro/og-generic.png",
+      "offers": [
+        { "@type": "Offer", "name": "Pro Monthly", "price": "3.99", "priceCurrency": "EUR", "url": "https://www.studytools.pro/pro.html", "availability": "https://schema.org/InStock" },
+        { "@type": "Offer", "name": "Pro Yearly", "price": "29.99", "priceCurrency": "EUR", "url": "https://www.studytools.pro/pro.html", "availability": "https://schema.org/InStock" }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        { "@type": "Question", "name": "What does StudyTools Pro include?", "acceptedAnswer": { "@type": "Answer", "text": "Pro raises the daily AI allowance from 15 to 2000 requests, returns full-length explanations instead of short answers, and saves your chats, study sets, solved questions and citations to your account so you can continue on any device." } },
+        { "@type": "Question", "name": "How much does StudyTools Pro cost?", "acceptedAnswer": { "@type": "Answer", "text": "Pro Monthly is 3.99 EUR per month and Pro Yearly is 29.99 EUR per year, which works out at about 2.50 EUR a month. Payments are handled by PayPal and you can cancel from your PayPal account at any time." } },
+        { "@type": "Question", "name": "Can I cancel my subscription?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Cancel from your PayPal account under Payments, manage automatic payments, and select the StudyTools subscription. You keep Pro until the end of the period you already paid for and are not charged again." } },
+        { "@type": "Question", "name": "Do I need a credit card for the free plan?", "acceptedAnswer": { "@type": "Answer", "text": "No. The free plan needs no payment details at all. You get the AI tutor, the exam solver, AI notes, the citation generator, flashcards, the calculators, the study schedule and the focus timer with a daily allowance of 15 AI requests." } },
+        { "@type": "Question", "name": "Is the AI allowed for homework?", "acceptedAnswer": { "@type": "Answer", "text": "StudyTools explains and shows the reasoning so you can check every step against your course material. Your school decides what AI use is allowed, so read your policy and use the tools to understand concepts rather than to submit work as your own." } },
+        { "@type": "Question", "name": "Can I get a refund?", "acceptedAnswer": { "@type": "Answer", "text": "Write to support@studytools.pro within 14 days of a payment and we refund it. Because Pro is a small monthly subscription, we would rather fix a problem than keep the money." } }
+      ]
+    }
+  ]
+}
+</script>
+<style>
+  html{color-scheme:light}
+  .wrap{width:min(1080px,100%);margin:0 auto}
+  .hero{display:grid;grid-template-columns:1.1fr .9fr;gap:32px;align-items:center;margin-bottom:34px}
+  .hero h1{color:var(--navy,#0f172a);font-size:clamp(2rem,5vw,3.1rem);line-height:1.08;margin:6px 0 14px}
+  .hero p{color:#475569;font-size:1.03rem;line-height:1.65;margin:0 0 18px}
+  .bullets{list-style:none;display:grid;gap:9px;font-size:.95rem;color:#334155}
+  .bullets li::before{content:"\2713";color:#10b981;font-weight:900;margin-right:9px}
+  .badge{display:inline-block;background:#eff6ff;color:#1d4ed8;border-radius:999px;padding:5px 12px;font-size:.76rem;font-weight:800;letter-spacing:.04em;text-transform:uppercase}
+  .pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin:30px 0}
+  .price-card{background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:26px 22px;display:flex;flex-direction:column}
+  .price-card.highlighted{border:2px solid #2563eb;box-shadow:0 14px 40px rgba(37,99,235,.14);position:relative}
+  .price-card .badge{position:absolute;top:-12px;left:22px}
+  .price-card h3{margin:0 0 6px;font-size:1.12rem;color:#0f172a}
+  .price{font-size:2.05rem;font-weight:900;color:#0f172a;margin:2px 0 4px;line-height:1.1}
+  .price small{font-size:.86rem;font-weight:600;color:#64748b}
+  .price-card > p{color:#64748b;font-size:.9rem;line-height:1.55;margin:0 0 14px}
+  .price-card ul{list-style:none;padding:0;margin:0 0 18px;display:grid;gap:8px;font-size:.89rem;color:#334155}
+  .price-card ul li::before{content:"\2713";color:#10b981;font-weight:900;margin-right:8px}
+  .plan-cta{margin-top:auto;text-align:center;font-weight:800;font-size:.86rem;color:#1d4ed8;background:#eff6ff;border-radius:10px;padding:12px}
+  .save{color:#047857;font-weight:800;font-size:.8rem;display:block;margin-top:2px}
+  table{width:100%;border-collapse:collapse;margin:18px 0;font-size:.92rem}
+  th,td{padding:12px 14px;border-bottom:1px solid #e2e8f0;text-align:left;vertical-align:top}
+  th{background:#f8fafc;color:#0f172a;font-weight:800}
+  td.yes{color:#047857;font-weight:800}
+  td.no{color:#94a3b8}
+  h2{color:#0f172a;font-size:clamp(1.4rem,3vw,1.9rem);margin:44px 0 6px}
+  .sub{color:#64748b;margin:0 0 18px}
+  details{border:1px solid #e2e8f0;border-radius:12px;padding:14px 18px;margin-bottom:10px;background:#fff}
+  summary{cursor:pointer;font-weight:800;color:#0f172a}
+  details p{color:#475569;font-size:.93rem;line-height:1.65;margin:10px 0 0}
+  .cta-final{background:#0f172a;color:#fff;border-radius:18px;padding:30px;text-align:center;margin:34px 0}
+  .cta-final h2{color:#fff;margin-top:0}
+  .cta-final p{color:#cbd5e1;max-width:56ch;margin:0 auto 18px}
+  .btn{display:inline-block;background:#2563eb;color:#fff;text-decoration:none;font-weight:800;padding:14px 26px;border-radius:10px}
+  .fine{font-size:.82rem;color:#64748b;text-align:center;margin-top:14px}
+  @media(max-width:820px){.hero{grid-template-columns:1fr}.pricing-grid{grid-template-columns:1fr}table{font-size:.86rem}}
+</style>
+</head>
+<body>
+<header class="site-header"><a class="logo" href="/">StudyTools</a><nav class="public-nav"><a href="/dashboard.html">Dashboard</a><a href="/profile.html">Profile</a></nav></header>
+
+<main class="container section">
+  <div class="wrap">
+    <section class="hero">
+      <div>
+        <span class="badge">StudyTools Pro</span>
+        <h1>More room to study, right when exams pile up.</h1>
+        <p>Free accounts get 15 AI requests a day. Pro raises that to 2000, answers in full instead of in fragments, and keeps every study set, chat and citation in your account so you can pick up on any device.</p>
+        <ul class="bullets">
+          <li>2000 AI requests a day instead of 15</li>
+          <li>Full-length explanations and study plans</li>
+          <li>Everything saved to your account, on every device</li>
+          <li>Cancel from PayPal in two clicks, no emails needed</li>
+        </ul>
+      </div>
+      <aside>
+        <h2 style="margin-top:0">Pick your plan</h2>
+        <p class="sub">Two options, same features. The yearly one is two months cheaper.</p>
+        <ul class="bullets">
+          <li>No card is stored by us: PayPal handles billing</li>
+          <li>Works during exam season, cancel any time</li>
+          <li>14-day refund if something is not working</li>
+        </ul>
+      </aside>
+    </section>
+
+    <div class="pricing-grid">
+      <article class="price-card">
+        <h3>Free</h3>
+        <p class="price">&euro;0 <small>forever</small></p>
+        <p>Everything you need to start studying, with a daily AI allowance.</p>
+        <ul>
+          <li>All 9 study tools</li>
+          <li>15 AI requests per day</li>
+          <li>Short answers</li>
+          <li>Saved on this device</li>
+        </ul>
+        <a class="button button-secondary" href="/app.html">Start studying free</a>
+      </article>
+
+      <article class="price-card highlighted">
+        <span class="badge">Most students pick this</span>
+        <h3>Pro Monthly</h3>
+        <p class="price">&euro;3.99 <small>/ month</small></p>
+        <p>Full access, month to month. Ideal if the exam season is the pressure.</p>
+        <ul>
+          <li>2000 AI requests per day</li>
+          <li>Full-length explanations</li>
+          <li>Cloud sync of saved work</li>
+          <li>New tools as they ship</li>
+        </ul>
+        <div id="paypal-monthly"></div>
+        <p class="plan-cta">3.99 EUR per month &middot; cancel in PayPal</p>
+      </article>
+
+      <article class="price-card">
+        <h3>Pro Yearly</h3>
+        <p class="price">&euro;29.99 <small>/ year</small><span class="save">About 2.50 EUR a month</span></p>
+        <p>The same Pro access for a whole year, at a lower effective price.</p>
+        <ul>
+          <li>Everything in Pro Monthly</li>
+          <li>One payment, twelve months</li>
+          <li>Two months cheaper than monthly</li>
+          <li>Cancel from PayPal</li>
+        </ul>
+        <div id="paypal-yearly"></div>
+        <p class="plan-cta">29.99 EUR per year &middot; cancel in PayPal</p>
+      </article>
+    </div>
+
+    <h2>Free vs Pro, side by side</h2>
+    <p class="sub">The tools are the same. What changes is how far you can go before the day runs out.</p>
+    <table>
+      <thead><tr><th>What you get</th><th>Free</th><th>Pro</th></tr></thead>
+      <tbody>
+        <tr><td>AI tutor, exam solver and AI notes</td><td class="yes">Included</td><td class="yes">Included</td></tr>
+        <tr><td>Citations, flashcards, calculators, timer, schedule</td><td class="yes">Unlimited</td><td class="yes">Unlimited</td></tr>
+        <tr><td>AI requests per day</td><td>15</td><td class="yes">2000</td></tr>
+        <tr><td>Length of each answer</td><td>Short</td><td class="yes">Full, with steps</td></tr>
+        <tr><td>Long study plans from your syllabus</td><td class="no">No</td><td class="yes">Yes</td></tr>
+        <tr><td>Saved work follows you to another device</td><td class="no">No</td><td class="yes">Yes</td></tr>
+        <tr><td>Works when the daily limit is hit</td><td class="no">Stops until tomorrow</td><td class="yes">Keeps going</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Questions before you pay</h2>
+    <p class="sub">The things students actually ask us.</p>
+    <details open><summary>What exactly do I get with Pro?</summary><p>Your daily AI allowance goes from 15 to 2000 requests, answers stop being cut short, and your chats, study sets, solved questions, flashcards and citations are stored in your account. Sign in on a library computer or your phone and everything is there.</p></details>
+    <details><summary>Why is it so cheap?</summary><p>Because we do not run a sales team or charge per seat. There is one product, one price and one thing to pay for. Pro costs less than one hour of tutoring, and most students tell us it pays for itself the first time it saves an hour.</p></details>
+    <details><summary>Can I cancel?</summary><p>Yes, from your PayPal account: Payments, then Manage automatic payments, then cancel StudyTools. You keep Pro until the end of the period you paid for, and you are not charged again. There is no cancellation email to send and no retention call.</p></details>
+    <details><summary>What if I only need it for a few weeks?</summary><p>Then take Pro Monthly for the exam season and cancel afterwards. If the school year is what you are paying for, the yearly plan costs about 2.50 EUR a month, which is less than a coffee a week.</p></details>
+    <details><summary>Is my card safe?</summary><p>We never see your card. Payment happens on PayPal's servers, and we only receive a subscription reference. Pro is linked to your StudyTools account, not to your card details.</p></details>
+    <details><summary>Do I need a credit card to start?</summary><p>No. The free plan needs no payment details at all, and the calculators, timer, flashcards and citation generator work without an account.</p></details>
+    <details><summary>Can my school block it?</summary><p>Your school decides what AI use is allowed. StudyTools shows the reasoning so you can check each step against your course material, and the study guides explain how to use it without handing in work that is not yours.</p></details>
+
+    <div class="cta-final">
+      <h2>Ready when your next deadline is</h2>
+      <p>Start free right now and upgrade only when the daily limit gets in the way. Takes about 20 seconds.</p>
+      <a class="btn" href="/app.html">Start free</a>
+      <p class="fine" style="color:#94a3b8;margin-top:16px">Payments and cancellations are handled by PayPal &middot; support@studytools.pro</p>
+    </div>
+  </div>
+</main>
+
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+<script src="/js/firebase-config.js"></script>
+<script src="/js/paypal-plans.js"></script>
+<script src="https://www.paypal.com/sdk/js?client-id=AYvOTOt-rN_CEBn-ybGmMFeHt8zHSBzx7ze5QHuhbDXTerKFiz7SgjEGzxIZLNbww4K6Y4CRRXUANsPZ&vault=true&intent=subscription"></script>
+<script>
+(function(){
+  var plans = [
+    { key: 'monthly', selector: '#paypal-monthly' },
+    { key: 'yearly', selector: '#paypal-yearly' }
+  ];
+  function track(name){
+    if (window.dataLayer && window.gtag) {
+      window.gtag('event', 'begin_checkout', { currency: 'EUR', items: [{ item_name: 'StudyTools Pro ' + name }] });
+    }
+  }
+  addEventListener('load', function(){
+    if (!window.paypal || !window.StudyToolsPlans) return;
+    var auth = firebase.auth();
+    var currentUser = auth.currentUser;
+    auth.onAuthStateChanged(function(u){ currentUser = u; });
+    plans.forEach(function(entry){
+      var plan = window.StudyToolsPlans[entry.key];
+      var host = document.querySelector(entry.selector);
+      if (!plan || !host) return;
+      paypal.Buttons({
+        style: { shape: 'pill', color: 'gold', layout: 'vertical', label: 'subscribe' },
+        onClick: function(data, actions){
+          track(entry.key);
+          if (!currentUser) {
+            actions.reject();
+            alert('Please sign in or create a free account first, so your Pro subscription is linked to your email.');
+            location.href = '/login.html?redirect=' + encodeURIComponent('/pro.html');
+            return;
+          }
+          return actions.resolve();
+        },
+        createSubscription: function(data, actions){ return actions.subscription.create({ plan_id: plan.id }); },
+        onApprove: function(data){
+          location.href = '/pro-success.html?plan=' + entry.key + '&subscription_id=' + encodeURIComponent(data.subscriptionID);
+        },
+        onError: function(){
+          host.insertAdjacentHTML('beforeend', '<p style="font-size:.85rem;color:#b91c1c;margin-top:10px">The PayPal button could not load. Refresh the page, or email support@studytools.pro and we will sort it out.</p>');
+        }
+      }).render(host);
+    });
+  });
+})();
+</script>
+</body>
+</html>

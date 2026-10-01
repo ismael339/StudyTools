@@ -1,2 +1,113 @@
-<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Log in | StudyTools</title><meta name="robots" content="noindex,nofollow"><link rel="stylesheet" href="/css/auth-workspace.css"><style>html{color-scheme:light}</style>
-</head><body><main class="auth-shell"><section class="auth-card"><a class="auth-logo" href="/">StudyTools</a><h1>Welcome back</h1><p class="auth-sub">Continue your study progress.</p><form id="login-form"><div class="auth-group"><label for="email">Email</label><input id="email" type="email" required autocomplete="email"></div><div class="auth-group"><label for="password">Password</label><input id="password" type="password" required autocomplete="current-password"></div><button class="auth-button">Log in</button></form><div class="auth-divider">or continue with</div><button class="auth-button alt" id="google">Continue with Google</button><div class="auth-error" id="error" hidden></div><div class="auth-links">No account? <a href="/register.html">Create one free</a><br><a href="/">Back to StudyTools</a></div></section></main><script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script><script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script><script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script><script src="/js/firebase-config.js"></script><script>const auth=firebase.auth(),error=document.querySelector('#error');const params=new URLSearchParams(location.search);const nextUrl=params.get('redirect')||'/dashboard.html';function show(e){error.hidden=false;error.textContent=e}document.querySelector('#login-form').addEventListener('submit',async e=>{e.preventDefault();try{await auth.signInWithEmailAndPassword(email.value,password.value);location.href=nextUrl}catch(x){show('We could not sign you in. Check your email and password.')}});document.querySelector('#google').onclick=async()=>{try{await auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());location.href=nextUrl}catch(x){show(x.message)}};</script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Log in | StudyTools</title>
+<meta name="description" content="Log in to StudyTools to keep your AI study limits, saved study sets, solved questions and citations in one place.">
+<meta name="robots" content="noindex,nofollow">
+<link rel="stylesheet" href="/css/auth-workspace.css">
+<link rel="icon" href="/favicon.svg">
+<style>html{color-scheme:light}
+  .auth-note{margin-top:18px;font-size:.84rem;color:#64748b;line-height:1.6}
+  .auth-note a{color:#2563eb;font-weight:700}
+  .row-between{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:6px}
+  .link-button{background:none;border:none;color:#2563eb;font-size:.82rem;font-weight:700;cursor:pointer;padding:0;text-decoration:underline}
+  .auth-ok{background:#ecfdf5;border:1px solid #a7f3d0;color:#047857;border-radius:10px;padding:12px 14px;font-size:.88rem;line-height:1.55;margin-top:12px}
+</style>
+</head>
+<body>
+<main class="auth-shell">
+  <section class="auth-card">
+    <a class="auth-logo" href="/">StudyTools</a>
+    <h1>Welcome back</h1>
+    <p class="auth-sub">Continue your study progress.</p>
+
+    <form id="login-form">
+      <div class="auth-group"><label for="email">Email</label><input id="email" type="email" required autocomplete="email"></div>
+      <div class="auth-group">
+        <div class="row-between"><label for="password">Password</label><button type="button" class="link-button" id="forgot">Forgot password?</button></div>
+        <input id="password" type="password" required autocomplete="current-password">
+      </div>
+      <button class="auth-button">Log in</button>
+    </form>
+
+    <div class="auth-divider">or continue with</div>
+    <button class="auth-button alt" id="google">Continue with Google</button>
+
+    <div class="auth-error" id="error" hidden></div>
+    <div class="auth-ok" id="notice" hidden></div>
+
+    <div class="auth-links">No account? <a href="/register.html">Create one free</a><br><a href="/">Back to StudyTools</a></div>
+    <p class="auth-note">Pro subscribers: sign in with the same email you paid with and your Pro access follows you to this device.</p>
+  </section>
+</main>
+
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+<script src="/js/firebase-config.js"></script>
+<script>
+var auth = firebase.auth();
+var errorBox = document.querySelector('#error');
+var noticeBox = document.querySelector('#notice');
+var params = new URLSearchParams(location.search);
+var nextUrl = params.get('redirect') || '/dashboard.html';
+
+function showError(text) {
+  noticeBox.hidden = true;
+  errorBox.hidden = false;
+  errorBox.textContent = text;
+}
+
+function showNotice(text) {
+  errorBox.hidden = true;
+  noticeBox.hidden = false;
+  noticeBox.textContent = text;
+}
+
+document.querySelector('#login-form').addEventListener('submit', async function (event) {
+  event.preventDefault();
+  var button = event.target.querySelector('button');
+  button.disabled = true;
+  try {
+    await auth.signInWithEmailAndPassword(email.value, password.value);
+    location.href = nextUrl;
+  } catch (err) {
+    showError('We could not sign you in. Check your email and password.');
+    button.disabled = false;
+  }
+});
+
+document.querySelector('#google').addEventListener('click', async function () {
+  try {
+    await auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+    location.href = nextUrl;
+  } catch (err) {
+    showError(err.message || 'Google sign-in was cancelled.');
+  }
+});
+
+// Password reset. Without this, a forgotten password meant a lost account and a
+// lost Pro subscription, which is the easiest way to lose a paying customer.
+document.querySelector('#forgot').addEventListener('click', async function () {
+  var address = email.value.trim();
+  if (!address) {
+    showError('Write your email above first, then press "Forgot password?".');
+    email.focus();
+    return;
+  }
+  try {
+    await auth.sendPasswordResetEmail(address);
+    showNotice('Done. If that address has an account, the reset link is on its way. It expires in one hour, and check the spam folder.');
+  } catch (err) {
+    if (err && err.code === 'auth/user-not-found') {
+      showNotice('If that address has an account, the reset link is on its way. Check the spam folder if it does not arrive.');
+    } else {
+      showError('We could not send the reset email. Wait a minute and try again.');
+    }
+  }
+});
+</script>
+</body>
+</html>

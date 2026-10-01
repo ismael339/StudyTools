@@ -1,11 +1,15 @@
 {
-  "name": "studytools-email-automation",
+  "name": "studytools",
   "version": "1.0.0",
-  "description": "Email automation for StudyTools",
+  "description": "StudyTools: free AI study tools for students. Vercel serverless functions for the AI tutor, PayPal billing and newsletter.",
+  "private": true,
   "scripts": {
-    "send-update": "node .github/scripts/send-update-email.js"
+    "send-update": "node .github/scripts/send-update-email.js",
+    "sitemap": "node scripts/build-sitemap.js",
+    "seo:check": "node scripts/seo-check.js"
   },
   "dependencies": {
+    "firebase-admin": "^12.7.0",
     "resend": "^3.2.0"
   }
 }

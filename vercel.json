@@ -2,20 +2,35 @@
   "redirects": [
     {
       "source": "/:path*",
-      "has": [
-        {
-          "type": "host",
-          "value": "studytools.pro"
-        }
-      ],
+      "has": [{ "type": "host", "value": "studytools.pro" }],
       "destination": "https://www.studytools.pro/:path*",
       "statusCode": 301
+    },
+    { "source": "/pricing", "destination": "/pro.html", "statusCode": 301 },
+    { "source": "/pricing.html", "destination": "/pro.html", "statusCode": 301 },
+    { "source": "/premium", "destination": "/pro.html", "statusCode": 301 },
+    { "source": "/premium.html", "destination": "/pro.html", "statusCode": 301 }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
+        { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
+        { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=(), interest-cohort=()" }
+      ]
+    },
+    {
+      "source": "/api/(.*)",
+      "headers": [{ "key": "Cache-Control", "value": "no-store, max-age=0" }]
     }
   ],
   "functions": {
-    "api/chat.js": {
-      "memory": 128,
-      "maxDuration": 15
-    }
+    "api/chat.js": { "memory": 128, "maxDuration": 30 },
+    "api/entitlement.js": { "memory": 128, "maxDuration": 10 },
+    "api/subscription.js": { "memory": 128, "maxDuration": 20 },
+    "api/paypal-webhook.js": { "memory": 256, "maxDuration": 30 },
+    "api/subscribe.js": { "memory": 128, "maxDuration": 15 }
   }
 }

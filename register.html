@@ -1,2 +1,132 @@
-<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Create an account | StudyTools</title><meta name="robots" content="noindex,nofollow"><link rel="stylesheet" href="/css/auth-workspace.css"><style>html{color-scheme:light}</style>
-</head><body><main class="auth-shell"><section class="auth-card"><a class="auth-logo" href="/">StudyTools</a><h1>Create your account</h1><p class="auth-sub">Save your study progress and return to your workspace.</p><form id="register-form"><div class="auth-group"><label for="email">Email</label><input id="email" type="email" required autocomplete="email"></div><div class="auth-group"><label for="password">Password</label><input id="password" type="password" required minlength="6" autocomplete="new-password"></div><div class="auth-group"><label for="confirm">Confirm password</label><input id="confirm" type="password" required minlength="6" autocomplete="new-password"></div><button class="auth-button">Create free account</button></form><div class="auth-divider">or continue with</div><button class="auth-button alt" id="google">Continue with Google</button><div class="auth-error" id="error" hidden></div><div class="auth-links">Already have an account? <a href="/login.html">Log in</a><br><a href="/">Back to StudyTools</a></div></section></main><script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script><script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script><script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script><script src="/js/firebase-config.js"></script><script>const auth=firebase.auth(),db=firebase.firestore(),error=document.querySelector('#error');const params=new URLSearchParams(location.search);const nextUrl=params.get('redirect')||'/dashboard.html';function show(e){error.hidden=false;error.textContent=e}document.querySelector('#register-form').addEventListener('submit',async e=>{e.preventDefault();if(password.value!==confirm.value)return show('Passwords do not match.');try{const r=await auth.createUserWithEmailAndPassword(email.value,password.value);await db.collection('users').doc(r.user.email).set({email:r.user.email,createdAt:firebase.firestore.FieldValue.serverTimestamp(),plan:'free',achievements:[],badges:[]});location.href=nextUrl}catch(x){show(x.message)}});document.querySelector('#google').onclick=async()=>{try{const r=await auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());const ref=db.collection('users').doc(r.user.email);if(!(await ref.get()).exists)await ref.set({email:r.user.email,plan:'free',achievements:[],badges:[]});location.href=nextUrl}catch(x){show(x.message)}};</script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Create a free account | StudyTools</title>
+<meta name="description" content="Create a free StudyTools account to keep your AI study limits, saved study sets, solved questions and citations in one place. No card needed.">
+<meta name="robots" content="noindex,nofollow">
+<link rel="stylesheet" href="/css/auth-workspace.css">
+<link rel="icon" href="/favicon.svg">
+<style>html{color-scheme:light}
+  .auth-note{margin-top:18px;font-size:.84rem;color:#64748b;line-height:1.6}
+  .auth-ok{background:#ecfdf5;border:1px solid #a7f3d0;color:#047857;border-radius:10px;padding:12px 14px;font-size:.88rem;line-height:1.55;margin-top:12px}
+  .perks{list-style:none;padding:0;margin:16px 0 0;font-size:.86rem;color:#334155;line-height:1.75}
+  .perks li::before{content:"\2713";color:#10b981;font-weight:900;margin-right:8px}
+</style>
+</head>
+<body>
+<main class="auth-shell">
+  <section class="auth-card">
+    <a class="auth-logo" href="/">StudyTools</a>
+    <h1>Create your account</h1>
+    <p class="auth-sub">Free forever. No card needed.</p>
+
+    <form id="register-form">
+      <div class="auth-group"><label for="email">Email</label><input id="email" type="email" required autocomplete="email"></div>
+      <div class="auth-group"><label for="password">Password</label><input id="password" type="password" required minlength="6" autocomplete="new-password"></div>
+      <div class="auth-group"><label for="confirm">Confirm password</label><input id="confirm" type="password" required minlength="6" autocomplete="new-password"></div>
+      <button class="auth-button">Create free account</button>
+    </form>
+
+    <ul class="perks">
+      <li>15 AI requests a day, free</li>
+      <li>Your study sets saved and synced</li>
+      <li>Upgrade to Pro later if you need more</li>
+    </ul>
+
+    <div class="auth-divider">or continue with</div>
+    <button class="auth-button alt" id="google">Continue with Google</button>
+
+    <div class="auth-error" id="error" hidden></div>
+    <div class="auth-ok" id="notice" hidden></div>
+
+    <div class="auth-links">Already have an account? <a href="/login.html">Log in</a><br><a href="/">Back to StudyTools</a></div>
+    <p class="auth-note">By creating an account you accept the <a href="/terms.html">terms</a> and the <a href="/privacy.html">privacy notice</a>.</p>
+  </section>
+</main>
+
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+<script src="/js/firebase-config.js"></script>
+<script>
+var auth = firebase.auth();
+var db = firebase.firestore();
+var errorBox = document.querySelector('#error');
+var noticeBox = document.querySelector('#notice');
+var params = new URLSearchParams(location.search);
+var nextUrl = params.get('redirect') || '/dashboard.html';
+
+function showError(text) {
+  noticeBox.hidden = true;
+  errorBox.hidden = false;
+  errorBox.textContent = text;
+}
+
+function showNotice(text) {
+  errorBox.hidden = true;
+  noticeBox.hidden = false;
+  noticeBox.textContent = text;
+}
+
+// The profile lives under the uid, which is the only document id the security
+// rules accept for a plan field. Writing it under the email used to be rejected
+// by the rules, which is why new accounts had no profile at all.
+async function saveProfile(user) {
+  await db.collection('users').doc(user.uid).set({
+    email: user.email,
+    plan: 'free',
+    createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+    updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+  }, { merge: true });
+}
+
+document.querySelector('#register-form').addEventListener('submit', async function (event) {
+  event.preventDefault();
+  if (password.value !== confirm.value) {
+    showError('The two passwords do not match.');
+    return;
+  }
+  var button = event.target.querySelector('button');
+  button.disabled = true;
+  try {
+    var result = await auth.createUserWithEmailAndPassword(email.value, password.value);
+    await saveProfile(result.user);
+    // A verified address is the only way to recover the account later, and the
+    // only way we can send a Pro receipt if a payment ever goes wrong.
+    try {
+      await result.user.sendEmailVerification();
+    } catch (verificationError) {
+      console.warn('Verification email not sent:', verificationError && verificationError.code);
+    }
+    showNotice('Account created. We sent a verification link to ' + result.user.email + '. Confirming it means you can always get back in and recover your work.');
+    setTimeout(function () { location.href = nextUrl; }, 2200);
+  } catch (err) {
+    if (err && err.code === 'auth/email-already-in-use') {
+      showError('There is already an account with that email. Log in instead, or reset the password.');
+    } else if (err && err.code === 'auth/weak-password') {
+      showError('Choose a longer password, at least 6 characters.');
+    } else {
+      showError('We could not create the account. Wait a moment and try again.');
+    }
+    button.disabled = false;
+  }
+});
+
+document.querySelector('#google').addEventListener('click', async function () {
+  try {
+    var result = await auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+    try {
+      await saveProfile(result.user);
+    } catch (profileError) {
+      console.warn('Profile not saved:', profileError && profileError.message);
+    }
+    location.href = nextUrl;
+  } catch (err) {
+    showError(err.message || 'Google sign-in was cancelled.');
+  }
+});
+</script>
+</body>
+</html>

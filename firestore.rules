@@ -62,6 +62,30 @@ service cloud.firestore {
       allow delete: if false;
     }
 
+    // Newsletter list. Only the server (api/subscribe.js, Admin SDK) writes
+    // here, so no address can be added or removed from the browser.
+    match /emails/{emailId} {
+      allow read, get, list: if false;
+      allow write: if false;
+    }
+
+    // Entitlement mirror written by lib/admin.js after PayPal confirms payment.
+    match /entitlements/{userId} {
+      allow read: if signedIn() && request.auth.uid == userId;
+      allow write: if false;
+    }
+
+    // Purchase history, readable by the owner for their own receipts.
+    match /subscriptions/{subscriptionId} {
+      allow read: if signedIn() && resource.data.uid == request.auth.uid;
+      allow write: if false;
+    }
+
+    // Log of PayPal webhook deliveries, used to ignore retried events.
+    match /paypal_events/{eventId} {
+      allow read, write: if false;
+    }
+
     // Everything else is closed. Public content is served from static pages.
     match /{document=**} {
       allow read, write: if false;

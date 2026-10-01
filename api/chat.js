@@ -81,6 +81,23 @@ function intField(fields, name) {
   const value = fields && fields[name];
   return value && typeof value.integerValue !== 'undefined' ? Number(value.integerValue) : 0;
 }
+function timeField(fields, name) {
+  const value = fields && fields[name];
+  if (!value) return 0;
+  if (typeof value.timestampValue === 'string') return Date.parse(value.timestampValue) || 0;
+  if (typeof value.integerValue !== 'undefined') return Number(value.integerValue);
+  return 0;
+}
+
+// A plan of premium that has run out reads as free, so an exam pass stops
+// granting access by itself without anyone having to clean up the document.
+function activePlan(profile) {
+  const plan = stringField(profile, 'plan') || 'free';
+  if (plan !== 'premium') return plan;
+  const until = timeField(profile, 'premiumUntil');
+  if (until > 0 && until < Date.now()) return 'free';
+  return 'premium';
+}
 
 async function bumpUsage(uid, token, day) {
   const path = 'usage/' + uid + '_' + day;
@@ -149,7 +166,8 @@ export default async function handler(req, res) {
   if (identity.status === 'ok' && token) {
     let profile = await readDoc('users/' + identity.uid, token);
     if (!profile && identity.email) profile = await readDoc('users/' + identity.email, token);
-    plan = stringField(profile, 'plan') || 'free';
+    plan = activePlan(profile);
+    if (plan === 'premium') used = Math.min(used, PRO_DAILY_LIMIT);
     limit = plan === 'premium' ? PRO_DAILY_LIMIT : FREE_DAILY_LIMIT;
     const usage = await readDoc('usage/' + identity.uid + '_' + day, token);
     used = usage ? intField(usage, 'count') : 0;
@@ -214,6 +232,7 @@ export default async function handler(req, res) {
         plan: plan,
         limit: limit,
         used: used + 1,
+        server: true,
         remaining: Math.max(0, limit - used - 1)
       }
     });

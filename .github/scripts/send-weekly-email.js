@@ -20,9 +20,13 @@ async function getFirebaseEmails() {
       res.on('end', () => {
         try {
           const json = JSON.parse(data);
+          // Only confirmed addresses: api/subscribe.js writes every request here
+          // with subscribed false and flips it after the user clicks the link.
           const emails = json.documents?.map(doc => {
             const fields = doc.fields;
-            return fields?.email?.stringValue;
+            if (!fields) return null;
+            if (fields.subscribed?.booleanValue === false) return null;
+            return fields.email?.stringValue;
           }).filter(email => email) || [];
           resolve(emails);
         } catch (e) {

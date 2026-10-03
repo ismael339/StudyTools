@@ -27,7 +27,10 @@ async function testPayPal() {
   if (!clientId || !secret) {
     return { tested: false, reason: 'client id or secret not found' };
   }
-  const api = process.env.PAYPAL_ENV === 'sandbox'
+  // Sandbox client ids start with BAA0 or Baa0, live ones with A. Mixing them
+  // is the most common cause of a 401 when asking PayPal for a token.
+  const flavour = /^b/i.test(String(clientId)) ? 'sandbox' : 'live';
+  const api = (process.env.PAYPAL_ENV || flavour) === 'sandbox'
     ? 'https://api-m.sandbox.paypal.com'
     : 'https://api-m.paypal.com';
   try {
@@ -41,9 +44,9 @@ async function testPayPal() {
     });
     const data = await response.json().catch(function () { return {}; });
     if (!response.ok) {
-      return { tested: true, ok: false, status: response.status, error: data.error_description || data.error || 'unknown' };
+      return { tested: true, ok: false, status: response.status, clientIdLooksLike: flavour, hint: flavour === 'sandbox' ? 'You are using a sandbox client id. A live site needs the Live app credentials, so switch to Live in the PayPal developer dashboard.' : undefined, error: data.error_description || data.error || 'unknown' };
     }
-    return { tested: true, ok: true, environment: api.indexOf('sandbox') > -1 ? 'sandbox' : 'live', scope: data.scope };
+    return { tested: true, ok: true, clientIdLooksLike: flavour, environment: api.indexOf('sandbox') > -1 ? 'sandbox' : 'live', scope: data.scope };
   } catch (error) {
     return { tested: true, ok: false, error: (error && error.message) || 'request failed' };
   }

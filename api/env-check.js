@@ -17,19 +17,11 @@ function describe(name) {
   };
 }
 
-async function testPayPal() {
-  const clientId = process.env.PAYPAL_CLIENT_ID
-    || process.env.PAYPAL_CLIENT_ID_LIVE;
-  const secret = process.env.PAYPAL_CLIENT_SECRET
-    || process.env.PAYPAL_SECRET
-    || process.env.PAYPAL_API_SECRET
-    || process.env.PAYPAL_API_SECRET_KEY;
-  if (!clientId || !secret) {
-    return { tested: false, reason: 'client id or secret not found' };
-  }
-  // Sandbox client ids start with BAA0 or Baa0, live ones with A. Mixing them
-  // is the most common cause of a 401 when asking PayPal for a token.
-  const flavour = /^b/i.test(String(clientId)) ? 'sandbox' : 'live';
+// Every secret that reached the function is tested against PayPal, one at a
+// time, and the report says which one authenticated. The value is never
+// printed. This removes the guesswork when several PayPal apps exist and it is
+// unclear which secret belongs to the live one.
+async function trySecret(clientId, secret, flavour) {
   const api = (process.env.PAYPAL_ENV || flavour) === 'sandbox'
     ? 'https://api-m.sandbox.paypal.com'
     : 'https://api-m.paypal.com';
@@ -44,12 +36,50 @@ async function testPayPal() {
     });
     const data = await response.json().catch(function () { return {}; });
     if (!response.ok) {
-      return { tested: true, ok: false, status: response.status, clientIdLooksLike: flavour, hint: flavour === 'sandbox' ? 'You are using a sandbox client id. A live site needs the Live app credentials, so switch to Live in the PayPal developer dashboard.' : undefined, error: data.error_description || data.error || 'unknown' };
+      return {
+        ok: false,
+        status: response.status,
+        error: data.error_description || data.error || 'unknown'
+      };
     }
-    return { tested: true, ok: true, clientIdLooksLike: flavour, environment: api.indexOf('sandbox') > -1 ? 'sandbox' : 'live', scope: data.scope };
+    return { ok: true, environment: api.indexOf('sandbox') > -1 ? 'sandbox' : 'live', scope: data.scope };
   } catch (error) {
-    return { tested: true, ok: false, error: (error && error.message) || 'request failed' };
+    return { ok: false, error: (error && error.message) || 'request failed' };
   }
+}
+
+async function testPayPal() {
+  const clientId = process.env.PAYPAL_CLIENT_ID;
+  const names = ['PAYPAL_CLIENT_SECRET', 'PAYPAL_SECRET', 'PAYPAL_API_SECRET', 'PAYPAL_API_SECRET_KEY'];
+  const candidates = names
+    .filter(function (name) { return Boolean(process.env[name]); })
+    .map(function (name) { return { name: name, value: process.env[name] }; });
+  if (!clientId) return { tested: false, reason: 'PAYPAL_CLIENT_ID not set' };
+  if (!candidates.length) return { tested: false, reason: 'no secret variable is set' };
+
+  const flavour = /^b/i.test(String(clientId)) ? 'sandbox' : 'live';
+  const results = [];
+  let working = null;
+  for (const candidate of candidates) {
+    const result = await trySecret(clientId, candidate.value, flavour);
+    results.push({ variable: candidate.name, ok: result.ok, status: result.status || null, error: result.error || null });
+    if (result.ok && !working) {
+      working = { variable: candidate.name, environment: result.environment, scope: result.scope };
+    }
+  }
+  return {
+    tested: true,
+    clientIdLooksLike: flavour,
+    attempts: results,
+    workingVariable: working ? working.variable : null,
+    ok: Boolean(working),
+    environment: working ? working.environment : null,
+    hint: working
+      ? 'Use ' + working.variable + ' as the PayPal secret. Billing can verify payments.'
+      : (flavour === 'sandbox'
+          ? 'The client id looks like a sandbox id, so a live site cannot verify payments. Copy the client id and secret of the LIVE app instead.'
+          : 'No secret authenticated. Check that the secret belongs to the same app as this client id.')
+  };
 }
 export default async function handler(req, res) {
   res.setHeader('Cache-Control', 'no-store, max-age=0');

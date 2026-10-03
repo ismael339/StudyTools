@@ -17,6 +17,37 @@ function describe(name) {
   };
 }
 
+async function testPayPal() {
+  const clientId = process.env.PAYPAL_CLIENT_ID
+    || process.env.PAYPAL_CLIENT_ID_LIVE;
+  const secret = process.env.PAYPAL_CLIENT_SECRET
+    || process.env.PAYPAL_SECRET
+    || process.env.PAYPAL_API_SECRET
+    || process.env.PAYPAL_API_SECRET_KEY;
+  if (!clientId || !secret) {
+    return { tested: false, reason: 'client id or secret not found' };
+  }
+  const api = process.env.PAYPAL_ENV === 'sandbox'
+    ? 'https://api-m.sandbox.paypal.com'
+    : 'https://api-m.paypal.com';
+  try {
+    const response = await fetch(api + '/v1/oauth2/token', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        Authorization: 'Basic ' + Buffer.from(clientId + ':' + secret).toString('base64')
+      },
+      body: 'grant_type=client_credentials'
+    });
+    const data = await response.json().catch(function () { return {}; });
+    if (!response.ok) {
+      return { tested: true, ok: false, status: response.status, error: data.error_description || data.error || 'unknown' };
+    }
+    return { tested: true, ok: true, environment: api.indexOf('sandbox') > -1 ? 'sandbox' : 'live', scope: data.scope };
+  } catch (error) {
+    return { tested: true, ok: false, error: (error && error.message) || 'request failed' };
+  }
+}
 export default async function handler(req, res) {
   res.setHeader('Cache-Control', 'no-store, max-age=0');
 
@@ -33,8 +64,11 @@ export default async function handler(req, res) {
     firestore = adminEnabled() ? 'admin_initialisation_failed' : 'service_account_not_set';
   }
 
+  const paypal = await testPayPal();
+
   return res.status(200).json({
-    ok: firestore === 'ok',
+    ok: firestore === 'ok' && paypal.ok === true,
+    paypal: paypal,
     firestore: firestore,
     serviceAccountConfigured: adminEnabled(),
     vars: {

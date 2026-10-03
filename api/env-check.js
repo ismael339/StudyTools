@@ -116,8 +116,10 @@ export default async function handler(req, res) {
       FIREBASE_PROJECT_ID: describe('FIREBASE_PROJECT_ID'),
       FIREBASE_WEB_API_KEY: describe('FIREBASE_WEB_API_KEY')
     },
-    hint: firestore === 'ok'
-      ? 'Billing is fully configured. A real payment will now activate Pro automatically.'
-      : 'Add FIREBASE_SERVICE_ACCOUNT in Vercel (all three environments), then Redeploy from the Deployments tab.'
+    hint: firestore !== 'ok'
+      ? 'Firebase is not usable yet. Check FIREBASE_SERVICE_ACCOUNT in Vercel and redeploy.'
+      : (paypal.ok
+          ? 'Billing is fully configured: Firestore and PayPal both verified. A real payment will activate Pro automatically.'
+          : 'Firestore is ready, but PayPal rejected the secret. See paypal.hint above.')
   });
 }

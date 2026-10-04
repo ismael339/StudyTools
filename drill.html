@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Study Coach Drills | StudyTools Pro</title>
+<meta name="description" content="Quizzes built from the topics you keep getting wrong, not from a generic question bank. Your StudyTools Pro drill remembers every weak topic and drills only those.">
+<link rel="canonical" href="https://www.studytools.pro/drill.html">
+<meta name="robots" content="noindex, follow">
+<meta name="author" content="StudyTools">
+<link rel="stylesheet" href="/css/studytools-design.css">
+<link rel="icon" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<style>html{color-scheme:light}
+  body{background:#f8fafc;color:#0f172a;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.7;margin:0}
+  .wrap{width:min(880px,calc(100% - 28px));margin:0 auto;padding:22px 0 60px}
+  .nav{display:flex;justify-content:space-between;align-items:center;padding-bottom:18px;font-size:.88rem}
+  .nav a{color:#1d4ed8;text-decoration:none;font-weight:700}
+  h1{font-size:clamp(1.9rem,5vw,2.9rem);line-height:1.1;margin:8px 0 10px}
+  .lead{color:#475569;font-size:1.08rem;margin:0 0 22px}
+  .panel{background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:22px;margin-bottom:18px}
+  .panel h2{margin:0 0 8px;font-size:1.15rem;color:#0f172a}
+  .panel p{margin:0 0 12px;color:#475569;font-size:.95rem}
+  textarea{width:100%;min-height:130px;padding:14px;border:1px solid #cbd5e1;border-radius:10px;font:inherit;font-size:.95rem;box-sizing:border-box}
+  .btn{display:inline-block;background:#2563eb;color:#fff;border:none;border-radius:10px;padding:13px 24px;font-weight:800;font-size:.95rem;cursor:pointer;text-decoration:none}
+  .btn.ghost{background:#fff;color:#1d4ed8;border:1px solid #cbd5e1}
+  .btn:disabled{opacity:.55;cursor:not-allowed}
+  .out{white-space:pre-wrap;font-size:.96rem;line-height:1.75;color:#0f172a;background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:18px;margin-top:6px}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 0}
+  .chip{background:#fff7ed;border:1px solid #fed7aa;color:#9a3412;border-radius:999px;padding:7px 13px;font-size:.84rem;font-weight:700}
+  .err{background:#fef2f2;border:1px solid #fecaca;color:#b91c1c;border-radius:10px;padding:13px 16px;font-size:.92rem;margin-top:12px}
+  .ok{background:#ecfdf5;border:1px solid #a7f3d0;color:#047857;border-radius:10px;padding:13px 16px;font-size:.92rem;margin-top:12px}
+  .fine{font-size:.82rem;color:#94a3b8;margin-top:10px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav class="nav"><a href="/">StudyTools</a><a href="/dashboard.html">Dashboard</a></nav>
+
+  <h1>Study Coach Drills</h1>
+  <p class="lead">A quiz built from the topics <strong>you</strong> keep getting wrong, taken from your own notes. Not a generic question bank, and not something a free chatbot can do, because it needs your history.</p>
+
+  <div class="panel">
+    <h2>1. Paste your material</h2>
+    <p>Lecture notes, a chapter, your homework, or a past paper. The drill is built from this and from the topics you have failed before.</p>
+    <textarea id="material" placeholder="Paste your notes here..."></textarea>
+    <p class="fine">Nothing is published. It is used for your drill and stored in your own account only.</p>
+  </div>
+
+  <div class="panel">
+    <h2>2. Build the drill</h2>
+    <p>Free accounts get 2 drills a month. Pro gets 40, plus drills on every weak topic rather than one.</p>
+    <button class="btn" id="go">Build my drill</button>
+    <button class="btn ghost" id="coach">Just coach me on this</button>
+    <div id="status"></div>
+  </div>
+
+  <div class="panel" id="result-panel" hidden>
+    <h2 id="result-title">Your drill</h2>
+    <div class="out" id="out"></div>
+    <div id="after"></div>
+  </div>
+
+  <div class="panel" id="weak-panel" hidden>
+    <h2>What the coach remembers</h2>
+    <div class="chips" id="weak"></div>
+    <p class="fine">These are the topics where you said you were lost. They are stored in your StudyTools account, so the next drill starts where this one finished.</p>
+  </div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+<script src="/js/firebase-config.js"></script>
+<script>
+(function () {
+  var material = document.getElementById('material');
+  var status = document.getElementById('status');
+  var panel = document.getElementById('result-panel');
+  var out = document.getElementById('out');
+  var title = document.getElementById('result-title');
+  var weakPanel = document.getElementById('weak-panel');
+
+  function requireAuth(callback) {
+    var user = firebase.auth().currentUser;
+    if (!user) {
+      location.href = '/login.html?redirect=' + encodeURIComponent('/drill.html');
+      return;
+    }
+    user.getIdToken().then(callback).catch(function () {
+      location.href = '/login.html?redirect=' + encodeURIComponent('/drill.html');
+    });
+  }
+
+  function run(mode) {
+    requireAuth(function (token) {
+      var text = material.value.trim();
+      if (!text) {
+        status.innerHTML = '<div class="err">Paste your notes first. The drill is built from your material and your weak topics, not from generic questions.</div>';
+        material.focus();
+        return;
+      }
+      document.getElementById('go').disabled = true;
+      document.getElementById('coach').disabled = true;
+      status.innerHTML = '<div class="ok">Building your drill from the topics you struggle with...</div>';
+
+      fetch('/api/coach', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + token },
+        body: JSON.stringify({ mode: mode, material: text, topic: text.slice(0, 140) })
+      })
+        .then(function (response) { return response.json().then(function (data) { return { ok: response.ok, data: data }; }); })
+        .then(function (result) {
+          document.getElementById('go').disabled = false;
+          document.getElementById('coach').disabled = false;
+          if (!result.ok || !result.data.ok) {
+            var message = (result.data && result.data.error) || 'The coach could not answer.';
+            var extra = (result.data && result.data.code === 'coach_limit')
+              ? ' <a href="/pro.html" style="color:#1d4ed8;font-weight:800">See Pro</a>'
+              : '';
+            status.innerHTML = '<div class="err">' + message + extra + '</div>';
+            return;
+          }
+          status.innerHTML = '';
+          panel.hidden = false;
+          title.textContent = mode === 'quiz' ? 'Your drill' : 'Coaching note';
+          out.textContent = result.data.reply;
+          panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+          document.getElementById('after').innerHTML = '<div class="ok">' +
+            (result.data.drillsLeft > 0
+              ? 'Drills left this month: ' + result.data.drillsLeft + ' of ' + result.data.allowance + '.'
+              : 'That was your last drill this month.') +
+            '</div>';
+
+          if (result.data.weakTopics && result.data.weakTopics.length) {
+            weakPanel.hidden = false;
+            document.getElementById('weak').innerHTML = result.data.weakTopics
+              .map(function (t) { return '<span class="chip">' + t + '</span>'; }).join('');
+          }
+        })
+        .catch(function () {
+          document.getElementById('go').disabled = false;
+          document.getElementById('coach').disabled = false;
+          status.innerHTML = '<div class="err">Connection problem. Try again in a moment.</div>';
+        });
+    });
+  }
+
+  document.getElementById('go').addEventListener('click', function () { run('quiz'); });
+  document.getElementById('coach').addEventListener('click', function () { run('coach'); });
+})();
+</script>
+</body>
+</html>

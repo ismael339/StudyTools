@@ -86,6 +86,19 @@ service cloud.firestore {
       allow read, write: if false;
     }
 
+    // Study Coach memory. The weak-topic profile and the drill history are what
+    // make the coach different from a chatbot, so they live in their own
+    // collection, written only by the server with the service account.
+    match /coach_profiles/{uid} {
+      allow read: if signedIn() && request.auth.uid == uid;
+      allow write: if false;
+    }
+
+    match /coach_events/{eventId} {
+      allow read: if signedIn() && resource.data.uid == request.auth.uid;
+      allow write: if false;
+    }
+
     // Everything else is closed. Public content is served from static pages.
     match /{document=**} {
       allow read, write: if false;

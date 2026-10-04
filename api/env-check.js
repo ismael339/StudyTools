@@ -69,10 +69,9 @@ async function testPayPal() {
   let working = null;
   for (const candidate of candidates) {
     const result = await trySecret(clientId, candidate.value, flavour);
-    if (result.accessToken && !working) result.token = result.accessToken;
     results.push({ variable: candidate.name, ok: result.ok, status: result.status || null, error: result.error || null });
     if (result.ok && !working) {
-      working = { variable: candidate.name, environment: result.environment, scope: result.scope, accessToken: result.token || null };
+      working = { variable: candidate.name, environment: result.environment, scope: result.scope, accessToken: result.accessToken || null };
     }
   }
   return {
@@ -152,7 +151,9 @@ export default async function handler(req, res) {
 
   return res.status(200).json({
     ok: firestore === 'ok' && paypal.ok === true,
-    paypal: paypal.ok ? { ok: paypal.ok, workingVariable: paypal.workingVariable, environment: paypal.environment, hint: paypal.hint } : paypal,
+    paypal: paypal.ok
+      ? { ok: paypal.ok, workingVariable: paypal.workingVariable, environment: paypal.environment, hint: paypal.hint }
+      : paypal,
     plans: plans,
     firestore: firestore,
     serviceAccountConfigured: adminEnabled(),

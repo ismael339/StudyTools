@@ -81,6 +81,7 @@ async function testPayPal() {
     workingVariable: working ? working.variable : null,
     ok: Boolean(working),
     environment: working ? working.environment : null,
+    accessToken: working ? working.accessToken : null,
     hint: working
       ? 'Use ' + working.variable + ' as the PayPal secret. Billing can verify payments.'
       : 'No secret authenticated. Confirm that PAYPAL_CLIENT_ID and the secret come from the same PayPal app, copied without any trailing dot, dash or line break.'

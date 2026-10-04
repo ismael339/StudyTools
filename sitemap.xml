@@ -253,6 +253,12 @@
     <priority>0.1</priority>
   </url>
   <url>
+    <loc>https://www.studytools.pro/planner.html</loc>
+    <lastmod>2026-09-29</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.1</priority>
+  </url>
+  <url>
     <loc>https://www.studytools.pro/play.html</loc>
     <lastmod>2026-09-29</lastmod>
     <changefreq>monthly</changefreq>

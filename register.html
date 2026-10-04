@@ -75,7 +75,7 @@ function showNotice(text) {
 // rules accept for a plan field. Writing it under the email used to be rejected
 // by the rules, which is why new accounts had no profile at all.
 async function saveProfile(user) {
-  await db.collection('users').doc(user.uid).set({
+  await db.collection('users').doc(user.email).set({
     email: user.email,
     plan: 'free',
     createdAt: firebase.firestore.FieldValue.serverTimestamp(),

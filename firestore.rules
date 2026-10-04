@@ -99,6 +99,13 @@ service cloud.firestore {
       allow write: if false;
     }
 
+    // Revision plans. Written by the server from the student's own subjects,
+    // exam date and Study Coach history, readable only by its owner.
+    match /plans/{uid} {
+      allow read: if signedIn() && request.auth.uid == uid;
+      allow write: if false;
+    }
+
     // Everything else is closed. Public content is served from static pages.
     match /{document=**} {
       allow read, write: if false;

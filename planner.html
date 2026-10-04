@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Adaptive Revision Planner | StudyTools</title>
+<meta name="description" content="A revision plan built from your subjects, your exam date and the topics you keep failing. Recalculated every time, not a generic template.">
+<link rel="canonical" href="https://www.studytools.pro/planner.html">
+<meta name="robots" content="noindex, follow">
+<meta name="author" content="StudyTools">
+<link rel="stylesheet" href="/css/studytools-design.css">
+<link rel="icon" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<style>html{color-scheme:light}
+  body{background:#f8fafc;color:#0f172a;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.7;margin:0}
+  .wrap{width:min(900px,calc(100% - 28px));margin:0 auto;padding:22px 0 60px}
+  .nav{display:flex;justify-content:space-between;align-items:center;padding-bottom:18px;font-size:.88rem}
+  .nav a{color:#1d4ed8;text-decoration:none;font-weight:700}
+  h1{font-size:clamp(1.9rem,5vw,2.9rem);line-height:1.1;margin:8px 0 10px}
+  .lead{color:#475569;font-size:1.08rem;margin:0 0 22px}
+  .panel{background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:22px;margin-bottom:18px}
+  .panel h2{margin:0 0 10px;font-size:1.15rem;color:#0f172a}
+  .panel p{margin:0 0 12px;color:#475569;font-size:.95rem}
+  input,select{width:100%;padding:12px 14px;border:1px solid #cbd5e1;border-radius:10px;font:inherit;font-size:.95rem;box-sizing:border-box}
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+  .btn{background:#2563eb;color:#fff;border:none;border-radius:10px;padding:13px 24px;font-weight:800;font-size:.95rem;cursor:pointer}
+  .btn:disabled{opacity:.55;cursor:not-allowed}
+  .out{white-space:pre-wrap;font-size:.96rem;line-height:1.75;background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:18px;margin-top:6px}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+  .chip{background:#fff7ed;border:1px solid #fed7aa;color:#9a3412;border-radius:999px;padding:7px 13px;font-size:.84rem;font-weight:700}
+  .meta{background:#eff6ff;border:1px solid #bfdbfe;color:#1e3a8a;border-radius:10px;padding:12px 15px;font-size:.9rem;margin-bottom:16px}
+  .err{background:#fef2f2;border:1px solid #fecaca;color:#b91c1c;border-radius:10px;padding:13px 16px;font-size:.92rem;margin-top:12px}
+  .fine{font-size:.82rem;color:#94a3b8;margin-top:10px}
+  @media(max-width:620px){.row{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav class="nav"><a href="/">StudyTools</a><a href="/drill.html">Study Coach</a></nav>
+
+  <h1>Adaptive Revision Planner</h1>
+  <p class="lead">A plan built from <strong>your</strong> subjects, <strong>your</strong> exam date and the topics you keep failing. Come back tomorrow and it recalculates from what changed.</p>
+
+  <div class="panel">
+    <h2>Your situation</h2>
+    <div class="row">
+      <div><label for="exam"><strong>Exam date</strong></label><input id="exam" type="date"></div>
+      <div><label for="hours"><strong>Hours per day</strong></label><select id="hours"><option>1</option><option selected>2</option><option>3</option><option>4</option><option>6</option></select></div>
+    </div>
+    <label for="subjects"><strong>Subjects</strong> (comma separated)</label>
+    <input id="subjects" placeholder="Biology, Chemistry, Maths">
+    <p class="fine">The more honest you are about your hours, the more realistic the plan.</p>
+  </div>
+
+  <div class="panel">
+    <h2>Your plan</h2>
+    <button class="btn" id="go">Build my revision plan</button>
+    <div id="status"></div>
+  </div>
+
+  <div class="panel" id="out-panel" hidden>
+    <h2 id="plan-title">Your revision plan</h2>
+    <div class="meta" id="meta"></div>
+    <div class="out" id="out"></div>
+  </div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+<script src="/js/firebase-config.js"></script>
+<script>
+(function () {
+  var subjects = document.getElementById('subjects');
+  var exam = document.getElementById('exam');
+  var hours = document.getElementById('hours');
+  var status = document.getElementById('status');
+  var panel = document.getElementById('out-panel');
+  var out = document.getElementById('out');
+  var meta = document.getElementById('meta');
+
+  document.getElementById('go').addEventListener('click', function () {
+    var list = subjects.value.split(',').map(function (s) { return s.trim(); }).filter(Boolean);
+    if (!list.length) {
+      status.innerHTML = '<div class="err">Add at least one subject.</div>';
+      subjects.focus();
+      return;
+    }
+    var user = firebase.auth().currentUser;
+    if (!user) {
+      location.href = '/login.html?redirect=' + encodeURIComponent('/planner.html');
+      return;
+    }
+    user.getIdToken().then(function (token) {
+      document.getElementById('go').disabled = true;
+      status.innerHTML = '<div class="meta">Building your plan from your subjects and the topics you keep failing...</div>';
+      return fetch('/api/planner', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + token },
+        body: JSON.stringify({ subjects: list, examDate: exam.value, hoursPerDay: Number(hours.value) })
+      }).then(function (r) { return r.json().then(function (d) { return { ok: r.ok, data: d }; }); });
+    }).then(function (result) {
+      document.getElementById('go').disabled = false;
+      if (!result.ok || !result.data.ok) {
+        status.innerHTML = '<div class="err">' + ((result.data && result.data.error) || 'Could not build the plan.') + '</div>';
+        return;
+      }
+      status.innerHTML = '';
+      panel.hidden = false;
+      out.textContent = result.data.plan;
+      var chips = (result.data.weakTopics || []).map(function (t) { return '<span class="chip">' + t + '</span>'; }).join(' ');
+      meta.innerHTML = 'Days until your exam: <strong>' + result.data.daysLeft + '</strong>. ' +
+        (chips ? '<br>Prioritising your weak topics: ' + chips : '<br>No weak topics recorded yet, so this plan starts broad.');
+      panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }).catch(function () {
+      document.getElementById('go').disabled = false;
+      status.innerHTML = '<div class="err">Connection problem. Try again.</div>';
+    });
+  });
+})();
+</script>
+</body>
+</html>

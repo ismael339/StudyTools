@@ -18,6 +18,12 @@ const KEEP_UNTIL_NOW_STATUSES = ['CANCELLED'];
 
 // The secret was added in Vercel under a name chosen when the panel was filled
 // in, so several spellings are accepted. Whichever one exists, it is used.
+// PayPal rejects the pair if either value carries stray whitespace from a copy
+// and paste, so both are normalised before use.
+function clean(value) {
+  return String(value || '').replace(/\s+/g, '').trim();
+}
+
 function paypalSecret() {
   return process.env.PAYPAL_CLIENT_SECRET
     || process.env.PAYPAL_SECRET
@@ -29,8 +35,8 @@ let paypalToken = null;
 let paypalTokenExpiry = 0;
 
 async function getPayPalAccessToken() {
-  const clientId = process.env.PAYPAL_CLIENT_ID;
-  const secret = paypalSecret();
+  const clientId = clean(process.env.PAYPAL_CLIENT_ID);
+  const secret = clean(paypalSecret());
   if (!clientId || !secret) return null;
   if (paypalToken && Date.now() < paypalTokenExpiry) return paypalToken;
   const response = await fetch(PAYPAL_API + '/v1/oauth2/token', {

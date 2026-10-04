@@ -8,7 +8,12 @@ import { getAdmin, adminEnabled } from '../lib/admin.js';
 function describe(name) {
   const value = process.env[name];
   if (!value) return { set: false };
-  const trimmed = value.trim();
+  // A pasted client id often arrives with a trailing space, a line break or a
+  // stray character, which is exactly what makes PayPal answer 401.
+  const trimmed = value.replace(/\s+/g, '').trim();
+  if (trimmed.length !== value.trim().length) {
+    return { set: true, length: trimmed.length, rawLength: value.trim().length, cleaned: true, looksLikeJson: false, lines: 1, note: 'Had whitespace, it is stripped before use' };
+  }
   return {
     set: true,
     length: trimmed.length,

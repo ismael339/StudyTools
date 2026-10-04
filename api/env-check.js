@@ -62,7 +62,9 @@ async function testPayPal() {
   if (!clientId) return { tested: false, reason: 'PAYPAL_CLIENT_ID not set' };
   if (!candidates.length) return { tested: false, reason: 'no secret variable is set' };
 
-  const flavour = /^b/i.test(String(clientId)) ? 'sandbox' : 'live';
+  // No guessing from the prefix: live ids can start with A or B, so the only
+  // reliable signal is whether PayPal itself accepts the pair.
+  const flavour = String(process.env.PAYPAL_ENV || 'live').toLowerCase();
   const results = [];
   let working = null;
   for (const candidate of candidates) {
@@ -81,9 +83,7 @@ async function testPayPal() {
     environment: working ? working.environment : null,
     hint: working
       ? 'Use ' + working.variable + ' as the PayPal secret. Billing can verify payments.'
-      : (flavour === 'sandbox'
-          ? 'The client id looks like a sandbox id, so a live site cannot verify payments. Copy the client id and secret of the LIVE app instead.'
-          : 'No secret authenticated. Check that the secret belongs to the same app as this client id.')
+      : 'No secret authenticated. Confirm that PAYPAL_CLIENT_ID and the secret come from the same PayPal app, copied without any trailing dot, dash or line break.'
   };
 }
 export default async function handler(req, res) {

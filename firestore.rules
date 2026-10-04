@@ -29,7 +29,7 @@ service cloud.firestore {
 
     function noBillingOnCreate() {
       return !request.resource.data.keys().hasAny(['subscriptionId', 'premiumGift', 'role', 'isAdmin'])
-        && request.resource.data.get('plan', 'free') == 'free';
+        && (!('plan' in request.resource.data) || request.resource.data.plan == 'free');
     }
 
     match /users/{userId} {

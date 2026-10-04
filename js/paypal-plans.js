@@ -22,8 +22,8 @@ window.StudyToolsPlans = {
   // skus unchanged, otherwise pro.html would show a different price than the
   // amount actually charged.
   currency: 'EUR',
-  monthly: { id: 'P-44976517YC761723RNI6W5AY', sku: 'pro-monthly', label: 'Pro Monthly', price: 3.99, period: 'month' },
-  yearly: { id: 'P-14N28530X9822712DNI6W7NQ', sku: 'pro-yearly', label: 'Pro Yearly', price: 29.99, period: 'year' },
+  monthly: { id: 'P-5GW019469S153851ANLBHLNQ', sku: 'pro-monthly', label: 'Pro Monthly', price: 3.99, period: 'month' },
+  yearly: { id: 'P-17W830833G852291FNLBHLNY', sku: 'pro-yearly', label: 'Pro Yearly', price: 29.99, period: 'year' },
   freeDailyAi: 15,
   proDailyAi: 2000,
   priceText: function (key) {

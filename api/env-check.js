@@ -92,8 +92,8 @@ async function testPayPal() {
 // checkout uses and reports whether the current app can still charge for it.
 async function checkPlans(accessToken, flavour) {
   const ids = [
-    { key: 'monthly', id: process.env.PLAN_ID_MONTHLY || 'P-44976517YC761723RNI6W5AY' },
-    { key: 'yearly', id: process.env.PLAN_ID_YEARLY || 'P-14N28530X9822712DNI6W7NQ' }
+    { key: 'monthly', id: process.env.PLAN_ID_MONTHLY || 'P-5GW019469S153851ANLBHLNQ' },
+    { key: 'yearly', id: process.env.PLAN_ID_YEARLY || 'P-17W830833G852291FNLBHLNY' }
   ];
   const api = (process.env.PAYPAL_ENV || flavour) === 'sandbox'
     ? 'https://api-m.sandbox.paypal.com'

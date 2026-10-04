@@ -10,7 +10,17 @@ window.StudyToolsPlans = {
   // Live PayPal client id. pro.html loads the SDK from here, so switching to a
   // different PayPal app means editing this line and the PAYPAL_CLIENT_ID
   // variable in Vercel, nothing else.
-  clientId: '',
+  clientId: 'BAA7gPQPf9ATShT_E7GDRdQXYhiFyYt6_29rVWpF_96_W15AAC44z9dS71rkoJBlnkuh0H13mKZqQv5T5w',
+  // The plan ids below were created on the previous PayPal app. PayPal ties a
+  // plan to the app that created it, so if the buttons refuse to open, recreate
+  // these two plans on the current app and put the new ids here. The prices and
+  // the skus must stay the same, otherwise pro.html would show a different
+  // price than the one charged.
+  // The two plan ids were created on the previous PayPal app. PayPal ties a
+  // plan to the app that created it, so if the buttons refuse to open, recreate
+  // these plans on the current app and put the new ids here. Keep the prices and
+  // skus unchanged, otherwise pro.html would show a different price than the
+  // amount actually charged.
   currency: 'EUR',
   monthly: { id: 'P-44976517YC761723RNI6W5AY', sku: 'pro-monthly', label: 'Pro Monthly', price: 3.99, period: 'month' },
   yearly: { id: 'P-14N28530X9822712DNI6W7NQ', sku: 'pro-yearly', label: 'Pro Yearly', price: 29.99, period: 'year' },

@@ -47,7 +47,7 @@ async function trySecret(clientId, secret, flavour) {
         error: data.error_description || data.error || 'unknown'
       };
     }
-    return { ok: true, environment: api.indexOf('sandbox') > -1 ? 'sandbox' : 'live', scope: data.scope };
+    return { ok: true, environment: api.indexOf('sandbox') > -1 ? 'sandbox' : 'live', scope: data.scope, accessToken: data.access_token };
   } catch (error) {
     return { ok: false, error: (error && error.message) || 'request failed' };
   }
@@ -69,9 +69,10 @@ async function testPayPal() {
   let working = null;
   for (const candidate of candidates) {
     const result = await trySecret(clientId, candidate.value, flavour);
+    if (result.accessToken && !working) result.token = result.accessToken;
     results.push({ variable: candidate.name, ok: result.ok, status: result.status || null, error: result.error || null });
     if (result.ok && !working) {
-      working = { variable: candidate.name, environment: result.environment, scope: result.scope };
+      working = { variable: candidate.name, environment: result.environment, scope: result.scope, accessToken: result.token || null };
     }
   }
   return {
@@ -85,6 +86,47 @@ async function testPayPal() {
       ? 'Use ' + working.variable + ' as the PayPal secret. Billing can verify payments.'
       : 'No secret authenticated. Confirm that PAYPAL_CLIENT_ID and the secret come from the same PayPal app, copied without any trailing dot, dash or line break.'
   };
+}
+// A plan belongs to the app that created it, so an id from the previous app is
+// rejected even with valid credentials. This asks PayPal about each plan the
+// checkout uses and reports whether the current app can still charge for it.
+async function checkPlans(accessToken, flavour) {
+  const ids = [
+    { key: 'monthly', id: process.env.PLAN_ID_MONTHLY || 'P-44976517YC761723RNI6W5AY' },
+    { key: 'yearly', id: process.env.PLAN_ID_YEARLY || 'P-14N28530X9822712DNI6W7NQ' }
+  ];
+  const api = (process.env.PAYPAL_ENV || flavour) === 'sandbox'
+    ? 'https://api-m.sandbox.paypal.com'
+    : 'https://api-m.paypal.com';
+  const out = [];
+  for (const entry of ids) {
+    try {
+      const response = await fetch(api + '/v1/billing/plans/' + encodeURIComponent(entry.id), {
+        headers: { Authorization: 'Bearer ' + accessToken }
+      });
+      if (response.ok) {
+        const data = await response.json();
+        const price = data.price && data.price.value ? Number(data.price.value) : null;
+        const status = data.status || 'UNKNOWN';
+        out.push({
+          key: entry.key, id: entry.id, ok: true, status: status,
+          price: price,
+          active: status === 'ACTIVE',
+          priceMatchesPage: price === null ? null : (entry.key === 'monthly' ? price === 3.99 : price === 29.99)
+        });
+      } else {
+        let detail = '';
+        try {
+          const body = await response.json();
+          detail = body.message || body.name || '';
+        } catch (error) { /* ignore */ }
+        out.push({ key: entry.key, id: entry.id, ok: false, status: response.status, error: detail || 'plan not available for this app' });
+      }
+    } catch (error) {
+      out.push({ key: entry.key, id: entry.id, ok: false, error: (error && error.message) || 'request failed' });
+    }
+  }
+  return out;
 }
 export default async function handler(req, res) {
   res.setHeader('Cache-Control', 'no-store, max-age=0');
@@ -103,10 +145,15 @@ export default async function handler(req, res) {
   }
 
   const paypal = await testPayPal();
+  let plans = [];
+  if (paypal.ok && paypal.accessToken) {
+    plans = await checkPlans(paypal.accessToken, paypal.environment);
+  }
 
   return res.status(200).json({
     ok: firestore === 'ok' && paypal.ok === true,
-    paypal: paypal,
+    paypal: paypal.ok ? { ok: paypal.ok, workingVariable: paypal.workingVariable, environment: paypal.environment, hint: paypal.hint } : paypal,
+    plans: plans,
     firestore: firestore,
     serviceAccountConfigured: adminEnabled(),
     vars: {

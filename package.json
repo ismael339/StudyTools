@@ -6,7 +6,8 @@
   "scripts": {
     "send-update": "node .github/scripts/send-update-email.js",
     "sitemap": "node scripts/build-sitemap.js",
-    "seo:check": "node scripts/seo-check.js"
+    "seo:check": "node scripts/seo-check.js",
+    "newsletter:check": "node scripts/newsletter-check.js"
   },
   "dependencies": {
     "firebase-admin": "^12.7.0",

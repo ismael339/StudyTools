@@ -167,6 +167,8 @@ export default async function handler(req, res) {
       PAYPAL_WEBHOOK_ID: describe('PAYPAL_WEBHOOK_ID'),
       GROQ_API_KEY: describe('GROQ_API_KEY'),
       RESEND_API_KEY: describe('RESEND_API_KEY'),
+      CRON_SECRET: describe('CRON_SECRET'),
+      NEWSLETTER_FROM: describe('NEWSLETTER_FROM'),
       FIREBASE_PROJECT_ID: describe('FIREBASE_PROJECT_ID'),
       FIREBASE_WEB_API_KEY: describe('FIREBASE_WEB_API_KEY')
     },

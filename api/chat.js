@@ -5,6 +5,8 @@
 // security rules stay in charge and no service-account key lives in this repo.
 // Every auth step fails open: a broken check must never take the tutor down.
 
+import { buildTutorSystemPrompt, decodeStudyProfile, decodeWeakTopics, encodeProfileToFields, hasProfile, mergeProfile, normaliseProfile, parseTutorReply } from '../lib/tutor.js';
+
 const PROJECT_ID = process.env.FIREBASE_PROJECT_ID || 'studytools-b60e9';
 const WEB_API_KEY = process.env.FIREBASE_WEB_API_KEY || 'AIzaSyDx4StAzPExYbQU_9yJ04R7HO2JX1_sq6w';
 const VERIFY_URL = 'https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyIdToken?key=' + WEB_API_KEY;
@@ -136,12 +138,38 @@ async function bumpUsage(uid, token, day) {
   return next;
 }
 
+// StudyTools AI: persist what the tutor learned about the student onto
+// users/{uid}.studyProfile. Same user-token pattern as bumpUsage, so the
+// security rules keep deciding; updateMask replaces only that one field.
+async function writeStudyProfile(uid, token, profile) {
+  try {
+    const response = await fetch(DOC_BASE + 'users/' + uid + '?updateMask.fieldPaths=studyProfile', {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + token },
+      body: JSON.stringify({
+        fields: { studyProfile: { mapValue: { fields: encodeProfileToFields(profile) } } }
+      })
+    });
+    if (!response.ok) console.warn('studyProfile write rejected (' + response.status + ')');
+  } catch (error) {
+    console.warn('studyProfile write failed:', error && error.message);
+  }
+}
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const { messages, system } = req.body || {};
+  // Tutor mode (`assistant: true`) adds the StudyTools AI orchestrator: student
+  // profile, coach memory and the structured reply protocol from lib/tutor.js.
+  // Callers that do not send it (app.html, exam-solver.html) keep the exact
+  // same {system, messages} -> {reply, quota} behaviour as before.
+  const { messages, system, assistant, profile: clientProfile } = req.body || {};
+  const tutorMode = assistant === true;
+  let studyProfile = null;
+  let weakTopics = [];
+  let coachDocPromise = null;
   if (!messages || !Array.isArray(messages) || messages.length === 0) {
     return res.status(400).json({ error: 'Missing or invalid messages array' });
   }
@@ -153,7 +181,7 @@ export default async function handler(req, res) {
   if (lastUserMessage.content.length > 12000) {
     return res.status(413).json({ error: 'Message payload too large. Please shorten your text.' });
   }
-  const trimmedMessages = messages.slice(-10);
+  const trimmedMessages = messages.slice(tutorMode ? -30 : -10);
 
   const apiKey = process.env.GROQ_API_KEY;
   if (!apiKey) {
@@ -178,6 +206,11 @@ export default async function handler(req, res) {
   if (identity.status === 'ok' && token) {
     let profile = await readDoc('users/' + identity.uid, token);
     if (!profile && identity.email) profile = await readDoc('users/' + identity.email, token);
+    if (tutorMode) {
+      // Coach memory read runs in parallel with the usage counter below.
+      coachDocPromise = readDoc('coach_profiles/' + identity.uid, token);
+      studyProfile = decodeStudyProfile(profile);
+    }
     plan = activePlan(profile);
     if (plan === 'premium') used = Math.min(used, PRO_DAILY_LIMIT);
     limit = plan === 'premium' ? PRO_DAILY_LIMIT : FREE_DAILY_LIMIT;
@@ -200,6 +233,21 @@ export default async function handler(req, res) {
     });
   }
 
+  // StudyTools AI context assembly: coach memory + the profile copy the browser
+  // holds (anonymous visitors have no server-side storage). Everything fails
+  // open: missing reads only mean an emptier prompt.
+  let effectiveSystem = system;
+  if (tutorMode) {
+    if (coachDocPromise) weakTopics = decodeWeakTopics(await coachDocPromise);
+    const localProfile = normaliseProfile(clientProfile);
+    if (!hasProfile(studyProfile) && hasProfile(localProfile)) studyProfile = localProfile;
+    effectiveSystem = buildTutorSystemPrompt({
+      profile: studyProfile,
+      weakTopics: weakTopics,
+      modeSystem: system || ''
+    });
+  }
+
   try {
     const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
       method: 'POST',
@@ -213,10 +261,10 @@ export default async function handler(req, res) {
           // The identity is enforced here, not in the browser. The underlying
           // model is OpenAI's, so without this it introduces itself as ChatGPT
           // and students assume they are on a different website.
-          { role: 'system', content: BRAND_IDENTITY + (system ? '\n\n' + system : '') },
+          { role: 'system', content: BRAND_IDENTITY + (effectiveSystem ? '\n\n' + effectiveSystem : '') },
           ...trimmedMessages
         ],
-        max_tokens: 1500,
+        max_tokens: tutorMode ? 2000 : 1500,
         temperature: 0.6
       })
     });
@@ -231,17 +279,36 @@ export default async function handler(req, res) {
 
     const data = await response.json();
     const first = data.choices && data.choices[0] ? data.choices[0] : null;
-    const reply = first && first.message ? first.message.content : '';
+    const rawReply = first && first.message ? first.message.content : '';
 
-    if (!reply) {
+    if (!rawReply) {
       return res.status(500).json({ error: 'Empty response from AI engine' });
+    }
+
+    // Tutor mode: strip the protocol tail, then keep whatever was learned.
+    let reply = rawReply;
+    let actions = [];
+    let nextProfile;
+    if (tutorMode) {
+      const parsed = parseTutorReply(rawReply);
+      reply = parsed.text || 'Got it.';
+      actions = parsed.actions;
+      nextProfile = mergeProfile(studyProfile, parsed.profile || {});
+      // Persist onto users/{uid}.studyProfile with the caller's own token. A
+      // rejected write is not fatal: the browser holds the same copy and sends
+      // it back on the next turn.
+      if (identity.status === 'ok' && token && parsed.profile) {
+        writeStudyProfile(identity.uid, token, nextProfile).catch(function (err) {
+          console.warn('studyProfile write:', err && err.message);
+        });
+      }
     }
 
     if (identity.status === 'ok' && token) {
       bumpUsage(identity.uid, token, day).catch(err => console.warn('Usage counter:', err && err.message));
     }
 
-    return res.status(200).json({
+    const payload = {
       reply: reply,
       quota: {
         plan: plan,
@@ -250,7 +317,12 @@ export default async function handler(req, res) {
         server: true,
         remaining: Math.max(0, limit - used - 1)
       }
-    });
+    };
+    if (tutorMode) {
+      payload.actions = actions;
+      payload.profile = nextProfile;
+    }
+    return res.status(200).json(payload);
   } catch (error) {
     console.error('Groq error:', error);
     return res.status(500).json({ error: 'Unable to process your request. Please try again.' });

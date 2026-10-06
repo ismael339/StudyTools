@@ -67,7 +67,7 @@
   "functions": {
     "api/chat.js": {
       "memory": 128,
-      "maxDuration": 30
+      "maxDuration": 45
     },
     "api/entitlement.js": {
       "memory": 128,

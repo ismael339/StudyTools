@@ -75,6 +75,7 @@
   <script src="/js/user-tracking.js"></script>
   <script src="/js/library.js"></script>
   <script src="/js/tutor-history.js"></script>
+  <script src="/js/tutor-session.js"></script>
   <script>
     // Initialize Firebase
     try {
@@ -94,6 +95,26 @@
   </style>
   <style>
     .chat-actions{display:flex;gap:8px}.chat-actions button{background:rgba(15,23,42,0.06);border:1px solid var(--line);color:var(--text);padding:6px 12px;border-radius:6px;cursor:pointer;font-size:.85rem;font-weight:600}.chat-actions button:hover{background:rgba(37,99,235,0.09);border-color:var(--accent)}
+    .profile-head{margin-top:16px;padding-top:14px;border-top:1px solid var(--line)}
+    .profile-head strong{display:block;font-size:.76rem;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);font-weight:800;margin-bottom:8px}
+    .chips{display:flex;flex-wrap:wrap;gap:6px}
+    .chip{font-size:.78rem;font-weight:700;color:#1d4ed8;background:rgba(37,99,235,.08);border:1px solid rgba(37,99,235,.18);border-radius:999px;padding:5px 10px;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    .chip.hint{color:var(--muted);background:rgba(15,23,42,.04);border-color:var(--line);font-weight:500;white-space:normal}
+    .msg-wrap{display:flex;flex-direction:column;gap:6px;max-width:82%}
+    .msg-wrap.user{align-self:flex-end;align-items:flex-end}
+    .msg-wrap.ai{align-self:flex-start;align-items:flex-start}
+    .msg-wrap .msg{max-width:100%}
+    .msg-actions{display:flex;flex-wrap:wrap;gap:6px}
+    .action-card{display:inline-block;font-size:.8rem;font-weight:700;color:#0f766e;background:rgba(13,148,136,.07);border:1px solid rgba(13,148,136,.28);border-radius:8px;padding:7px 11px;cursor:pointer;font-family:inherit;text-align:left}
+    .action-card:hover{background:rgba(13,148,136,.14)}
+    .typing{display:inline-flex;gap:5px;align-items:center}
+    .typing i{width:6px;height:6px;border-radius:50%;background:var(--muted);opacity:.45;animation:st-blink 1.1s infinite}
+    .typing i:nth-child(2){animation-delay:.2s}
+    .typing i:nth-child(3){animation-delay:.4s}
+    @keyframes st-blink{50%{opacity:.12}}
+    .timer-pill{display:none;align-items:center;gap:7px;font-size:.8rem;font-weight:800;color:#b45309;background:#fffbeb;border:1px solid #fde68a;border-radius:999px;padding:5px 11px}
+    .timer-pill.on{display:inline-flex}
+    .composer textarea{background:#ffffff;color:var(--text)}
   </style>
   <link rel="stylesheet" href="/css/tool-pages.css" data-studytools-tool-theme="true" />
 <style>html{color-scheme:light}</style>
@@ -107,6 +128,7 @@
         <div class="eyebrow">Free AI tutor</div>
         <h1>Free AI Tutor for Students</h1>
         <p>Ask homework questions, get step-by-step explanations, create quizzes, and generate study plans. Write naturally, even with mistakes. No sign-up required.</p>
+        <div class="profile-head"><strong>My study profile</strong><div class="chips" id="profile-chips"></div></div>
         <div class="quick">
           <button onclick="setStudyMode('feynman', 'Explica de forma ultra sencilla (técnica Feynman): ')">🎯 Explicar fácil (Feynman)</button>
           <button onclick="setStudyMode('exam', 'Hazme 3 preguntas tipo examen con respuestas razonadas sobre: ')">📝 Preguntas de examen</button>
@@ -119,13 +141,14 @@
         <div class="chat-head">
           <strong>StudyTools AI Tutor</strong>
           <span class="status" id="status">Ready</span>
+          <span class="timer-pill" id="session-timer" title="Focus session timer">⏱ <span id="timer-value">0:00</span></span>
           <div class="chat-actions">
             <button id="save-chat-btn" onclick="saveCurrentConversation()" title="Guardar conversación">💾 Guardar</button>
             <button id="history-chat-btn" onclick="loadSavedConversations()" title="Cargar conversaciones guardadas">📂 Historial</button>
           </div>
         </div>
-        <div class="msgs" id="msgs"><div class="msg ai">Hi. I am your StudyTools AI tutor. Ask me a question, paste notes, or tell me what exam you are preparing for.</div></div>
-        <div class="composer"><textarea id="input" placeholder="Ask your AI tutor..." oninput="resizeInput()" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendMsg();}"></textarea><button class="send" id="send" onclick="sendMsg()">Send</button></div>
+        <div class="msgs" id="msgs"></div>
+        <div class="composer"><textarea id="input" placeholder="Tell me what you're studying or ask anything..." oninput="resizeInput()" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendMsg();}"></textarea><button class="send" id="send" onclick="sendMsg()">Send</button></div>
         <div class="note">Tip: ask for explanations, hints, quizzes or study plans. Do not submit AI text as your own homework.</div>
       </section>
     <section class="st-upsell" aria-label="StudyTools Pro">
@@ -155,26 +178,44 @@
       usePrompt(starterText);
     }
 
-    function getSystemPrompt() {
-      const base = "You are StudyTools AI Tutor, an elite academic private tutor designed for serious students. Always answer in the exact same language as the student. Structure answers cleanly with bold highlights and bullet points. Never provide bare homework solutions to copy—explain the foundational principles clearly.";
-      if (currentMode === 'feynman') {
-        return base + " MODE: FEYNMAN TECHNIQUE. Explain concepts using real-world everyday analogies, zero academic jargon, and clear intuition so a 12-year-old would understand.";
-      }
-      if (currentMode === 'exam') {
-        return base + " MODE: EXAM PREPARATION. Generate realistic high-yield exam questions, provide model answers, highlight common pitfalls students fall into, and explain grading criteria.";
-      }
-      if (currentMode === 'mnemonic') {
-        return base + " MODE: MEMORY ACCELERATION. Provide clever acronyms, memory palaces, visualization tricks, and associations to help the student memorize terms and formulas permanently.";
-      }
-      if (currentMode === 'solve') {
-        return base + " MODE: STEP-BY-STEP PROBLEM SOLVER. Break down math, science, or logic problems into numbered, bite-sized steps. For each step, state WHAT is done and WHY.";
-      }
-      return base;
-    }
+    // The tutor persona, the student profile and the action-card protocol are
+    // assembled server side now (api/chat.js + lib/tutor.js). The quick mode
+    // buttons above only prefill the input with their starter sentence.
     
     function usePrompt(text){ const input=document.getElementById('input'); input.value=text; input.focus(); resizeInput(); }
     function resizeInput(){ const el=document.getElementById('input'); el.style.height='auto'; el.style.height=Math.min(el.scrollHeight,160)+'px'; }
-    function addMsg(text,type){ const d=document.createElement('div'); d.className='msg '+type; d.textContent=text; document.getElementById('msgs').appendChild(d); document.getElementById('msgs').scrollTop=document.getElementById('msgs').scrollHeight; }
+    function scrollMsgs(){ const box=document.getElementById('msgs'); box.scrollTop=box.scrollHeight; }
+
+    function addMsg(text,type,actions){
+      const box=document.getElementById('msgs');
+      const wrap=document.createElement('div');
+      wrap.className='msg-wrap '+(type==='user'?'user':'ai');
+      const d=document.createElement('div');
+      d.className='msg '+type;
+      d.textContent=text;
+      wrap.appendChild(d);
+      if(Array.isArray(actions)&&actions.length&&window.TutorSession){
+        const row=TutorSession.actionRow(actions);
+        if(row) wrap.appendChild(row);
+      }
+      box.appendChild(wrap);
+      scrollMsgs();
+    }
+
+    function showTyping(on){
+      const box=document.getElementById('msgs');
+      let row=document.getElementById('typing-row');
+      if(on&&!row){
+        row=document.createElement('div');
+        row.id='typing-row';
+        row.className='msg-wrap ai';
+        row.innerHTML='<div class="msg ai typing"><i></i><i></i><i></i></div>';
+        box.appendChild(row);
+        scrollMsgs();
+      }else if(!on&&row){
+        row.parentNode.removeChild(row);
+      }
+    }
     
     async function sendMsg(){
       const input=document.getElementById('input');
@@ -194,17 +235,27 @@
       messages.push({role:'user',content:text});
       document.getElementById('send').disabled=true;
       document.getElementById('status').textContent='Thinking...';
-      
-      try{ 
-        const system = getSystemPrompt();
-        const tk=(typeof firebase!=='undefined'&&firebase.auth().currentUser)?await firebase.auth().currentUser.getIdToken():null; 
-        const chatHeaders={'Content-Type':'application/json'};if(tk)chatHeaders.Authorization='Bearer '+tk; 
-        const res=await fetch('/api/chat',{method:'POST',headers:chatHeaders,body:JSON.stringify({system,messages})}); 
-        const data=await res.json(); 
-        if(!res.ok) throw new Error(data.error||'AI service error'); 
+      showTyping(true);
+
+      try{
+        const tk=(typeof firebase!=='undefined'&&firebase.auth().currentUser)?await firebase.auth().currentUser.getIdToken():null;
+        const chatHeaders={'Content-Type':'application/json'};if(tk)chatHeaders.Authorization='Bearer '+tk;
+        // Tutor mode: the server adds the orchestrator, reads the profile and
+        // the coach memory, and answers with {reply, actions, profile, quota}.
+        const payload={assistant:true,messages:messages.map(function(m){return {role:m.role,content:m.content};})};
+        if(window.TutorSession) payload.profile=TutorSession.profile();
+        const res=await fetch('/api/chat',{method:'POST',headers:chatHeaders,body:JSON.stringify(payload)});
+        const data=await res.json();
+        if(!res.ok) throw new Error(data.error||'AI service error');
+        showTyping(false);
         const reply=data.reply||'I could not answer. Try again.';
-        messages.push({role:'assistant',content:reply});
-        addMsg(reply,'ai');
+        const actions=Array.isArray(data.actions)?data.actions:[];
+        messages.push({role:'assistant',content:reply,actions:actions});
+        addMsg(reply,'ai',actions);
+        if(window.TutorSession){
+          if(data.profile) TutorSession.applyProfile(data.profile);
+          TutorSession.persist(messages);
+        }
 
         // Increment usage
         if (window.PremiumLimits) {
@@ -212,10 +263,10 @@
           updateUsageCounter();
         }
       }
-      catch(e){ addMsg('Error: '+(e.message||'Please try again.'),'err'); }
-      document.getElementById('send').disabled=false; 
-      document.getElementById('status').textContent='Ready'; 
-      input.focus(); 
+      catch(e){ showTyping(false); addMsg('Error: '+(e.message||'Please try again.'),'err'); }
+      document.getElementById('send').disabled=false;
+      document.getElementById('status').textContent='Ready';
+      input.focus();
     }
     
     // Update usage counter display
@@ -228,8 +279,27 @@
       }
     }
 
-    // Initialize usage counter on load
+    // Restore the previous session, otherwise greet like a tutor with memory.
     document.addEventListener('DOMContentLoaded', function() {
+      if(window.TutorSession){
+        const restored=TutorSession.restore();
+        if(restored&&restored.length){
+          restored.forEach(function(m){
+            messages.push(m);
+            addMsg(m.content,m.role==='user'?'user':'ai',m.actions);
+          });
+        }else{
+          const hello=TutorSession.greeting();
+          messages.push({role:'assistant',content:hello});
+          addMsg(hello,'ai');
+        }
+        TutorSession.renderChips();
+        document.addEventListener('studytools-timer-end',function(){
+          addMsg('Time is up. How did it go — what clicked, and what should we repeat next time?','ai');
+        });
+      }else{
+        addMsg('Hi. I am your StudyTools AI tutor. Ask me a question, paste notes, or tell me what exam you are preparing for.','ai');
+      }
       if (window.PremiumLimits) {
         const remaining = PremiumLimits.getRemainingUsage('aiTutorMessages');
         const status = document.getElementById('status');
@@ -237,6 +307,7 @@
           status.textContent = remaining + ' messages remaining today';
         }
       }
+      resizeInput();
     });
 
   </script>

@@ -175,6 +175,11 @@
         <p>Enter your subjects, exams and available hours, and get a realistic revision plan instead of a vague to-do list.</p>
         <span>Plan my revision &rarr;</span>
       </a>
+      <a class="tool-card" href="/planner.html">
+        <h3>Adaptive revision planner</h3>
+        <p>Add your exam date, subjects and daily hours to get a day-by-day revision timetable that rebuilds itself as things change.</p>
+        <span>Build my plan &rarr;</span>
+      </a>
       <a class="tool-card" href="/pomodoro-timer.html">
         <h3>Pomodoro focus timer</h3>
         <p>Work in focused 25-minute blocks with proper breaks. Built to help you start, which is the hardest part.</p>
@@ -342,5 +347,14 @@
   });
 })();
 </script>
+<script>
+  // One registration at the root; the worker scope covers every page.
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function () {
+      navigator.serviceWorker.register('/sw.js').catch(function () { /* offline support is optional */ });
+    });
+  }
+</script>
+
 </body>
 </html>

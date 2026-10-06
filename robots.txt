@@ -19,3 +19,4 @@ User-agent: PerplexityBot
 Allow: /
 
 Sitemap: https://www.studytools.pro/sitemap.xml
+Sitemap: https://www.studytools.pro/image-sitemap.xml

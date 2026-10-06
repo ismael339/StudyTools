@@ -2,7 +2,7 @@
 // credentials: the unsubscribe token, the ISO week key that identifies one
 // send, the recipient merge and the rendered email.
 //
-//   node scripts/newsletter-check.js     (or: npm run newsletter:check)
+//   node scripts/newsletter-check.mjs     (or: npm run newsletter:check)
 
 import assert from 'node:assert';
 import {

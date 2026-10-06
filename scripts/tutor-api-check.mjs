@@ -3,7 +3,7 @@
 // while the classic {system, messages} callers stay byte-compatible, and that
 // the anonymous rate limit still fires. No keys, no network.
 //
-//   node scripts/tutor-api-check.js     (or: npm run tutor:api-check)
+//   node scripts/tutor-api-check.mjs     (or: npm run tutor:check)
 
 import assert from 'node:assert';
 import { pathToFileURL } from 'node:url';

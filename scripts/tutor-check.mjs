@@ -2,7 +2,7 @@
 // and no credentials: the student profile schema, the coach memory decoding,
 // the orchestrator prompt and the tagged reply protocol.
 //
-//   node scripts/tutor-check.js     (or: npm run tutor:check)
+//   node scripts/tutor-check.mjs     (or: npm run tutor:check)
 
 import assert from 'node:assert';
 import {

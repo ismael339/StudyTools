@@ -53,6 +53,45 @@ async function trySecret(clientId, secret, flavour) {
   }
 }
 
+// Is Resend actually able to send? The key existing is not enough: the
+// sending domain has to be added in the Resend dashboard and verified with DNS
+// records (DKIM + SPF), and until it is, every email fails with HTTP 422 and
+// nobody notices because the subscribe endpoint used to swallow the error.
+// This asks Resend directly for the domain list, so /api/env-check answers
+// "why did my test email never arrive" in one request.
+async function checkResend() {
+  const key = process.env.RESEND_API_KEY;
+  if (!key) return { configured: false, ok: false, reason: 'RESEND_API_KEY is not set' };
+  try {
+    const response = await fetch('https://api.resend.com/domains', {
+      headers: { Authorization: 'Bearer ' + key }
+    });
+    const data = await response.json().catch(function () { return {}; });
+    if (!response.ok) {
+      return { configured: true, ok: false, status: response.status, error: data.message || data.name || 'Resend rejected the key' };
+    }
+    const domains = (Array.isArray(data.data) ? data.data : []).map(function (entry) {
+      return { domain: entry.domain, status: entry.status, region: entry.region || null };
+    });
+    const own = domains.find(function (entry) { return entry.domain === 'studytools.pro'; });
+    return {
+      configured: true,
+      ok: true,
+      from: process.env.NEWSLETTER_FROM || 'StudyTools <newsletter@studytools.pro>',
+      domainFound: Boolean(own),
+      domainStatus: own ? own.status : null,
+      domains: domains,
+      hint: !own
+        ? 'studytools.pro is not in Resend at all. Add it in Resend (Domains > Add Domain) and copy the DNS records it shows.'
+        : (own.status !== 'verified'
+          ? 'studytools.pro is in Resend but NOT verified (' + own.status + '). Add the TXT records Resend shows in Porkbun, then press Verify in Resend. Until then every send fails with HTTP 422.'
+          : 'Domain verified: confirmation, welcome, drip and weekly emails can leave.')
+    };
+  } catch (error) {
+    return { configured: true, ok: false, error: 'network: ' + (error && error.message) };
+  }
+}
+
 async function testPayPal() {
   const clientId = process.env.PAYPAL_CLIENT_ID;
   const names = ['PAYPAL_CLIENT_SECRET', 'PAYPAL_SECRET', 'PAYPAL_API_SECRET', 'PAYPAL_API_SECRET_KEY'];
@@ -145,6 +184,7 @@ export default async function handler(req, res) {
   }
 
   const paypal = await testPayPal();
+  const newsletter = await checkResend();
   let plans = [];
   if (paypal.ok && paypal.accessToken) {
     plans = await checkPlans(paypal.accessToken, paypal.environment);
@@ -156,6 +196,7 @@ export default async function handler(req, res) {
       ? { ok: paypal.ok, workingVariable: paypal.workingVariable, environment: paypal.environment, hint: paypal.hint }
       : paypal,
     plans: plans,
+    newsletter: newsletter,
     firestore: firestore,
     serviceAccountConfigured: adminEnabled(),
     vars: {
@@ -174,8 +215,10 @@ export default async function handler(req, res) {
     },
     hint: firestore !== 'ok'
       ? 'Firebase is not usable yet. Check FIREBASE_SERVICE_ACCOUNT in Vercel and redeploy.'
-      : (paypal.ok
-          ? 'Billing is fully configured: Firestore and PayPal both verified. A real payment will activate Pro automatically.'
-          : 'Firestore is ready, but PayPal rejected the secret. See paypal.hint above.')
+      : (!newsletter.ok || newsletter.domainStatus !== 'verified'
+          ? 'Email is the broken part: ' + (newsletter.hint || newsletter.error || newsletter.reason || 'see the newsletter section above')
+          : (paypal.ok
+              ? 'Billing is fully configured: Firestore and PayPal both verified. A real payment will activate Pro automatically.'
+              : 'Firestore is ready, but PayPal rejected the secret. See paypal.hint above.'))
   });
 }

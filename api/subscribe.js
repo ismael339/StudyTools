@@ -61,19 +61,29 @@ function isValidEmail(email) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email) && email.length <= 254;
 }
 
+// Sends one message through Resend and ALWAYS reports the truth: { ok: true }
+// or { ok: false, error: 'HTTP 422: ...' }. The old version threw on rejection
+// (silently swallowed by the callers) or pretended success when the key was
+// missing, which is how subscriptions answered "check your inbox" while no
+// email ever left the building.
 function sendEmail(to, subject, html, text) {
   const key = process.env.RESEND_API_KEY;
   if (!key) {
-    console.warn('[newsletter] RESEND_API_KEY is not set in Vercel: the confirmation email was NOT sent.');
-    return Promise.resolve({ skipped: true });
+    console.warn('[newsletter] RESEND_API_KEY is not set in Vercel: the email was NOT sent.');
+    return Promise.resolve({ ok: false, error: 'RESEND_API_KEY is not configured in Vercel' });
   }
   return fetch(RESEND_API, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + key },
     body: JSON.stringify({ from: FROM, to: [to], subject, html, text })
-  }).then(function (response) {
-    if (!response.ok) throw new Error('Resend rejected the message (' + response.status + ')');
-    return response.json();
+  }).then(async function (response) {
+    const bodyText = await response.text().catch(function () { return ''; });
+    if (!response.ok) {
+      return { ok: false, error: 'HTTP ' + response.status + ': ' + bodyText.slice(0, 240) };
+    }
+    return { ok: true };
+  }).catch(function (error) {
+    return { ok: false, error: 'network: ' + (error && error.message) };
   });
 }
 
@@ -110,7 +120,14 @@ export default async function handler(req, res) {
     try {
       const welcome = renderWelcomeEmail();
       if (welcome) {
-        await sendEmail(token.email, welcome.subject, welcome.htmlFor(token.email), welcome.textFor(token.email));
+        const sent = await sendEmail(token.email, welcome.subject, welcome.htmlFor(token.email), welcome.textFor(token.email));
+        if (!sent.ok) {
+          console.error('Welcome email failed:', sent.error);
+          await admin.db.collection('emails').doc(token.email).set({
+            lastSendError: String(sent.error || '').slice(0, 300),
+            lastSendErrorAt: new Date().toISOString()
+          }, { merge: true });
+        }
       }
     } catch (error) {
       console.error('Welcome email failed:', error && error.message);
@@ -197,21 +214,35 @@ export default async function handler(req, res) {
     createdAt: new Date().toISOString()
   });
 
-  try {
-    await sendEmail(
-      email,
-      'One click and you are in',
-      '<div style="font-family:Arial,sans-serif;max-width:520px;margin:0 auto;color:#0f172a">' +
-        '<h2 style="color:#0f172a">Confirm your StudyTools newsletter</h2>' +
-        '<p style="color:#475569;line-height:1.6">Once a week, one study method that actually works and the free tools that go with it. No promotions, and you can leave with one click.</p>' +
-        '<p style="margin:26px 0"><a href="' + site + '/api/subscribe?confirm=' + encodeURIComponent(token) + '" style="background:#2563eb;color:#fff;text-decoration:none;padding:14px 24px;border-radius:10px;font-weight:700;display:inline-block">Confirm my subscription</a></p>' +
-        '<p style="color:#64748b;font-size:14px">If you did not ask for this, ignore this email and nothing will happen.</p>' +
-        '</div>',
-      'Confirm your StudyTools newsletter: ' + site + '/api/subscribe?confirm=' + encodeURIComponent(token) +
-        '\n\nIf you did not ask for this, ignore this email.'
-    );
-  } catch (error) {
-    console.error('Confirmation email failed:', error && error.message);
+  const sent = await sendEmail(
+    email,
+    'One click and you are in',
+    '<div style="font-family:Arial,sans-serif;max-width:520px;margin:0 auto;color:#0f172a">' +
+      '<h2 style="color:#0f172a">Confirm your StudyTools newsletter</h2>' +
+      '<p style="color:#475569;line-height:1.6">Once a week, one study method that actually works and the free tools that go with it. No promotions, and you can leave with one click.</p>' +
+      '<p style="margin:26px 0"><a href="' + site + '/api/subscribe?confirm=' + encodeURIComponent(token) + '" style="background:#2563eb;color:#fff;text-decoration:none;padding:14px 24px;border-radius:10px;font-weight:700;display:inline-block">Confirm my subscription</a></p>' +
+      '<p style="color:#64748b;font-size:14px">If you did not ask for this, ignore this email and nothing will happen.</p>' +
+      '</div>',
+    'Confirm your StudyTools newsletter: ' + site + '/api/subscribe?confirm=' + encodeURIComponent(token) +
+      '\n\nIf you did not ask for this, ignore this email.'
+  );
+  if (!sent.ok) {
+    // A subscription whose confirmation never arrives is worse than an honest
+    // failure: say so, remember the reason on the document, and let the person
+    // try again once the mail service works.
+    console.error('Confirmation email failed:', sent.error);
+    try {
+      await admin.db.collection('emails').doc(email).set({
+        lastSendError: String(sent.error || '').slice(0, 300),
+        lastSendErrorAt: new Date().toISOString()
+      }, { merge: true });
+    } catch (recordError) {
+      console.error('Could not record the send error:', recordError && recordError.message);
+    }
+    return res.status(502).json({
+      ok: false,
+      error: 'The subscription was saved, but the confirmation email could not be sent (' + String(sent.error || 'unknown error').slice(0, 160) + '). Please try again later.'
+    });
   }
 
   return res.status(200).json({ ok: true, message: 'Check your inbox to confirm your subscription.' });

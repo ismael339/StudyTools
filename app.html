@@ -1,5 +1,13 @@
 <!doctype html>
-<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>AI Notes Summarizer for Students | StudyTools</title><meta name="description" content="Paste your notes and turn them into a clear summary, outline, flashcards and practice questions with StudyTools AI Notes."><meta name="robots" content="index, follow"><link rel="canonical" href="https://www.studytools.pro/app.html"><link rel="stylesheet" href="/css/studytools-design.css"><link rel="icon" href="/favicon.svg">
+<html lang="en"><head>
+<script src="/js/consent.js"></script>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-P8T9B392');</script>
+<!-- End Google Tag Manager --><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>AI Notes Summarizer for Students | StudyTools</title><meta name="description" content="Paste your notes and turn them into a clear summary, outline, flashcards and practice questions with StudyTools AI Notes."><meta name="robots" content="index, follow"><link rel="canonical" href="https://www.studytools.pro/app.html"><link rel="stylesheet" href="/css/studytools-design.css"><link rel="icon" href="/favicon.svg">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"StudyTools AI Notes","applicationCategory":"EducationalApplication","url":"https://www.studytools.pro/app.html"}</script>
   <link rel="stylesheet" href="/css/tool-pages.css" data-studytools-tool-theme="true" />
 <style>html{color-scheme:light}</style>
@@ -11,7 +19,9 @@
   <meta property="og:image" content="https://www.studytools.pro/og-generic.png">
   <meta name="twitter:card" content="summary_large_image">
 </head>
-<body><header class="site-header"><a class="logo" href="/">StudyTools</a><nav class="public-nav"><a href="/dashboard.html">Dashboard</a><a href="/profile.html">Profile</a></nav></header><main class="tool-page container"><p class="eyebrow">Organize and practice</p><h1>AI Notes</h1><p class="hero-lead">Turn your notes into clear summaries, outlines, flashcards and practice questions.</p><section class="tool-panel"><label for="notes-input">Paste your notes here</label><textarea id="notes-input" placeholder="Paste lecture notes, textbook text, or an assignment..."></textarea><div class="tool-actions"><span id="word-count">0 words</span><button id="generate" class="button button-primary">Generate study set</button></div><p id="status" class="status-message" aria-live="polite"></p></section><section><h2>Choose your output</h2><div class="output-grid"><button data-output="summary"><strong>Summary</strong><span>Key ideas in a clean structure</span></button><button data-output="outline"><strong>Outline</strong><span>Organized headings and subtopics</span></button><button data-output="flashcards"><strong>Flashcards</strong><span>Active-recall questions and answers</span></button><button data-output="quiz"><strong>Quiz</strong><span>Practice questions from your notes</span></button></div></section><section id="results" class="results" hidden><div class="result-head"><h2>Your study set</h2><button id="copy-result" class="button button-secondary">Copy</button><button id="save-set" class="button button-primary">Save</button><button id="history-set" class="button button-secondary">History</button></div><pre id="result-text"></pre></section><section class="tool-explanation"><h2>How AI Notes works</h2><p>StudyTools AI Notes turns notes or study material into structured study resources. Paste text, select the outputs you want, and review the generated material before using it to study.</p><div class="related-links"><a href="/flashcard-maker.html">Make flashcards →</a><a href="/exam-solver.html">Solve a question →</a><a href="/study-assistant.html">Ask the AI Tutor →</a></div></section></main>
+<body>
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P8T9B392"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><header class="site-header"><a class="logo" href="/">StudyTools</a><nav class="public-nav"><a href="/dashboard.html">Dashboard</a><a href="/profile.html">Profile</a></nav></header><main class="tool-page container"><p class="eyebrow">Organize and practice</p><h1>AI Notes</h1><p class="hero-lead">Turn your notes into clear summaries, outlines, flashcards and practice questions.</p><section class="tool-panel"><label for="notes-input">Paste your notes here</label><textarea id="notes-input" placeholder="Paste lecture notes, textbook text, or an assignment..."></textarea><div class="tool-actions"><span id="word-count">0 words</span><button id="generate" class="button button-primary">Generate study set</button></div><p id="status" class="status-message" aria-live="polite"></p></section><section><h2>Choose your output</h2><div class="output-grid"><button data-output="summary"><strong>Summary</strong><span>Key ideas in a clean structure</span></button><button data-output="outline"><strong>Outline</strong><span>Organized headings and subtopics</span></button><button data-output="flashcards"><strong>Flashcards</strong><span>Active-recall questions and answers</span></button><button data-output="quiz"><strong>Quiz</strong><span>Practice questions from your notes</span></button></div></section><section id="results" class="results" hidden><div class="result-head"><h2>Your study set</h2><button id="copy-result" class="button button-secondary">Copy</button><button id="save-set" class="button button-primary">Save</button><button id="history-set" class="button button-secondary">History</button></div><pre id="result-text"></pre></section><section class="tool-explanation"><h2>How AI Notes works</h2><p>StudyTools AI Notes turns notes or study material into structured study resources. Paste text, select the outputs you want, and review the generated material before using it to study.</p><div class="related-links"><a href="/flashcard-maker.html">Make flashcards →</a><a href="/exam-solver.html">Solve a question →</a><a href="/study-assistant.html">Ask the AI Tutor →</a></div></section></main>
 <script src="/js/premium-limits.js"></script>
 <script src="/js/premium-status.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
@@ -119,4 +129,21 @@ status.textContent='Done — review the result against your course material.';re
   });
 })();
 </script>
+<footer class="site-footer">
+  <div>
+    <a class="logo" href="/">StudyTools</a>
+    <p>Free AI study tools for students. Understand it, practise it, remember it.</p>
+  </div>
+  <nav>
+    <a href="/blog.html">Study guides</a>
+    <a href="/pro.html">Pro plans</a>
+    <a href="/about.html">About</a>
+    <a href="/contact.html">Contact</a>
+    <a href="/terms.html">Terms</a>
+    <a href="/privacy.html">Privacy</a>
+    <a href="#" class="js-cookie-settings">Cookies</a>
+    <a href="/login.html">Log in</a>
+  </nav>
+  <small>&copy; 2026 StudyTools &middot; support@studytools.pro</small>
+</footer>
 </body></html>

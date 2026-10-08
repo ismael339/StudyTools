@@ -1,6 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<style>/* Brand chrome: fallback for pages that do not load /css/studytools-design.css */
+.site-header{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;min-height:64px;padding:12px max(20px,calc((100% - 1180px)/2));background:#fff;border-bottom:1px solid #f1f5f9}
+.site-header .logo{font-size:1.35rem;font-weight:800;letter-spacing:-.03em;color:#172554;text-decoration:none}
+.site-header .public-nav{display:flex;gap:20px;flex-wrap:wrap}
+.site-header .public-nav a{color:#64748b;font-weight:700;font-size:.95rem;text-decoration:none}
+.site-header .public-nav a:hover{color:#2563eb}
+.site-footer{display:grid;gap:16px;margin-top:48px;padding:30px max(20px,calc((100% - 1180px)/2));border-top:1px solid #e2e8f0;background:#fff}
+.site-footer .logo{font-size:1.25rem;font-weight:800;color:#172554;text-decoration:none}
+.site-footer p{margin:6px 0 0;color:#64748b;font-size:.9rem;max-width:46ch}
+.site-footer nav{display:flex;gap:16px;flex-wrap:wrap}
+.site-footer nav a{color:#475569;font-size:.88rem;font-weight:700;text-decoration:none}
+.site-footer nav a:hover{color:#2563eb}
+.site-footer small{color:#94a3b8;font-size:.8rem}
+@media(min-width:760px){.site-footer{grid-template-columns:1.1fr 2fr;align-items:start}}
+</style>
+<script src="/js/consent.js"></script>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-P8T9B392');</script>
+<!-- End Google Tag Manager -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>StudyTools Blog: Study Tips, AI Tools and Exam Guides</title>
@@ -23,6 +46,8 @@
   <meta name="twitter:card" content="summary_large_image">
 </head>
 <body>
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P8T9B392"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div class="wrap">
 <nav class="nav" aria-label="Site navigation"><a href="/" class="brand"><span class="mark">S</span><span>StudyTools</span></a><div class="nav-links"><a href="/gpa-calculator.html">GPA Calculator</a><a href="/grade-calculator.html">Grade Calculator</a><a href="/pomodoro-timer.html">Pomodoro timer</a><a href="/study-assistant.html">Ask the AI Tutor</a><a href="/blog.html">Blog</a></div></nav>
 <header class="hero"><div class="eyebrow">Student Guides · SEO Library · 2026</div><h1>Study guides that solve real student problems.</h1><p class="lead">Browse practical articles on exam preparation, AI study tools, flashcards, GPA calculators, reading, science, history, productivity and homework help. Every guide links back to a useful StudyTools feature.</p><div class="stats"><span class="stat">Available study guides</span><span class="stat">Updated 2026</span><span class="stat">Built for Google search intent</span></div><div class="tools"><a href="/study-assistant.html">Ask the AI Tutor</a><a class="secondary" href="/gpa-calculator.html">GPA Calculator</a><a class="secondary" href="/grade-calculator.html">Grade Calculator</a></div></header>
@@ -77,7 +102,23 @@
 <a class="card" data-cat="ai" href="/ai-homework-helper.html"><span class="visual"><img src="/og-image.png" alt="AI homework helper for students" loading="lazy"></span><span class="body"><span class="meta"><span class="tag ai">AI Students</span><span class="read">8 min</span></span><h3>AI for Students in 2026</h3><span class="excerpt">A modern guide to using AI tools for studying, homework and exam preparation.</span><span class="open">Read guide</span></span></a>
 </div></section>
 <section class="cta"><div><h2>Need help right now?</h2><p>Use the AI Tutor to explain a topic, turn notes into questions, plan your study week or check what you still do not understand.</p></div><a href="/study-assistant.html">Ask AI Tutor</a></section>
-<footer><span>StudyTools.pro</span><span><a href="/privacy.html">Privacy</a></span></footer>
+<footer class="site-footer">
+  <div>
+    <a class="logo" href="/">StudyTools</a>
+    <p>Free AI study tools for students. Understand it, practise it, remember it.</p>
+  </div>
+  <nav>
+    <a href="/blog.html">Study guides</a>
+    <a href="/pro.html">Pro plans</a>
+    <a href="/about.html">About</a>
+    <a href="/contact.html">Contact</a>
+    <a href="/terms.html">Terms</a>
+    <a href="/privacy.html">Privacy</a>
+    <a href="#" class="js-cookie-settings">Cookies</a>
+    <a href="/login.html">Log in</a>
+  </nav>
+  <small>&copy; 2026 StudyTools &middot; support@studytools.pro</small>
+</footer>
 </div><script>function filterCards(cat,btn){document.querySelectorAll('.filters button').forEach(b=>b.classList.remove('active'));btn.classList.add('active');document.querySelectorAll('.card').forEach(card=>{card.classList.toggle('hidden',cat!=='all'&&!card.dataset.cat.includes(cat));});}</script>
 </body>
 </html>

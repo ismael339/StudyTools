@@ -6,7 +6,9 @@
 // canonical, noindex on a public page, broken internal links (including
 // case-only mismatches, which break on Linux hosting), invalid JSON-LD,
 // sitemap drift (missing indexable pages, blocked pages listed, dead URLs,
-// future lastmod) and a missing robots.txt sitemap pointer.
+// future lastmod), a missing robots.txt sitemap pointer, and a public page
+// missing the shared brand shell (site header, site-footer, Google Tag
+// Manager or the /js/consent.js cookie banner).
 // Warnings (exit 0): out-of-range title/description lengths, images without
 // alt, missing Open Graph or Twitter tags.
 
@@ -159,6 +161,14 @@ for (const file of pages) {
   for (const tag of html.matchAll(/<img\b[^>]*>/gi)) {
     const a = attrs(tag[0]);
     if (!('alt' in a)) warn(page, '<img> without alt: ' + (a.src || '?'));
+  }
+
+  // --- brand shell: shared header/footer, analytics and cookie consent ---
+  if (isPublic) {
+    if (!html.includes('GTM-P8T9B392')) err(page, 'missing Google Tag Manager');
+    if (!html.includes('/js/consent.js')) err(page, 'missing /js/consent.js (cookie consent)');
+    if (!html.includes('class="site-footer"')) err(page, 'missing shared site-footer');
+    if (!/site-header|class="nav"|nav-in|public-nav/.test(html)) err(page, 'missing site navigation');
   }
 
   if (isPublic) indexable.push({ file, path: page });

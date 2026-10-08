@@ -11,13 +11,14 @@
   <meta property="og:image" content="https://www.studytools.pro/og-generic.png">
   <meta name="twitter:card" content="summary_large_image">
 </head>
-<body><header class="site-header"><a class="logo" href="/">StudyTools</a><nav class="public-nav"><a href="/dashboard.html">Dashboard</a><a href="/profile.html">Profile</a></nav></header><main class="tool-page container"><p class="eyebrow">Organize and practice</p><h1>AI Notes</h1><p class="hero-lead">Turn your notes into clear summaries, outlines, flashcards and practice questions.</p><section class="tool-panel"><label for="notes-input">Paste your notes here</label><textarea id="notes-input" placeholder="Paste lecture notes, textbook text, or an assignment..."></textarea><div class="tool-actions"><span id="word-count">0 words</span><button id="generate" class="button button-primary">Generate study set</button></div><p id="status" class="status-message" aria-live="polite"></p></section><section><h2>Choose your output</h2><div class="output-grid"><button data-output="summary"><strong>Summary</strong><span>Key ideas in a clean structure</span></button><button data-output="outline"><strong>Outline</strong><span>Organized headings and subtopics</span></button><button data-output="flashcards"><strong>Flashcards</strong><span>Active-recall questions and answers</span></button><button data-output="quiz"><strong>Quiz</strong><span>Practice questions from your notes</span></button></div></section><section id="results" class="results" hidden><div class="result-head"><h2>Your study set</h2><button id="copy-result" class="button button-secondary">Copy</button></div><pre id="result-text"></pre></section><section class="tool-explanation"><h2>How AI Notes works</h2><p>StudyTools AI Notes turns notes or study material into structured study resources. Paste text, select the outputs you want, and review the generated material before using it to study.</p><div class="related-links"><a href="/flashcard-maker.html">Make flashcards →</a><a href="/exam-solver.html">Solve a question →</a><a href="/study-assistant.html">Ask the AI Tutor →</a></div></section></main>
+<body><header class="site-header"><a class="logo" href="/">StudyTools</a><nav class="public-nav"><a href="/dashboard.html">Dashboard</a><a href="/profile.html">Profile</a></nav></header><main class="tool-page container"><p class="eyebrow">Organize and practice</p><h1>AI Notes</h1><p class="hero-lead">Turn your notes into clear summaries, outlines, flashcards and practice questions.</p><section class="tool-panel"><label for="notes-input">Paste your notes here</label><textarea id="notes-input" placeholder="Paste lecture notes, textbook text, or an assignment..."></textarea><div class="tool-actions"><span id="word-count">0 words</span><button id="generate" class="button button-primary">Generate study set</button></div><p id="status" class="status-message" aria-live="polite"></p></section><section><h2>Choose your output</h2><div class="output-grid"><button data-output="summary"><strong>Summary</strong><span>Key ideas in a clean structure</span></button><button data-output="outline"><strong>Outline</strong><span>Organized headings and subtopics</span></button><button data-output="flashcards"><strong>Flashcards</strong><span>Active-recall questions and answers</span></button><button data-output="quiz"><strong>Quiz</strong><span>Practice questions from your notes</span></button></div></section><section id="results" class="results" hidden><div class="result-head"><h2>Your study set</h2><button id="copy-result" class="button button-secondary">Copy</button><button id="save-set" class="button button-primary">Save</button><button id="history-set" class="button button-secondary">History</button></div><pre id="result-text"></pre></section><section class="tool-explanation"><h2>How AI Notes works</h2><p>StudyTools AI Notes turns notes or study material into structured study resources. Paste text, select the outputs you want, and review the generated material before using it to study.</p><div class="related-links"><a href="/flashcard-maker.html">Make flashcards →</a><a href="/exam-solver.html">Solve a question →</a><a href="/study-assistant.html">Ask the AI Tutor →</a></div></section></main>
 <script src="/js/premium-limits.js"></script>
 <script src="/js/premium-status.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
 <script src="/js/firebase-config.js"></script>
+<script src="/js/library.js"></script>
 <script>
 const input=document.querySelector('#notes-input'), count=document.querySelector('#word-count'), status=document.querySelector('#status'), result=document.querySelector('#results'), resultText=document.querySelector('#result-text');let output='summary';document.querySelectorAll('[data-output]').forEach(b=>b.addEventListener('click',()=>{output=b.dataset.output;document.querySelectorAll('[data-output]').forEach(x=>x.classList.remove('selected'));b.classList.add('selected')}));input.addEventListener('input',()=>{count.textContent=((input.value.trim().match(/\S+/g)||[]).length)+' words'});document.querySelector('#generate').addEventListener('click',async()=>{const text=input.value.trim();if(text.length<30){status.textContent='Add a little more text so the study set is useful.';return}
 
@@ -33,4 +34,89 @@ if (window.PremiumLimits) {
 }
 
 status.textContent='Done — review the result against your course material.';result.scrollIntoView({behavior:'smooth',block:'start'})}catch(e){status.textContent=e.message||'Something went wrong. Please try again.'}finally{btn.disabled=false}});document.querySelector('#copy-result').addEventListener('click',()=>navigator.clipboard?.writeText(resultText.textContent));
-</script></body></html>
+</script>
+<script>
+(function () {
+  var lib = window.StudyLibrary;
+  if (!lib) return;
+  var inputEl = document.querySelector('#notes-input');
+  var resultsEl = document.querySelector('#results');
+  var resultTextEl = document.querySelector('#result-text');
+  if (!inputEl || !resultsEl || !resultTextEl) return;
+
+  var saveBtn = document.querySelector('#save-set');
+  var historyBtn = document.querySelector('#history-set');
+  if (!saveBtn || !historyBtn) return;
+
+  // Chips with the saved study sets, injected under the results section so the
+  // markup stays untouched for signed-out visitors.
+  var historyBox = document.createElement('div');
+  historyBox.id = 'notes-history';
+  historyBox.style.cssText = 'display:none;gap:8px;flex-wrap:wrap;margin-top:12px';
+  resultsEl.parentNode.insertBefore(historyBox, resultsEl.nextSibling);
+
+  function currentOutput() {
+    var selected = document.querySelector('[data-output].selected');
+    return selected ? selected.dataset.output : 'summary';
+  }
+
+  function setTitle() {
+    var line = (inputEl.value.trim().split('\n')[0] || '').trim();
+    return line.slice(0, 70) || 'AI Notes study set';
+  }
+
+  function applyItem(item) {
+    if (!item || !item.data) return;
+    inputEl.value = item.data.notes || '';
+    inputEl.dispatchEvent(new Event('input'));
+    if (item.data.result) {
+      resultTextEl.textContent = item.data.result;
+      resultsEl.hidden = false;
+    }
+    historyBox.style.display = 'none';
+    lib.toast('Loaded ' + item.title);
+  }
+
+  saveBtn.addEventListener('click', function () {
+    var notes = inputEl.value.trim();
+    if (!notes) { lib.toast('Paste some notes first'); return; }
+    lib.save('ai-notes', {
+      notes: notes,
+      output: currentOutput(),
+      result: resultsEl.hidden ? '' : resultTextEl.textContent
+    }, { title: setTitle() }).then(function (result) {
+      lib.toast(result && result.synced ? 'Saved to your account' : 'Saved on this device');
+    });
+  });
+
+  historyBtn.addEventListener('click', function () {
+    if (historyBox.style.display === 'flex') { historyBox.style.display = 'none'; return; }
+    lib.list('ai-notes', { limit: 12 }).then(function (items) {
+      historyBox.innerHTML = '';
+      if (!items || !items.length) { lib.toast('No saved study sets yet'); return; }
+      items.forEach(function (item) {
+        var chip = document.createElement('button');
+        chip.type = 'button';
+        chip.textContent = item.title;
+        chip.style.cssText = 'border:1px solid #dbe1ee;background:#fff;border-radius:8px;padding:8px 12px;font-size:.85rem;cursor:pointer;color:#1d4ed8;font-weight:600';
+        chip.addEventListener('click', function () { applyItem(item); });
+        historyBox.appendChild(chip);
+      });
+      historyBox.style.display = 'flex';
+    });
+  });
+
+  // Soft gate in action: the newest saved set reloads itself right after sign-in.
+  function restoreIfSignedIn() {
+    if (!lib.isSignedIn() || inputEl.value.trim()) return;
+    lib.list('ai-notes', { limit: 1 }).then(function (items) {
+      if (items && items.length) applyItem(items[0]);
+    });
+  }
+  restoreIfSignedIn();
+  document.addEventListener('studytoolsLibraryAuth', function (event) {
+    if (event.detail && event.detail.user) restoreIfSignedIn();
+  });
+})();
+</script>
+</body></html>

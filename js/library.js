@@ -170,6 +170,7 @@
       var collection = itemsCollection(currentUid());
       if (!collection) {
         queuePending({ op: 'save', tool: tool, id: id });
+        promptSignIn(tool);
         return Promise.resolve({ ok: true, id: id, synced: false });
       }
 
@@ -346,6 +347,42 @@
     toast: toast,
     isSignedIn: function () { return Boolean(currentUid()); }
   };
+
+  // Soft gate: saving without an account always works (localStorage + queue),
+  // so this is only a one-time nudge, never a wall. Shown at most once per
+  // session and remembered if the student dismisses it.
+  var nudgeShown = false;
+  function promptSignIn(tool) {
+    if (nudgeShown) return;
+    try {
+      if (sessionStorage.getItem('st_signin_nudge') === 'dismissed') return;
+    } catch (e) { /* private mode: still show once */ }
+    nudgeShown = true;
+    try {
+      var here = encodeURIComponent(location.pathname + location.search);
+      var overlay = document.createElement('div');
+      overlay.id = 'st-signin-nudge';
+      overlay.setAttribute('style', 'position:fixed;inset:0;background:rgba(15,23,42,.55);display:flex;align-items:center;justify-content:center;z-index:4000;font-family:Arial,system-ui,sans-serif');
+      overlay.innerHTML = '<div style="background:#fff;border-radius:14px;max-width:380px;width:92%;padding:24px;box-shadow:0 18px 50px rgba(15,23,42,.35);text-align:center">' +
+        '<div style="font-size:1.7rem">&#128190;</div>' +
+        '<h3 style="margin:8px 0 6px;color:#0f172a;font-size:1.05rem">Saved. Sign in to keep it everywhere.</h3>' +
+        '<p style="margin:0 0 16px;color:#475569;font-size:.9rem;line-height:1.55">Your work is safe on this device. Sign in once and it follows you to every device automatically from then on.</p>' +
+        '<div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap">' +
+        '<a href="/login.html?redirect=' + here + '" style="background:#2563eb;color:#fff;text-decoration:none;padding:10px 18px;border-radius:9px;font-weight:700;font-size:.9rem">Sign in</a>' +
+        '<button type="button" id="st-nudge-later" style="background:none;border:1px solid #cbd5e1;color:#475569;padding:10px 18px;border-radius:9px;font-size:.9rem;cursor:pointer">Not now</button>' +
+        '</div>' +
+        '<p style="margin:14px 0 0;font-size:.78rem;color:#94a3b8">No account yet? <a href="/register.html?redirect=' + here + '" style="color:#2563eb;font-weight:700">Create one free</a></p>' +
+        '</div>';
+      document.body.appendChild(overlay);
+      overlay.addEventListener('click', function (event) {
+        if (event.target === overlay || event.target.id === 'st-nudge-later') {
+          try { sessionStorage.setItem('st_signin_nudge', 'dismissed'); } catch (e) { /* ignore */ }
+          if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
+        }
+      });
+    } catch (e) { /* never break saving */ }
+    if (tool) { /* tool is shown in nothing: kept for future copy */ }
+  }
 
   function listen() {
     var a = auth();

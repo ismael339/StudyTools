@@ -219,7 +219,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="study-controls">
       <div class="study-title">📖 Study Mode</div>
       <div class="study-btns">
-        <button class="btn-sm" onclick="shuffleDeck()">🔀 Shuffle</button>
+        <button class="btn-sm" onclick="saveDeck()">💾 Save deck</button><span id="deck-status" style="font-size:.75rem;color:var(--muted);margin-left:.35rem"></span><button class="btn-sm" onclick="shuffleDeck()">🔀 Shuffle</button>
         <button class="btn-sm" onclick="resetStudy()">↺ Restart</button>
         <button class="btn-sm primary" onclick="startStudy()">▶ Start Studying</button>
       </div>
@@ -251,7 +251,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
     <div class="faq-item">
       <div class="faq-q" onclick="toggleFAQ(this)">Are my flashcards saved?</div>
-      <div class="faq-a">Your cards are kept in memory while the tab is open. They are not saved to a server. To keep your deck, don't close the tab while studying. We're working on local save functionality for a future update.</div>
+      <div class="faq-a">Your deck saves automatically on this device every time you add or delete a card. Sign in or create a free account and it syncs too, so the deck follows you to every device.</div>
     </div>
   </div>
 </div>
@@ -267,6 +267,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </ul>
   <small>© 2025 StudyTools</small>
 </footer>
+
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+<script src="/js/firebase-config.js"></script>
+<script src="/js/library.js"></script>
 
 <script>
   let deck = [];
@@ -412,6 +418,51 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   }
 
   function toggleFAQ(el) { el.parentElement.classList.toggle('open'); }
+
+  // Deck persistence: StudyLibrary saves to localStorage when signed out and
+  // mirrors to the account when signed in (plus the sync queue for later), so
+  // the soft-gate nudge fires once instead of blocking anything.
+  function deckTitle() {
+    return (deck[0] && deck[0].front ? String(deck[0].front).slice(0, 40) : 'My flashcards');
+  }
+
+  function saveDeck(silent) {
+    const lib = window.StudyLibrary;
+    if (!lib || !deck.length) return;
+    lib.save('flashcards', { cards: deck }, { title: deckTitle() }).then(function (r) {
+      if (silent) return;
+      lib.toast(r && r.synced ? 'Deck saved to your account' : 'Deck saved on this device');
+    }).catch(function () { /* never block typing */ });
+  }
+
+  function restoreDeck() {
+    const lib = window.StudyLibrary;
+    if (!lib) return;
+    lib.list('flashcards', { limit: 1 }).then(function (items) {
+      const item = items && items[0];
+      if (!item || !item.data || !Array.isArray(item.data.cards) || !item.data.cards.length) return;
+      deck = item.data.cards.slice();
+      renderDeck();
+      updateStudyArea();
+      const label = document.getElementById('deck-status');
+      if (label) label.textContent = 'Restored ' + deck.length + ' saved card' + (deck.length !== 1 ? 's' : '');
+    }).catch(function () { /* offline: start empty */ });
+  }
+
+  // Wrap the two mutations so the deck persists without needing the Save click.
+  const originalAddCard = addCard;
+  addCard = function () {
+    const before = deck.length;
+    originalAddCard();
+    if (deck.length > before) saveDeck(true);
+  };
+  const originalDeleteCard = deleteCard;
+  deleteCard = function (i) {
+    originalDeleteCard(i);
+    saveDeck(true);
+  };
+
+  restoreDeck();
 
 </script>
 

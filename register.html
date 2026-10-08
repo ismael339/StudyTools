@@ -59,6 +59,14 @@ var noticeBox = document.querySelector('#notice');
 var params = new URLSearchParams(location.search);
 var nextUrl = params.get('redirect') || '/dashboard.html';
 
+// Already signed in? Skip the form and go where the student was heading.
+var bootstrapped = false;
+auth.onAuthStateChanged(function (user) {
+  if (bootstrapped) return;
+  bootstrapped = true;
+  if (user) location.href = nextUrl;
+});
+
 function showError(text) {
   noticeBox.hidden = true;
   errorBox.hidden = false;

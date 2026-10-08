@@ -481,7 +481,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div id="sticky-banner" style="position: fixed; bottom: 0; left: 0; right: 0; background: linear-gradient(135deg, #172554, #2563eb); padding: 1rem; text-align: center; z-index: 1000; display: none;">
   <div style="max-width: 860px; margin: 0 auto; display: flex; align-items: center; justify-content: center; gap: 1rem; flex-wrap: wrap;">
     <span style="color: #0f172a; font-weight: 600; font-size: 0.95rem;">¿Quieres guardar tu progreso? Crea cuenta gratis</span>
-    <button onclick="showEmailPopup()" style="background: white; color: #2563eb; border: none; padding: 0.5rem 1rem; border-radius: 6px; font-weight: 700; cursor: pointer; font-size: 0.9rem;">Crear cuenta</button>
+    <button onclick="location.href='/register.html'" style="background: white; color: #2563eb; border: none; padding: 0.5rem 1rem; border-radius: 6px; font-weight: 700; cursor: pointer; font-size: 0.9rem;">Crear cuenta</button>
     <button onclick="closeBanner()" style="background: transparent; border: 1px solid rgba(15,23,42,0.35); color: #0f172a; padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer; font-size: 0.85rem;">✕</button>
   </div>
 </div>
@@ -490,10 +490,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div id="email-popup" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); display: none; align-items: center; justify-content: center; z-index: 2000;">
   <div style="background: #ffffff; border: 1px solid rgba(15,23,42,0.16); border-radius: 12px; padding: 2rem; max-width: 400px; width: 90%; text-align: center;">
     <div style="font-size: 2rem; margin-bottom: 1rem;">🎓</div>
-    <h3 style="font-family: 'Syne', sans-serif; font-size: 1.3rem; font-weight: 700; margin-bottom: 0.5rem; color: #0f172a;">Únete a +500 estudiantes</h3>
-    <p style="color: #64748b; margin-bottom: 1.5rem; font-size: 0.95rem;">Guarda tu progreso, accede a más usos diarios y recibe tips de estudio.</p>
+    <h3 style="font-family: 'Syne', sans-serif; font-size: 1.3rem; font-weight: 700; margin-bottom: 0.5rem; color: #0f172a;">Un tip de estudio cada semana</h3>
+    <p style="color: #64748b; margin-bottom: 1.5rem; font-size: 0.95rem;">Un correo por semana con un método que funciona y la herramienta para aplicarlo. Sin ruido, y te bajas con un clic.</p>
     <input type="email" id="email-input" placeholder="tu@email.com" style="width: 100%; padding: 0.75rem; border: 1px solid rgba(15,23,42,0.16); border-radius: 6px; background: #ffffff; color: #0f172a; margin-bottom: 1rem; font-size: 0.95rem;">
-    <button onclick="submitEmail()" style="width: 100%; background: linear-gradient(135deg, #172554, #2563eb); color: white; border: none; padding: 0.75rem; border-radius: 6px; font-weight: 700; cursor: pointer; font-size: 0.95rem;">Empezar gratis</button>
+    <p id="email-status" style="font-size: 0.85rem; min-height: 1.1em; margin: 0 0 10px; color: #2563eb; font-weight: 700;"></p><button onclick="submitEmail()" style="width: 100%; background: linear-gradient(135deg, #172554, #2563eb); color: white; border: none; padding: 0.75rem; border-radius: 6px; font-weight: 700; cursor: pointer; font-size: 0.95rem;">Suscribirme</button>
     <button onclick="closeEmailPopup()" style="background: transparent; border: none; color: #64748b; padding: 0.75rem; cursor: pointer; font-size: 0.85rem; margin-top: 0.5rem;">Quizás más tarde</button>
   </div>
 </div>
@@ -520,16 +520,45 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   }
 
   function submitEmail() {
-    const email = document.getElementById('email-input').value;
-    if (email && email.includes('@')) {
-      localStorage.setItem('studytools_email', email);
-      localStorage.setItem('studytools_banner_closed', 'true');
-      document.getElementById('email-popup').style.display = 'none';
-      document.getElementById('sticky-banner').style.display = 'none';
-      alert('¡Gracias! Te hemos enviado un correo de confirmación.');
-    } else {
-      alert('Por favor, introduce un email válido');
+    const input = document.getElementById('email-input');
+    const status = document.getElementById('email-status');
+    const email = input.value.trim();
+    if (!email || !email.includes('@')) {
+      status.style.color = '#dc2626';
+      status.textContent = 'Escribe un email válido.';
+      input.focus();
+      return;
     }
+    status.style.color = '#2563eb';
+    status.textContent = 'Enviando…';
+    // Real double opt-in: the API writes the token and mails the confirmation
+    // link. The old version only touched localStorage, so nothing ever sent.
+    fetch('/api/subscribe', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: email, source: 'gpa-popup' })
+    })
+      .then(function (r) { return r.json().then(function (d) { return { ok: r.ok, data: d }; }); })
+      .then(function (res) {
+        if (res.ok && res.data && res.data.ok) {
+          localStorage.setItem('studytools_email', email);
+          localStorage.setItem('studytools_banner_closed', 'true');
+          status.style.color = '#047857';
+          status.textContent = 'Listo. Te hemos enviado un email de confirmación: ábrelo para activar los tips.';
+          input.value = '';
+          setTimeout(function () {
+            document.getElementById('email-popup').style.display = 'none';
+            document.getElementById('sticky-banner').style.display = 'none';
+          }, 3500);
+        } else {
+          status.style.color = '#dc2626';
+          status.textContent = (res.data && res.data.error) || 'No ha sido posible. Inténtalo de nuevo en un momento.';
+        }
+      })
+      .catch(function () {
+        status.style.color = '#dc2626';
+        status.textContent = 'Sin conexión. Inténtalo de nuevo en un momento.';
+      });
   }
 
   // Show popup on 2nd use

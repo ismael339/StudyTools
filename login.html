@@ -55,6 +55,16 @@ var noticeBox = document.querySelector('#notice');
 var params = new URLSearchParams(location.search);
 var nextUrl = params.get('redirect') || '/dashboard.html';
 
+// Already signed in? Firebase keeps the session on this device (LOCAL
+// persistence), so going straight to the destination is what makes "signed in
+// from now on" visible instead of showing the form again.
+var bootstrapped = false;
+auth.onAuthStateChanged(function (user) {
+  if (bootstrapped) return;
+  bootstrapped = true;
+  if (user) location.href = nextUrl;
+});
+
 function showError(text) {
   noticeBox.hidden = true;
   errorBox.hidden = false;

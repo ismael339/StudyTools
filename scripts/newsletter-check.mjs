@@ -15,7 +15,12 @@ import {
   maskEmail,
   mergeRecipients,
   tipOfWeek,
-  renderWeeklyEmail
+  renderWeeklyEmail,
+  renderWelcomeEmail,
+  renderDripEmail,
+  DRIP_DELAYS_DAYS,
+  MAX_DRIP_STEP,
+  dripDueAt
 } from '../lib/newsletter.js';
 
 let passed = 0;
@@ -101,6 +106,52 @@ test('the unsubscribe link inside a rendered email verifies', function () {
   const match = html.match(/\/api\/subscribe\?u=([^"&]+)/);
   assert.ok(match, 'link not found');
   assert.strictEqual(verifyUnsubscribe(decodeURIComponent(match[1])), 'reader@example.com');
+});
+
+test('the drip cadence: welcome now, then +1, +3 and +6 days', function () {
+  assert.deepStrictEqual(DRIP_DELAYS_DAYS, [0, 1, 3, 6]);
+  assert.strictEqual(MAX_DRIP_STEP, 3);
+  const start = Date.parse('2026-10-05T09:00:00Z');
+  assert.strictEqual(dripDueAt('2026-10-05T09:00:00Z', 0), start);
+  assert.strictEqual(dripDueAt('2026-10-05T09:00:00Z', 1), start + 86400000);
+  assert.strictEqual(dripDueAt('2026-10-05T09:00:00Z', 2), start + 3 * 86400000);
+  assert.strictEqual(dripDueAt('2026-10-05T09:00:00Z', 3), start + 6 * 86400000);
+  assert.strictEqual(dripDueAt('not-a-date', 1), null);
+  assert.strictEqual(dripDueAt('2026-10-05T09:00:00Z', 99), null);
+});
+
+test('the welcome email is drip step 0 and carries an unsubscribe link', function () {
+  const welcome = renderWelcomeEmail();
+  assert.ok(welcome, 'welcome template missing');
+  assert.strictEqual(welcome.step, 0);
+  const html = welcome.htmlFor('reader@example.com');
+  const text = welcome.textFor('reader@example.com');
+  assert.ok(welcome.subject.indexOf('Welcome') >= 0, 'subject: ' + welcome.subject);
+  assert.ok(html.indexOf('/api/subscribe?u=') > 0, 'missing unsubscribe link');
+  assert.ok(html.indexOf('{{') === -1, 'no template placeholders may remain');
+  assert.ok(text.indexOf('Unsubscribe') > 0, 'text version needs the unsubscribe link');
+  const match = html.match(/\/api\/subscribe\?u=([^"&]+)/);
+  assert.ok(match, 'link not found');
+  assert.strictEqual(verifyUnsubscribe(decodeURIComponent(match[1])), 'reader@example.com');
+});
+
+test('every drip step renders its own subject, links and unsubscribe', function () {
+  for (let step = 0; step <= MAX_DRIP_STEP; step++) {
+    const rendered = renderDripEmail(step);
+    assert.ok(rendered, 'missing step ' + step);
+    assert.strictEqual(rendered.step, step);
+    const html = rendered.htmlFor('reader@example.com');
+    const text = rendered.textFor('reader@example.com');
+    assert.ok(rendered.subject.length > 10, 'subject too short on step ' + step);
+    assert.ok(html.indexOf('studytools.pro') > 0, 'site links missing on step ' + step);
+    assert.ok(html.indexOf('{{') === -1, 'placeholder left in step ' + step);
+    assert.strictEqual((html.match(/<div/g) || []).length, (html.match(/<\/div>/g) || []).length, 'div tags must balance on step ' + step);
+    assert.ok(text.indexOf('Unsubscribe') > 0, 'text unsubscribe missing on step ' + step);
+    const match = html.match(/\/api\/subscribe\?u=([^"&]+)/);
+    assert.ok(match, 'unsubscribe link missing on step ' + step);
+    assert.strictEqual(verifyUnsubscribe(decodeURIComponent(match[1])), 'reader@example.com');
+  }
+  assert.strictEqual(renderDripEmail(99), null, 'a missing step must return null');
 });
 
 console.log('\n' + passed + ' checks passed.');

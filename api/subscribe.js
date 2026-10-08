@@ -8,7 +8,7 @@
 // and nothing is ever written from the browser.
 
 import { getAdmin, adminEnabled } from '../lib/admin.js';
-import { verifyUnsubscribe } from '../lib/newsletter.js';
+import { verifyUnsubscribe, renderWelcomeEmail } from '../lib/newsletter.js';
 
 const RESEND_API = 'https://api.resend.com/emails';
 const FROM = process.env.NEWSLETTER_FROM || 'StudyTools <newsletter@studytools.pro>';
@@ -27,6 +27,27 @@ function unsubscribePage(message) {
     '</div></body></html>';
 }
 
+
+// Confirmation result page: a real HTML page (the old raw JSON made browser
+// links look broken) with two next steps instead of a dead end.
+function confirmPage(message, ok) {
+  const next = ok
+    ? '<p style="margin:20px 0 0 0;"><a href="/planner.html" style="background:#2563eb;color:#fff;text-decoration:none;padding:12px 22px;border-radius:10px;font-weight:700;display:inline-block;">Build my study plan</a></p>' +
+      '<p style="margin:12px 0 0 0;font-size:14px;"><a href="/active-recall-study-method.html" style="color:#2563eb;font-weight:700;text-decoration:none;">Read: the active recall method &rarr;</a></p>'
+    : '';
+  const icon = ok ? '&#9989;' : '&#128269;';
+  return '<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>StudyTools - ' + (ok ? 'you are subscribed' : 'confirmation') + '</title></head>' +
+    '<body style="margin:0;background:#f1f5f9;font-family:Arial,Helvetica,sans-serif;color:#0f172a;">' +
+    '<div style="max-width:520px;margin:0 auto;padding:60px 20px;text-align:center;">' +
+    '<div style="font-size:20px;font-weight:bold;margin-bottom:16px;">StudyTools</div>' +
+    '<div style="background:#fff;border-radius:16px;padding:32px;text-align:left;box-shadow:0 8px 30px rgba(15,23,42,.08);">' +
+    '<div style="font-size:34px;margin-bottom:12px;">' + icon + '</div>' +
+    '<p style="margin:0 0 14px 0;font-size:16px;line-height:1.6;color:#334155;">' + message + '</p>' +
+    next +
+    '</div>' +
+    '<p style="margin-top:20px;font-size:13px;color:#94a3b8;"><a href="/" style="color:#2563eb;text-decoration:none;">Back to StudyTools</a></p>' +
+    '</div></body></html>';
+}
 
 // One instance, one throttle: enough to stop a bored spammer without adding
 // state that would not survive a cold start anyway.
@@ -64,11 +85,13 @@ export default async function handler(req, res) {
   if (req.method === 'GET' && query.confirm) {
     const admin = getAdmin();
     if (!admin) {
-      return res.status(503).json({ ok: false, error: 'Newsletter is being set up. Please try again shortly.' });
+      res.setHeader('Content-Type', 'text/html; charset=utf-8');
+      return res.status(503).send(confirmPage('Newsletter is being set up. Please try again shortly.', false));
     }
     const snapshot = await admin.db.collection('email_tokens').doc(String(query.confirm)).get();
     if (!snapshot.exists) {
-      return res.status(400).json({ ok: false, error: 'This confirmation link is not valid any more. Sign up again from the homepage.' });
+      res.setHeader('Content-Type', 'text/html; charset=utf-8');
+      return res.status(400).send(confirmPage('This confirmation link is not valid any more. Sign up again from the homepage or the popup on any tool.', false));
     }
     const token = snapshot.data();
     await admin.db.collection('emails').doc(token.email).set({
@@ -82,7 +105,19 @@ export default async function handler(req, res) {
       bounced: false
     }, { merge: true });
     await admin.db.collection('email_tokens').doc(String(query.confirm)).delete();
-    return res.status(200).json({ ok: true });
+    // Step 0 of the drip: the welcome email goes out right at confirmation.
+    // A failure here must not undo the confirmation itself.
+    try {
+      const welcome = renderWelcomeEmail();
+      if (welcome) {
+        await sendEmail(token.email, welcome.subject, welcome.htmlFor(token.email), welcome.textFor(token.email));
+      }
+    } catch (error) {
+      console.error('Welcome email failed:', error && error.message);
+    }
+
+    res.setHeader('Content-Type', 'text/html; charset=utf-8');
+    return res.status(200).send(confirmPage('You are subscribed. Check your inbox for the welcome email: one study method every Monday, one free tool to try it with, and one click in any message takes you off the list.', true));
   }
 
   // Unsubscribe: /api/subscribe?u=TOKEN. A GET renders a page for a person,

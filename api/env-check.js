@@ -70,21 +70,30 @@ async function checkResend() {
     if (!response.ok) {
       return { configured: true, ok: false, status: response.status, error: data.message || data.name || 'Resend rejected the key' };
     }
+    // Resend calls the field `name` (older samples used `domain`): keep both
+    // so a field rename can never silently hide a verified domain again.
     const domains = (Array.isArray(data.data) ? data.data : []).map(function (entry) {
-      return { domain: entry.domain, status: entry.status, region: entry.region || null };
+      return { domain: entry.name || entry.domain || null, status: entry.status, region: entry.region || null };
     });
-    const own = domains.find(function (entry) { return entry.domain === 'studytools.pro'; });
+    const from = process.env.NEWSLETTER_FROM || 'StudyTools <newsletter@studytools.pro>';
+    const fromMatch = from.match(/<([^>]+)>/) || [];
+    const fromAddress = (fromMatch[1] || from).trim().toLowerCase();
+    const fromDomain = fromAddress.split('@')[1] || '';
+    const own = domains.find(function (entry) { return entry.domain === fromDomain; });
     return {
       configured: true,
       ok: true,
-      from: process.env.NEWSLETTER_FROM || 'StudyTools <newsletter@studytools.pro>',
+      from: from,
+      fromDomain: fromDomain,
       domainFound: Boolean(own),
       domainStatus: own ? own.status : null,
       domains: domains,
       hint: !own
-        ? 'studytools.pro is not in Resend at all. Add it in Resend (Domains > Add Domain) and copy the DNS records it shows.'
+        ? (domains.length
+          ? 'FROM uses ' + fromDomain + ' but the verified Resend domain(s) are: ' + domains.map(function (d) { return d.domain; }).join(', ') + '. Verify ' + fromDomain + ' in Resend or change NEWSLETTER_FROM to match.'
+          : fromDomain + ' is not in Resend at all. Add it in Resend (Domains > Add Domain) and copy the DNS records it shows.')
         : (own.status !== 'verified'
-          ? 'studytools.pro is in Resend but NOT verified (' + own.status + '). Add the TXT records Resend shows in Porkbun, then press Verify in Resend. Until then every send fails with HTTP 422.'
+          ? fromDomain + ' is in Resend but NOT verified (' + own.status + '). Add the TXT records Resend shows in Porkbun, then press Verify in Resend. Until then every send fails with HTTP 422.'
           : 'Domain verified: confirmation, welcome, drip and weekly emails can leave.')
     };
   } catch (error) {

@@ -8,7 +8,8 @@
 // sitemap drift (missing indexable pages, blocked pages listed, dead URLs,
 // future lastmod), a missing robots.txt sitemap pointer, and a public page
 // missing the shared brand shell (site header, site-footer, Google Tag
-// Manager or the /js/consent.js cookie banner).
+// Manager, the GA4/gtag snippet or its order after /js/consent.js, or the
+// cookie banner itself).
 // Warnings (exit 0): out-of-range title/description lengths, images without
 // alt, missing Open Graph or Twitter tags.
 
@@ -167,6 +168,14 @@ for (const file of pages) {
   if (isPublic) {
     if (!html.includes('GTM-P8T9B392')) err(page, 'missing Google Tag Manager');
     if (!html.includes('/js/consent.js')) err(page, 'missing /js/consent.js (cookie consent)');
+    // GA4 (gtag.js) must exist exactly once (src + config = 2 mentions) and
+    // must load AFTER consent.js so Consent Mode v2 starts analytics denied.
+    const ga4 = html.split('G-66DETECVGK').length - 1;
+    const consentAt = html.indexOf('/js/consent.js');
+    const ga4At = html.indexOf('G-66DETECVGK');
+    if (ga4 === 0) err(page, 'missing GA4 snippet (G-66DETECVGK)');
+    else if (ga4 > 2) err(page, 'duplicate GA4 snippets (' + ga4 + ' mentions of G-66DETECVGK, expected 2)');
+    else if (consentAt < 0 || consentAt > ga4At) err(page, 'GA4 must load after /js/consent.js (Consent Mode v2)');
     if (!html.includes('class="site-footer"')) err(page, 'missing shared site-footer');
     if (!/site-header|class="nav"|nav-in|public-nav/.test(html)) err(page, 'missing site navigation');
   }

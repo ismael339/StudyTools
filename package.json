@@ -6,6 +6,7 @@
   "scripts": {
     "send-update": "node .github/scripts/send-update-email.js",
     "sitemap": "node scripts/build-sitemap.mjs",
+    "analytics:pass": "node scripts/analytics-pass.mjs",
     "seo:check": "node scripts/seo-check.mjs",
     "newsletter:check": "node scripts/newsletter-check.mjs",
     "tutor:check": "node scripts/tutor-check.mjs && node scripts/tutor-api-check.mjs"

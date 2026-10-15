@@ -16,6 +16,11 @@ process.env.GROQ_API_KEY = process.env.GROQ_API_KEY || 'test-key';
 delete process.env.FIREBASE_SERVICE_ACCOUNT;
 delete process.env.FIREBASE_SERVICE_ACCOUNT_JSON;
 delete process.env.FIREBASE_SERVICE_ACCOUNT_PATH;
+delete process.env.PAYPAL_CLIENT_ID;
+delete process.env.PAYPAL_CLIENT_SECRET;
+delete process.env.PAYPAL_SECRET;
+delete process.env.PAYPAL_API_SECRET;
+delete process.env.PAYPAL_API_SECRET_KEY;
 
 const LOOKUP = 'identitytoolkit.googleapis.com/v1/accounts:lookup';
 const LEGACY = 'identitytoolkit/v3/relyingparty';
@@ -124,8 +129,26 @@ assert.strictEqual(res.body.quota.used, 8, 'quota must be the verified uid count
 assert.strictEqual(res.body.quota.server, true);
 console.log('ok - chat resolves the identity from users[0] and counts per uid');
 
-// 6) Nothing anywhere may still target the retired endpoint.
+// 6) The coach uses the same verification and must reach the admin gate.
+verifyMode = 'ok';
+const coach = await load('/api/coach.js');
+res = makeRes();
+await coach({ method: 'POST', headers: { authorization: 'Bearer tok-6' }, body: {} }, res);
+assert.strictEqual(res.statusCode, 503, 'valid token must not be a 401');
+assert.strictEqual(res.body.error, 'The Study Coach is being set up. Try again shortly.');
+console.log('ok - coach no longer answers "session expired" for a valid session');
+
+// 7) Pro activation used to reject every valid session before PayPal; it must
+//    now clear verification and stop at the unconfigured billing gate instead.
+const subscription = await load('/api/subscription.js');
+res = makeRes();
+await subscription({ method: 'POST', headers: { authorization: 'Bearer tok-7' }, body: { subscription_id: 'IJKLmnopQR12' } }, res);
+assert.strictEqual(res.statusCode, 503);
+assert.strictEqual(res.body.code, 'billing_not_configured');
+console.log('ok - subscription activation clears token verification with a valid session');
+
+// 8) Nothing anywhere may still target the retired endpoint.
 assert.ok(calls.every(u => u.indexOf(LEGACY) === -1), 'the retired v3/relyingparty endpoint was called');
 console.log('ok - no handler calls the retired v3/relyingparty endpoint');
 
-console.log('6 checks passed.');
+console.log('8 checks passed.');

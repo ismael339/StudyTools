@@ -86,7 +86,7 @@ var auth = firebase.auth();
 var errorBox = document.querySelector('#error');
 var noticeBox = document.querySelector('#notice');
 var params = new URLSearchParams(location.search);
-var nextUrl = params.get('redirect') || '/dashboard.html';
+var nextUrl = params.get('redirect') || '/profile.html';
 
 // Already signed in? Firebase keeps the session on this device (LOCAL
 // persistence), so going straight to the destination is what makes "signed in

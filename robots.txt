@@ -1,14 +1,12 @@
 # StudyTools - https://www.studytools.pro
 User-agent: *
 Allow: /
-Disallow: /dashboard.html
-Disallow: /profile.html
-Disallow: /pro-success.html
-Disallow: /api/
 
-# Signed-in areas and payment confirmations are useless in a search result.
-Disallow: /login.html
-Disallow: /register.html
+# Logged-in pages (login, register, profile, payment return) rely on their
+# <meta name="robots" content="noindex"> tag instead of a robots.txt block:
+# blocking them here hides that tag from Google and Search Console reports
+# "page blocked by robots.txt" as a crawl error for every linked page.
+Disallow: /api/
 
 # AI crawlers: the tool list and the study guides, in plain text.
 User-agent: GPTBot

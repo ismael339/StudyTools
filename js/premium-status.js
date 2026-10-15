@@ -74,7 +74,7 @@
       if (!navLinks || document.querySelector('.premium-badge')) return;
       const badge = document.createElement('a');
       badge.className = 'premium-badge';
-      badge.href = '/dashboard.html';
+      badge.href = '/profile.html';
       badge.textContent = 'Pro';
       navLinks.appendChild(badge);
     },

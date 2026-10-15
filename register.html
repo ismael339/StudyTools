@@ -90,7 +90,7 @@ var db = firebase.firestore();
 var errorBox = document.querySelector('#error');
 var noticeBox = document.querySelector('#notice');
 var params = new URLSearchParams(location.search);
-var nextUrl = params.get('redirect') || '/dashboard.html';
+var nextUrl = params.get('redirect') || '/profile.html';
 
 // Already signed in? Skip the form and go where the student was heading.
 var bootstrapped = false;

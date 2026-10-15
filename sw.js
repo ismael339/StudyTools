@@ -3,7 +3,7 @@
 const CACHE = 'studytools-v2026-10-04';
 
 // Pages that must never be written to disk (logged-in / payment states).
-const PRIVATE = ['/dashboard.html', '/profile.html', '/login.html', '/register.html', '/pro-success.html'];
+const PRIVATE = ['/profile.html', '/login.html', '/register.html', '/pro-success.html'];
 
 self.addEventListener('install', event => {
   event.waitUntil(self.skipWaiting());

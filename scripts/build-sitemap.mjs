@@ -16,7 +16,7 @@ const ROOT = process.cwd();
 const ORIGIN = 'https://www.studytools.pro';
 const TODAY = new Date().toISOString().slice(0, 10);
 
-const BLOCKED = new Set(['/dashboard.html', '/profile.html', '/pro-success.html', '/login.html', '/register.html']);
+const BLOCKED = new Set(['/profile.html', '/pro-success.html', '/login.html', '/register.html']);
 const TOOLS = new Set([
   '/app.html', '/exam-solver.html', '/citation-generator.html', '/flashcard-maker.html',
   '/gpa-calculator.html', '/grade-calculator.html', '/planner.html', '/pomodoro-timer.html',

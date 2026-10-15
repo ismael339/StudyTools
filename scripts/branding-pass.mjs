@@ -64,11 +64,11 @@ const FALLBACK_STYLE = `<style>/* Brand chrome: fallback for pages that do not l
 
 // Full-screen shells and the dark PLAY hub keep their own chrome.
 const NO_HEADER = new Set([
-  '404.html', 'login.html', 'register.html', 'dashboard.html',
+  '404.html', 'login.html', 'register.html',
   'profile.html', 'pro-success.html', 'play.html'
 ]);
 const NO_FOOTER = new Set([
-  '404.html', 'dashboard.html', 'profile.html', 'pro-success.html', 'play.html'
+  '404.html', 'profile.html', 'pro-success.html', 'play.html'
 ]);
 
 function insertAfterHead(html, block) {

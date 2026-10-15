@@ -4,12 +4,14 @@
 //
 // Errors (exit 1): missing/duplicate title or description, missing or wrong
 // canonical, noindex on a public page, broken internal links (including
-// case-only mismatches, which break on Linux hosting), invalid JSON-LD,
-// sitemap drift (missing indexable pages, blocked pages listed, dead URLs,
-// future lastmod), a missing robots.txt sitemap pointer, and a public page
-// missing the shared brand shell (site header, site-footer, Google Tag
-// Manager, the GA4/gtag snippet or its order after /js/consent.js, or the
-// cookie banner itself).
+// case-only mismatches and extensionless URLs, which never resolve), internal
+// links pointing at a redirected URL, orphan pages nothing links to, a blog
+// hub missing a guide or listing one twice, invalid JSON-LD, sitemap drift
+// (missing indexable pages, blocked pages listed, dead URLs, future lastmod),
+// a missing robots.txt sitemap pointer, robots.txt blocking a page that must
+// rely on noindex, and a public page missing the shared brand shell (site
+// header, site-footer, Google Tag Manager, the GA4/gtag snippet or its order
+// after /js/consent.js, or the cookie banner itself).
 // Warnings (exit 0): out-of-range title/description lengths, images without
 // alt, missing Open Graph or Twitter tags.
 
@@ -19,8 +21,13 @@ import { join } from 'node:path';
 const ROOT = process.cwd();
 const ORIGIN = 'https://www.studytools.pro';
 
+// Private pages that must never appear in the sitemap. They rely on their
+// <meta name="robots" content="noindex"> tag — NOT a robots.txt Disallow:
+// blocking them there hides the noindex from Google, and Search Console
+// reports a "page blocked by robots.txt" crawl error for every page linking
+// to them (including pages Google cannot see, like a signed-in profile).
 const ROBOTS_BLOCKED = new Set([
-  '/dashboard.html', '/profile.html', '/pro-success.html',
+  '/profile.html', '/pro-success.html',
   '/login.html', '/register.html', '/api/'
 ]);
 
@@ -58,7 +65,7 @@ function localTargetExists(path) {
   if (!clean || clean === '/') return { ok: true };
   const rel = clean.replace(/^\//, '');
   if (rel.startsWith('api/')) return { ok: true };
-  if (!rel.includes('.')) return { ok: true }; // extensionless: vercel redirect
+  if (!rel.includes('.')) return { ok: false }; // extensionless: no cleanUrls, the URL 404s
   if (!existsSync(join(ROOT, rel))) return { ok: false };
   const dir = rel.includes('/') ? rel.slice(0, rel.lastIndexOf('/')) : '';
   const base = rel.slice(rel.lastIndexOf('/') + 1);
@@ -71,6 +78,8 @@ function localTargetExists(path) {
 }
 
 const indexable = [];
+const localLinks = {}; // page -> root-relative targets it links to (redirect + orphan checks)
+const inbound = new Map(pages.map(p => [p, 0])); // page -> how many pages link to it
 
 for (const file of pages) {
   const html = readFileSync(join(ROOT, file), 'utf8');
@@ -156,6 +165,12 @@ for (const file of pages) {
     const res = localTargetExists(raw);
     if (!res.ok) err(page, 'broken internal link: ' + raw);
     else if (res.exact === false) err(page, 'case-mismatch link (breaks on Linux): ' + raw);
+    else {
+      const clean = raw.split('#')[0].split('?')[0];
+      (localLinks[page] = localLinks[page] || []).push(clean);
+      const target = clean === '/' ? 'index.html' : clean.replace(/^\//, '');
+      if (actualFiles.has(target)) inbound.set(target, (inbound.get(target) || 0) + 1);
+    }
   }
 
   // --- images without alt ---
@@ -183,16 +198,50 @@ for (const file of pages) {
   if (isPublic) indexable.push({ file, path: page });
 }
 
+// --- redirects: an internal link pointing at a URL that 30x-redirects is an
+// indirect hit Google counts, and every redirect destination must exist ---
+let redirectSources = new Set();
+try {
+  const vc = JSON.parse(readFileSync(join(ROOT, 'vercel.json'), 'utf8'));
+  for (const r of vc.redirects || []) {
+    if (r.source && !r.source.includes(':') && !r.source.includes('*')) redirectSources.add(r.source);
+    const d = r.destination || '';
+    if (d.startsWith('/') && !d.includes(':') && d.includes('.') &&
+        !existsSync(join(ROOT, d.replace(/^\//, '')))) {
+      err('vercel.json', 'redirect ' + r.source + ' points at missing file ' + d);
+    }
+  }
+} catch (e) {
+  err('vercel.json', 'unreadable redirects: ' + e.message);
+}
+for (const [page, links] of Object.entries(localLinks)) {
+  for (const clean of links) {
+    if (redirectSources.has(clean)) err(page, 'internal link points at a redirected URL: ' + clean);
+  }
+}
+
+// --- orphan pages: an indexable page nothing else links to is rarely crawled ---
+for (const p of indexable) {
+  if ((inbound.get(p.file) || 0) === 0) err(p.path, 'orphan page: no other page links to it');
+}
+
 // --- robots.txt ---
 const robotsTxt = existsSync(join(ROOT, 'robots.txt')) ? readFileSync(join(ROOT, 'robots.txt'), 'utf8') : '';
 if (!robotsTxt.includes('Sitemap: ' + ORIGIN + '/sitemap.xml')) err('robots.txt', 'missing Sitemap pointer');
 if (!robotsTxt.includes('Disallow: /api/')) warn('robots.txt', 'API not disallowed');
+// robots.txt Disallow + noindex do not combine: the block hides the noindex
+// tag from Google, so Search Console only reports the page as blocked.
+for (const [, blocked] of robotsTxt.matchAll(/^Disallow:\s*(\S+)/gmi)) {
+  if (blocked.toLowerCase().endsWith('.html')) {
+    err('robots.txt', 'blocks ' + blocked + ' — private pages must rely on <meta name="robots" content="noindex"> instead');
+  }
+}
 
 // --- sitemap.xml ---
 try {
   const sm = readFileSync(join(ROOT, 'sitemap.xml'), 'utf8');
-  const entries = [...sm.matchAll(/<loc>([^<]+)<\/loc>\s*<lastmod>([^<]+)<\/lastmod>/g)]
-    .map(m => ({ loc: m[1], lastmod: m[2], path: m[1].replace(ORIGIN, '') || '/' }));
+  const entries = [...sm.matchAll(/<loc>([^<]+)<\/loc>\s*<lastmod>([^<]+)<\/lastmod>[\s\S]*?<priority>([^<]+)<\/priority>/g)]
+    .map(m => ({ loc: m[1], lastmod: m[2], priority: m[3], path: m[1].replace(ORIGIN, '') || '/' }));
   const inSitemap = new Set(entries.map(e => e.path));
 
   for (const p of indexable) {
@@ -206,6 +255,22 @@ try {
     else if (e.lastmod > new Date().toISOString().slice(0, 10)) err('sitemap.xml', 'future lastmod for ' + e.path);
     const file = e.path === '/' ? 'index.html' : e.path.replace(/^\//, '');
     if (!existsSync(join(ROOT, file))) err('sitemap.xml', 'dead URL (no file): ' + e.path);
+  }
+
+  // --- blog hub: every guide (priority 0.8) must be listed exactly once ---
+  const blogHtml = readFileSync(join(ROOT, 'blog.html'), 'utf8');
+  const cards = [...blogHtml.matchAll(/<a class="card"[^>]*href="([^"]+)"/g)].map(m => m[1]);
+  const seenCards = new Set();
+  for (const href of cards) {
+    if (seenCards.has(href)) err('blog.html', 'duplicate hub card: ' + href);
+    seenCards.add(href);
+  }
+  for (const e of entries) {
+    if (e.priority === '0.8' && !seenCards.has(e.path)) err('blog.html', 'hub missing guide: ' + e.path);
+  }
+  const countLabel = blogHtml.match(/(\d+) guides/);
+  if (countLabel && Number(countLabel[1]) !== cards.length) {
+    err('blog.html', 'hub count says ' + countLabel[1] + ' guides but lists ' + cards.length);
   }
 } catch (e) {
   err('sitemap.xml', 'unreadable: ' + e.message);

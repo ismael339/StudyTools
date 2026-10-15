@@ -79,7 +79,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </ul>
 
     <div class="actions">
-      <a class="primary" href="/dashboard.html" id="go">Go to my dashboard</a>
+      <a class="primary" href="/profile.html" id="go">Go to my profile</a>
       <a class="secondary" href="/study-assistant.html">Open the AI Tutor</a>
       <a class="secondary" href="/pro.html" id="plans">See plans</a>
     </div>
@@ -167,7 +167,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         if (result.status === 202 || (result.data && result.data.code === 'subscription_not_found')) {
           attempts += 1;
           if (attempts > MAX_ATTEMPTS) {
-            pending('PayPal is taking longer than usual. Open your dashboard in one minute: if Pro is not on yet, email us and we will switch it on manually the same day.');
+            pending('PayPal is taking longer than usual. Open your profile in one minute: if Pro is not on yet, email us and we will switch it on manually the same day.');
             return;
           }
           pending('PayPal has not confirmed the payment yet (attempt ' + attempts + ' of ' + MAX_ATTEMPTS + '). Keep this page open, we are checking every few seconds.');

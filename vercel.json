@@ -30,6 +30,91 @@
       "source": "/premium.html",
       "destination": "/pro.html",
       "statusCode": 301
+    },
+    {
+      "source": "/index.html",
+      "destination": "/",
+      "statusCode": 308
+    },
+    {
+      "source": "/dashboard.html",
+      "destination": "/profile.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/ai-for-students-2026.html",
+      "destination": "/ai-homework-helper.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/how-to-get-better-grades-in-high-school.html",
+      "destination": "/best-study-routine-for-high-school-students.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/how-to-improve-concentration-while-studying.html",
+      "destination": "/how-to-do-homework-without-getting-distracted.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/how-to-improve-reading-comprehension.html",
+      "destination": "/how-to-take-notes-from-a-textbook.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/how-to-pass-a-hard-exam.html",
+      "destination": "/how-to-study-for-an-exam-in-one-week.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/how-to-prepare-for-multiple-exams.html",
+      "destination": "/how-to-make-a-study-plan-for-finals.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/how-to-remember-what-you-study.html",
+      "destination": "/active-recall-study-method.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/how-to-study-after-school.html",
+      "destination": "/best-study-routine-for-high-school-students.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/how-to-study-faster-without-forgetting.html",
+      "destination": "/spaced-repetition-for-students.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/how-to-study-for-multiple-choice-tests.html",
+      "destination": "/how-to-study-for-an-exam-in-one-week.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/how-to-study-history-for-exams.html",
+      "destination": "/how-to-revise-for-exams.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/how-to-study-science-effectively.html",
+      "destination": "/how-to-study-math-effectively.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/how-to-study-without-cramming.html",
+      "destination": "/how-to-create-a-study-schedule.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/how-to-use-flashcards-for-exams.html",
+      "destination": "/how-to-make-flashcards-that-work.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/word-counter.html",
+      "destination": "/app.html",
+      "statusCode": 301
     }
   ],
   "headers": [

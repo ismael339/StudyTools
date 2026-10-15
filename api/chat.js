@@ -9,7 +9,8 @@ import { buildTutorSystemPrompt, decodeStudyProfile, decodeWeakTopics, encodePro
 
 const PROJECT_ID = process.env.FIREBASE_PROJECT_ID || 'studytools-b60e9';
 const WEB_API_KEY = process.env.FIREBASE_WEB_API_KEY || 'AIzaSyDx4StAzPExYbQU_9yJ04R7HO2JX1_sq6w';
-const VERIFY_URL = 'https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyIdToken?key=' + WEB_API_KEY;
+// v3/relyingparty was retired by Google (it answers 404 now); v1 accounts:lookup verifies the same Firebase ID token.
+const VERIFY_URL = 'https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=' + WEB_API_KEY;
 const DOC_BASE = 'https://firestore.googleapis.com/v1/projects/' + PROJECT_ID + '/databases/(default)/documents/';
 const FREE_DAILY_LIMIT = Number(process.env.FREE_DAILY_LIMIT || 15);
 const PRO_DAILY_LIMIT = Number(process.env.PRO_DAILY_LIMIT || 2000);
@@ -64,9 +65,10 @@ async function verifyToken(token) {
     });
     if (!response.ok) return { status: 'invalid' };
     const data = await response.json();
-    const uid = data.user_id || data.localId;
+    const user = (data.users && data.users[0]) || null;
+    const uid = user && user.localId;
     if (!uid) return { status: 'invalid' };
-    return { status: 'ok', uid: uid, email: data.email || '' };
+    return { status: 'ok', uid: uid, email: user.email || '' };
   } catch (error) {
     console.warn('Token verification unavailable:', error && error.message);
     return { status: 'unavailable' };

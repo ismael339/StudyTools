@@ -11,7 +11,8 @@ import { getAdmin, adminEnabled } from '../lib/admin.js';
 
 const PROJECT_ID = process.env.FIREBASE_PROJECT_ID || 'studytools-b60e9';
 const WEB_API_KEY = process.env.FIREBASE_WEB_API_KEY || 'AIzaSyDx4StAzPExYbQU_9yJ04R7HO2JX1_sq6w';
-const VERIFY_URL = 'https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyIdToken?key=' + WEB_API_KEY;
+// v3/relyingparty was retired by Google (it answers 404 now); v1 accounts:lookup verifies the same Firebase ID token.
+const VERIFY_URL = 'https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=' + WEB_API_KEY;
 const GROQ_URL = 'https://api.groq.com/openai/v1/chat/completions';
 const MODEL = process.env.GROQ_MODEL || 'openai/gpt-oss-20b';
 const SITE = (process.env.SITE_URL || 'https://www.studytools.pro').replace(/\/$/, '');
@@ -34,8 +35,9 @@ async function verifyToken(token) {
     });
     if (!response.ok) return null;
     const data = await response.json();
-    const uid = data.user_id || data.localId;
-    return uid ? { uid, email: data.email || '' } : null;
+    const user = (data.users && data.users[0]) || null;
+    const uid = user && user.localId;
+    return uid ? { uid, email: user.email || '' } : null;
   } catch (error) {
     return null;
   }

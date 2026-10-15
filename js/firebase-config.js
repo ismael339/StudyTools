@@ -31,29 +31,33 @@ if (typeof firebase !== 'undefined') {
       localStorage.setItem('studytools_user_email', user.email || '');
 
       try {
-        const db = firebase.firestore();
-        // Profiles are keyed by uid now; older accounts used the email as id.
-        // The plan is NOT copied into localStorage any more: that value was the
-        // one the interface trusted, so it could be edited to fake Pro. Only the
-        // display name is cached here, and the plan comes from /api/entitlement.
-        let snap = await db.collection('users').doc(user.uid).get();
-        if (!snap.exists && user.email) {
-          snap = await db.collection('users').doc(user.email).get();
-        }
-        const data = snap.exists ? snap.data() : {};
-        localStorage.setItem('studytools_current_user', JSON.stringify({
-          email: user.email,
-          name: data.name || user.displayName || (user.email || '').split('@')[0]
-        }));
-        try {
-          localStorage.removeItem('studytools_user_plan');
-          localStorage.removeItem('studytools_subscription');
-        } catch (legacyError) { /* ignore */ }
-        if (window.PremiumLimits && typeof window.PremiumLimits.refresh === 'function') {
-          window.PremiumLimits.refresh(true).catch(() => {});
+        // Firestore is not loaded on every page (pro.html only needs auth);
+        // guard so its absence never breaks the auth-state callback.
+        if (typeof firebase.firestore === 'function') {
+          const db = firebase.firestore();
+          // Profiles are keyed by uid now; older accounts used the email as id.
+          // The plan is NOT copied into localStorage any more: that value was the
+          // one the interface trusted, so it could be edited to fake Pro. Only the
+          // display name is cached here, and the plan comes from /api/entitlement.
+          let snap = await db.collection('users').doc(user.uid).get();
+          if (!snap.exists && user.email) {
+            snap = await db.collection('users').doc(user.email).get();
+          }
+          const data = snap.exists ? snap.data() : {};
+          localStorage.setItem('studytools_current_user', JSON.stringify({
+            email: user.email,
+            name: data.name || user.displayName || (user.email || '').split('@')[0]
+          }));
+          try {
+            localStorage.removeItem('studytools_user_plan');
+            localStorage.removeItem('studytools_subscription');
+          } catch (legacyError) { /* ignore */ }
         }
       } catch (err) {
         console.warn('Could not fetch user Firestore profile:', err);
+      }
+      if (window.PremiumLimits && typeof window.PremiumLimits.refresh === 'function') {
+        window.PremiumLimits.refresh(true).catch(() => {});
       }
     } else {
       localStorage.removeItem('studytools_logged_in');

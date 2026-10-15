@@ -1,6 +1,6 @@
 // StudyTools service worker: network-first pages, cached static assets.
 // Registered once from index.html; the scope covers the whole site.
-const CACHE = 'studytools-v2026-10-04';
+const CACHE = 'studytools-v2026-10-15';
 
 // Pages that must never be written to disk (logged-in / payment states).
 const PRIVATE = ['/profile.html', '/login.html', '/register.html', '/pro-success.html'];

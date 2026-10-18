@@ -218,6 +218,10 @@ export default async function handler(req, res) {
     limit = plan === 'premium' ? PRO_DAILY_LIMIT : FREE_DAILY_LIMIT;
     const usage = await readDoc('usage/' + identity.uid + '_' + day, token);
     used = usage ? intField(usage, 'count') : 0;
+    // Free accounts may have earned a rewarded-video bonus for the day; it
+    // raises the ceiling but is capped by the Firestore rule (see reward.js).
+    const rewardBonus = plan === 'premium' ? 0 : (usage ? intField(usage, 'reward') : 0);
+    limit = (plan === 'premium' ? PRO_DAILY_LIMIT : FREE_DAILY_LIMIT) + rewardBonus;
     if (used >= limit) {
       return res.status(429).json({
         error: plan === 'premium'

@@ -97,7 +97,10 @@ export default async function handler(req, res) {
   const day = new Date().toISOString().slice(0, 10).split('-').join('');
   const usage = await readDoc('usage/' + identity.uid + '_' + day, token);
   const used = usage ? intField(usage, 'count') : 0;
-  const limit = active ? PRO_DAILY_LIMIT : FREE_DAILY_LIMIT;
+  // Rewarded-video bonus earned today (free tier only). The Firestore rule caps
+  // it, and chat.js adds it to the daily ceiling.
+  const rewardBonus = active ? 0 : (usage ? intField(usage, 'reward') : 0);
+  const limit = (active ? PRO_DAILY_LIMIT : FREE_DAILY_LIMIT) + rewardBonus;
 
   return res.status(200).json({
     signedIn: true,
@@ -109,6 +112,7 @@ export default async function handler(req, res) {
     subscriptionStatus: stringField(profile, 'subscriptionStatus') || null,
     used: used,
     limit: limit,
+    rewardBonus: rewardBonus,
     remaining: Math.max(0, limit - used),
     source: 'server'
   });

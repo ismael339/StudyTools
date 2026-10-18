@@ -24,6 +24,7 @@
     premiumUntil: null,
     used: 0,
     limit: FREE_DAILY_AI,
+    rewardBonus: 0,
     remaining: FREE_DAILY_AI,
     email: null
   };
@@ -121,13 +122,14 @@
           premiumUntil: data.premiumUntil || null,
           used: Number(data.used) || 0,
           limit: Number(data.limit) || FREE_DAILY_AI,
+          rewardBonus: Number(data.rewardBonus) || 0,
           remaining: Number(data.remaining) || 0,
           email: data.email || null
         };
         writeCache({
           signedIn: state.signedIn, plan: state.plan, active: state.active,
           premiumUntil: state.premiumUntil, used: state.used,
-          limit: state.limit, remaining: state.remaining
+          limit: state.limit, rewardBonus: state.rewardBonus, remaining: state.remaining
         });
         document.dispatchEvent(new CustomEvent('premiumStatusChanged', { detail: state }));
         return state;
@@ -220,6 +222,14 @@
       return '/pro.html';
     },
 
+    // A free, signed-in visitor may be offered the rewarded top-up, but only
+    // when a rewarded unit is configured. Pro never sees it.
+    canWatchVideo: function() {
+      try {
+        return !!(window.STRewards && STRewards.canReward() && this.getRemainingAiMessages() <= 0);
+      } catch (e) { return false; }
+    },
+
     showUpgradePrompt: function(featureName) {
       if (document.getElementById('st-upgrade-modal')) return;
       var what = featureName || 'this tool';
@@ -234,16 +244,20 @@
         '<div style="background:#fff;max-width:430px;width:100%;border-radius:16px;padding:30px;text-align:center;box-shadow:0 24px 60px rgba(0,0,0,.35)">',
         '<div style="font-size:26px;margin-bottom:12px">\u26A1</div>',
         '<h2 style="font-size:1.4rem;font-weight:800;color:#0f172a;margin:0 0 10px;line-height:1.25">You have reached your free daily limit</h2>',
-        '<p style="color:#64748b;font-size:.95rem;line-height:1.55;margin:0 0 20px">',
-        'You used your free AI allowance for today. Free accounts get ',
-        FREE_DAILY_AI,
-        ' AI requests a day. <strong>StudyTools Pro</strong> raises it to ',
-        PRO_DAILY_AI,
-        ' a day, with full-length answers and everything saved to your account.</p>',
+        '<p style="color:#64748b;font-size:.95rem;line-height:1.55;margin:0 0 18px">',
+        'You used your ', FREE_DAILY_AI, ' free AI requests for today. Keep going with a quick top-up, or move to Pro for the whole day unlocked.</p>',
+        // Rewarded top-up: a calm, opt-in free option. Shown only when a unit is
+        // configured and the visitor is free. Never forced, never an interstitial.
+        (this.canWatchVideo() ?
+        '<div data-st-video style="border:1px solid #dbe4f0;border-radius:12px;padding:16px;margin-bottom:14px;background:#f8fafc">' +
+        '<div style="font-weight:800;color:#0f172a;font-size:.98rem;margin-bottom:4px">Watch a short video &#8594; +' + ((window.STRewards && STRewards.config.adsterra.rewarded.rewardPerVideo) || 3) + ' requests now</div>' +
+        '<div style="color:#64748b;font-size:.85rem;margin-bottom:12px">Free, instant, and it keeps you studying today.</div>' +
+        '<button type="button" data-st-watch style="background:#0f172a;color:#fff;border:none;padding:11px 18px;border-radius:9px;font-weight:700;cursor:pointer;font-size:.9rem">Watch video</button>' +
+        '</div>' : ''),
         '<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:14px;text-align:left;margin-bottom:20px;font-size:.88rem;color:#334155;line-height:1.7">',
         '<div>\u2713 <strong>' + PRO_DAILY_AI + ' AI requests per day</strong> instead of ' + FREE_DAILY_AI + '</div>',
         '<div>\u2713 Full-length explanations instead of short answers</div>',
-        '<div>\u2713 Study sets, chats and citations saved to your account</div>',
+        '<div>\u2713 Study sets, chats and citations saved to your account · Pro removes all ads</div>',
         '<div style="margin-top:6px"><strong>\u20AC3.99/month</strong> \u00B7 \u20AC29.99/year \u00B7 cancel any time in PayPal</div>',
         '</div>',
         '<a href="' + this.upgradeUrl() + '" style="background:#2563eb;color:#fff;padding:14px 20px;border-radius:10px;text-decoration:none;font-weight:700;display:block;margin-bottom:10px">See Pro plans</a>',
@@ -251,6 +265,39 @@
         '</div>'
       ].join('');
       document.body.appendChild(modal);
+      var watchBtn = modal.querySelector('[data-st-watch]');
+      if (watchBtn) {
+        var self = this;
+        watchBtn.addEventListener('click', function() {
+          var slot = modal.querySelector('[data-st-video]');
+          watchBtn.disabled = true;
+          watchBtn.textContent = 'Loading video...';
+          // Hand the slot to the Adsterra rewarded unit. On completion the unit
+          // calls __stRewardedComplete -> onComplete -> we claim the top-up.
+          if (window.STRewards) {
+            STRewards.play(slot, function(watched) {
+              if (!watched) { watchBtn.disabled = false; watchBtn.textContent = 'Watch video'; return; }
+              self.claimReward().then(function(res) {
+                if (res && res.needsAuth) { location.href = '/login.html?redirect=' + encodeURIComponent(location.pathname); return; }
+                if (res && res.granted) {
+                  modal.remove();
+                  var toast = document.createElement('div');
+                  toast.style.cssText = 'position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#0f172a;color:#fff;padding:12px 20px;border-radius:10px;font:600 14px Arial;z-index:10000';
+                  toast.textContent = res.message || ('+' + res.granted + ' requests added.');
+                  document.body.appendChild(toast);
+                  setTimeout(function() { toast.remove(); }, 3200);
+                } else if (res && res.error) {
+                  watchBtn.disabled = false;
+                  watchBtn.textContent = 'Watch video';
+                }
+              });
+            });
+          } else {
+            watchBtn.disabled = false;
+            watchBtn.textContent = 'Watch video';
+          }
+        });
+      }
       modal.addEventListener('click', function(event) {
         if (event.target === modal || event.target.hasAttribute('data-st-close')) modal.remove();
       });
@@ -259,6 +306,34 @@
           modal.remove();
           document.removeEventListener('keydown', onKey);
         }
+      });
+    },
+
+    // After a rewarded video completes, ask the server to grant the top-up and
+    // refresh local state. The server + Firestore rule cap the daily bonus, so
+    // this is safe to call only from a genuine completion callback.
+    claimReward: function() {
+      var self = this;
+      if (this.isUserPremium()) return Promise.resolve({ granted: 0 });
+      var user = firebaseUser();
+      if (!user) {
+        // Free visitors who are not signed in cannot hold a daily counter.
+        return Promise.resolve({ granted: 0, needsAuth: true });
+      }
+      return user.getIdToken().then(function(idToken) {
+        return fetch('/api/reward', {
+          method: 'POST',
+          headers: { Authorization: 'Bearer ' + idToken }
+        });
+      }).then(function(response) {
+        return response.json().then(function(data) { return { ok: response.ok, data: data }; });
+      }).then(function(result) {
+        if (result.ok) {
+          return self.refresh(true).then(function() { return result.data; });
+        }
+        return result.data || { error: 'Could not add the bonus.' };
+      }).catch(function() {
+        return { error: 'Could not add the bonus right now. Please try again.' };
       });
     },
 

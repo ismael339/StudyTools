@@ -55,10 +55,31 @@ service cloud.firestore {
     // Daily counters written by api/chat.js using the caller's own token.
     // The browser may only raise a counter by one, so a used-up quota cannot be
     // reset from the console.
+    //
+    // Free accounts can watch a rewarded ad (api/reward.js) to top up a few
+    // extra requests. The `reward` field holds that bonus and is also written
+    // with the caller's token, so THIS RULE is the real cap: reward may only
+    // rise by at most REWARD_PER_VIDEO per write and never past REWARD_DAILY_CAP.
+    // A client that forges the "video watched" callback still cannot exceed the
+    // daily ceiling, so the worst case is bounded (15 + 9 = 24/day), not open.
     match /usage/{usageId} {
       allow read: if signedIn() && usageId.split('_')[0] == request.auth.uid;
-      allow create: if signedIn() && usageId.split('_')[0] == request.auth.uid && request.resource.data.count == 1;
-      allow update: if signedIn() && usageId.split('_')[0] == request.auth.uid && request.resource.data.count == resource.data.count + 1;
+      // Normal AI request: count +1, reward untouched.
+      allow create: if signedIn() && usageId.split('_')[0] == request.auth.uid
+        && request.resource.data.count == 1
+        && request.resource.data.get('reward', 0) == 0;
+      allow update: if signedIn() && usageId.split('_')[0] == request.auth.uid && (
+        // (A) A normal AI request bumps the counter by one; the bonus is frozen.
+        (request.resource.data.count == resource.data.count + 1
+          && request.resource.data.get('reward', 0) == resource.data.get('reward', 0))
+        ||
+        // (B) A rewarded-video top-up raises only the bonus, in a bounded step,
+        //     and never past the daily cap. Count must not move here.
+        (request.resource.data.count == resource.data.count
+          && request.resource.data.get('reward', 0) > resource.data.get('reward', 0)
+          && request.resource.data.get('reward', 0) <= resource.data.get('reward', 0) + 3
+          && request.resource.data.get('reward', 0) <= 9)
+      );
       allow delete: if false;
     }
 

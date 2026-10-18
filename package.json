@@ -6,6 +6,9 @@
   "scripts": {
     "send-update": "node .github/scripts/send-update-email.js",
     "sitemap": "node scripts/build-sitemap.mjs",
+    "images": "node scripts/build-og-images.mjs",
+    "seo:meta": "node scripts/seo-meta-pass.mjs",
+    "seo:howto": "node scripts/seo-howto-pass.mjs",
     "analytics:pass": "node scripts/analytics-pass.mjs",
     "seo:check": "node scripts/seo-check.mjs",
     "newsletter:check": "node scripts/newsletter-check.mjs",

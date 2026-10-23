@@ -2,14 +2,8 @@
 <html lang="en">
 <head>
 <script src="/js/consent.js"></script>
-<!-- Google tag (GA4) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-66DETECVGK"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){window.dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-66DETECVGK');
-</script>
+<script src="/assets/analytics-events.js" defer></script>
+
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -260,8 +254,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     { key: 'yearly', selector: '#paypal-yearly' }
   ];
   function track(name){
-    if (window.dataLayer && window.gtag) {
-      window.gtag('event', 'begin_checkout', { currency: 'EUR', items: [{ item_name: 'StudyTools Pro ' + name }] });
+    if (window.StudyToolsAnalytics) {
+      window.StudyToolsAnalytics.checkoutStart(name);
     }
   }
   addEventListener('load', function(){

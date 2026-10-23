@@ -10,7 +10,7 @@
 // (missing indexable pages, blocked pages listed, dead URLs, future lastmod),
 // a missing robots.txt sitemap pointer, robots.txt blocking a page that must
 // rely on noindex, and a public page missing the shared brand shell (site
-// header, site-footer, Google Tag Manager, the GA4/gtag snippet or its order
+// header, site-footer, Google Tag Manager, Consent Mode order
 // after /js/consent.js, or the cookie banner itself).
 // Warnings (exit 0): out-of-range title/description lengths, images without
 // alt, missing Open Graph or Twitter tags.
@@ -183,14 +183,16 @@ for (const file of pages) {
   if (isPublic) {
     if (!html.includes('GTM-P8T9B392')) err(page, 'missing Google Tag Manager');
     if (!html.includes('/js/consent.js')) err(page, 'missing /js/consent.js (cookie consent)');
-    // GA4 (gtag.js) must exist exactly once (src + config = 2 mentions) and
-    // must load AFTER consent.js so Consent Mode v2 starts analytics denied.
-    const ga4 = html.split('G-66DETECVGK').length - 1;
-    const consentAt = html.indexOf('/js/consent.js');
-    const ga4At = html.indexOf('G-66DETECVGK');
-    if (ga4 === 0) err(page, 'missing GA4 snippet (G-66DETECVGK)');
-    else if (ga4 > 2) err(page, 'duplicate GA4 snippets (' + ga4 + ' mentions of G-66DETECVGK, expected 2)');
-    else if (consentAt < 0 || consentAt > ga4At) err(page, 'GA4 must load after /js/consent.js (Consent Mode v2)');
+    // GTM-only: GA4 fires from the container, never a direct gtag.js snippet.
+    // Consent + event helper must come before the container so Consent Mode
+    // v2 starts denied.
+    if (html.includes('gtag/js') || html.includes("gtag('config'")) err(page, 'direct gtag.js must go through GTM only');
+    {
+      const cAt = html.indexOf('/js/consent.js');
+      const eAt = html.indexOf('analytics-events.js');
+      const gAt = html.indexOf('GTM-P8T9B392');
+      if (!(cAt >= 0 && eAt > cAt && gAt > eAt)) err(page, 'consent.js + analytics-events.js must load before GTM (Consent Mode v2)');
+    }
     if (!html.includes('class="site-footer"')) err(page, 'missing shared site-footer');
     if (!/site-header|class="nav"|nav-in|public-nav/.test(html)) err(page, 'missing site navigation');
   }

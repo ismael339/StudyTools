@@ -1,0 +1,68 @@
+# StudyTools - Redirects for Google Indexing Fix
+# Force HTTPS and www canonical domain
+
+RewriteEngine On
+
+# Force HTTPS
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://www.studytools.pro/$1 [R=301,L]
+
+# Force www
+RewriteCond %{HTTP_HOST} ^studytools\.pro [NC]
+RewriteRule ^(.*)$ https://www.studytools.pro/$1 [R=301,L]
+
+# Redirect non-www to www for all pages
+RewriteCond %{HTTP_HOST} !^www\. [NC]
+RewriteRule ^(.*)$ https://www.studytools.pro/$1 [R=301,L]
+
+# 10 pages - redirect to www HTTPS canonical versions (kept for explicitness)
+RewriteRule ^app\.html$ https://www.studytools.pro/app.html [R=301,L]
+RewriteRule ^study-assistant\.html$ https://www.studytools.pro/study-assistant.html [R=301,L]
+RewriteRule ^study-schedule\.html$ https://www.studytools.pro/study-schedule.html [R=301,L]
+RewriteRule ^citation-generator\.html$ https://www.studytools.pro/citation-generator.html [R=301,L]
+RewriteRule ^pomodoro-timer\.html$ https://www.studytools.pro/pomodoro-timer.html [R=301,L]
+RewriteRule ^gpa-calculator\.html$ https://www.studytools.pro/gpa-calculator.html [R=301,L]
+RewriteRule ^exam-solver\.html$ https://www.studytools.pro/exam-solver.html [R=301,L]
+RewriteRule ^grade-calculator\.html$ https://www.studytools.pro/grade-calculator.html [R=301,L]
+
+# Fix 404 pages - redirect to relevant existing pages
+RewriteRule ^ai-for-students-2026\.html$ https://www.studytools.pro/ai-homework-helper-without-cheating.html [R=301,L]
+RewriteRule ^word-counter\.html$ https://www.studytools.pro/study-assistant.html [R=301,L]
+
+# Favicon redirect
+RewriteRule ^favicon\.ico$ https://www.studytools.pro/favicon.ico [R=301,L]
+
+# ============================================
+# CONTENT MERGER - 301 redirects (duplicate consolidation)
+# Merged ~12 thin/duplicate pages into ~9 strong survivor pages
+# ============================================
+
+# Grupo 1: Memoria -> active-recall-study-method.html
+RewriteRule ^spaced-repetition-for-students\.html$ https://www.studytools.pro/active-recall-study-method.html [R=301,L]
+RewriteRule ^how-to-memorize-vocabulary-fast\.html$ https://www.studytools.pro/active-recall-study-method.html [R=301,L]
+
+# Grupo 2: Flashcards -> how-to-make-flashcards-that-work.html
+RewriteRule ^flashcard-maker\.html$ https://www.studytools.pro/how-to-make-flashcards-that-work.html [R=301,L]
+
+# Grupo 3: Estrés y ansiedad -> exam-anxiety-how-to-calm-down.html
+RewriteRule ^how-to-reduce-exam-stress\.html$ https://www.studytools.pro/exam-anxiety-how-to-calm-down.html [R=301,L]
+
+# Grupo 4: Plan de exámenes -> how-to-revise-for-exams.html
+RewriteRule ^how-to-make-a-study-plan-for-finals\.html$ https://www.studytools.pro/how-to-revise-for-exams.html [R=301,L]
+
+# Grupo 5: Motivación y foco -> how-to-stop-procrastinating-homework.html
+RewriteRule ^how-to-study-with-no-motivation\.html$ https://www.studytools.pro/how-to-stop-procrastinating-homework.html [R=301,L]
+
+# Grupo 6: Matemáticas -> how-to-study-for-a-math-test.html
+RewriteRule ^how-to-study-math-effectively\.html$ https://www.studytools.pro/how-to-study-for-a-math-test.html [R=301,L]
+
+# Grupo 7: IA genérica -> ai-homework-helper-without-cheating.html
+RewriteRule ^how-ai-improves-learning\.html$ https://www.studytools.pro/ai-homework-helper-without-cheating.html [R=301,L]
+RewriteRule ^benefits-of-ai-in-education\.html$ https://www.studytools.pro/ai-homework-helper-without-cheating.html [R=301,L]
+RewriteRule ^ai-homework-helper\.html$ https://www.studytools.pro/ai-homework-helper-without-cheating.html [R=301,L]
+
+# Grupo 8: Listado de apps -> best-free-ai-study-tools-for-students.html
+RewriteRule ^best-study-apps-for-students\.html$ https://www.studytools.pro/best-free-ai-study-tools-for-students.html [R=301,L]
+
+# Grupo 10: Notas -> how-to-take-better-notes-in-class.html
+RewriteRule ^how-to-take-notes-from-a-textbook\.html$ https://www.studytools.pro/how-to-take-better-notes-in-class.html [R=301,L]

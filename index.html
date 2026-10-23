@@ -2,14 +2,7 @@
 <html lang="en">
 <head>
 <script src="/js/consent.js"></script>
-<!-- Google tag (GA4) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-66DETECVGK"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){window.dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-66DETECVGK');
-</script>
+<script src="/assets/analytics-events.js" defer></script>
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -166,10 +159,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <p>Paste lecture notes and get a clean summary, a structured outline, flashcards and practice questions in seconds.</p>
         <span>Summarize notes &rarr;</span>
       </a>
-      <a class="tool-card" href="/flashcard-maker.html">
-        <h3>Flashcard maker</h3>
-        <p>Turn any text into question and answer cards built for active recall, the study method with the strongest evidence behind it.</p>
-        <span>Make flashcards &rarr;</span>
+      <a class="tool-card" href="/how-to-make-flashcards-that-work.html">
+        <h3>Flashcard maker guide</h3>
+        <p>Learn how to write better flashcards for active recall, with examples, spaced repetition and the flashcard maker tool.</p>
+        <span>Read the guide &rarr;</span>
       </a>
       <a class="tool-card" href="/citation-generator.html">
         <h3>Citation generator</h3>
@@ -285,8 +278,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   <section class="container section newsletter">
     <h2>One useful study email a week</h2>
-    <p>One study method that actually works, plus the free tool that goes with it. No promotions, and you can leave with a single click. Around 1,000 students read it.</p>
-    <form class="nl-form" id="nl-form" novalidate>
+    <p>One study method that actually works, plus the free tool that goes with it. No promotions, and you can leave with a single click.</p>
+    <form class="nl-form" id="nl-form" novalidate data-newsletter-form>
       <input id="nl-email" type="email" placeholder="you@school.edu" aria-label="Your email address" required>
       <input id="nl-website" type="text" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px">
       <button type="submit">Get the weekly email</button>
@@ -299,7 +292,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <h2>Start with one study task.</h2>
       <p>Understand a topic, summarize notes, or make your next practice set. Free, and it takes about 20 seconds.</p>
     </div>
-    <a class="button button-primary" href="/study-assistant.html">Ask your first question</a>
+    <a class="button button-primary" href="/study-assistant.html" data-tool-action="study_assistant">Ask your first question</a>
   </section>
 </main>
 
@@ -310,7 +303,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
   <nav>
     <a href="/blog.html">Study guides</a>
-    <a href="/pro.html">Pro plans</a>
+    <a href="/pro.html" data-pro-cta="footer">Pro plans</a>
     <a href="/about.html">About</a>
     <a href="/contact.html">Contact</a>
     <a href="/terms.html">Terms</a>

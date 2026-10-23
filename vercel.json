@@ -122,18 +122,8 @@
       "statusCode": 301
     },
     {
-      "source": "/how-to-use-flashcards-for-exams.html",
-      "destination": "/how-to-make-flashcards-that-work.html",
-      "statusCode": 301
-    },
-    {
       "source": "/how-to-take-notes-from-a-textbook.html",
       "destination": "/how-to-take-better-notes-in-class.html",
-      "statusCode": 301
-    },
-    {
-      "source": "/how-to-get-better-grades-in-high-school.html",
-      "destination": "/best-study-routine-for-high-school-students.html",
       "statusCode": 301
     },
     {
